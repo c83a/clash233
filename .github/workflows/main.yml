@@ -45,6 +45,8 @@ jobs:
           wget -q -O clash.gz $clash_bin_url
           gunzip clash.gz
           fi
+          ./clash -v
+          ./clash -t speed.yaml
           if [  ! -f clash ]; then
           cp clash.old clash
           cp Country.mmdb.old Country.mmdb
