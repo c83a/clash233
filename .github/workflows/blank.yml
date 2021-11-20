@@ -57,6 +57,7 @@ jobs:
         date
     - name: update repo
       run: |
+        . ipvenv/bin/activate
         echo working dir is `pwd`
         echo "proxies:">z.yaml
         for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E 's/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
