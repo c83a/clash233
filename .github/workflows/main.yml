@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  schedule:
+  - cron: "0 3 9 * *"
+  
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          set +e
+          echo del clash for  autoupdate
+          mv clash clash.old
+          mv Country.mmdb Country.mmdb.old
+          if [  ! -f clash ]; then
+          os_type=linux
+          cpu_type=amd64
+          clash_bin_url="https://github.com/Dreamacro/clash/releases"
+          clash_html=tmp$RANDOM.html
+          wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
+          clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+          wget -q -O clash.gz $clash_bin_url
+          gunzip clash.gz
+          fi
+          if [  ! -f clash ]; then
+          cp clash.old clash
+          cp Country.mmdb.old Country.mmdb
+          fi
+          git add clash.old clash Country.mmdb Country.mmdb.old
+          git config --global user.name "jw853355718"
+          git config --global user.email "17853355718@139.com"
+          git commit -m 'github runner commit' && echo "Git Committed"
+          git push -u origin master && echo "Git Pushed Origin" # runner改成存放图片的分支
