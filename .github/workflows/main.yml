@@ -39,8 +39,8 @@ jobs:
           cpu_type=amd64
           clash_bin_url="https://github.com/Dreamacro/clash/releases"
           clash_html=tmp$RANDOM.html
-          wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
-          clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+          wget -q -O $clash_html $clash_bin_url
+          clash_bin_url="https://github.com"$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
           wget -q -O clash.gz $clash_bin_url
           gunzip clash.gz
           fi
