@@ -62,7 +62,7 @@ jobs:
         for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E 's/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
         echo $i | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
         echo
-        done | awk '!a[$0]++' | awk  'if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" NR "\042}" > file }' 
+        done | awk '!a[$0]++' | awk  '{if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" NR "\042}" > file }}' 
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat >w.yaml<<-EOF
