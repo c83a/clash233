@@ -33,8 +33,7 @@ jobs:
         run: |
           set +e
           echo del clash for  autoupdate
-          mv clash clash.old
-          mv Country.mmdb Country.mmdb.old
+          rm clash
           if [  ! -f clash ]; then
           os_type=linux
           cpu_type=amd64
@@ -45,14 +44,13 @@ jobs:
           wget -q -O clash.gz $clash_bin_url
           gunzip clash.gz
           fi
-          ./clash -v
-          ./clash -t speed.yaml
           if [  ! -f clash ]; then
-          cp clash.old clash
-          cp Country.mmdb.old Country.mmdb
+          git checkout clash
           fi
-          git add clash.old clash Country.mmdb Country.mmdb.old
+          chmod a+x clash
+          ./clash -v
+          git add clash
           git config --global user.name "jw853355718"
           git config --global user.email "17853355718@139.com"
           git commit -m 'github runner commit' && echo "Git Committed"
-          git push -u origin master && echo "Git Pushed Origin" # runner改成存放图片的分支
+          git push -u origin master && echo "Git Pushed Origin"
