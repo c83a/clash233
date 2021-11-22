@@ -124,10 +124,10 @@ jobs:
         d=`date`
         c=""
         echo $d started
-        cat speed_test.json |sed 's/},{/\n/g'| awk -F, 'BEGIN{print "!!!!speed_test.json"}{if(NF == 5){print $2}}END{print NR}' 
+        #cat speed_test.json |sed 's/},{/\n/g'| awk -F, 'BEGIN{print "!!!!speed_test.json"}{if(NF == 5){print $2}}END{print NR}' 
         c=`date`
         echo $d $c
-        cat z.yaml | awk 'BEGIN{print "!!!!z.yaml"}{print}END{print NR}'
+        #cat z.yaml | awk 'BEGIN{print "!!!!z.yaml"}{print}END{print NR}'
         d=`date`
         echo $d $c ended
         echo delay added ,format is "- {...}#0123"
@@ -153,10 +153,11 @@ jobs:
         speed_ignore_ssl.yaml
         speed_short.yaml"
         for file in $filelist;do
-        total=`cat $file|wc -l`
-        begin=$(( $total - $total / 8 ))
+        #total=`cat $file|wc -l`
+        #begin=$(( $total - $total / 8 ))
         echo dealing $file
-        command="$begin,$total"d';/# 9999,/d'
+        #command="$begin,$total"d';/# 9999,/d'
+        command='/# 9999,/d'
         sed -i "$command" $file
         sed -i "1i #$d" $file
         done
