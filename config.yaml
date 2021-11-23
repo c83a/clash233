@@ -107,8 +107,9 @@ proxy-providers:
     url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml"
     path: z.yaml
     health-check:
-      enable: false
-        #enable: true
+      #enable: false
+      enable: true
+      lazy: true
       interval: 600
       url: http://www.gstatic.com/generate_204
   px:
@@ -117,8 +118,9 @@ proxy-providers:
     url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/speed_ignore_ssl.yaml"
     path: x.yaml
     health-check:
-      enable: false
-        #enable: true
+      #enable: false
+      enable: true
+      lazy: true
       interval: 600
       url: http://www.gstatic.com/generate_204
 rules:
