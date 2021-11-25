@@ -41,6 +41,6 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
         except:
           country='ZZ'
         code_cache[ip]=country
-      g.write(line.strip() + ',' + ','.join((ip,country)) + "\n")
+      g.write(line.strip() + ',' + country + "\n")
       break
 
