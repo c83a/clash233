@@ -10,18 +10,18 @@ def get_location(ip):
 with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
   for line in f:
     for server in re.finditer('"server":"([^"]*)"',line):
-      if re.match(ip_pattern,server.group(1)):
-        try:
-          country=get_location(server.group(1))
-        except:
-          country='ZZ'
+      ip_domain=server.group(1)
+      if re.match(ip_pattern,ip_domain):
+        ip=ip_domain
       else:
-        a = os.popen("nslookup " + server.group(1)+ '|grep -v "^$"')
+        domain=ip_domain
+        a = os.popen("nslookup " + domain+ '|grep -v "^$"')
         output=a.readlines()
-        try:
-            country=get_location(re.findall(ip_pattern,output[-1])[0])
-        except:
-            country='ZZ'
-      g.write(line.strip() + ',' + country + "\n")
+        ip=re.findall(ip_pattern,output[-1])[0]
+      try:
+        country=get_location(ip)
+      except:
+        country='ZZ'
+      g.write(line.strip() + ',' + ','.join((ip,country)) + "\n")
       break
 
