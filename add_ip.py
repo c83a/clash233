@@ -17,7 +17,12 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
         domain=ip_domain
         a = os.popen("nslookup " + domain+ '|grep -v "^$"')
         output=a.readlines()
+        print("######")
+        print(output)
+        print("*****")
         ip=re.findall(ip_pattern,output[-1])[0]
+        print(ip)
+        print("######")
       try:
         country=get_location(ip)
       except:
