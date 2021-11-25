@@ -4,6 +4,8 @@ import re
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='\d+\.\d+\.\d+\.\d'
+dns_cache={}
+code_cache={}
 def get_location(ip):
   response = reader.country(ip)
   return response.country.iso_code
@@ -13,6 +15,8 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
       ip_domain=server.group(1)
       if re.match(ip_pattern,ip_domain):
         ip=ip_domain
+      elif ip_domain in dns_cache:
+        ip=dns_cache[ip_domain]
       else:
         domain=ip_domain
         ip=None
@@ -28,10 +32,15 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
             if ip: break
         print(ip)
         print("######")
-      try:
-        country=get_location(ip)
-      except:
-        country='ZZ'
+        dns_cache[domain]=ip
+      if ip in code_cache:
+          country=code_cache[ip]
+      else:
+        try:
+          country=get_location(ip)
+        except:
+          country='ZZ'
+        code_cache[ip]=country
       g.write(line.strip() + ',' + ','.join((ip,country)) + "\n")
       break
 
