@@ -3,7 +3,7 @@ import os
 import re
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
-ip_pattern='\d+.\d+.\d+.\d'
+ip_pattern='\d+\.\d+\.\d+\.\d'
 def get_location(ip):
   response = reader.country(ip)
   return response.country.iso_code
@@ -20,7 +20,11 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
         print("######")
         print(output)
         print("*****")
-        ip=re.findall(ip_pattern,output[-1])[0]
+        for i in reversed(output):
+            for ip in re.finditer(".*?("+ ip_pattern + ").*",i):
+              ip=ip.group(1)
+              break
+            if ip: break
         print(ip)
         print("######")
       try:
