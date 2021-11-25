@@ -15,14 +15,15 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
         ip=ip_domain
       else:
         domain=ip_domain
+        ip=None
         a = os.popen("nslookup " + domain+ '|grep -v "^$"')
         output=a.readlines()
         print("######")
         print(output)
         print("*****")
         for i in reversed(output):
-            for ip in re.finditer(".*?("+ ip_pattern + ").*",i):
-              ip=ip.group(1)
+            for j in re.finditer(".*?("+ ip_pattern + ").*",i):
+              ip=j.group(1)
               break
             if ip: break
         print(ip)
