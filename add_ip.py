@@ -3,7 +3,7 @@ import os
 import re
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
-ip_pattern='\d+\.\d+\.\d+\.\d'
+ip_pattern='\d+\.\d+\.\d+\.\d+'
 dns_cache={}
 code_cache={}
 def get_location(ip):
