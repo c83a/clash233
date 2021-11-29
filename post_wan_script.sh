@@ -30,7 +30,7 @@ while true;do
   fi
 done
 }
-ebtables -t broute -F
+# ebtables -t broute -F BROUTING
 brctl delif br0 $wan_if
 sleep 5
 bridge_ipv6
