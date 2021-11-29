@@ -10,13 +10,16 @@ logger  "运行后 WAN 状态:" "WAN 状态:【$1】, WAN 接口:【$2】, WAN I
 link=$1
 wan_if=$2
 bridge_ipv6(){
+[ "0$link" != "0up" ] && return
+[ "0" == "0$wan_if" ] && return
 while true;do
-  [ "0$link" != "0up" ] && break
-  [ "0" == "0$wan_if" ] && break
   dhcp6c_pid=`pidof dhcp6c`
   [ 0 != $? ] && break
   ipv6=`ifconfig $wan_if | grep inet6 | grep Global | awk '{print $3}'`
-  if [ 0 == $? ]; then
+  if [ "0" == "0$ipv6" ]; then
+    sleep 5
+  else
+    logger "WAN IPv6: $ipv6"
     ifconfig br0 add $ipv6
     ipv6_gw=`ip -6 route | grep "default via" | head -n 1 | awk '{print $3}'`
     ebtables -t broute --list | grep "\-p ! IPv6 -i $wan_if -j DROP"
@@ -24,11 +27,10 @@ while true;do
     brctl addif br0 $wan_if
     ip -6 route change default via $ipv6_gw dev br0
     break
-  else
-    sleep 5
   fi
 done
 }
+ebtables -t broute -F
 brctl delif br0 $wan_if
 sleep 5
 bridge_ipv6
