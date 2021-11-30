@@ -9,13 +9,22 @@ set -x
 logger  "运行后 WAN 状态:" "WAN 状态:【$1】, WAN 接口:【$2】, WAN IP:【$3】"
 link=$1
 wan_if=$2
+
 bridge_ipv6(){
+if [ "0$link" == "0down" ] && [ "0" != "0$wan_if" ]; then
+  logger "del $wan_if from bridge br0" && brctl delif br0 $wan_if
+  logger "flush BROUTING table" && ebtables -t broute -F BROUTING
+  ipv6=`ifconfig br0 | grep inet6 | grep Global | awk '{print $3}'`
+  [ 0 == $? ] && logger "del ipv6 address $ipv6 on br0" && ifconfig br0 del $ipv6
+  logger "flush all ipv6 route" && ip -6 route flush all
+fi
 [ "0$link" != "0up" ] && return
 [ "0" == "0$wan_if" ] && return
 while true;do
   dhcp6c_pid=`pidof dhcp6c`
   [ 0 != $? ] && break
   ipv6=`ifconfig $wan_if | grep inet6 | grep Global | awk '{print $3}'`
+#  logger "WAN IPv6: $ipv6"
   if [ "0" == "0$ipv6" ]; then
     sleep 5
   else
@@ -30,9 +39,7 @@ while true;do
   fi
 done
 }
-# ebtables -t broute -F BROUTING
-brctl delif br0 $wan_if
-sleep 5
+
 bridge_ipv6
 #    sleep 30
 [ "0up" == "0$link" ] && /etc/storage/crontabs_script.sh up &
