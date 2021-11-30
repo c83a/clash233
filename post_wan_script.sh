@@ -12,11 +12,12 @@ wan_if=$2
 
 bridge_ipv6(){
 if [ "0$link" == "0down" ] && [ "0" != "0$wan_if" ]; then
-  logger "del $wan_if from bridge br0" && brctl delif br0 $wan_if
-  logger "flush BROUTING table" && ebtables -t broute -F BROUTING
+  ipv6_gw=`ip -6 route | grep "default via" | head -n 1 | awk '{print $3}'`
+  [ 0 == $? ] && logger "change $ipv6_gw $wan_if" && ip -6 route change default via $ipv6_gw dev $wan_if
   ipv6=`ifconfig br0 | grep inet6 | grep Global | awk '{print $3}'`
   [ 0 == $? ] && logger "del ipv6 address $ipv6 on br0" && ifconfig br0 del $ipv6
-  logger "flush all ipv6 route" && ip -6 route flush all
+  logger "del $wan_if from bridge br0" && brctl delif br0 $wan_if
+  logger "flush BROUTING table" && ebtables -t broute -F BROUTING
 fi
 [ "0$link" != "0up" ] && return
 [ "0" == "0$wan_if" ] && return
