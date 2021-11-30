@@ -39,6 +39,7 @@ while true;do
     [ 0 == $? ] || ebtables -t broute -A BROUTING -p ! IPv6 -i $wan_if -j DROP
     brctl addif br0 $wan_if
     change_route6 $wan_if br0
+    ip -6 route list table main | awk '!a[$0]++' | awk '{a[NR]=$0}END{print "ip -6 route flush table main"; for (i=1;i<NR;i++){print "ip -6 route add",a[i]}}' | sh
     break
   fi
 done
