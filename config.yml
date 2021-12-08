@@ -32,7 +32,6 @@ dns:
     domain:
       - '+.google.com'
 
-# port of SOCKS5
 redir-port: 7892
 socks-port: 7891
 port: 7890
@@ -40,83 +39,56 @@ allow-lan: true
 mode: rule
 log-level: silent
 external-controller: 0.0.0.0:9090
-
 #proxies:
 proxy-groups:
+  - name: B0
+    type: select
+    proxies: [Z1,A1,RZA,FZ,DIRECT]
   - name: A0
     type: select
-    proxies:
-      - AZ
-      - RZA
-      - A1
-      - R_Z1-Z0
-      - DIRECT
-  - name: R_Z1-Z0
-    type: relay
-    proxies:
-      - Z1
-      - Z0
-  - name: Z1
-    type: select
-    use:
-      - ps
-    proxies:
-      - A1
-      - DIRECT
-  - name: Z0
-    type: select
-    use:
-      - ps
-    proxies:
-      - DIRECT
-      - A1
+    proxies: [A1,Z1,RZA,FZ,DIRECT]
+  - name: FZ
+    type: fallback
+    proxies: [RZA,A1]
+    interval: 600
+    url: https://www.gstatic.com/generate_204
   - name: RZA
     type: relay
-    proxies:
-      - A1
-      - Z2
-  - name: AZ
-    type: fallback
-    proxies:
-      - A1
-      - RZA
-      - R_Z1-Z0
-    interval: 600
-    url: http://www.gstatic.com/generate_204
-  - name: Z2
-    type: fallback
-    use:
-      - ps
-    interval: 600
-    url: http://www.gstatic.com/generate_204
+    proxies: [A1,Z1]
+  - name: Z1
+    type: select
+    use: [px,ps]
+    proxies: [DIRECT]
   - name: A1
     type: load-balance
-    use:
-      - ps
+    use: [px,ps]
     strategy: round-robin
     interval: 600
-    url: http://www.gstatic.com/generate_204
+    url: https://www.gstatic.com/generate_204
 proxy-providers:
   ps:
     type: http
     interval: 9600
-    url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/speed_short.yaml"
-    path: z.yaml
+    url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml"
+    path: s.yaml
     health-check:
       enable: true
+      lazy: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
+  px:
+    type: http
+    interval: 9600
+    url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/speed_ignore_ssl.yaml"
+    path: x.yaml
+    health-check:
+      enable: true
+      lazy: true
       interval: 600
       url: http://www.gstatic.com/generate_204
-
 rules:
-  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
-  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
-  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
-  - IP-CIDR,198.18.0.0/16,DIRECT,no-resolve
-  - IP-CIDR6,::1/128,DIRECT,no-resolve
-  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
-  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
-  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
   - GEOIP,CN,DIRECT
+  #- DST-PORT,80,A2
+  #- SRC-IP-CIDR,192.168.123.1/32,B0
+  #- SRC-IP-CIDR,192.168.123.6/32,B0
   - MATCH,A0
