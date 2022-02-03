@@ -2,7 +2,7 @@ name: "clash proxy provider"
 
 on:
   schedule:
-    - cron: '0 0 * * *'  
+    - cron: '0 1 * * *'  
   #push:
   #  branches:
   #     - master
@@ -69,6 +69,7 @@ jobs:
         cat >w.yaml<<-EOF
         dns:
           enable: false
+          listen: 0.0.0.0:8053
         proxy-providers:
          px:
           type: file
@@ -82,6 +83,7 @@ jobs:
         cat >y.yaml<<-EOF
         dns:
           enable: false
+          listen: 0.0.0.0:8054
         proxy-providers:
          px:
           type: file
