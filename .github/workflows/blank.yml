@@ -67,6 +67,8 @@ jobs:
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat >w.yaml<<-EOF
+        dns:
+          enable: false
         proxy-providers:
          px:
           type: file
@@ -78,6 +80,8 @@ jobs:
             url: http://www.gstatic.com/generate_204
         EOF
         cat >y.yaml<<-EOF
+        dns:
+          enable: false
         proxy-providers:
          px:
           type: file
