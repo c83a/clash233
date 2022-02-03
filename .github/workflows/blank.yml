@@ -164,8 +164,8 @@ jobs:
         #begin=$(( $total - $total / 8 ))
         echo dealing $file
         #command="$begin,$total"d';/# 9999,/d'
-        command='/# 9999,/d'
-        sed -i "$command" $file
+        #command='/# 9999,/d'
+        #sed -i "$command" $file
         sed -i "1i #$d" $file
         done
         if [ ! -e config.yaml ] || [ ! -e config.yml ];then
