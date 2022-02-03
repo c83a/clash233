@@ -108,7 +108,7 @@ jobs:
         [ ! -x clash ] && chmod a+x clash
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9999" &
         ./clash -d . -f w.yaml  -ext-ctl "127.0.0.1:8888" &
-        if [ "`pidof clash`" ]; then
+        if true; then
         speed_test=tmp$RANDOM.json
         speed_test_x=tmp$RANDOM.json
         echo wait 90 seconds for clash to test
