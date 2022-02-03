@@ -119,6 +119,9 @@ jobs:
         echo "begin write delay(%4d- {...}) on the fly an finally info to speed.yaml"
         mv $speed_test speed_test.json 
         mv $speed_test_x speed_test_x.json 
+        else
+        echo pass today
+        exit 0
         fi
         # "delay <-> server is 1 <-> 1, so del the first line of file of raw proxy provider"
         sed -i '1d' z.yaml
