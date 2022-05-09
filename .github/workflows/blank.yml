@@ -171,6 +171,7 @@ jobs:
         sed -i "$command" $file
         sed -i "1i #$d" $file
         done
+        sed -i 's/name":"/name":"a/g' speed_ignore_ssl.yaml
         if [ ! -e config.yaml ] || [ ! -e config.yml ];then
         touch config.yaml
         touch config.yml
