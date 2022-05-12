@@ -185,7 +185,7 @@ jobs:
         done
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
-        git add Country.mmdb config.yaml config.yml speed_ignore_ssl.yaml speed.yaml speed_short.yaml && echo "Git Added"
+        git add Country.mmdb config.yaml config.yml speed_ignore_ssl.yaml speed.yaml && echo "Git Added"
         git commit -m 'github runner commit' && echo "Git Committed"
         git push -u origin master && echo "Git Pushed Origin"
     - name: Failure test
