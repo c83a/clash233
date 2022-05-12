@@ -128,6 +128,7 @@ jobs:
         port=9090
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$i}" "http://127.0.0.1:$port/proxies/S1")
         r=$(curl -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
+        s=$?
         if [ 200 = $r ] ; then
         file="good.txt"
         elif [ 302 = $r ] ;then
@@ -137,13 +138,15 @@ jobs:
         else
         file="bad.txt"
         fi
-        echo $i $file
+        echo $i $file $s
         echo $i >> $file
         done
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
+        rm speed.yaml
+        python ./add_ip.py
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
-        git add Country.mmdb speed_short.yaml && echo "Git Added"
+        git add Country.mmdb speed_short.yaml speed.yaml && echo "Git Added"
         git commit -m 'github runner commit' && echo "Git Committed"
         git push -u origin master && echo "Git Pushed Origin"
     - name: Failure test
