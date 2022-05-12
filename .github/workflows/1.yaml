@@ -58,6 +58,7 @@ jobs:
         date
     - name: update repo
       run: |
+      continue-on-error: true
         . ipvenv/bin/activate
         echo working dir is `pwd`
         for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E 's/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
