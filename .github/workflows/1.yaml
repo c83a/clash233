@@ -126,7 +126,7 @@ jobs:
         timeout=10
         proxy="http://127.0.0.1:7890"
         port=9090
-        t=$(curl -s -X PUT -w "%{http_code}" -d "$i" "http://127.0.0.1:$port/proxies/S1")
+        t=$(curl -s -X PUT -w "%{http_code}" -d "{$i}" "http://127.0.0.1:$port/proxies/S1")
         r=$(curl -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
         if [ 200 = $r ] ; then
         file="good.txt"
