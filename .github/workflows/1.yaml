@@ -58,7 +58,8 @@ jobs:
         date
     - name: update repo
       continue-on-error: true 
-      run: |    
+      run: | 
+        set +e  
         . ipvenv/bin/activate
         echo working dir is `pwd`
         for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E 's/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
@@ -136,6 +137,7 @@ jobs:
         else
         file="bad.txt"
         fi
+        echo $i $file
         echo $i >> $file
         done
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
