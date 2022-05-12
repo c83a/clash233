@@ -1,0 +1,150 @@
+name: "clash proxy provider"
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  
+  #push:
+  #  branches:
+  #     - master
+
+  workflow_dispatch:
+jobs:
+  job_1:
+    name: collect proxies
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: update pool 
+      continue-on-error: true
+      run: |
+        #!/bin/bash
+        # buggy script
+        # continue with error
+        set +e
+        if [ ! -e ipvenv ]; then
+        python -m venv ipvenv
+        fi
+        . ipvenv/bin/activate
+        python -m pip install geoip2 &
+        echo virtual env activate
+        date
+        if [ ! -f pool_etc ];then
+        cat >pool_etc<<-EEE
+        https://hello.stgod.com/clash/proxies
+        http://www.fuckgfw.tk/clash/proxies
+        https://fq.lonxin.net/clash/proxies
+        EEE
+        fi
+        #        https://proxypool.fly.dev/clash/proxies
+        #        http://111.229.220.110:5000/clash/proxies
+        #        https://ednovas.design/clash/proxies
+        #        https://www.linbaoz.com/clash/proxies
+        #https://proxy.leefake.xyz/clash/proxies
+        #https://sspool.herokuapp.com/clash/proxies
+        down_from_list() {
+        while read url;do
+        filename=tmp_$RANDOM.yaml
+        echo GET $url TO $filename
+        ( wget -q -T 5 --no-check-certificate -O $filename $url  && echo $filename job done )&
+        done<$1
+        echo done $1
+        }
+        #down_from_list pool.txt
+        down_from_list pool_etc
+        echo wait for done
+        ( sleep 20 && killall wget )&
+        wait
+        date
+    - name: update repo
+      run: |
+        . ipvenv/bin/activate
+        echo working dir is `pwd`
+        for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E 's/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
+        echo $i | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
+        echo
+        done | awk '!a[$0]++' | awk  '{if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" NR "\042}" > file }}' 
+        sed -i "1i proxies:" z.yaml
+        sed -i "1i proxies:" x.yaml
+        cat >y.yaml<<-EOF
+        mixed-port: 7890
+        ipv6: true
+        mode: rule
+        proxy-groups:
+          - name: S2
+            type: select
+            use:
+              - px
+              - pz
+          - name: S1
+            type: select
+            use:
+              - px
+              - pz
+        rules:
+          - SRC-IPCIDR,127.0.0.0/8,S1
+          - MATCH,S2
+        proxy-providers:
+         px:
+          type: file
+          interval: 9600
+          path: x.yaml
+          health-check:
+            enable: true
+            interval: 600
+            url: http://www.gstatic.com/generate_204
+         pz:
+          type: file
+          interval: 9600
+          path: z.yaml
+          health-check:
+            enable: true
+            interval: 600
+            url: http://www.gstatic.com/generate_204
+        EOF
+        if [  ! -f clash ]; then
+        os_type=linux
+        cpu_type=amd64
+        clash_bin_url="https://github.com/Dreamacro/clash/releases"
+        clash_html=tmp$RANDOM.html
+        wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
+        clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+        wget -q -O clash.gz $clash_bin_url
+        gunzip clash.gz
+        git add clash
+        fi
+        [ ! -x clash ] && chmod a+x clash
+        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
+        if true; then
+        sleep 90  
+        fi
+        curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
+        for i in `cat alive-list.txt`;do
+        url="https://bing.com"
+        timeout=10
+        proxy="http://127.0.0.1:7890"
+        port=9090
+        t=$(curl -s -X PUT -w "%{http_code}" -d "$i" "http://127.0.0.1:$port/proxies/S1")
+        r=$(curl -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
+        if [ 200 = $r ] ; then
+        file="good.txt"
+        elif [ 302 = $r ] ;then
+        file="good.txt"
+        elif [ 301 = $r ] ;then
+        file="good.txt"
+        else
+        file="bad.txt"
+        fi
+        echo $i >> $file
+        done
+        awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
+        git config --global user.name "jw853355718" 
+        git config --global user.email "17853355718@139.com"
+        git add Country.mmdb speed_short.yaml && echo "Git Added"
+        git commit -m 'github runner commit' && echo "Git Committed"
+        git push -u origin master && echo "Git Pushed Origin"
+    - name: Failure test
+      if: failure()
+      run: | 
+        ls
+        echo "Error on running!"
