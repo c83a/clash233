@@ -82,7 +82,7 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-IPCIDR,127.0.0.0/8,S1
+          - SRC-IP-CIDR,127.0.0.0/8,S1
           - MATCH,S2
         proxy-providers:
          px:
