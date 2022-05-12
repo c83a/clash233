@@ -9,7 +9,9 @@ code_cache={}
 def get_location(ip):
   response = reader.country(ip)
   return response.country.iso_code
-with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
+with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
+  next(f)
+  g.write("proxies:\n")
   for line in f:
     for server in re.finditer('"server":"([^"]*)"',line):
       ip_domain=server.group(1)
@@ -41,6 +43,6 @@ with open('speed.yaml') as f,open('speed_c.yaml','w') as g:
         except:
           country='ZZ'
         code_cache[ip]=country
-      g.write(line.strip() + ',' + country + "\n")
+      g.write(line.strip() + ' # ' + country + "\n")
       break
 
