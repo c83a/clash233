@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: test
 
 # Controls when the workflow will run
 on:
@@ -30,6 +30,6 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          clash -d . &
+          ./clash -d . &
           sleep 10
           curl http://[::1]:9090/providers/proxies
