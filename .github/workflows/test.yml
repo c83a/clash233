@@ -30,6 +30,5 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          ./clash -d . &
-          sleep 10
-          curl http://[::1]:9090/providers/proxies
+          ping6 -c 2 weibo.com
+          
