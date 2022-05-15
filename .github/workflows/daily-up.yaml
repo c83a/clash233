@@ -26,7 +26,7 @@ jobs:
         python -m venv ipvenv
         fi
         . ipvenv/bin/activate
-        python -m pip install geoip2 &
+        python -m pip install  geoip2 & 
         echo virtual env activate
         date
         if [ ! -f pool_etc ];then
