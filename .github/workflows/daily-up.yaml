@@ -84,9 +84,9 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-PORT,11000,S1
+          - SRC-PORT,13000,S1
           - SRC-PORT,12000,S2
-          - MATCH,S2
+          - MATCH,S1
         proxy-providers:
          px:
           type: file
@@ -134,7 +134,7 @@ jobs:
         num=$1
         if [ 1 = $num ] ;then
         proxy=$proxy1 
-        local=11000
+        local=13000
         else
         proxy=$proxy1
         local=12000
@@ -151,7 +151,7 @@ jobs:
         else
         file="bad.txt"
         fi
-        echo $data $file $r $s
+        echo $data $file $t $r $s
         flock -x $file -c "echo $data >> $file"
         }
         sleep 5 &
