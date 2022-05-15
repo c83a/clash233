@@ -2,7 +2,7 @@ name: "clash proxy provider 2"
 
 on:
   schedule:
-    - cron: '0 1 * * *'  
+    - cron: '0 0 * * *'  
   #push:
   #  branches:
   #     - master
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: update pool 
       continue-on-error: true
       run: |
@@ -121,12 +121,22 @@ jobs:
         sleep 90  
         fi
         curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
-        for i in `cat alive-list.txt`;do
+        j=1
         url="https://bing.com"
         timeout=10
-        proxy="http://127.0.0.1:7890"
+        proxy1="http://127.0.0.1:7890"
+        proxy2="http://[::1]:7890"
         port=9090
-        t=$(curl -s -X PUT -w "%{http_code}" -d "{$i}" "http://127.0.0.1:$port/proxies/S1")
+        peer()
+        {
+        data=$2
+        num=$1
+        if [ 1 = $num ] ;then
+        proxy=$proxy1 
+        else
+        proxy=$proxy2
+        fi
+        t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         r=$(curl -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
         s=$?
         if [ 200 = $r ] ; then
@@ -138,8 +148,18 @@ jobs:
         else
         file="bad.txt"
         fi
-        echo $i $file $s
-        echo $i >> $file
+        echo $i $file $r $s
+        flock -x $file -c "echo $i >> $file"
+        }
+        for data in `cat alive-list.txt`;do
+        num=$(( $j % 2 ))
+        if [ $num = 1 ] ;then
+        wait
+        peer 1 $data &
+        else
+        peer 2 $data &
+        fi
+        j=$(( $j + 1 ))
         done
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         rm speed.yaml
@@ -147,6 +167,7 @@ jobs:
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed_short.yaml speed.yaml && echo "Git Added"
+        git pull
         git commit -m 'github runner commit' && echo "Git Committed"
         git push -u origin master && echo "Git Pushed Origin"
     - name: Failure test
