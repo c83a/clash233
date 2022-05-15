@@ -85,7 +85,11 @@ jobs:
               - pz
         rules:
           - SRC-PORT,12111,S1
-          - SRC-PORT,12000,S2
+          - SRC-PORT,12112,S1
+          - SRC-PORT,12113,S1
+          - SRC-PORT,12224,S2
+          - SRC-PORT,12225,S2
+          - SRC-PORT,12226,S2
           - MATCH,S1
         proxy-providers:
          px:
@@ -134,10 +138,10 @@ jobs:
         num=$1
         if [ 1 = $num ] ;then
         proxy=$proxy1 
-        local=12111
+        local=12111-12113
         else
         proxy=$proxy1
-        local=12000
+        local=12224-12226
         fi
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
