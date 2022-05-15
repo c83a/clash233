@@ -84,7 +84,8 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-IP-CIDR,127.0.0.0/8,S1
+          - SRC-PORT,11000,S1
+          - SRC-PORT,12000,S2
           - MATCH,S2
         proxy-providers:
          px:
@@ -133,11 +134,13 @@ jobs:
         num=$1
         if [ 1 = $num ] ;then
         proxy=$proxy1 
+        local=11000
         else
-        proxy=$proxy2
+        proxy=$proxy1
+        local=12000
         fi
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
-        r=$(curl -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
+        r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
         s=$?
         if [ 200 = $r ] ; then
         file="good.txt"
