@@ -161,6 +161,7 @@ jobs:
         fi
         j=$(( $j + 1 ))
         done
+        wait
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
         git config --global user.name "jw853355718" 
