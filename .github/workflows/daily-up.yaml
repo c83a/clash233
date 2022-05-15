@@ -146,14 +146,14 @@ jobs:
         proxy1="http://127.0.0.1:7890"
         proxy2="http://[::1]:7890"
         port=9090
-        touch good.txt
-        touch bad.txt
         peer()
         {
         data=$2
         num=$1
+        good="good$num.txt"
+        bad="bad$num.txt"
         if [ 1 = $num ] ;then
-        proxy=$proxy1 
+        proxy=$proxy1
         local=52110-52119
         else
         proxy=$proxy1
@@ -163,16 +163,16 @@ jobs:
         r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
         s=$?
         if [ 200 = $r ] ; then
-        file="good.txt"
+        file=$good
         elif [ 302 = $r ] ;then
-        file="good.txt"
+        file=$good
         elif [ 301 = $r ] ;then
-        file="good.txt"
+        file=$good
         else
-        file="bad.txt"
+        file=$bad
         fi
         echo $data $file $t $r $s
-        flock -x $file -c "echo $data >> $file"
+        echo $data >> $file
         }
         sleep 5 &
         w1=$!
@@ -192,7 +192,7 @@ jobs:
         done
         wait $w1
         wait $w2
-        awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
+        awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
