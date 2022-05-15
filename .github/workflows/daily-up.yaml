@@ -160,7 +160,7 @@ jobs:
         local=53110-53119
         fi
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
-        r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
+        r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
         s=$?
         if [ 200 = $r ] ; then
         file=$good
