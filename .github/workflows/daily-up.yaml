@@ -84,7 +84,7 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-PORT,13000,S1
+          - SRC-PORT,12111,S1
           - SRC-PORT,12000,S2
           - MATCH,S1
         proxy-providers:
@@ -134,7 +134,7 @@ jobs:
         num=$1
         if [ 1 = $num ] ;then
         proxy=$proxy1 
-        local=13000
+        local=12111
         else
         proxy=$proxy1
         local=12000
@@ -146,7 +146,7 @@ jobs:
         file="good.txt"
         elif [ 302 = $r ] ;then
         file="good.txt"
-        elif [ 301 = $r ] ;then
+      elif [ 301 = $r ] ;then
         file="good.txt"
         else
         file="bad.txt"
