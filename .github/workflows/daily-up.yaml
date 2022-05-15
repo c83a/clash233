@@ -84,13 +84,27 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-PORT,12111,S1
-          - SRC-PORT,12112,S1
-          - SRC-PORT,12113,S1
-          - SRC-PORT,12224,S2
-          - SRC-PORT,12225,S2
-          - SRC-PORT,12226,S2
-          - MATCH,S1
+          - SRC-PORT,52111,S1
+          - SRC-PORT,52112,S1
+          - SRC-PORT,52113,S1
+          - SRC-PORT,52114,S1
+          - SRC-PORT,52115,S1
+          - SRC-PORT,52116,S1
+          - SRC-PORT,52117,S1
+          - SRC-PORT,52118,S1
+          - SRC-PORT,52119,S1
+          - SRC-PORT,52110,S1
+          - SRC-PORT,53111,S2
+          - SRC-PORT,53112,S2
+          - SRC-PORT,53113,S2
+          - SRC-PORT,53114,S2
+          - SRC-PORT,53115,S2
+          - SRC-PORT,53116,S2
+          - SRC-PORT,53117,S2
+          - SRC-PORT,53118,S2
+          - SRC-PORT,53119,S2
+          - SRC-PORT,53110,S2
+          - MATCH,S2
         proxy-providers:
          px:
           type: file
@@ -138,10 +152,10 @@ jobs:
         num=$1
         if [ 1 = $num ] ;then
         proxy=$proxy1 
-        local=12111-12113
+        local=52110-52119
         else
         proxy=$proxy1
-        local=12224-12226
+        local=53110-53119
         fi
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/nul -m $timeout -x $proxy $url)
@@ -181,7 +195,6 @@ jobs:
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed_short.yaml speed.yaml && echo "Git Added"
-        git pull
         git commit -m 'github runner commit' && echo "Git Committed"
         git push -u origin master && echo "Git Pushed Origin"
     - name: update cache
