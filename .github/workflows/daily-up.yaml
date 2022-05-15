@@ -146,7 +146,7 @@ jobs:
         file="good.txt"
         elif [ 302 = $r ] ;then
         file="good.txt"
-      elif [ 301 = $r ] ;then
+        elif [ 301 = $r ] ;then
         file="good.txt"
         else
         file="bad.txt"
