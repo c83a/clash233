@@ -2,7 +2,7 @@ name: "clash proxy provider 2"
 
 on:
   schedule:
-    - cron: '0 0 * * *'  
+    - cron: '0 */12 * * *'  
   #push:
   #  branches:
   #     - master
@@ -46,14 +46,14 @@ jobs:
         while read url;do
         filename=tmp_$RANDOM.yaml
         echo GET $url TO $filename
-        ( wget -q -T 5 --no-check-certificate -O $filename $url  && echo $filename job done )&
+        ( wget -q -T 15 --no-check-certificate -O $filename $url  && echo $filename job done )&
         done<$1
         echo done $1
         }
         #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for done
-        ( sleep 20 && killall wget )&
+        ( sleep 60 && killall wget )&
         wait
         date
     - name: update repo
@@ -72,6 +72,7 @@ jobs:
         mixed-port: 7890
         ipv6: true
         mode: rule
+        log-level: silent
         proxy-groups:
           - name: S2
             type: select
@@ -142,7 +143,7 @@ jobs:
         curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         j=1
         url="https://bing.com"
-        timeout=10
+        timeout=15
         proxy1="http://127.0.0.1:7890"
         proxy2="http://[::1]:7890"
         port=9090
@@ -174,7 +175,7 @@ jobs:
         echo $data $file $t $r $s
         echo $data >> $file
         }
-        sleep 5 &
+        sleep 1 &
         w1=$!
         w2=$!
         for data in `cat alive-list.txt`;do
