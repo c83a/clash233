@@ -146,6 +146,8 @@ jobs:
         proxy1="http://127.0.0.1:7890"
         proxy2="http://[::1]:7890"
         port=9090
+        touch good.txt
+        touch bad.txt
         peer()
         {
         data=$2
