@@ -85,26 +85,7 @@ jobs:
               - px
               - pz
         rules:
-          - SRC-PORT,52111,S1
-          - SRC-PORT,52112,S1
-          - SRC-PORT,52113,S1
-          - SRC-PORT,52114,S1
-          - SRC-PORT,52115,S1
-          - SRC-PORT,52116,S1
-          - SRC-PORT,52117,S1
-          - SRC-PORT,52118,S1
-          - SRC-PORT,52119,S1
-          - SRC-PORT,52110,S1
-          - SRC-PORT,53111,S2
-          - SRC-PORT,53112,S2
-          - SRC-PORT,53113,S2
-          - SRC-PORT,53114,S2
-          - SRC-PORT,53115,S2
-          - SRC-PORT,53116,S2
-          - SRC-PORT,53117,S2
-          - SRC-PORT,53118,S2
-          - SRC-PORT,53119,S2
-          - SRC-PORT,53110,S2
+          - DOMAIN-KEYWORD,baidu.com,S1
           - MATCH,S2
         proxy-providers:
          px:
@@ -142,10 +123,11 @@ jobs:
         fi
         curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         j=1
-        url="https://bing.com"
+        url1="https://bing.com"
+        url2="https://baidu.com"
         timeout=15
-        proxy1="http://127.0.0.1:7890"
-        proxy2="http://[::1]:7890"
+        proxy="http://127.0.0.1:7890"
+        #proxy2="http://[::1]:7890"
         port=9090
         peer()
         {
@@ -154,14 +136,14 @@ jobs:
         good="good$num.txt"
         bad="bad$num.txt"
         if [ 1 = $num ] ;then
-        proxy=$proxy1
-        local=52110-52119
+        url=$url1
+        #local=53110-53119
         else
-        proxy=$proxy1
-        local=53110-53119
+        url=$url2
+        #local=53110-53119
         fi
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
-        r=$(curl --local-port $local -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
+        r=$(curl -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
         s=$?
         if [ 200 = $r ] ; then
         file=$good
