@@ -85,7 +85,7 @@ jobs:
               - px
               - pz
         rules:
-          - DOMAIN-KEYWORD,baidu.com,S1
+          - DOMAIN-KEYWORD,baidu,S1
           - MATCH,S2
         proxy-providers:
          px:
@@ -123,8 +123,8 @@ jobs:
         fi
         curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         j=1
-        url1="https://bing.com"
-        url2="https://baidu.com"
+        url1="https://baidu.com"
+        url2="https://bing.com"
         timeout=15
         proxy="http://127.0.0.1:7890"
         #proxy2="http://[::1]:7890"
