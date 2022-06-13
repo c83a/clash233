@@ -62,10 +62,12 @@ jobs:
         set +e  
         . ipvenv/bin/activate
         echo working dir is `pwd`
+        uuid=`cat  /proc/sys/kernel/random/uuid`
+        np=${uuid:0:8}
         for i in ` cat tmp*.yaml | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E '/:"%/d;s/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
         echo $i | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
         echo
-        done | awk '!a[$0]++' | awk  '{if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" NR "\042}" > file }}' 
+        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" np NR "\042}" > file }}' 
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat x.yaml
@@ -127,7 +129,7 @@ jobs:
         j=1
         url1="https://microsoft.com"
         url2="https://bing.com"
-        timeout=15
+        timeout=7
         proxy="http://127.0.0.1:7890"
         #proxy2="http://[::1]:7890"
         port=9090
