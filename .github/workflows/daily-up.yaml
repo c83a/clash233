@@ -67,7 +67,7 @@ jobs:
         SFI=$IFS
         IFS=\n
         for j in tmp*.yaml ; do
-        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{/ /;s/\}$//'  | sed -E '/:"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;'` ; do
+        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{/ /;s/\}$//'  | sed -E '/"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;'` ; do
         echo $i | tr ',' '\n' | sort | tr '\n' ','| sed "s/^ //"
         echo
         done
