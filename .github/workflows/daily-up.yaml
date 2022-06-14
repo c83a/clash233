@@ -66,7 +66,7 @@ jobs:
         np=${uuid:0:8}
         for j in tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' |yq 'del(.proxies.[].name)'|yq 'del(.proxies.[].servername)'|yq 'del(.proxies.[].country)'|sed '/%/d'| yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  
-        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ", name: _" np NR "}" > file }}'
+        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         sed -i "s/headers: ''/headers: {}/g" x.yaml
@@ -177,7 +177,6 @@ jobs:
         done
         wait $w1
         wait $w2
-        sed -i 's/^/ /;s/"//g;s/:/: /' good*.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
         git config --global user.name "jw853355718" 
