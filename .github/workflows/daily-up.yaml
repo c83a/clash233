@@ -69,7 +69,7 @@ jobs:
         echo $i | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
         echo
         done
-        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",name: _" np NR "}" > file }}' 
+        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ", name: _" np NR "}" > file }}' 
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat x.yaml
