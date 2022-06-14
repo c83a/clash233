@@ -69,8 +69,6 @@ jobs:
         done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ", name: _" np NR "}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
-        cat x.yaml
-        cat z.yaml
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
@@ -187,6 +185,8 @@ jobs:
         git push -u origin master && echo "Git Pushed Origin"
     - name: update cache
       run: | 
+        cat -n x.yaml
+        cat -n z.yaml
         sleep 15
         curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
