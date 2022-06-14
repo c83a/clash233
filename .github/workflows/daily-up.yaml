@@ -65,11 +65,11 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=${uuid:0:8}
         for j in tmp*.yaml ; do
-        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/ //g;s/^-\{//;s/\}$//'  | sed -E '/:"%/d;s/"?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
+        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  | sed -E '/:"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `; do
         echo $i | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
         echo
         done
-        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"\042skip-cert-verify\042:true")){file="x.yaml"}else{file="z.yaml"}{ print "- {" $0 ",\042name\042:\042_" np NR "\042}" > file }}' 
+        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",name: _" np NR "}" > file }}' 
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat x.yaml
