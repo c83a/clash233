@@ -68,7 +68,7 @@ jobs:
         #IFS=\n
         for j in tmp*.yaml ; do
         for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{/ /;s/\}$//'  | sed -E '/"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;s/ //g'` ; do
-        echo $i | tr ',' '\n' | sort | tr '\n' ','| sed "s/:/: /"
+        echo $i | tr ',' '\n' | sort | tr '\n' ','| sed "s/:/: /g"
         echo
         done
         done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 " name: _" np NR "}" > file }}' 
