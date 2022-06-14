@@ -69,7 +69,7 @@ jobs:
         done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ", name: _" np NR "}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
-        sed -i "s/ws-headers: ''/ws-headers: {}/g" x.yaml
+        sed -i "s/headers: ''/headers: {}/g" x.yaml
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
