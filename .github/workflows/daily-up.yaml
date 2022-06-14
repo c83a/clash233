@@ -65,10 +65,13 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=${uuid:0:8}
         for j in tmp*.yaml ; do
+        cat $j | yq -P | yq '.proxies.[] style="flow"' | \
+        sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  |\
+        sed -E '/:"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;'  |\         
         while read record ;do
         echo $record | tr ',' '\n' | sort | tr '\n' ',' | sed "s/,$//"
         echo
-        done <`cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  | sed -E '/:"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;' `     
+        done
         done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ", name: _" np NR "}" > file }}' 
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
