@@ -64,15 +64,15 @@ jobs:
         echo working dir is `pwd`
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=${uuid:0:8}
-        SFI=$IFS
-        IFS=\n
+        #SFI=$IFS
+        #IFS=\n
         for j in tmp*.yaml ; do
-        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{/ /;s/\}$//'  | sed -E '/"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;'` ; do
-        echo $i | tr ',' '\n' | sort | tr '\n' ','| sed "s/^ //"
+        for i in ` cat $j | yq -P | yq '.proxies.[] style="flow"' | sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{/ /;s/\}$//'  | sed -E '/"%/d;s/"?(server)?name"?:[^,]*,//;s/"?country"?:[^,]*,//;s/ //g'` ; do
+        echo $i | tr ',' '\n' | sort | tr '\n' ','| sed "s/:/: /"
         echo
         done
         done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 " name: _" np NR "}" > file }}' 
-        IFS=$SFI
+        #IFS=$SFI
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         cat x.yaml
