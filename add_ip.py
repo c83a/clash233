@@ -13,7 +13,7 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
   next(f)
   g.write("proxies:\n")
   for line in f:
-    for server in re.finditer('"server":"([^"]*)"',line):
+    for server in re.finditer('server: ([^,]*)',line):
       ip_domain=server.group(1)
       if re.match(ip_pattern,ip_domain):
         ip=ip_domain
