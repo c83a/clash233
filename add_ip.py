@@ -36,13 +36,13 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
         print("######")
         dns_cache[domain]=ip
       if ip in code_cache:
-          country=code_cache[ip]
+          code=code_cache[ip]
       else:
         try:
-          country=get_location(ip)
+          code=get_location(ip)
         except:
-          country='ZZ'
-        code_cache[ip]=country
-      g.write("#".join(map(str,(line.strip(), country, ip, "\n"))))
+          code='ZZ'
+        code_cache[ip]=code
+      g.write("#".join(map(str,(line.strip(), code, ip, "\n"))))
       break
 
