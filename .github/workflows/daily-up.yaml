@@ -66,7 +66,7 @@ jobs:
         np=${uuid:0:8}
         for j in tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' |yq 'del(.proxies.[].name)'|yq 'del(.proxies.[].servername)'|yq 'del(.proxies.[].country)'| yq '.proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  
-        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
+        done | awk '!a[$0]++'|gawk '{if (match($0,/server:[ "]*([^,"]*)/,a)&&!b[a[1]]++) print}' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         #sed -i "s/headers: ''/headers: {}/g" x.yaml
