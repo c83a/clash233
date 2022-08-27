@@ -162,6 +162,7 @@ jobs:
         sleep 1 &
         w1=$!
         w2=$!
+        if [ ! 1 ] ;then
         for data in `cat alive-list.txt`;do
         num=$(( $j % 2 ))
         if [ $num = 1 ] ;then
@@ -177,6 +178,25 @@ jobs:
         done
         wait $w1
         wait $w2
+        fi
+        mkfifo queue
+        exec 99<>queue
+        worker(){
+        while [ 1 ];do
+        read -u99 data
+        [ 'done' == "$data" ] && break
+        peer "$1" "$data"
+        done&
+        }
+        if [ 1 ];then
+        cat alive-list.txt
+        echo done
+        echo done
+        fi>&99 &
+        p=$!
+        worker 1
+        worker 2
+        wait $p
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
