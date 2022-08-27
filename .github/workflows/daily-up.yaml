@@ -197,6 +197,8 @@ jobs:
         worker 1
         worker 2
         wait $p
+        sleep 15
+        ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
