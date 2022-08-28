@@ -31,17 +31,10 @@ jobs:
         date
         if [ ! -f pool_etc ];then
         cat >pool_etc<<-EEE
-        https://hello.stgod.com/clash/proxies
-        http://www.fuckgfw.tk/clash/proxies
+        https://sspool.herokuapp.com/clash/proxies
         https://fq.lonxin.net/clash/proxies
         EEE
         fi
-        #        https://proxypool.fly.dev/clash/proxies
-        #        http://111.229.220.110:5000/clash/proxies
-        #        https://ednovas.design/clash/proxies
-        #        https://www.linbaoz.com/clash/proxies
-        #https://proxy.leefake.xyz/clash/proxies
-        #https://sspool.herokuapp.com/clash/proxies
         down_from_list() {
         while read url;do
         filename=tmp_$RANDOM.yaml
@@ -53,7 +46,7 @@ jobs:
         #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for done
-        ( sleep 60 && killall wget )&
+        ( sleep 60 && pidof wget && killall wget )&
         wait
         date
     - name: update repo
@@ -64,9 +57,9 @@ jobs:
         echo working dir is `pwd`
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=${uuid:0:8}
-        for j in tmp*.yaml ; do
+        for j in speed_short.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' |yq 'del(.proxies.[].name)'|yq 'del(.proxies.[].servername)'|yq 'del(.proxies.[].country)'| yq '.proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  
-        done | awk '!a[$0]++'|gawk '{if (match($0,/server:[ "]*([^,"]*)/,a)&&!b[a[1]]++) print}' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
+        done | awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
         #sed -i "s/headers: ''/headers: {}/g" x.yaml
@@ -204,6 +197,8 @@ jobs:
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         python ./add_ip.py
+        echo 'proxies:' > speed_short.yaml
+        gawk '{if (match($0,/server:[ "]*([^,"]*)/,a)&&!b[a[1]]++) print}' speed.yaml >> speed_short.yaml
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
@@ -214,8 +209,8 @@ jobs:
       run: | 
         cat -n x.yaml
         cat -n z.yaml
-        sleep 15
-        curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
+        #sleep 15
+        #curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
       if: failure()
       run: | 
