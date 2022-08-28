@@ -199,7 +199,7 @@ jobs:
         python ./add_ip.py
         echo 'proxies:' > speed_short.yaml
         gawk '{if (match($0,/server:[ "]*([^,"]*)/,a)&&!b[a[1]]++) print}' speed.yaml >> speed_short.yaml
-        sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
+        #sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed_short.yaml speed.yaml && echo "Git Added"
@@ -209,8 +209,8 @@ jobs:
       run: | 
         cat -n x.yaml
         cat -n z.yaml
-        #sleep 15
-        #curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
+        sleep 15
+        curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
       if: failure()
       run: | 
