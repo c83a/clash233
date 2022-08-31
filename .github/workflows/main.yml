@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   schedule:
-  - cron: "0 3 9 * *"
+  - cron: "0 3 13 * *"
   
 
   # Allows you to run this workflow manually from the Actions tab
@@ -22,7 +22,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -33,6 +33,8 @@ jobs:
         run: |
           set +e
           echo del clash for  autoupdate
+          mmdb_url='https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb'
+          wget -O Country.mmdb "$mmdb_url"
           rm clash
           if [  ! -f clash ]; then
           os_type=linux
@@ -49,7 +51,7 @@ jobs:
           fi
           chmod a+x clash
           ./clash -v
-          git add clash
+          git add clash Country.mmdb
           git config --global user.name "jw853355718"
           git config --global user.email "17853355718@139.com"
           git commit -m 'github runner commit' && echo "Git Committed"
