@@ -30,6 +30,7 @@ jobs:
         fi
         . ipvenv/bin/activate
         python -m pip install  geoip2 & 
+        p=$!
         echo virtual env activate
         date
         if [ ! -f pool_etc ];then
@@ -49,8 +50,8 @@ jobs:
         #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for done
-        ( sleep 60 && pidof wget && killall wget )&
-        wait
+        #( sleep 60 && pidof wget && killall wget )&
+        wait $p 
         date
     - name: update repo
       continue-on-error: true 
