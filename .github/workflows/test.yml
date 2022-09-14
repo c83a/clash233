@@ -33,7 +33,7 @@ jobs:
           #whoami
           #grep '' /etc/passwd*
           sudo addgroup clash2 --gid 6666
-          sudo adduser -G clash2 clash2
+          sudo adduser clash2 --gid 6666
           sudo iptables -A OUTPUT -p tcp -m owner --gid-owner 6666 -j REDIRECT --to-ports 7892
           sudo iptables -S -t nat
           curl https://www.bing.com
