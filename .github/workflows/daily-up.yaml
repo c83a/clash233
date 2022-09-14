@@ -61,7 +61,7 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=${uuid:0:8}
         for j in speed_short.yaml tmp*.yaml ; do
-        cat $j | yq -P 'sort_keys(..) ' |yq 'del(.proxies.[].name)'|yq 'del(.proxies.[].servername)'|yq 'del(.proxies.[].country)'|yq 'del(.proxies.[].ws-opts.headers)'| yq '.proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  
+        cat $j | yq -P 'sort_keys(..) ' |yq 'del(.proxies.[].name)'|yq 'del(.proxies.[].servername)'|yq 'del(.proxies.[].country)'|yq 'del(.proxies.[].ws-opts.headers)'| yq '.proxies.[] style="flow"' |sed -E 's/ [^ ]*: \{},//g'|sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p"| sed -E  's/^  - \{//;s/\}$//'  
         done | sed -E 's@ws-path: ([^,]*)@ws-opts: {path: \1}@' |awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
         sed -i "1i proxies:" z.yaml
         sed -i "1i proxies:" x.yaml
