@@ -21,7 +21,10 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
         ip=dns_cache[ip_domain]
       else:
         domain=ip_domain
-        ip=nslookup(domain)
+        try:
+          ip=nslookup(domain)
+        except:
+          ip=None
         dns_cache[domain]=ip
       if ip in code_cache:
           code=code_cache[ip]
