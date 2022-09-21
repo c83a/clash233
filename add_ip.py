@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import os
 import re
+from socket import gethostbyname as nslookup
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='\d+\.\d+\.\d+\.\d+'
@@ -21,19 +21,7 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
         ip=dns_cache[ip_domain]
       else:
         domain=ip_domain
-        ip=None
-        a = os.popen("nslookup " + domain+ '|grep -v "^$"')
-        output=a.readlines()
-        print("######")
-        print(output)
-        print("*****")
-        for i in reversed(output):
-            for j in re.finditer(".*?("+ ip_pattern + ").*",i):
-              ip=j.group(1)
-              break
-            if ip: break
-        print(ip)
-        print("######")
+        ip=nslookup(domain)
         dns_cache[domain]=ip
       if ip in code_cache:
           code=code_cache[ip]
