@@ -191,13 +191,14 @@ jobs:
         # echo done
         fi>&99 &
         p=$!
-        worker 1
-        p1=$!
-        worker 2
-        p2=$!
-        wait $p
-        wait $p1
-        wait $p2
+        max_worker=2
+        for i in `seq $max_worker`;do
+        worker $i
+        p="$! $p"
+        done
+        for w in $p;do
+        wait $w
+        done
         ls *.txt
         #awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml z.yaml
