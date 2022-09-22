@@ -180,15 +180,15 @@ jobs:
         exec 99<>queue
         worker(){
         while [ 1 ];do
-        read -u99 data
-        [ 'done' == "$data" ] && break
+        read -u99 data -t 3 || break
+        # [ 'done' == "$data" ]  && break
         peer "$1" "$data"
         done&
         }
         if [ 1 ];then
         cat alive-list.txt
-        echo done
-        echo done
+        # echo done
+        # echo done
         fi>&99 &
         p=$!
         worker 1
