@@ -63,9 +63,9 @@ jobs:
         np=${uuid:0:8}
         for j in speed_short.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/^  - \{//;s/\}$//'  
-        done  |awk '!a[$0]++' | awk -v np=$np '{if(match($0,"skip-cert-verify: true")){file="x.yaml"}else{file="z.yaml"}{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file }}'
-        sed -i "1i proxies:" z.yaml
-        sed -i "1i proxies:" x.yaml
+        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file }{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file}'
+        #sed -i "1i proxies:" z.yaml
+        #sed -i "1i proxies:" x.yaml
         #sed -i "s/headers: ''/headers: {}/g" x.yaml
         cat >y.yaml<<-EOF
         mixed-port: 7890
@@ -77,12 +77,10 @@ jobs:
             type: select
             use:
               - px
-              - pz
           - name: S1
             type: select
             use:
               - px
-              - pz
         rules:
           - DOMAIN-KEYWORD,microsoft,S1
           - MATCH,S2
@@ -91,14 +89,6 @@ jobs:
           type: file
           interval: 9600
           path: x.yaml
-          health-check:
-            enable: true
-            interval: 600
-            url: http://www.gstatic.com/generate_204
-         pz:
-          type: file
-          interval: 9600
-          path: z.yaml
           health-check:
             enable: true
             interval: 600
@@ -200,8 +190,8 @@ jobs:
         wait $w
         done
         ls *.txt
-        #awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml z.yaml
-        awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml z.yaml
+        #awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while ((getline n < "good1.txt") >0)a[n "}"]; while ((getline n < "good2.txt") >0)a[n "}"]}{if($NF in a)print $0 >f}' x.yaml
+        awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         python ./add_ip.py
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         echo 'proxies:' > speed_short.yaml
@@ -214,7 +204,6 @@ jobs:
     - name: update cache
       run: | 
         cat -n x.yaml
-        cat -n z.yaml
         sleep 15
         curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
