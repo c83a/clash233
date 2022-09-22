@@ -170,7 +170,7 @@ jobs:
         exec 99<>queue
         worker(){
         while [ 1 ];do
-        read -u99 data -t 3 || break
+        read -t 3 -u99 data|| break
         # [ 'done' == "$data" ]  && break
         peer "$1" "$data"
         done&
