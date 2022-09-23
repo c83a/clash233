@@ -29,7 +29,7 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
           pass
         if not ip:
           try:
-            ip=nslookup46('6.c83a.tk',80,socket.AF_INET6)[0][4][0]
+            ip=nslookup46(domain,80,socket.AF_INET6)[0][4][0]
           except:
             pass
         dns_cache[domain]=ip
