@@ -21,10 +21,16 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
         ip=dns_cache[ip_domain]
       else:
         domain=ip_domain
+        ip=None
         try:
           ip=nslookup(domain)
         except:
-          ip=None
+          pass
+        if not ip:
+          try:
+            ip=socket.getaddrinfo('6.c83a.tk',80,socket.AF_INET6)[0][4][0]
+          except:
+            pass
         dns_cache[domain]=ip
       if ip in code_cache:
           code=code_cache[ip]
