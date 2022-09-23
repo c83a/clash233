@@ -5,7 +5,7 @@ from socket import getaddrinfo as nslookup46
 from socket import AF_INET6
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
-ip_pattern='^(\d+\.\d+\.\d+\.\d+)$|^[0-9a-fA-F:]+$'
+ip_pattern='^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'
 dns_cache={}
 code_cache={}
 def get_location(ip):
