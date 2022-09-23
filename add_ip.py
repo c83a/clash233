@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import re
 from socket import gethostbyname as nslookup
-from socket import socket.getaddrinfo as nslookup46
+from socket import getaddrinfo as nslookup46
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='\d+\.\d+\.\d+\.\d+'
