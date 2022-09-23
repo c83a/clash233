@@ -2,6 +2,7 @@
 import re
 from socket import gethostbyname as nslookup
 from socket import getaddrinfo as nslookup46
+from socket import AF_INET6
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='\d+\.\d+\.\d+\.\d+'
@@ -29,7 +30,7 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
           pass
         if not ip:
           try:
-            ip=nslookup46(domain,80,socket.AF_INET6)[0][4][0]
+            ip=nslookup46(domain,80,AF_INET6)[0][4][0]
           except:
             pass
         dns_cache[domain]=ip
