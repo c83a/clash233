@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import re
 from socket import gethostbyname as nslookup
+from socket import socket.getaddrinfo as nslookup46
 import geoip2.database
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='\d+\.\d+\.\d+\.\d+'
@@ -28,7 +29,7 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
           pass
         if not ip:
           try:
-            ip=socket.getaddrinfo('6.c83a.tk',80,socket.AF_INET6)[0][4][0]
+            ip=nslookup46('6.c83a.tk',80,socket.AF_INET6)[0][4][0]
           except:
             pass
         dns_cache[domain]=ip
