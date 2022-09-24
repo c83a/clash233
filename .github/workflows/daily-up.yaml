@@ -63,7 +63,7 @@ jobs:
         np=${uuid:0:8}
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/^  - \{//;s/\}$//'  
-        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file }{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file}'
+        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file }{ print "  - {" $0 ",\42name\42:\42_" np NR "\42}" > file;print "\42name\42:\42_" np NR "\42">"alive-list.txt"}'
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
@@ -87,7 +87,7 @@ jobs:
           interval: 9600
           path: x.yaml
           health-check:
-            enable: true
+            enable: false
             interval: 600
             url: http://www.gstatic.com/generate_204
         EOF
@@ -104,7 +104,7 @@ jobs:
         fi
         [ ! -x clash ] && chmod a+x clash
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
-        if true; then
+        if [ ! 1 ]; then
         sleep 90  
         fi
         curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
