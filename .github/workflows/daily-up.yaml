@@ -36,22 +36,23 @@ jobs:
         if [ ! -f pool_etc ];then
         cat >pool_etc<<-EEE
         https://sspool.herokuapp.com/clash/proxies
-        https://fq.lonxin.net/clash/proxies
         EEE
         fi
         down_from_list() {
         while read url;do
         filename=tmp_$RANDOM.yaml
         echo GET $url TO $filename
-        ( wget -q -T 15 --no-check-certificate -O $filename $url  && echo $filename job done )&
+        ( wget -q -T 15 --no-check-certificate -O $filename $url  && echo $filename job done || echo $url failed)&
+        p="$! $p"
         done<$1
-        echo done $1
+        echo download from $1 started
         }
         #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for done
-        #( sleep 60 && pidof wget && killall wget )&
-        wait $p 
+        for i in $p;do
+        wait $i
+        done
         date
     - name: update repo
       continue-on-error: true 
