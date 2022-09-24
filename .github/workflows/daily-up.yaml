@@ -107,8 +107,7 @@ jobs:
         if [ ! 1 ]; then
         sleep 90  
         fi
-        curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
-        j=1
+        #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         url1="https://microsoft.com"
         url2="https://bing.com"
         timeout=7
