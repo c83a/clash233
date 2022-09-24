@@ -70,6 +70,14 @@ jobs:
         mode: rule
         #log-level: silent
         proxy-groups:
+          - name: S4
+            type: select
+            use:
+              - px
+          - name: S3
+            type: select
+            use:
+              - px
           - name: S2
             type: select
             use:
@@ -80,7 +88,10 @@ jobs:
               - px
         rules:
           - DOMAIN-KEYWORD,microsoft,S1
-          - MATCH,S2
+          - DOMAIN-KEYWORD,bing,S2
+          - DOMAIN-KEYWORD,baidu,S3
+          - DOMAIN-KEYWORD,sougou,S4
+          - MATCH,S4
         proxy-providers:
          px:
           type: file
@@ -110,6 +121,8 @@ jobs:
         #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         url1="https://microsoft.com"
         url2="https://bing.com"
+        url3="https://baidu.com"
+        url4="https://sogou.com"
         timeout=7
         proxy="http://127.0.0.1:7890"
         #proxy2="http://[::1]:7890"
@@ -120,13 +133,7 @@ jobs:
         num=$1
         good="good$num.txt"
         bad="bad$num.txt"
-        if [ 1 = $num ] ;then
-        url=$url1
-        #local=53110-53119
-        else
-        url=$url2
-        #local=53110-53119
-        fi
+        url=$(eval echo '$url'$num)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         r=$(curl -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
         s=$?
@@ -155,7 +162,7 @@ jobs:
         cat alive-list.txt
         fi>&99 &
         p=$!
-        max_worker=2
+        max_worker=4
         for i in `seq $max_worker`;do
         worker $i
         p="$! $p"
