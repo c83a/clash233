@@ -62,7 +62,7 @@ jobs:
         wait $i
         done
         [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-        ./warp.sh d
+        sudo './warp.sh d'
         . ./warp.sh
         tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
         git add warp.tgz
