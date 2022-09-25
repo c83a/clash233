@@ -41,8 +41,10 @@ jobs:
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
           curl -s -o warp.sh $warp_url 
           chmod 755 ./warp.sh
+          sudo bash
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-          sudo ./warp.sh d
+          sudo bash
+          ./warp.sh d
           . ./warp.sh
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
           git add warp.tgz
