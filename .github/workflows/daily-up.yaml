@@ -196,6 +196,7 @@ jobs:
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         python ./add_ip.py
+        sudo ./warp.sh x
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}}' speed.yaml > speed_short.yaml
         git config --global user.name "jw853355718" 
