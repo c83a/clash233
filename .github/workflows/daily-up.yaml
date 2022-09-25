@@ -67,11 +67,12 @@ jobs:
           cat >run.sh<<-\EOF
           #!/bin/sh
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-          ./warp.sh d
+          ./warp.sh 6
           . ./warp.sh
-          tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
-          chmod 666 warp.tgz
+          tar zcvf warp2.tgz $WGCF_ProfilePath $WireGuard_ConfPath
+          chmod 666 warp2.tgz
           EOF
+          cp warp2.tgz warp.tgz
           chmod 755 ./run.sh
           sudo ./run.sh
           curl -s http://api64.ipify.org
