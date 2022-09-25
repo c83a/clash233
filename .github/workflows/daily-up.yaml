@@ -67,7 +67,7 @@ jobs:
           cat >run.sh<<-\EOF
           #!/bin/sh
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-          ./warp.sh 6
+          ./warp.sh 4
           . ./warp.sh
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
           chmod 666 warp.tgz
