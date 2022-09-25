@@ -19,7 +19,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       #- name: Run a one-line script
@@ -34,8 +34,20 @@ jobs:
           #grep '' /etc/passwd*
           #sudo addgroup clash2 --gid 6666
           #sudo adduser clash2 --gid 6666
-          sudo iptables -t nat -A OUTPUT -p tcp -m owner --gid-owner 6666 -j REDIRECT --to-ports 7892
-          sudo iptables -S -t nat
+          #sudo iptables -t nat -A OUTPUT -p tcp -m owner --gid-owner 6666 -j REDIRECT --to-ports 7892
+          #sudo iptables -S -t nat
+          set +e
+          curl -s http://api64.ipify.org
+          warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
+          curl -s -o warp.sh $warp_url 
+          chmod 755 ./warp.sh
+          [ -f warp.tgz ] && tar xzvf warp.tgz -C /
+          sudo ./warp.sh d
+          . ./warp.sh
+          tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
+          git add warp.tgz
+          curl -s http://api64.ipify.org
+
           #curl https://www.bing.com
           #sudo clash2 curl https://www.bing.com
           
