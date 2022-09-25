@@ -53,9 +53,7 @@ jobs:
         }
         #down_from_list pool.txt
         down_from_list pool_etc
-        echo wait for done
-        p="$! $p"
-        chmod 755 ./warp.sh
+        echo wait for download
         for i in $p;do
         wait $i
         done
