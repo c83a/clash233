@@ -42,10 +42,16 @@ jobs:
           curl -s -o warp.sh $warp_url 
           chmod 755 ./warp.sh
           sudo su
+          cat >run.sh<<-\EOF
+          #!/bin/sh
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
           ./warp.sh d
           . ./warp.sh
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
+          chmod 666 warp.tgz
+          EOF
+          chmod 755 ./run.sh
+          sudo ./run.sh
           git add warp.tgz
           curl -s http://api64.ipify.org
           git config --global user.name "jw853355718" 
