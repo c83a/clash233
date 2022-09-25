@@ -116,8 +116,8 @@ jobs:
         fi
         [ ! -x clash ] && chmod a+x clash
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
-        if [ ! 1 ]; then
-        sleep 90  
+        if [ 1 ]; then
+        sleep 3
         fi
         #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         url1="https://microsoft.com"
