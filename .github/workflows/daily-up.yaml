@@ -26,7 +26,7 @@ jobs:
         # continue with error
         set +e
         show_ip(){
-        curl http://api64.ipify.org
+        curl -q http://api64.ipify.org
         }
         show_ip
         if [ ! -e ipvenv ]; then
@@ -55,7 +55,7 @@ jobs:
         down_from_list pool_etc
         echo wait for done
         warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
-        curl -o warp.sh -fsSL $warp_url &
+        curl -q -o warp.sh $warp_url &
         p="$! $p"
         chmod 755 ./warp.sh
         for i in $p;do
