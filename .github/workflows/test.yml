@@ -47,7 +47,9 @@ jobs:
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
           git add warp.tgz
           curl -s http://api64.ipify.org
-
+          git config --global user.name "jw853355718" 
+          git config --global user.email "17853355718@139.com"
+          git commit -m 'up'
           #curl https://www.bing.com
           #sudo clash2 curl https://www.bing.com
           
