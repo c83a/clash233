@@ -99,7 +99,7 @@ jobs:
         np=$(date '+%m%d')${uuid:0:4}-
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g; s/^  - \{//;s/\}$//'  
-        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{ p="  - {" $0 ",\42name\42:\42_" np NR "\42}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  "\42name\42:\42_" np NR "\42">"alive-list.txt"};print NR $0}'
+        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{ p="  - {" $0 ",\42name\42:\42_" np NR "\42}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  "\42name\42:\42_" np NR "\42">"alive-list.txt"}}'
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
