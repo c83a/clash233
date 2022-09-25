@@ -25,6 +25,10 @@ jobs:
         # buggy script
         # continue with error
         set +e
+        show_ip(){
+        curl http://api64.ipify.org
+        }
+        show_ip
         if [ ! -e ipvenv ]; then
         python -m venv ipvenv
         fi
@@ -62,6 +66,7 @@ jobs:
         . ./warp.sh
         tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
         git add warp.tgz
+        show_ip
         date
     - name: update repo
       continue-on-error: true 
