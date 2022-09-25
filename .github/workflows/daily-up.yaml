@@ -26,7 +26,7 @@ jobs:
         # continue with error
         set +e
         show_ip(){
-        curl -q http://api64.ipify.org
+        curl -s http://api64.ipify.org
         }
         show_ip
         if [ ! -e ipvenv ]; then
