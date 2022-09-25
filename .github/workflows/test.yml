@@ -43,7 +43,6 @@ jobs:
           chmod 755 ./warp.sh
           sudo bash
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-          sudo bash
           ./warp.sh d
           . ./warp.sh
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
