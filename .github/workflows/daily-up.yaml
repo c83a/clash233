@@ -54,6 +54,18 @@ jobs:
         #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for download
+        if [  ! -f clash ]; then
+        os_type=linux
+        cpu_type=amd64
+        clash_bin_url="https://github.com/Dreamacro/clash/releases"
+        clash_html=tmp$RANDOM.html
+        wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
+        clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+        wget -q -O clash.gz $clash_bin_url
+        gunzip clash.gz
+        git add clash
+        fi
+        [ ! -x clash ] && chmod a+x clash
         for i in $p;do
         wait $i
         done
@@ -85,7 +97,7 @@ jobs:
         np=$(date '+%m%d')${uuid:0:4}-
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g; s/^  - \{//;s/\}$//'  
-        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="clash -t -f 1.yaml"}{ p="  - {" $0 ",\42name\42:\42_" np NR "\42}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  "\42name\42:\42_" np NR "\42">"alive-list.txt"}}'
+        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml"}{ p="  - {" $0 ",\42name\42:\42_" np NR "\42}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  "\42name\42:\42_" np NR "\42">"alive-list.txt"}}'
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
@@ -124,18 +136,6 @@ jobs:
             interval: 600
             url: http://www.gstatic.com/generate_204
         EOF
-        if [  ! -f clash ]; then
-        os_type=linux
-        cpu_type=amd64
-        clash_bin_url="https://github.com/Dreamacro/clash/releases"
-        clash_html=tmp$RANDOM.html
-        wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
-        clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
-        wget -q -O clash.gz $clash_bin_url
-        gunzip clash.gz
-        git add clash
-        fi
-        [ ! -x clash ] && chmod a+x clash
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
         sleep 3
