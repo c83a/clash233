@@ -41,7 +41,6 @@ jobs:
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
           curl -s -o warp.sh $warp_url 
           chmod 755 ./warp.sh
-          sudo su
           cat >run.sh<<-\EOF
           #!/bin/sh
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
@@ -57,6 +56,6 @@ jobs:
           git config --global user.name "jw853355718" 
           git config --global user.email "17853355718@139.com"
           git commit -m 'up'
-          #curl https://www.bing.com
-          #sudo clash2 curl https://www.bing.com
+          ls
+          cat run.sh
           
