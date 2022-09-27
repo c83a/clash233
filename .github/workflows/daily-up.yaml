@@ -106,6 +106,14 @@ jobs:
         mode: rule
         #log-level: silent
         proxy-groups:
+          - name: S6
+            type: select
+            use:
+              - px
+          - name: S5
+            type: select
+            use:
+              - px
           - name: S4
             type: select
             use:
@@ -127,7 +135,9 @@ jobs:
           - DOMAIN-KEYWORD,bing,S2
           - DOMAIN-KEYWORD,baidu,S3
           - DOMAIN-KEYWORD,sogou,S4
-          - MATCH,S4
+          - DOMAIN-KEYWORD,weibo,S5
+          - DOMAIN-KEYWORD,zhihu,S6
+          - MATCH,S6
         proxy-providers:
          px:
           type: file
@@ -147,6 +157,8 @@ jobs:
         url2="https://bing.com"
         url3="https://baidu.com"
         url4="https://sogou.com"
+        url5="https://weibo.com"
+        url6="https://zhihu.com"
         timeout=7
         proxy="http://127.0.0.1:7890"
         #proxy2="http://[::1]:7890"
@@ -186,8 +198,9 @@ jobs:
         cat alive-list.txt
         fi>&99 &
         p=$!
-        max_worker=4
+        max_worker=6
         for i in `seq $max_worker`;do
+        sleep 1
         worker $i
         p="$! $p"
         done
