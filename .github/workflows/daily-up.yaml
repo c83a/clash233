@@ -94,7 +94,7 @@ jobs:
           r=$?
           r2=$(curl -w '%{http_code}' http://www.gstatic.com/generate_204)
           if [ 0204 == $r$r2 ]; then break ;fi
-          if [ $i -lt $m ]; then i=$(( $i + 1)); continue; fi
+          if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh x; continue; fi
           sudo ./warp.sh x
           break
           done
