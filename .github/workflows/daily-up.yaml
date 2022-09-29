@@ -86,16 +86,20 @@ jobs:
           chmod 666 warp.tgz
           EOF
           chmod 755 ./run.sh
+          sudo ./run.sh
           m=3
           i=1
+          TestIPv4_1='1.0.0.1'
+          TestIPv4_2='9.9.9.9'
+          TestIPv6_1='2606:4700:4700::1001'
+          TestIPv6_2='2620:fe::fe'
           while [ 1 ];do
-          sudo ./run.sh
-          curl -s http://api64.ipify.org | grep ':'
-          r=$?
-          ping -c 3 8.8.8.8
-          r2=$?
-          if [ 00 == $r$r2 ]; then break ;fi
-          if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh x; continue; fi
+          ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2
+          r4=$?
+          ping6 -c1 -W1 TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2
+          r6=$?
+          if [ 00 == $r4$r6 ]; then break ;fi
+          if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh rwg; continue; fi
           sudo ./warp.sh x
           break
           done
