@@ -92,8 +92,9 @@ jobs:
           sudo ./run.sh
           curl -s http://api64.ipify.org | grep ':'
           r=$?
-          r2=$(curl -w '%{http_code}' http://www.gstatic.com/generate_204)
-          if [ 0204 == $r$r2 ]; then break ;fi
+          ping -c 3 8.8.8.8
+          r2=$?
+          if [ 00 == $r$r2 ]; then break ;fi
           if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh x; continue; fi
           sudo ./warp.sh x
           break
