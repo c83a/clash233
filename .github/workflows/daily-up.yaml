@@ -96,7 +96,7 @@ jobs:
           while [ 1 ];do
           ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2
           r4=$?
-          ping6 -c1 -W1 TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2
+          ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2
           r6=$?
           if [ 00 == $r4$r6 ]; then break ;fi
           if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh rwg; continue; fi
