@@ -73,6 +73,7 @@ jobs:
     - name: cloudflare warp
       continue-on-error: true 
       run: |
+          set +e  
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
           curl -s -o warp.sh $warp_url 
           chmod 755 ./warp.sh
