@@ -121,14 +121,15 @@ jobs:
         zhihu
         bilibili
         EOF
-        i=1
+        i=0
         for kwi in $(grep -v '^$' kw.txt);do
         eval kw$i=$kwi
         i=$(($i + 1))
         done
         max_worker=$i
-        cat <<-\EOF
-        mixed-port: 7890
+        mport=7890
+        cat <<-EOF
+        mixed-port: $mport
         ipv6: true
         mode: rule
         #log-level: silent
@@ -147,17 +148,17 @@ jobs:
         echo "          - MATCH,S1"
         echo "proxy-groups:";for i in `seq $max_worker`; do
         echo "          - {name: S$i, type: select, use: [px]}";done 
-        fi >> y.yaml
+        fi > y.yaml
         ./clash -t -d . -f y.yaml || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
-        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
+        port=9090
+        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" &
         if [ 1 ]; then
         sleep 3
         fi
-        #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
+        #curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         timeout=7
-        proxy="http://127.0.0.1:7890"
-        port=9090
+        proxy="http://127.0.0.1:$mport"
         peer()
         {
         data=$2
@@ -165,7 +166,7 @@ jobs:
         good="good$num.txt"
         bad="bad$num.txt"
         url=$(eval echo https://'$kw'${num}.com)
-        t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
+        t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num") || continue
         r=$(curl -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
         s=$?
         if [ 0200 = "0$r" ] ; then
