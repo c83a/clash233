@@ -145,9 +145,10 @@ jobs:
         # generate proxy-group
         echo "        proxy-groups:"
         for i in `seq $max_worker`; do
-        echo "          - {name: S$i, type:select, use: [px]}"
+        echo "          - {name: S$i, type: select, use: [px]}"
         done 
         # end of prxoy-group) >> y.yaml
+        ./clash -t -f y.yaml || (cat y.yaml && exit 1)
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
         sleep 3
