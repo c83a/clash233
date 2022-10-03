@@ -95,10 +95,10 @@ jobs:
           TestIPv6_1='2606:4700:4700::1001'
           TestIPv6_2='2620:fe::fe'
           while [ 1 ];do
-          ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2
-          r4=$?
-          ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2
-          r6=$?
+          r4=0
+          r6=0
+          ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2 || r4=1         
+          ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2 || r6=1
           if [ 00 == $r4$r6 ]; then break ;fi
           if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh rwg; continue; fi
           sudo ./warp.sh x
