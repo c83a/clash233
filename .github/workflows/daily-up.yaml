@@ -75,35 +75,30 @@ jobs:
       run: |
           set +e  
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
-          curl -s -o warp.sh $warp_url 
+          curl -s -o warp.sh $warp_url || exit 1
           chmod 755 ./warp.sh
           cat >run.sh<<-\EOF
           #!/bin/sh
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
           ./warp.sh d
-          #./warp.sh 4
           . ./warp.sh
           tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
           chmod 666 warp.tgz
-          EOF
-          chmod 755 ./run.sh
-          sudo ./run.sh
           m=3
           i=1
-          TestIPv4_1='1.0.0.1'
-          TestIPv4_2='9.9.9.9'
-          TestIPv6_1='2606:4700:4700::1001'
-          TestIPv6_2='2620:fe::fe'
           while [ 1 ];do
           r4=0
           r6=0
           ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2 || r4=1         
           ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2 || r6=1
-          if [ 00 == $r4$r6 ]; then break ;fi
-          if [ $i -lt $m ]; then i=$(( $i + 1)); sudo ./warp.sh rwg; continue; fi
-          sudo ./warp.sh x
+          if [ 00 == $r4$r6 ]; then touch warp_on; break ;fi
+          if [ $i -lt $m ]; then i=$(( $i + 1)); ./warp.sh rwg; continue; fi
+          ./warp.sh x
           break
           done
+          EOF
+          chmod 755 ./run.sh
+          sudo ./run.sh
     - name: update repo
       continue-on-error: true 
       run: | 
@@ -225,7 +220,7 @@ jobs:
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         python ./add_ip.py
-        sudo ./warp.sh x
+        [ -f warp_on ] && sudo ./warp.sh x
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed.yaml > speed_short.yaml
         git config --global user.name "jw853355718" 
