@@ -134,21 +134,17 @@ jobs:
             interval: 600
             url: http://www.gstatic.com/generate_204
         EOF
-        ( # generate rules
-        echo 'rules:'
-        for i in `seq $max_worker`; do
-        kw=$(eval echo '$kw'$i)
-        echo "          - DOMAIN-KEYWORD,$kw,S$i"
-        done
+        if [ 1 ];then
+        # generate rules
+        echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
+        echo "          - DOMAIN-KEYWORD,$kw,S$i";done
         echo "          - MATCH,S1"
         # end of rules
         # generate proxy-group
-        echo "proxy-groups:"
-        for i in `seq $max_worker`; do
-        echo "          - {name: S$i, type: select, use: [px]}"
-        done 
+        echo "proxy-groups:";for i in `seq $max_worker`; do
+        echo "          - {name: S$i, type: select, use: [px]}";done 
         # end of prxoy-group 
-        ) >> y.yaml
+        fi >> y.yaml
         ./clash -t -d . -f y.yaml || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
