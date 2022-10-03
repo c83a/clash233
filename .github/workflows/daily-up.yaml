@@ -130,6 +130,7 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
+        [ $max_worker -eq 0 ] && check='true' && tls='s' || check='false' && tls=''
         mport=7890
         cat <<-EOF
         mixed-port: $mport
@@ -142,9 +143,9 @@ jobs:
           interval: 9600
           path: x.yaml
           health-check:
-            enable: false
+            enable: $check
             interval: 600
-            url: http://www.gstatic.com/generate_204
+            url: http${tls}://www.gstatic.com/generate_204
         EOF
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,S$i";done
@@ -156,10 +157,11 @@ jobs:
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=9090
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" &
-        if [ 1 ]; then
-        sleep 3
+        if [ $max_worker -eq 0 ]; then
+        time=$((90+$(wc -l x.yaml|awk 'print $1')/33))
+        sleep $time
+        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "good0.txt"}'
         fi
-        #curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         timeout=7
         proxy="http://127.0.0.1:$mport"
         peer()
