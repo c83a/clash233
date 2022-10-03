@@ -111,6 +111,13 @@ jobs:
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
         done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"alive-list.txt"}}'
+        kw1="microsoft"
+        kw2="bing"
+        kw3="baidu"
+        kw4="sogou"
+        kw5="weibo"
+        kw6="zhihu"
+        kw7="bilibili"
         cat >y.yaml<<-EOF
         mixed-port: 7890
         ipv6: true
@@ -139,13 +146,13 @@ jobs:
             type: select
             use: [px]
         rules:
-          - DOMAIN-KEYWORD,microsoft,S1
-          - DOMAIN-KEYWORD,bing,S2
-          - DOMAIN-KEYWORD,baidu,S3
-          - DOMAIN-KEYWORD,sogou,S4
-          - DOMAIN-KEYWORD,weibo,S5
-          - DOMAIN-KEYWORD,zhihu,S6
-          - DOMAIN-KEYWORD,bilibili,S7
+          - DOMAIN-KEYWORD,$kw1,S1
+          - DOMAIN-KEYWORD,$kw2,S2
+          - DOMAIN-KEYWORD,$kw3,S3
+          - DOMAIN-KEYWORD,$kw4,S4
+          - DOMAIN-KEYWORD,$kw5,S5
+          - DOMAIN-KEYWORD,$kw6,S6
+          - DOMAIN-KEYWORD,$kw7,S7
           - MATCH,S7
         proxy-providers:
          px:
@@ -162,13 +169,6 @@ jobs:
         sleep 3
         fi
         #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
-        url1="https://microsoft.com"
-        url2="https://bing.com"
-        url3="https://baidu.com"
-        url4="https://sogou.com"
-        url5="https://weibo.com"
-        url6="https://zhihu.com"
-        url7="https://bilibili.com"
         timeout=7
         proxy="http://127.0.0.1:7890"
         #proxy2="http://[::1]:7890"
@@ -179,7 +179,7 @@ jobs:
         num=$1
         good="good$num.txt"
         bad="bad$num.txt"
-        url=$(eval echo '$url'$num)
+        url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         r=$(curl -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
         s=$?
