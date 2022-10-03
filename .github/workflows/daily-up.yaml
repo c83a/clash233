@@ -124,28 +124,6 @@ jobs:
         ipv6: true
         mode: rule
         #log-level: silent
-        proxy-groups:
-          - name: S7
-            type: select
-            use: [px]
-          - name: S6
-            type: select
-            use: [px]
-          - name: S5
-            type: select
-            use: [px]
-          - name: S4
-            type: select
-            use: [px]
-          - name: S3
-            type: select
-            use: [px]
-          - name: S2
-            type: select
-            use: [px]
-          - name: S1
-            type: select
-            use: [px]
         proxy-providers:
          px:
           type: file
@@ -163,7 +141,13 @@ jobs:
         echo "          - DOMAIN-KEYWORD,$kw,S$i"
         done
         echo "          - MATCH,S1"
-        # end of rules ) >> y.yaml
+        # end of rules
+        # generate proxy-group
+        echo "        proxy-groups:"
+        for i in `seq $max_worker`; do
+        echo "          - {name: S$i, type:select, use: [px]}"
+        done 
+        # end of prxoy-group) >> y.yaml
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
         sleep 3
