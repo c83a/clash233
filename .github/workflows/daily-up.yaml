@@ -111,6 +111,7 @@ jobs:
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
         done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"alive-list.txt"}}'
+        if [ 1 ];then
         kw1="microsoft"
         kw2="bing"
         kw3="baidu"
@@ -119,7 +120,7 @@ jobs:
         kw6="zhihu"
         kw7="bilibili"
         max_worker=7
-        cat >y.yaml<<-EOF
+        cat <<-\EOF
         mixed-port: 7890
         ipv6: true
         mode: rule
@@ -134,16 +135,11 @@ jobs:
             interval: 600
             url: http://www.gstatic.com/generate_204
         EOF
-        if [ 1 ];then
-        # generate rules
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,S$i";done
         echo "          - MATCH,S1"
-        # end of rules
-        # generate proxy-group
         echo "proxy-groups:";for i in `seq $max_worker`; do
         echo "          - {name: S$i, type: select, use: [px]}";done 
-        # end of prxoy-group 
         fi >> y.yaml
         ./clash -t -d . -f y.yaml || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
@@ -154,7 +150,6 @@ jobs:
         #curl -s  http://127.0.0.1:9090/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "alive-list.txt"}'
         timeout=7
         proxy="http://127.0.0.1:7890"
-        #proxy2="http://[::1]:7890"
         port=9090
         peer()
         {
