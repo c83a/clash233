@@ -110,16 +110,23 @@ jobs:
         np=$(date '+%m%d')${uuid:0:4}-
         for j in speed_short.yaml speed.yaml tmp*.yaml ; do
         cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
-        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"alive-list.txt"}}'
+        done  |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"check-list.txt"}}'
         if [ 1 ];then
-        kw1="microsoft"
-        kw2="bing"
-        kw3="baidu"
-        kw4="sogou"
-        kw5="weibo"
-        kw6="zhihu"
-        kw7="bilibili"
-        max_worker=7
+        cat >kw.txt<<-EOF
+        microsoft
+        bing
+        baidu
+        sogou
+        weibo
+        zhihu
+        bilibili
+        EOF
+        i=1
+        for kwi in $(grep -v '^$' kw.txt);do
+        eval kw$i=$kwi
+        i=$(($i + 1))
+        done
+        max_worker=$i
         cat <<-\EOF
         mixed-port: 7890
         ipv6: true
@@ -183,7 +190,7 @@ jobs:
         done&
         }
         if [ 1 ];then
-        cat alive-list.txt
+        cat check-list.txt
         fi>&99 &
         p=$!
         for i in `seq $max_worker`;do
