@@ -91,7 +91,7 @@ jobs:
           r6=0
           ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2 || r4=1         
           ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2 || r6=1
-          if [ 00 == $r4$r6 ]; then touch warp_on; break ;fi
+          if [ "00" == $r4$r6 ]; then touch warp_on; break ;fi
           if [ $i -lt $m ]; then i=$(( $i + 1)); ./warp.sh rwg; continue; fi
           ./warp.sh x
           break
@@ -147,7 +147,8 @@ jobs:
         for i in `seq $max_worker`; do
         echo "          - {name: S$i, type: select, use: [px]}"
         done 
-        # end of prxoy-group) >> y.yaml
+        # end of prxoy-group 
+        ) >> y.yaml
         ./clash -t -f y.yaml || (cat y.yaml && exit 1)
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
