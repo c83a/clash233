@@ -78,7 +78,7 @@ jobs:
           curl -s -o warp.sh $warp_url || exit 1
           chmod 755 ./warp.sh
           cat >run.sh<<-\EOF
-          #!/bin/sh
+          #!/bin/bash
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
           ./warp.sh d
           . ./warp.sh
@@ -149,8 +149,8 @@ jobs:
         done 
         # end of prxoy-group 
         ) >> y.yaml
-        ./clash -t -d . -f y.yaml || cat y.yaml && error_config=1
-        if [ "$error_config" ];then exit 1;fi
+        ./clash -t -d . -f y.yaml || error_config=1
+        if [ "$error_config" ];then cat y.yaml; exit 1;fi
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
         sleep 3
