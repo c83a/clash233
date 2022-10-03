@@ -195,7 +195,7 @@ jobs:
         peer "$1" "$data"
         done&
         }
-        if [ 1 ];then
+        if [ ! $max_worker -eq 0 ];then
         cat check-list.txt
         fi>&99 &
         p=$!
