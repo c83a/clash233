@@ -149,7 +149,7 @@ jobs:
         done 
         # end of prxoy-group 
         ) >> y.yaml
-        ./clash -t -d . -f y.yaml || (cat y.yaml && error_config=1)
+        ./clash -t -d . -f y.yaml || cat y.yaml && error_config=1
         if [ "$error_config" ];then exit 1;fi
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:9090" &
         if [ 1 ]; then
