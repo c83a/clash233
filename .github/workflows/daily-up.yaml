@@ -160,8 +160,8 @@ jobs:
         port=9090
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" &
         if [ $max_worker -eq 0 ]; then
-        time=$((90+$(wc -l x.yaml|awk 'print $1')/33))
-        sleep $time
+        t=$((23+$(awk 'END{print NR}' x.yaml)/33))
+        sleep $t
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "good0.txt"}'
         fi
         timeout=7
