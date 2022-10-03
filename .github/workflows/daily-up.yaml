@@ -215,6 +215,7 @@ jobs:
         [ -f warp_on ] && sudo ./warp.sh x
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed.yaml > speed_short.yaml
+        if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed_short.yaml speed.yaml warp.tgz
