@@ -130,7 +130,9 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
-        [ $max_worker -eq 0 ] && check='true' && tls='s' || check='false' && tls=''
+        if [ $max_worker -eq 0 ]
+        then clash_check='true' ; tls='s' 
+        else clash_check='false' ; tls='' ;fi
         mport=7890
         cat <<-EOF
         mixed-port: $mport
@@ -143,7 +145,7 @@ jobs:
           interval: 9600
           path: x.yaml
           health-check:
-            enable: $check
+            enable: $clash_check
             interval: 600
             url: http${tls}://www.gstatic.com/generate_204
         EOF
