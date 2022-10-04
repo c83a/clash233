@@ -226,7 +226,7 @@ jobs:
         git push -u origin master
     - name: update cache
       run: |        
-        [ "$clash_check" = "true" -a $max_worker -ne 0 ] && cat -n speed_bad.yaml || cat -n x.yaml
+        [ -f speed_bad.yaml ] && cat -n speed_bad.yaml || cat -n x.yaml
         sleep 15
         curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
