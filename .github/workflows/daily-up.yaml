@@ -212,6 +212,7 @@ jobs:
         done
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
+        [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
         python ./add_ip.py
         [ -f warp_on ] && sudo ./warp.sh x
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
@@ -224,8 +225,8 @@ jobs:
         git commit -m "${np}update"
         git push -u origin master
     - name: update cache
-      run: | 
-        cat -n x.yaml
+      run: |        
+        [ "$clash_check" = "true" ] && cat -n speed_bad.yaml || cat -n x.yaml
         sleep 15
         curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
