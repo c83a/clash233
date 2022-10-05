@@ -130,7 +130,7 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
-        ls -al speed*.yaml | awk '{a[$(NF-2)$(NF-1)]++}END{for(i in a)if(2 = a[i])exit 1}' || clash_check='true'
+        [ "a$(sed -n 2p speed_short.yaml)" = "a$(sed -n 2p speed.yaml)" ] && clash_check='true'
         if [ $max_worker -eq 0 -o "a$clash_check" = 'atrue']
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
