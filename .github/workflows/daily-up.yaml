@@ -130,7 +130,8 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
-        if [ $max_worker -eq 0 -o $(date '+%H') -lt 6 ]
+        ls -al speed*.yaml | awk '{a[$(NF-2)$(NF-1)]}END{for(i in a)if(2 = a[i])exit 1}' || clash_check='true'
+        if [ $max_worker -eq 0 -o "a$clash_check" = 'atrue']
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
         mport=7890
@@ -229,7 +230,7 @@ jobs:
         git push -u origin master
     - name: update cache
       run: |        
-        [ -f speed_bad.yaml ] && cat -n speed_bad.yaml || cat -n x.yaml
+        cat -n speed_bad.yaml || cat -n x.yaml || ls -al
         sleep 15
         curl https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
     - name: Failure test
