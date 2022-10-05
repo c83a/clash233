@@ -210,6 +210,9 @@ jobs:
         for w in $p;do
         wait $w
         done
+        if [ $clash_check = 'true' ]; then
+        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
+        fi 
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
