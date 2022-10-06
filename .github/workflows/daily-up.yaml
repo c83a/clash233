@@ -121,8 +121,18 @@ jobs:
         weibo
         zhihu
         bilibili
+        qq
+        163
+        jd
+        taobao
+        sohu
+        ifeng
+        huanqiu
+        douyu
+        douyin
+        toutiao
         EOF
-        limit=7
+        limit=17
         i=0
         for kwi in $(awk '!a[$0]++' kw.txt);do
         curl -s https://${kwi}.com > /dev/null || continue
