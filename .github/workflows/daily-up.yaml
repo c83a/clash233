@@ -168,6 +168,7 @@ jobs:
         fi & 
         p="$! $p"
         timeout=15
+        try_n=2
         proxy="http://127.0.0.1:$mport"
         peer()
         {
@@ -177,7 +178,7 @@ jobs:
         bad="bad$num.txt"
         url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num") || continue
-        r=$(curl -s -w "%{http_code}" -o /dev/null -m $timeout -x $proxy $url)
+        r=$(curl -s -w "%{http_code}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
         s=$?
         if [ 0200 = "0$r" ] ; then
         file=$good
