@@ -2,7 +2,7 @@ name: "clash proxy provider 2"
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  
+    - cron: '0 */8 * * *'  
   #push:
   #  branches:
   #     - master
@@ -212,7 +212,7 @@ jobs:
         if [ $clash_check = 'true' ]; then
         while [ 1 ];do
         sleep 10
-        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))n++}END{print n}' >> stat.txt || break
+        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/)){a=$2;n++}}END{print n " " a}' >> stat.txt || break
         if [ -f goodz2.txt ]; then break; fi
         done&
         fi
@@ -238,10 +238,11 @@ jobs:
         git commit -m "${np}update"
         git push -u origin master
     - name: update cache
-      run: |  
+      run: | 
+        echo * 
         sleep 15
-        cat -n stat.txt || echo && echo ******
-        cat -n speed_bad.yaml || cat -n x.yaml || ls -al && echo ******
+        cat -n stat.txt || echo && echo '******'
+        cat -n speed_bad.yaml || cat -n x.yaml || ls -al && echo '******'
         curl -s https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
 
     - name: Failure test
