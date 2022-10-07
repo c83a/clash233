@@ -131,8 +131,13 @@ jobs:
         douyu
         douyin
         toutiao
+        wps
+        weixin
+        zhibo8
+        meituan
+        kugou
         EOF
-        limit=17
+        limit=20
         i=0
         for kwi in $(awk '!a[$0]++' kw.txt);do
         curl -s https://${kwi}.com > /dev/null || continue
