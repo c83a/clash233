@@ -146,7 +146,7 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
-        [ "a$(sed -n 2p speed_short.yaml)" = "a$(sed -n 2p speed.yaml)" ] && clash_check='true'
+        # [ "a$(sed -n 2p speed_short.yaml)" = "a$(sed -n 2p speed.yaml)" ] && clash_check='true'
         if [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
@@ -183,7 +183,7 @@ jobs:
         fi & 
         p="$! $p"
         timeout=15
-        try_n=2
+        try_n=1
         proxy="http://127.0.0.1:$mport"
         peer()
         {
