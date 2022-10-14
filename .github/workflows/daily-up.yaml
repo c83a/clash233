@@ -243,7 +243,7 @@ jobs:
         [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
         python add_ip.py speed_short.yaml > speed.yaml
         [ -f warp_on ] && sudo ./warp.sh x
-        sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)#$!"\2_\3\1"}!' speed.yaml
+        sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' speed.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
         #gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed.yaml > speed_short.yaml
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi
