@@ -3,6 +3,7 @@ import re
 from socket import gethostbyname as nslookup
 from socket import getaddrinfo as nslookup46
 import geoip2.database
+import sys
 reader = geoip2.database.Reader('Country.mmdb')
 ip_pattern='^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'
 dns_cache={}
@@ -10,9 +11,11 @@ code_cache={}
 def get_location(ip):
   response = reader.country(ip)
   return response.country.iso_code
-with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
+def get_filename():
+  return sys.argv[1]
+with open(get_filename()) as f:
   next(f)
-  g.write("proxies:\n")
+  print("proxies:")
   for line in f:
     for server in re.finditer('server: ([^,]*)',line):
       ip_domain=server.group(1)
@@ -41,6 +44,6 @@ with open('speed_short.yaml') as f,open('speed.yaml','w') as g:
         except:
           code='ZZ'
         code_cache[ip]=code
-      g.write("#".join(map(str,(line.strip(), code, ip, "\n"))))
+      print("#".join(map(str,(line.strip(), code, ip))))
       break
 
