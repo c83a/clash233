@@ -98,6 +98,12 @@ jobs:
         wait $i
         done
         date
+    - name: cat yaml
+      continue-on-error: true 
+      run: |
+        ls -al tmp*.yaml
+        for i in $(ls tmp*.yaml);do
+        echo $i;cat -n $i;done
     - name: update repo
       continue-on-error: true 
       run: | 
