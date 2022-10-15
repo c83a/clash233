@@ -103,7 +103,9 @@ jobs:
       run: |
         ls -al tmp*.yaml
         for i in $(ls tmp*.yaml);do
-        echo $i;cat -n $i|grep 'server:';done
+        echo $i
+        cat -n $i | grep 'server:'
+        done
     - name: update repo
       continue-on-error: true 
       run: | 
@@ -115,7 +117,7 @@ jobs:
         np=$(date '+%m%d')${uuid:0:4}-
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
         for j in $(ls speed_*.yaml speed.yaml tmp*.yaml) ; do
-        cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' |sed '/%/d'| sed -n "/}$/p"| sed -n "/port/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/password: ([0-9]+)/password: "\1"/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
+        cat $j | yq -P 'sort_keys(..) ' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | .proxies.[] style="flow"' | sed '/%/d' | sed -n "/type:/p" |sed -n "/server:/p" | sed -n "/port:/p" |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/password: ([0-9]+)/password: "\1"/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
         done |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"check-list.txt"}}'
         if [ 1 ];then
         cat >kw.txt<<-EOF
