@@ -116,14 +116,14 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         np=$(date '+%m%d')${uuid:0:4}-
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
-        for j in $(ls speed_*.yaml speed.yaml tmp*.yaml) ; do
-        if [ 1 ];then
+        for j in speed_*.yaml speed.yaml tmp*.yaml ; do
         echo processing  $j >&2
+        if [ 1 ];then
         echo 'proxies:'        
         cat $j | grep type  | grep server | grep port || cat $j
-        echo $j end  processing $? >&2
         fi | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | grep type | grep server |sed -E 's/ [^ ]*: \{\},//g; s@ws-path: ([^,]*)@ws-opts: {path: \1}@; s/ !<str> ([0-9]+)/ "\1"/g;s/password: ([0-9]+),/password: "\1",/g;s/server: ["'"'"']?\[([0-9a-fA-F:]+)]["'"'"']?/server: \1/ ;s/^  - \{//;s/\}$//'  
-        done |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"check-list.txt"}}'
+        echo $j end  processing $? >&2
+        done |awk '!a[$0]++' | awk -v np=$np 'BEGIN{file="x.yaml"; print "proxies:">file ;g="1.yaml";h="./clash -t -f 1.yaml";h|getline t;close(h)}{d="\42name\42:\42_" np NR "\42"; p="  - {" $0 "," d "}";print "proxies:\n"p > g;close(g);h|getline r;close(h);if(match(r,/success/)){print p > file;print  d>"check-list.txt"}}END{print NR " records in total."}'
         if [ 1 ];then
         cat >kw.txt<<-EOF
         microsoft
