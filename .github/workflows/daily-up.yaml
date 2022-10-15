@@ -104,7 +104,7 @@ jobs:
         ls -al tmp*.yaml
         for i in $(ls tmp*.yaml);do
         echo $i
-        cat -n $i | | grep 'type' | grep 'server' | grep 'port' 
+        cat -n $i | grep 'type' | grep 'server' | grep 'port'  || yq '.proxies.[] style="flow"' $i | grep type | grep server || cat $i
         done
     - name: update repo
       continue-on-error: true 
