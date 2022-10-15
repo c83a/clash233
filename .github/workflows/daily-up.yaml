@@ -74,7 +74,7 @@ jobs:
         while read url;do
         filename=tmp_$RANDOM.yaml
         echo GET $url TO $filename
-        ( wget -q -T 15 --no-check-certificate -O $filename $url  && echo $filename job done || echo $url failed)&
+        ( curl -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
         done<$1
         echo download from $1 started
