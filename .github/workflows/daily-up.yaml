@@ -218,7 +218,7 @@ jobs:
         { echo >&66; }
         worker(){
         while [ 1 ];do
-        get_lock 
+        get_lock || break
         read -t 1 -u99 data || end=1
         drop_lock
         [ 01 = "0$end" ] && break
