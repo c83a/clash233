@@ -227,8 +227,8 @@ jobs:
         done&
         }
         if [ ! $max_worker -eq 0 ];then
-        cat check-list.txt
         drop_lock
+        cat check-list.txt       
         fi>&99 &
         p="$! $p"
         for i in `seq $max_worker`;do
