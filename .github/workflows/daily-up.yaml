@@ -214,8 +214,9 @@ jobs:
         exec 66<>read_lock
         get_lock()
         { read -t 3 -u66 lock && return 0 || return 1 ;}
-        drop_lock()
-        { echo >&66 &; }
+        drop_lock(){
+        echo >&66 &
+        }
         worker(){
         while [ 1 ];do
         get_lock || break
