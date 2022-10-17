@@ -213,7 +213,7 @@ jobs:
         mkfifo read_lock
         exec 66<>read_lock
         get_lock()
-        { read -t 3 -u66 lock && return 0 || return 1 }
+        { read -t 3 -u66 lock && return 0 || return 1 ;}
         drop_lock()
         { echo >&66; }
         worker(){
