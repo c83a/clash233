@@ -211,10 +211,11 @@ jobs:
         mkfifo queue
         exec 99<>queue
         mkfifo read_lock
+        exec 66<>read_lock
         get_lock()
-        { exec 66<>read_lock;read -t 3 -u66 lock && return 0 || return 1 ;}
+        { read -t 3 -u66 lock && return 0 || return 1 ;}
         drop_lock()
-        { exec 66<>read_lock;echo >&66 &; }
+        { echo >&66 &; }
         worker(){
         while [ 1 ];do
         get_lock || break
