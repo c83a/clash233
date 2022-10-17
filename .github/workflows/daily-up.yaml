@@ -98,14 +98,6 @@ jobs:
         wait $i
         done
         date
-    - name: cat yaml
-      continue-on-error: true 
-      run: |
-        ls -al tmp*.yaml
-        for i in $(ls tmp*.yaml);do
-        echo $i
-        cat -n $i | grep 'type' | grep 'server' | grep 'port'  || yq '.proxies.[] style="flow"' $i | grep type | grep server || cat $i
-        done
     - name: update repo
       continue-on-error: true 
       run: | 
@@ -177,14 +169,14 @@ jobs:
         EOF
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,S$i";done
-        echo "          - MATCH,S1"
+        echo "          - MATCH,REJECT"
         echo "proxy-groups:";for i in `seq $max_worker`; do
         echo "          - {name: S$i, type: select, use: [px]}";done 
         fi > y.yaml
         ./clash -t -d . -f y.yaml || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=9090
-        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" &
+        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >clash.log &
         if [ $clash_check = 'true' ]; then
         t=$((23+$(awk 'END{print NR}' x.yaml)/33))
         sleep $t
@@ -247,6 +239,8 @@ jobs:
         if [ $clash_check = 'true' ]; then
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
         fi 
+        killall clash
+        # check finished
         ls *.txt
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
@@ -262,14 +256,17 @@ jobs:
         git add Country.mmdb speed.yaml warp.tgz
         git commit -m "${np}update"
         git push -u origin master
+    - name: clash.log
+      continue-on-error: true 
+      run: cat clash.log || :
+    - name: stat.txt
+      continue-on-error: true 
+      run: cat stat.txt || :
     - name: update cache
       run: | 
-        echo * 
+        echo *
         sleep 15
-        cat -n stat.txt || echo && echo '******'
-        cat -n speed_bad.yaml || cat -n x.yaml || ls -al && echo '******'
         curl -s https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
-
     - name: Failure test
       if: failure()
       run: | 
