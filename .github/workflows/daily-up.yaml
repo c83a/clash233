@@ -258,10 +258,10 @@ jobs:
         git push -u origin master
     - name: clash.log
       continue-on-error: true 
-      run: cat clash.log || :
+      run: "cat clash.log || :"
     - name: stat.txt
       continue-on-error: true 
-      run: cat stat.txt || :
+      run: "cat stat.txt || :"
     - name: update cache
       run: | 
         echo *
