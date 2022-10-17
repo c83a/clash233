@@ -210,15 +210,25 @@ jobs:
         }
         mkfifo queue
         exec 99<>queue
+        mkfifo read_lock
+        exec 66<>read_lock
+        get_lock()
+        { read -t 3 -u66 lock && return 0 || return 1 }
+        drop_lock()
+        { echo >&66; }
         worker(){
         while [ 1 ];do
-        read -t 3 -u99 data|| break
+        get_lock 
+        read -t 1 -u99 data || end=1
+        drop_lock
+        [ 01 = "0$end" ] && break
         # [ 'done' == "$data" ]  && break
         peer "$1" "$data"
         done&
         }
         if [ ! $max_worker -eq 0 ];then
         cat check-list.txt
+        drop_lock
         fi>&99 &
         p="$! $p"
         for i in `seq $max_worker`;do
