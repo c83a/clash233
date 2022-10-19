@@ -132,7 +132,7 @@ jobs:
               }else{
                 close(database) ; database_closed=1 ; d="\42name\42:\42_" np NR "\42"; break }     
             }
-          }}
+          }
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
