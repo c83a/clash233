@@ -49,6 +49,7 @@ jobs:
     - name: update pool 
       continue-on-error: true
       run: |
+        cat >prepare.sh<<-\FFF
         #!/bin/bash
         # buggy script
         # continue with error
@@ -98,6 +99,9 @@ jobs:
         wait $i
         done
         date
+        FFF
+        bash ./prepare.sh > prepare.log
+        cat prepare.log
     - name: update repo
       continue-on-error: true 
       run: | 
