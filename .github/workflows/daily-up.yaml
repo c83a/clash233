@@ -131,7 +131,7 @@ jobs:
           }else{
             while(1){
               if((getline dl < database) > 0){
-                if(match(dl,$0) && match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) && d="\42name\42:\42_" mp[1] NR "\42" ) break
+                if(index(dl,$0) && match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) && d="\42name\42:\42_" mp[1] NR "\42" ) break
                 else continue 
               }else{
                 close(database) ; database_closed=1 ; d="\42name\42:\42_" np NR "\42"; break }     
