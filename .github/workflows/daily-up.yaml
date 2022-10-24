@@ -121,8 +121,8 @@ jobs:
           file="x.yaml"
           print "proxies:">file 
           g="1.yaml"
-          h="./clash -t -f 1.yaml";
-          h|getline t;
+          h="./clash -t -f 1.yaml 1>/dev/null && echo t || echo f";
+          h|getline tf;
           close(h)
         }
         {if(!a[$0]++){
@@ -140,7 +140,7 @@ jobs:
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
-          if(index(r,t)){print p > file;print  d>"check-list.txt"}
+          if(index(r,"t")){print p > file;print  d>"check-list.txt"}
         }}
         END{print NR " records in total."}
         EOF
