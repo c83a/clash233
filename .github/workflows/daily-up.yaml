@@ -330,7 +330,7 @@ jobs:
           ps:
             type: http
             interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY/speed.yaml"
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml"
             path: s.yaml
             health-check:
               enable: true
@@ -361,7 +361,7 @@ jobs:
       run: | 
         echo *
         sleep 15
-        curl -s https://purge.jsdelivr.net/gh/jw853355718/clash_233/speed.yaml
+        curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
     - name: Failure test
       if: failure()
       run: | 
