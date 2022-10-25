@@ -252,7 +252,8 @@ jobs:
         good="good$num.txt"
         bad="bad$num.txt"
         url=$(eval echo https://'$kw'${num}.com)
-        t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num") || continue
+        t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
+        [ $t = 204 ] || continue
         r=$(curl -s -w "%{http_code}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
         s=$?
         if [ 0200 = "0$r" ] ; then
@@ -381,7 +382,7 @@ jobs:
         echo *
         sleep 15
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
-    - name: check2.log
+    - name: check2
       continue-on-error: true 
       run: |
         data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
