@@ -364,7 +364,7 @@ jobs:
         EOF
         ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
-        [ -f warp_on ] && sudo ./warp.sh x 
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x 
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed.yaml warp.tgz
@@ -386,6 +386,7 @@ jobs:
       run: |
         data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
         [ ! "$data" ] && exit 1
+        sudo ./run.sh
         ./check.sh "$data" > check2.log
         cat check2.log
         cat >config.yml<<-EOF
@@ -410,6 +411,7 @@ jobs:
           - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B0]}
         $(cat speed_short.yaml)
         EOF
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
         ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
     - name: Failure test
       if: failure()
