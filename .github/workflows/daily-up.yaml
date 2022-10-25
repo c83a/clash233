@@ -388,7 +388,6 @@ jobs:
         [ ! "$data" ] && exit 1
         sudo ./run.sh
         ./check.sh "$data" > check2.log
-        cat check2.log
         cat >config.yml<<-EOF
         ipv6: true
         redir-port: 7892
@@ -413,6 +412,12 @@ jobs:
         EOF
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
         ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
+    - name: check2.log
+      continue-on-error: true 
+      run: "cat check2.log || :"
+    - name: clash.log
+      continue-on-error: true 
+      run: "cat clash.log || :"
     - name: Failure test
       if: failure()
       run: | 
