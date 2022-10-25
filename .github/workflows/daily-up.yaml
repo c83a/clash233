@@ -388,10 +388,10 @@ jobs:
     - name: check2
       continue-on-error: true 
       run: |
-        data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
+        for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1
         sudo ./run.sh  
-        ./check.sh "$data" > check2.log &
+        ./check.sh "$data" >> check2.log &
         w=$!
         # sleep 3600 && kill $w &
         wait $w
@@ -417,6 +417,8 @@ jobs:
           - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B0]}
         $(cat speed_short.yaml)
         EOF
+        ls *.txt | grep -q good && break || continue
+        done
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
         ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
     - name: check2.log
