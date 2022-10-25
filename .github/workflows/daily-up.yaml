@@ -253,7 +253,7 @@ jobs:
         bad="bad$num.txt"
         url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
-        [ $t = 204 ] || continue
+        [ "$t" = "204" ] || return 1
         r=$(curl -s -w "%{http_code}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
         s=$?
         if [ 0200 = "0$r" ] ; then
