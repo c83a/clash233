@@ -404,9 +404,9 @@ jobs:
           #- SRC-IP-CIDR,192.168.123.6/32,B0
           - MATCH,A0
         proxy-groups:
-          - {name: A0, type: select, proxies[B0,C0,$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_short.yaml)DIRECT]}
-          - {name: B0, type: select, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' good*.txt)DIRECT]}
-          - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ",match(data,/"name":"([^"]*)"/,a);print a[1]}'), B0]
+          - {name: A0, type: select, proxies: [B0,C0,$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_short.yaml) DIRECT]}
+          - {name: B0, type: select, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' good*.txt) DIRECT]}
+          - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ",match(data,/"name":"([^"]*)"/,a);print a[1]}') , B0]
         $(cat speed_short.yaml)
         EOF
         ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
