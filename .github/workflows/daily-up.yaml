@@ -409,7 +409,7 @@ jobs:
           - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ",match(data,/"name":"([^"]*)"/,a);print a[1]}'), B0]
         $(cat speed_short.yaml)
         EOF
-        ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)"|| cat config.yml
+        ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
     - name: Failure test
       if: failure()
       run: | 
