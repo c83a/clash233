@@ -393,7 +393,7 @@ jobs:
         sudo ./run.sh  
         ./check.sh "$data" > check2.log &
         w=$!
-        sleep 3600 && kill $w &
+        # sleep 3600 && kill $w &
         wait $w
         cat >config.yml<<-EOF
         ipv6: true
