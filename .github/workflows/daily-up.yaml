@@ -384,6 +384,7 @@ jobs:
       continue-on-error: true 
       run: |
         data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
+        [ ! "$data" ] && exit 1
         ./check.sh "$data" > check2.log
         cat check2.log
         cat >config.yml<<-EOF
