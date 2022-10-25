@@ -115,6 +115,7 @@ jobs:
         if [ "$1" ];then
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
         ln speed_short.yaml x.yaml
+        gawk '{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_short.yaml > check-list.txt
         else
         echo 'ipv6: true' > 1.yaml
         if [ ! "$np" ];then
