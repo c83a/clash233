@@ -113,8 +113,8 @@ jobs:
         . ipvenv/bin/activate
         echo working dir is `pwd`
         if [ "$1" ];then
-        mv x.yaml z.yaml
-        cp speed_short.yaml x.yaml
+        [ ! -f z.yaml ] && mv x.yaml z.yaml || :
+        ln speed_short.yaml x.yaml
         else
         echo 'ipv6: true' > 1.yaml
         if [ ! "$np" ];then
