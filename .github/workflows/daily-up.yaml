@@ -390,9 +390,11 @@ jobs:
       run: |
         data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
         [ ! "$data" ] && exit 1
-        sudo ./run.sh
-        sleep 3600 && pidof clash && killall clash &
-        ./check.sh "$data" > check2.log
+        sudo ./run.sh  
+        ./check.sh "$data" > check2.log &
+        w=$!
+        sleep 3600 && kill $w &
+        wait $w
         cat >config.yml<<-EOF
         ipv6: true
         redir-port: 7892
