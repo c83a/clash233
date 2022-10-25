@@ -268,10 +268,13 @@ jobs:
         echo $data $file $t $r $s
         echo $data >> $file
         }
+        [ -f queue ] && rm queue
+        [ -f read_lock ] && rm read_lock
         mkfifo queue
         exec 99<>queue
         mkfifo read_lock
         exec 66<>read_lock
+        trap 'rm read_lock queue check-list.txt' EXIT
         get_lock()
         { read -t 3 -u66 lock && return 0 || return 1 ;}
         drop_lock(){
