@@ -391,7 +391,7 @@ jobs:
         data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
         [ ! "$data" ] && exit 1
         sudo ./run.sh
-        sleep 3600 && killall clash
+        sleep 3600 && pidof clash && killall clash &
         ./check.sh "$data" > check2.log
         cat >config.yml<<-EOF
         ipv6: true
