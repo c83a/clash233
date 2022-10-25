@@ -383,7 +383,7 @@ jobs:
     - name: check2.log
       continue-on-error: true 
       run: |
-        data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a) && print a[1]) exit }' speed_short.yaml) || exit
+        data=$(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1];exit} }' speed_short.yaml) || exit
         ./check.sh "$data" > check2.log
         cat check2.log
     - name: Failure test
