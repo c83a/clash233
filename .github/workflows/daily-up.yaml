@@ -408,7 +408,7 @@ jobs:
         sudo ./run.sh  >> warp.log
         for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1        
-        ./check.sh "$data" >> check2.log &
+        ./check.sh "$data" >> check.log &
         w=$!
         # sleep 3600 && kill $w &
         wait $w
