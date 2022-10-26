@@ -423,8 +423,8 @@ jobs:
         done
         cat >>config.yml<<-FFF
           - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+        $(cat x.yaml)
         FFF
-        cat x.yaml >> config.yml
         EEE
         chmod 755 check2.sh
         bash ./check2.sh > check2.log
