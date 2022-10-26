@@ -383,15 +383,11 @@ jobs:
     - name: check2
       continue-on-error: true 
       run: |
-        for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
-        [ ! "$data" ] && exit 1
-        sudo ./run.sh  >> warp.log
-        ./check.sh "$data" >> check2.log &
-        w=$!
-        # sleep 3600 && kill $w &
-        wait $w
-        ls *.txt | grep -q good || continue
-        cat >config.yml<<-EOF
+        cat >check2.sh<<-\EEE
+        #!/bin/bash
+        limit=7
+        i=0
+        cat >config.yml<<-FFF
         ipv6: true
         redir-port: 7892
         socks-port: 7891
@@ -408,19 +404,34 @@ jobs:
           #- SRC-IP-CIDR,192.168.123.6/32,B0
           - MATCH,A0
         proxy-groups:
-          - {name: A0, type: select, proxies: [B0,C0,$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_short.yaml) DIRECT]}
-          - {name: B0, type: select, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' good*.txt) DIRECT]}
-          - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B0]}
-        $(cat speed_short.yaml)
-        EOF
+        FFF
+        sudo ./run.sh  >> warp.log
+        for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
+        [ ! "$data" ] && exit 1        
+        ./check.sh "$data" >> check2.log &
+        w=$!
+        # sleep 3600 && kill $w &
+        wait $w
+        ls *.txt | grep -q good || continue
+        i=$(($i +1))
+        cat >>config.yml<<-FFF
+          - {name: B$i, type: select, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' good*.txt) DIRECT]}
+          - {name: C$i, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B$i]}        
+        FFF
+        touch yml_good
+        [ $i -eq $limit ] && break      
+        done
+        cat >>config.yml<<-FFF
+          - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+        FFF
+        cat x.yaml >> config.yml
+        EEE
         if [ 1 ];then
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         # curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml
         fi
-        break
-        done
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
-        ls *.txt | grep -q good && ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
+        [ -f yml_good ]&& ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
     - name: check2.log
       continue-on-error: true 
       run: "cat check2.log || :"
