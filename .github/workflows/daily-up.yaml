@@ -114,7 +114,7 @@ jobs:
         echo working dir is `pwd`
         if [ "$1" ];then
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
-        ln speed_short.yaml x.yaml
+        ln speed_short.yaml x.yaml || :
         gawk '{if(match($0,/("name":"[^"]*")/,a))print a[1]}' speed_short.yaml > check-list.txt
         else
         echo 'ipv6: true' > 1.yaml
@@ -426,6 +426,8 @@ jobs:
         FFF
         cat x.yaml >> config.yml
         EEE
+        chmod 755 check2.sh
+        bash ./check2.sh > check2.log
         if [ 1 ];then
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         # curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml
