@@ -38,14 +38,14 @@ jobs:
           r6=0
           ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2 || r4=1         
           ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2 || r6=1
-          if [ "a00" = "a$r4$r6" ]; then touch warp_on; break ;fi
+          if [ "a00" = "a$r4$r6" ]; then touch warp_on; chmod 666 warp_on; break ;fi
           if [ $i -lt $m ]; then i=$(( $i + 1)); ./warp.sh rwg; continue; fi
           ./warp.sh x
           break
           done
           EOF
           chmod 755 ./run.sh
-          sudo ./run.sh      
+          sudo ./run.sh  > warp.log    
     - name: update pool 
       continue-on-error: true
       run: |
@@ -368,7 +368,7 @@ jobs:
         EOF
         ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x 
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x >> warp.log
         git config --global user.name "jw853355718" 
         git config --global user.email "17853355718@139.com"
         git add Country.mmdb speed.yaml warp.tgz
@@ -380,17 +380,12 @@ jobs:
     - name: check.log
       continue-on-error: true 
       run: "cat check.log || :"
-    - name: update cache
-      run: | 
-        echo *
-        sleep 15
-        curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
     - name: check2
       continue-on-error: true 
       run: |
         for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1
-        sudo ./run.sh  
+        sudo ./run.sh  >> warp.log
         ./check.sh "$data" >> check2.log &
         w=$!
         # sleep 3600 && kill $w &
@@ -418,6 +413,10 @@ jobs:
           - {name: C0, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B0]}
         $(cat speed_short.yaml)
         EOF
+        if [ 1 ];then
+        curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
+        # curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml
+        fi
         break
         done
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
@@ -425,9 +424,9 @@ jobs:
     - name: check2.log
       continue-on-error: true 
       run: "cat check2.log || :"
-    - name: clash.log
+    - name: warp.log
       continue-on-error: true 
-      run: "cat clash.log || :"
+      run: "cat warp.log || :"
     - name: Failure test
       if: failure()
       run: | 
