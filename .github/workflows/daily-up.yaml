@@ -164,7 +164,7 @@ jobs:
         EOF
         for j in database.yaml tmp*.yaml ; do
         echo processing  $j >&2
-        cat $j | sed -E 's/(server)*name: [^,]*,*//;s/"name":"[^"]*",*//' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
+        cat $j | sed -E 's/ name: [^,]*(,*)/ name: a\1/' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
         done | gawk -v np="$np" -f gen.awk
         fi
