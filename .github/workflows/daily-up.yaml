@@ -257,8 +257,10 @@ jobs:
         url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1
+        t0=$(date '+%s')
         r=$(curl -s -w "%{http_code}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
         s=$?
+        t1=$(date '+%s')
         if [ 0200 = "0$r" ] ; then
         file=$good
         elif [ 0302 = "0$r" ] ;then
@@ -268,7 +270,8 @@ jobs:
         else
         file=$bad
         fi
-        echo $data $file $t $r $s
+        [ good = $file ] && t_a= $(( $t1 - $t0)) &&echo $t_a >> delay$num.txt
+        echo $data $file $t $r $s $t_a
         echo $data >> $file
         }
         [ -f queue ] && rm queue
@@ -298,7 +301,7 @@ jobs:
         cat check-list.txt       
         fi>&99 &
         p="$! $p"
-        [ "$1" ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0") && rm good*.txt bad*.txt || :
+        [ "$1" ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0") && rm good*.txt bad*.txt delay*.txt || :
         for i in `seq $max_worker`;do
         sleep 1
         worker $i
