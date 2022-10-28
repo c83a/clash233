@@ -239,6 +239,7 @@ jobs:
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=9090
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >clash.log &
+        clash_pid=$!
         if [ $clash_check = 'true' ]; then
         t=$((23+$(awk 'END{print NR}' x.yaml)/33))
         sleep $t
@@ -320,7 +321,7 @@ jobs:
         if [ $clash_check = 'true' ]; then
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
         fi 
-        killall clash
+        kill $clash_pid || echo clash Exited Already.
         # check finished
         ls *.txt
         if [ ! "$1" ];then
@@ -429,7 +430,7 @@ jobs:
         [ ! "$data" ] && exit 1        
         ./check.sh "$data" >> check.log &
         w=$!
-        # sleep 3600 && kill $w &
+        # timeout cmd
         wait $w
         ls *.txt | grep -q good || continue
         i=$(($i +1))
@@ -449,10 +450,12 @@ jobs:
         bash ./check2.sh > check2.log
         if [ 1 ];then
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
-        # curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  >> warp.log || :
         [ -f yml_good ]&& ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
+        if [ 1 ];then
+        sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
+        fi
     - name: check2.log
       timeout-minutes: 1
       continue-on-error: true 
