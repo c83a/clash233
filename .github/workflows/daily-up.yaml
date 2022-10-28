@@ -270,7 +270,7 @@ jobs:
         else
         file=$bad
         fi
-        [ good = $file ] && t_a= $(( $t1 - $t0)) &&echo $t_a >> delay$num.txt
+        [ good = $file ] && t_a=$(( $t1 - $t0)) && echo $t_a >> delay$num.txt
         echo $data $file $t $r $s $t_a
         echo $data >> $file
         }
