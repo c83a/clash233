@@ -206,7 +206,7 @@ jobs:
         done
         max_worker=$i
         # [ "a$(sed -n 2p speed_short.yaml)" = "a$(sed -n 2p speed.yaml)" ] && clash_check='true'
-        if [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
+        if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
         mport=7890
