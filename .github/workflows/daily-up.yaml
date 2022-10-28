@@ -396,6 +396,16 @@ jobs:
         #!/bin/bash
         limit=7
         i=0
+        cat >gen2.awk<-FFF
+        BEGIN{
+        while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
+          while( (getline t < f) && (getline s < g) ){
+            printf("%03d %s",t,s)
+          }
+          close(f);close(g);
+        }
+        }
+        FFF
         cat >config.yml<<-FFF
         ipv6: true
         redir-port: 7892
@@ -424,7 +434,7 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         cat >>config.yml<<-FFF
-          - {name: B$i, type: select, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' good*.txt) DIRECT]}
+          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk | sort | gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}') DIRECT]}
           - {name: C$i, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B$i]}        
         FFF
         touch yml_good
