@@ -19,6 +19,7 @@ jobs:
         fetch-depth: 1
     - name: cloudflare warp
       continue-on-error: true 
+      timeout-minutes: 15
       run: |
           set +e  
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
@@ -48,6 +49,7 @@ jobs:
           sudo ./run.sh  > warp.log    
     - name: update pool 
       continue-on-error: true
+      timeout-minutes: 15
       run: |
         cat >prepare.sh<<-\FFF
         #!/bin/bash
@@ -104,6 +106,7 @@ jobs:
         cat prepare.log
     - name: update repo
       continue-on-error: true 
+      timeout-minutes: 120
       run: | 
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d')${uuid:0:4}-
@@ -375,14 +378,17 @@ jobs:
         git commit -m "${np}update"
         git push -u origin master
     - name: clash.log
+      timeout-minutes: 1
       continue-on-error: true 
       run: "cat clash.log || :"
     - name: check.log
+      timeout-minutes: 1
       continue-on-error: true 
       run: "cat check.log || :"
     - name: check2
       continue-on-error: true 
       run: |
+        timeout-minutes: 90
         cat >check2.sh<<-\EEE
         #!/bin/bash
         limit=7
@@ -435,9 +441,11 @@ jobs:
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x
         [ -f yml_good ]&& ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
     - name: check2.log
+      timeout-minutes: 1
       continue-on-error: true 
       run: "cat check2.log || :"
     - name: warp.log
+      timeout-minutes: 1
       continue-on-error: true 
       run: "cat warp.log || :"
     - name: Failure test
