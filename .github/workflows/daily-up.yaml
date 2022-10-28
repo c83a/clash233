@@ -396,11 +396,11 @@ jobs:
         #!/bin/bash
         limit=7
         i=0
-        cat >gen2.awk<-FFF
+        cat >gen2.awk<-\FFF
         BEGIN{
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
           while( (getline t < f) && (getline s < g) ){
-            printf("%03d %s",t,s)
+            printf("%03d %s\n",t,s)
           }
           close(f);close(g);
         }
