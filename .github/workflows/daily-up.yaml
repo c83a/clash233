@@ -386,9 +386,9 @@ jobs:
       continue-on-error: true 
       run: "cat check.log || :"
     - name: check2
+      timeout-minutes: 90
       continue-on-error: true 
       run: |
-        timeout-minutes: 90
         cat >check2.sh<<-\EEE
         #!/bin/bash
         limit=7
