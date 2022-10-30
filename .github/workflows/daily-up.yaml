@@ -110,9 +110,16 @@ jobs:
         cat >check.sh<<-\EEE
         #!/bin/bash
         set +e  
-        . ipvenv/bin/activate
-        echo working dir is `pwd`
+        . ipvenv/bin/activate        
         [ "$2" ] && wd="$2" || wd=$(pwd)
+        if [ "$2" ];then
+        mkdir -p "$wd" || :
+        for i in $(ls);do
+        ln -s "`pwd`/$i" "$wd/$i" ;done
+        cd "$wd"
+        fi
+        echo working dir is `pwd`
+        [ -d "$wd"] || exit 1
         if [ "$1" ];then
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
         ln speed_short.yaml x.yaml || :
@@ -207,7 +214,8 @@ jobs:
         if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
-        mport=7890
+        seed=$(cat /proc/sys/kernel/random/uuid | sed 's/[^0-9]//g')
+        mport=$((1$seed % 100 + 10305))
         cat <<-EOF
         mixed-port: $mport
         ipv6: true
@@ -235,8 +243,8 @@ jobs:
         fi > y.yaml
         ./clash -t -f y.yaml || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
-        port=9090
-        ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >clash.log &
+        port=$((2$seed % 100 + 20406))
+        ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
         if [ $clash_check = 'true' ]; then
         t=$((23+$(awk 'END{print NR}' x.yaml)/33))
@@ -385,19 +393,17 @@ jobs:
         git commit -m "${np}update"
         git push -u origin master
     - name: clash.log
-      timeout-minutes: 1
       continue-on-error: true 
       run: "cat clash.log || :"
     - name: check.log
-      timeout-minutes: 1
       continue-on-error: true 
       run: "cat check.log || :"
     - name: check2
-      timeout-minutes: 90
       continue-on-error: true 
       run: |
         cat >check2.sh<<-\EEE
         #!/bin/bash
+        rm clash.log || :
         limit=7
         i=0
         cat >gen2.awk<<-\FFF
@@ -450,7 +456,7 @@ jobs:
         FFF
         EEE
         chmod 755 check2.sh
-        bash ./check2.sh > check2.log
+        timeout 90m bash ./check2.sh > check2.log
         if [ 1 ];then
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
@@ -460,15 +466,8 @@ jobs:
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
     - name: check2.log
-      timeout-minutes: 1
       continue-on-error: true 
       run: "cat check2.log || :"
-    - name: warp.log
-      timeout-minutes: 1
+    - name: clash.log
       continue-on-error: true 
-      run: "cat warp.log || :"
-    - name: Failure test
-      if: failure()
-      run: | 
-        ls
-        echo "Error on running!"
+      run: "cat clash.log || :"
