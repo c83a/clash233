@@ -443,7 +443,7 @@ jobs:
         timeout 15m ./check.sh "$data" >> check.log  || touch tout && echo "$data" timeout  &
         w=$!
         wait $w
-        if [ -f tout ] && echo "$data" maybe busy,maybe && rm tout
+        [ -f tout ] && echo "$data" maybe busy,maybe && rm tout
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         cat >>config.yml<<-FFF
