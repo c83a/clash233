@@ -1,12 +1,7 @@
 name: "clash proxy provider 2"
-
 on:
   schedule:
     - cron: '0 */8 * * *'  
-  #push:
-  #  branches:
-  #     - master
-
   workflow_dispatch:
 jobs:
   job_1:
@@ -172,7 +167,7 @@ jobs:
         EOF
         for j in database.yaml tmp*.yaml ; do
         echo processing  $j >&2
-        cat $j | sed -E '/: :/d;s/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
+        cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
         done | gawk -v np="$np" -f gen.awk
         fi
@@ -332,7 +327,6 @@ jobs:
         if [ $clash_check = 'true' ]; then
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
         fi 
-        #kill $clash_pid || echo clash Exited Already.
         # check finished
         ls *.txt
         if [ ! "$1" ];then
@@ -346,9 +340,6 @@ jobs:
         else
         cat good*.txt || :
         fi
-        EEE
-        chmod 755 check.sh 
-        timeout 120m ./check.sh > check.log
         cat >config.yaml<<-EOF
         ipv6: true
         redir-port: 7892
@@ -359,7 +350,6 @@ jobs:
         log-level: silent
         #external-ui: clash_webs
         external-controller: 0.0.0.0:9090
-        #proxies:
         proxy-groups:
           - {name: B0, type: select, proxies: [Z1,A1,RZA,FZ,DIRECT]}
           - {name: A0, type: select, proxies: [A1,Z1,RZA,FZ,DIRECT]}
@@ -381,9 +371,11 @@ jobs:
         rules:
           - GEOIP,CN,DIRECT
           #- SRC-IP-CIDR,127.0.0.0/8,B0
-          #- SRC-IP-CIDR,192.168.123.6/32,B0
           - MATCH,A0
         EOF
+        EEE
+        chmod 755 check.sh 
+        timeout 120m ./check.sh > check.log
         ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x >> warp.log || :
