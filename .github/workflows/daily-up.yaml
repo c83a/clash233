@@ -408,7 +408,7 @@ jobs:
         $(cat x.yaml)
         FFF
         }
-        trap 'timeout_end' EXIT
+        trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
         BEGIN{
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
