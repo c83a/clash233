@@ -12,6 +12,8 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: 1
+    - name: time_a
+      run: 'echo $(date "+%s") > time_a'
     - name: cloudflare warp
       continue-on-error: true 
       run: |
@@ -459,7 +461,8 @@ jobs:
         FFF       
         EEE
         chmod 755 check2.sh
-        timeout 90m bash ./check2.sh > check2.log
+        time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
+        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh > check2.log
         if [ -f s1_t ];then
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
