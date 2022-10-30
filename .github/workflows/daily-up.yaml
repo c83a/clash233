@@ -119,7 +119,7 @@ jobs:
         cd "$wd"
         fi
         echo working dir is `pwd`
-        [ -d "$wd"] || exit 1
+        [ -d "$wd" ] || exit 1
         if [ "$1" ];then
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
         ln speed_short.yaml x.yaml || :
@@ -462,12 +462,10 @@ jobs:
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  >> warp.log || :
         [ -f yml_good ]&& ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
-        if [ 1 ];then
+        if [ -f yml_good ];then
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
     - name: check2.log
-      continue-on-error: true 
       run: "cat check2.log || :"
     - name: clash.log
-      continue-on-error: true 
       run: "cat clash.log || :"
