@@ -392,14 +392,8 @@ jobs:
         git add Country.mmdb speed.yaml warp.tgz
         git commit -m "${np}update"
         git push -u origin master
-        time_left=$(( 90 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
+        time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ]  && touch s1_t
-    - name: clash.log
-      continue-on-error: true 
-      run: "cat clash.log || :"
-    - name: check.log
-      continue-on-error: true 
-      run: "cat check.log || :"
     - name: check2
       continue-on-error: true 
       run: |
@@ -477,7 +471,3 @@ jobs:
         rm yml_good
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
-    - name: check2.log
-      run: "cat check2.log || :"
-    - name: clash.log
-      run: "cat clash.log || :"
