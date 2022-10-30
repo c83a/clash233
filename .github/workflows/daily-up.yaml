@@ -402,7 +402,7 @@ jobs:
         i=0
         timeout_clean(){
         [ "$(pidof clash)" ]  && killall clash || return 0      
-        i=$(($i - 1))
+        [ $i -gt 0 ] && i=$(($i - 1))
         cat >>config.yml<<-FFF
           - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
         $(cat x.yaml)
@@ -454,8 +454,7 @@ jobs:
         cat >>config.yml<<-FFF
           - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
         $(cat x.yaml)
-        FFF
-        
+        FFF       
         EEE
         chmod 755 check2.sh
         timeout 90m bash ./check2.sh > check2.log
