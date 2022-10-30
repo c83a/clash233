@@ -462,7 +462,7 @@ jobs:
         EEE
         chmod 755 check2.sh
         time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
-        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh > check2.log
+        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh > check2.log || echo no enough time left( $time_left m)
         if [ -f s1_t ];then
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
