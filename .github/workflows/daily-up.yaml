@@ -97,7 +97,7 @@ jobs:
         done
         date
         FFF
-        timeout 15 bash ./prepare.sh > prepare.log || exit 1
+        timeout 15m bash ./prepare.sh > prepare.log || exit 1
         touch p_t
         cat prepare.log
     - name: update repo
