@@ -418,11 +418,9 @@ jobs:
         log-level: silent
         #external-ui: clash_webs
         external-controller: 0.0.0.0:9090
-        #proxies:
         rules:
           - GEOIP,CN,DIRECT
           #- SRC-IP-CIDR,127.0.0.0/8,B0
-          #- SRC-IP-CIDR,192.168.123.6/32,B0
           - MATCH,A0
         proxy-groups:
         FFF
@@ -453,7 +451,7 @@ jobs:
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  >> warp.log || :
-        [ -f yml_good ]&& ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
+        [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
         if [ -f yml_good ];then
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
