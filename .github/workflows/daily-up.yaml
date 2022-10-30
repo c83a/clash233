@@ -214,7 +214,7 @@ jobs:
         if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
-        seed=$(cat /proc/sys/kernel/random/uuid | sed 's/[^0-9]//g')
+        seed=$(cat /proc/sys/kernel/random/uuid | sed  -E 's/[^0-9]*//g')
         mport=$((1$seed % 100 + 10305))
         cat <<-EOF
         mixed-port: $mport
