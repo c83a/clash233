@@ -378,7 +378,7 @@ jobs:
         EOF
         EEE
         chmod 755 check.sh 
-        timeout 120m ./check.sh > check.log
+        timeout 90m ./check.sh > check.log
         ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x >> warp.log || :
