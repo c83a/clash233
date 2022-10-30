@@ -284,7 +284,8 @@ jobs:
         exec 66<>read_lock
         clean(){
         rm read_lock queue check-list.txt
-        kill $clash_pid || echo clash exited
+        kill $p || :
+        kill $clash_pid || echo clash exited 
         echo clean finished
         }
         trap 'clean' EXIT
@@ -401,7 +402,7 @@ jobs:
         limit=7
         i=0
         timeout_clean(){
-        [ "$(pidof clash)" ]  && killall clash || return 0      
+        [ "$(pidof clash)" ]  && kill $w || return 0  
         [ $i -gt 0 ] && i=$(($i - 1))
         cat >>config.yml<<-FFF
           - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
