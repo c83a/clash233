@@ -42,9 +42,9 @@ jobs:
           done
           EOF
           chmod 755 ./run.sh
-          timeout 15m sudo ./run.sh  > warp.log    
+          timeout 15m sudo ./run.sh  > warp.log || sudo ./warp.sh x  
     - name: update pool 
-      continue-on-error: true
+      continue-on-error: true 
       run: |
         cat >prepare.sh<<-\FFF
         #!/bin/bash
@@ -97,11 +97,13 @@ jobs:
         done
         date
         FFF
-        timeout 15 bash ./prepare.sh > prepare.log
+        timeout 15 bash ./prepare.sh > prepare.log || exit 1
+        touch p_t
         cat prepare.log
     - name: update repo
       continue-on-error: true 
       run: | 
+        [ -f p_t ] || exit 1
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d')${uuid:0:4}-
         cat >check.sh<<-\EEE
