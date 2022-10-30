@@ -385,10 +385,10 @@ jobs:
         EEE
         chmod 755 check.sh 
         time_left=$(( 90 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
-        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh > check.log || echo no enough time left( $time_left m)
+        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh || echo no enough time left( $time_left m) > check.log
         ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x >> warp.log || :
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
         git add Country.mmdb speed.yaml warp.tgz
         git commit -m "${np}update"
         git push -u origin master
@@ -440,7 +440,7 @@ jobs:
           - MATCH,A0
         proxy-groups:
         FFF
-        sudo ./run.sh  >> warp.log || :
+        sudo ./run.sh || : >> warp.log
         for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1  
         rm tout || :      
@@ -465,7 +465,7 @@ jobs:
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg >> warp.log || :
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg || : >> warp.log
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
         if [ -f yml_good ];then
         rm yml_good
