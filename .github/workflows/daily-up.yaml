@@ -460,11 +460,13 @@ jobs:
         chmod 755 check2.sh
         timeout 90m bash ./check2.sh > check2.log
         if [ -f s1_t ];then
+        rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  >> warp.log || :
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
         if [ -f yml_good ];then
+        rm yml_good
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
     - name: check2.log
