@@ -384,6 +384,7 @@ jobs:
         git add Country.mmdb speed.yaml warp.tgz
         git commit -m "${np}update"
         git push -u origin master
+        touch s1_t
     - name: clash.log
       continue-on-error: true 
       run: "cat clash.log || :"
@@ -393,11 +394,21 @@ jobs:
     - name: check2
       continue-on-error: true 
       run: |
+        [ -f s1_t ] || exit
         cat >check2.sh<<-\EEE
         #!/bin/bash
         rm clash.log || :
         limit=7
         i=0
+        timeout_clean(){
+        [ "$(pidof clash)" ]  && killall clash || return 0      
+        i=$(($i - 1))
+        cat >>config.yml<<-FFF
+          - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+        $(cat x.yaml)
+        FFF
+        }
+        trap 'timeout_end' EXIT
         cat >gen2.awk<<-\FFF
         BEGIN{
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
@@ -444,6 +455,7 @@ jobs:
           - {name: A0, type: select, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
         $(cat x.yaml)
         FFF
+        
         EEE
         chmod 755 check2.sh
         timeout 90m bash ./check2.sh > check2.log
