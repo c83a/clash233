@@ -459,7 +459,7 @@ jobs:
         EEE
         chmod 755 check2.sh
         timeout 90m bash ./check2.sh > check2.log
-        if [ 1 ];then
+        if [ -f s1_t ];then
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  >> warp.log || :
