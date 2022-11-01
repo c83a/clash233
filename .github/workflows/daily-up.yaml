@@ -390,6 +390,7 @@ jobs:
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
         git add Country.mmdb speed.yaml warp.tgz
+        git pull
         git commit -m "${np}update"
         git push -u origin master
         time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
@@ -466,7 +467,7 @@ jobs:
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg || : >> warp.log
-        [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git commit -m "$(date)" && git push -u origin master || cat config.yml
+        [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git pull && git commit -m "$(date)" && git push -u origin master || cat config.yml
         if [ -f yml_good ];then
         rm yml_good
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
