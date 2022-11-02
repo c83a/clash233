@@ -266,11 +266,11 @@ jobs:
         bad="bad$num.txt"
         url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
-        [ "$t" = "204" ] || return 1
-        t0=$(date '+%s')
-        r=$(curl -s -w "%{http_code}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
+        [ "$t" = "204" ] || return 1        
+        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout -x $proxy $url)
         s=$?
-        t1=$(date '+%s')
+        r=${r2:0:3}
+        t_a=${r2:4}
         if [ 0200 = "0$r" ] ; then
         file=$good
         elif [ 0302 = "0$r" ] ;then
@@ -280,7 +280,7 @@ jobs:
         else
         file=$bad
         fi
-        [ $good = $file ] && t_a=$(( $t1 - $t0)) && echo $t_a >> delay$num.txt
+        [ $good = $file ] && echo $t_a >> delay$num.txt
         echo $data $file $t $r $s $t_a
         echo $data >> $file
         }
@@ -419,7 +419,7 @@ jobs:
         BEGIN{
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
           while( (getline t < f) && (getline s < g) ){
-            printf("%03d %s\n",t,s)
+            printf("%03d %s\n",t * 10,s)
           }
           close(f);close(g);
         }
