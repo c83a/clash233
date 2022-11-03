@@ -34,6 +34,8 @@ jobs:
       - name: Run a multi-line script
         run: |
           set +e
+          git config --global user.name "${GITHUB_ACTOR}" 
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           echo del clash for  autoupdate
           mmdb_url='https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb'
           wget -O Country.mmdb "$mmdb_url"
@@ -55,7 +57,5 @@ jobs:
           chmod a+x clash
           ver=$(./clash -v)
           git add clash Country.mmdb
-          git config --global user.name "jw853355718"
-          git config --global user.email "17853355718@139.com"
           git commit -m "$ver" && echo "Git Committed"
           git push -u origin master && echo "Git Pushed Origin"
