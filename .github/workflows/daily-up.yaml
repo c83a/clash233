@@ -125,7 +125,7 @@ jobs:
         if [ "$1" ];then
         sd=$1
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
-        ln speed_short.yaml x.yaml || :
+        [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "speed_short.yaml as x.yaml with pre-server $1" || echo "x.yaml with pre-server $1"
         gawk '{if(match($0,/("name":"[^"]*")/,a))print a[1]}' x.yaml > check-list.txt
         else
         echo 'ipv6: true' > 1.yaml
@@ -151,7 +151,7 @@ jobs:
           }else{
             while(1){
               if((getline dl < database) > 0){
-                if(index(dl,$0) && match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) && d="\42name\42:\42_" mp[1] NR "\42" ) break
+                if(match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) && d="\42name\42:\42_" mp[1] NR "\42" ) break
                 else continue 
               }else{
                 close(database) ; database_closed=1 ; d="\42name\42:\42_" np NR "\42"; break }     
@@ -213,7 +213,6 @@ jobs:
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
-        # [ "a$(sed -n 2p speed_short.yaml)" = "a$(sed -n 2p speed.yaml)" ] && clash_check='true'
         if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ; tls='s' 
         else clash_check='false' ; tls='' ;fi
@@ -292,8 +291,10 @@ jobs:
         exec 66<>read_lock
         clean(){
         rm read_lock queue check-list.txt
+        if [ ! "$normal_end" ];then
         kill $p || :
         kill $clash_pid || echo clash exited 
+        fi
         ls *.txt
         cat >config.yaml<<-EOF
         ipv6: true
@@ -381,6 +382,8 @@ jobs:
         if [ $clash_check = 'true' ]; then
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
         fi 
+        kill $clash_pid
+        normal_end=1
         # check finished
         EEE
         chmod 755 check.sh 
