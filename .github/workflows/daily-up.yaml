@@ -448,7 +448,7 @@ jobs:
         for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1  
         rm tout || :      
-        timeout 15m ./check.sh "$data" >> check.log  || touch tout && echo "$data" timeout  &
+        timeout 15m ./check.sh "$data" || touch tout && echo "$data" timeout  &
         w=$!
         wait $w
         [ -f tout ] && echo "$data" maybe busy,maybe && rm tout
@@ -469,7 +469,7 @@ jobs:
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg || : >> warp.log
+        [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg >> warp.log || : 
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml && git pull && git commit -m "$(date)" && git push -u origin master || cat config.yml
         if [ -f yml_good ];then
         rm yml_good
