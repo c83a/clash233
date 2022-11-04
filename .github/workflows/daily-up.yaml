@@ -133,8 +133,17 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d')${uuid:0:4}-
         fi
+        cat >uniq.py<<-\EOF
+        import sys
+        a=set()
+        for line in sys.stdin:
+          if line in a: continue
+          else:
+            a.add(line)
+            print(line,end="")
+        EOF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
-        awk '!a[$0]++' speed_*.yaml speed.yaml > database.yaml
+        cat speed_*.yaml speed.yaml | python uniq.py > database.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
@@ -145,7 +154,7 @@ jobs:
           h|getline tf;
           close(h)
         }
-        {if(!a[$0]++){
+        {if(1){
           if(database_closed){
             d="\42name\42:\42_" np NR "\42"
           }else{
@@ -177,7 +186,7 @@ jobs:
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
-        done | gawk -v np="$np" -f gen.awk
+        done | python uniq.py | gawk -v np="$np" -f gen.awk
         fi
         if [ 1 ];then
         cat >kw.txt<<-EOF
