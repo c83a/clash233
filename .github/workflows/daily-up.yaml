@@ -412,20 +412,19 @@ jobs:
         kill $w 
         [ $i -gt 0 ] && i=$(($i - 1))
         fi
+        all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml)
         if [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
           - {name: A1, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, proxies: [A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+          - {name: A0, type: select, proxies: [A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $all_server DIRECT]}
         FFF
         else
         cat >>config.yml<<-FFF
-          - {name: A1, type: load-balance, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, proxies: [A1, $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+          - {name: A1, type: load-balance, proxies: [$all_server ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
+          - {name: A0, type: select, proxies: [A1, $all_server DIRECT]}
         FFF
         fi
-        cat >>config.yml<<-FFF
-        $(cat x.yaml)
-        FFF
+        cat x.yaml >> config.yml
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
