@@ -51,8 +51,6 @@ jobs:
       run: |
         cat >prepare.sh<<-\FFF
         #!/bin/bash
-        # buggy script
-        # continue with error
         set +e
         show_ip(){
         curl -s http://api64.ipify.org
@@ -80,7 +78,6 @@ jobs:
         done<$1
         echo download from $1 started
         }
-        #down_from_list pool.txt
         down_from_list pool_etc
         echo wait for download
         if [  ! -f clash ]; then
@@ -317,7 +314,7 @@ jobs:
           ps:
             type: http
             interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml"
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: s.yaml
             health-check:
               enable: true
@@ -325,8 +322,8 @@ jobs:
               interval: 600
               url: http://www.gstatic.com/generate_204
         rules:
+          #- SRC-IP-CIDR,127.0.0.0/8,Z1
           - GEOIP,CN,DIRECT
-          #- SRC-IP-CIDR,127.0.0.0/8,B0
           - MATCH,A0
         EOF
         if [ ! "$sd" ];then
@@ -335,7 +332,6 @@ jobs:
         python add_ip.py speed_short.yaml > speed.yaml
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' speed.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
-        #gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed.yaml > speed_short.yaml
         [ ! "$clash_check" = "true" ] && git add speed_short.yaml
         else
         cat good*.txt || :
