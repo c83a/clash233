@@ -133,17 +133,8 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d')${uuid:0:4}-
         fi
-        cat >uniq.py<<-\EOF
-        import sys
-        a=set()
-        for line in sys.stdin:
-          if line in a: continue
-          else:
-            a.add(line)
-            print(line,end="")
-        EOF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
-        cat speed_*.yaml speed.yaml | python uniq.py > database.yaml
+        awk '!a[$0]++' speed_*.yaml speed.yaml > database.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
@@ -154,7 +145,7 @@ jobs:
           h|getline tf;
           close(h)
         }
-        {if(1){
+        {if(!a[$0]++){
           if(database_closed){
             d="\42name\42:\42_" np NR "\42"
           }else{
