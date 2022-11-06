@@ -419,13 +419,24 @@ jobs:
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
+        function fsp(x,   y,z,i){
+          asorti(x,y)
+          for (i in y)
+            if ( match(y[i],/"name":"([^"]*)"/,z) )
+              print z[1]
+        }
         BEGIN{
+        ORS=","
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
           while( (getline t < f) && (getline s < g) ){
-            printf("%03d %s\n",t * 10,s)
+            if( match(t,/"CN_/) ) b[sprintf("%03d %s",t * 10, s)]
+            else a[sprintf("%03d %s",t * 10, s)]
           }
           close(f);close(g);
         }
+        }
+        END{
+        fsp(a);fsp(b)
         }
         FFF
         cat >config.yml<<-FFF
@@ -451,12 +462,12 @@ jobs:
         timeout 15m ./check.sh "$data" || touch tout && echo "$data" timeout  &
         w=$!
         wait $w
-        [ -f tout ] && echo "$data" maybe busy,maybe && rm tout
+        [ -f tout ] && echo "$data maybe busy,maybe" && rm tout
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         cat >>config.yml<<-FFF
-          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk | sort | gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}') DIRECT]}
-          - {name: C$i, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=" ";match(data,/"name":"([^"]*)"/,a);print a[1]}') , B$i]}        
+          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT]}
+          - {name: C$i, type: relay, proxies: [$(gawk -v data=$data 'BEGIN{ORS=",";match(data,/"name":"([^"]*)"/,a);print a[1]}') B$i]}        
         FFF
         touch yml_good
         [ $i -eq $limit ] && break      
