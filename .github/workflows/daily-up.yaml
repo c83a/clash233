@@ -413,7 +413,7 @@ jobs:
         [ $i -gt 0 ] && i=$(($i - 1))
         fi
         cat >>config.yml<<-FFF
-          - {name: A1, type: load-balence, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') DIRECT], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
+          - {name: A1, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') DIRECT], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A0, type: select, proxies: [A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
         $(cat x.yaml)
         FFF
