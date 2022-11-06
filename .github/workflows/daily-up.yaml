@@ -419,9 +419,9 @@ jobs:
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
-        function fsp(x,   y,z,i){
-          asorti(x,y)
-          for (i in y)
+        function fsp(x,   y,z,i,n){
+          n=asorti(x,y)
+          for (i = 1; i <= n; i++)
             if ( match(y[i],/"name":"([^"]*)"/,z) )
               print z[1]
         }
