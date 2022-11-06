@@ -429,7 +429,7 @@ jobs:
         ORS=","
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
           while( (getline t < f) && (getline s < g) ){
-            if( match(t,/"CN_/) ) b[sprintf("%03d %s",t * 10, s)]
+            if( match(s,/"CN_/) ) b[sprintf("%03d %s",t * 10, s)]
             else a[sprintf("%03d %s",t * 10, s)]
           }
           close(f);close(g);
