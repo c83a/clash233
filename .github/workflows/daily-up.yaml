@@ -412,9 +412,18 @@ jobs:
         kill $w 
         [ $i -gt 0 ] && i=$(($i - 1))
         fi
+        if [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
           - {name: A1, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') DIRECT], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A0, type: select, proxies: [A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+        FFF
+        else
+        cat >>config.yml<<-FFF
+          - {name: A1, type: load-balance, proxies: [$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
+          - {name: A0, type: select, proxies: [A1, $(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml) DIRECT]}
+        FFF
+        fi
+        cat >>config.yml<<-FFF
         $(cat x.yaml)
         FFF
         }
@@ -454,7 +463,7 @@ jobs:
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
-        for data in $(awk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
+        for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
         [ ! "$data" ] && exit 1  
         echo "test cdn-server $data" >&2 
         timeout 15m ./check.sh "$data" || touch tout && echo "$data" timeout  &
