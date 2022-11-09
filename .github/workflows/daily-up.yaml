@@ -15,8 +15,9 @@ jobs:
     - name: time_a
       run: |
         echo $(date "+%s") > time_a
-        git config --global user.name "${GITHUB_ACTOR}" 
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        [ "${GITHUB_ACTOR}" ] && user="${GITHUB_ACTOR}"  || user="jw853355718"
+        git config --global user.name "$user" 
+        git config --global user.email "${user}@users.noreply.github.com"
     - name: cloudflare warp
       continue-on-error: true 
       run: |
