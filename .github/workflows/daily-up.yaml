@@ -252,7 +252,7 @@ jobs:
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
         fi & 
         p="$! $p"
-        timeout=11
+        timeout=15
         try_n=1
         proxy="http://127.0.0.1:$mport"
         peer()
@@ -402,7 +402,7 @@ jobs:
         cat >check2.sh<<-\EEE
         #!/bin/bash
         rm clash.log || :
-        limit=11
+        limit=10
         i=0
         timeout_clean(){
         if [ "$(pidof clash)" ];then
