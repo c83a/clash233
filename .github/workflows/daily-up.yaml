@@ -473,7 +473,7 @@ jobs:
         i=$(($i +1))
         cdn_server=$(gawk -v data=$data 'BEGIN{match(data,/"name":"([^"]*)"/,a);print a[1]}')
         cat >>config.yml<<-FFF
-          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT]}
+          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT,REJECT]}
           - {name: C$i, type: relay, proxies: [$cdn_server , B$i]}        
           - {name: D$i, type: relay, proxies: [B$i , $cdn_server]}        
         FFF
