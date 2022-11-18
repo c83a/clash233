@@ -402,7 +402,7 @@ jobs:
         cat >check2.sh<<-\EEE
         #!/bin/bash
         rm clash.log || :
-        limit=10
+        limit=7
         i=0
         timeout_clean(){
         if [ "$(pidof clash)" ];then
