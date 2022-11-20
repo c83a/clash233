@@ -252,8 +252,8 @@ jobs:
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
         fi & 
         p="$! $p"
-        c_timeout=13
-        timeout=20
+        [ "$1" ] && c_timeout=20 || c_timeout=15
+        [ "$1" ] && timeout=25 || timeout=20
         try_n=1
         proxy="http://127.0.0.1:$mport"
         peer()
