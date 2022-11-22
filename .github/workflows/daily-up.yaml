@@ -479,7 +479,7 @@ jobs:
         grep '"CN_'        speed_short.yaml || :
         grep 'type: ss'    speed_short.yaml || :
         fi | awk '!a[$0]++' > x.yaml
-        for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' speed_short.yaml) ;do        
+        for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
         echo "test cdn-server $data" >&2 
         timeout 15m ./check.sh "$data" || touch tout && echo "$data" timeout  &
