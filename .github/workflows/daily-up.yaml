@@ -475,9 +475,9 @@ jobs:
         sudo ./run.sh || : >> warp.log
         mv x.yaml z.yaml || :
         if [ 1 ];then
-        grep -v 'type: ss' speed_short.yaml || :
-        grep '"CN_'        speed_short.yaml || :
-        grep 'type: ss'    speed_short.yaml || :
+        grep -Ev '"CN_|type: ss' speed.yaml || :
+        awk 'if(match($0,/"name":"(CN_[^_]*)[^"]*"/,a) && !b[a[1]]++ )print' speed.yaml || :
+        grep 'type: ss' speed.yaml || :
         fi | awk '!a[$0]++' > x.yaml
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
