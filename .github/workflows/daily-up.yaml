@@ -405,10 +405,20 @@ jobs:
         rm clash.log || :
         limit=7
         i=0
+        write_i(){
+        cdn_server=$(gawk -v data=$data 'BEGIN{match(data,/"name":"([^"]*)"/,a);print a[1]}')
+        cat >>config.yml<<-FFF
+          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT,REJECT]}
+          - {name: C$i, type: relay, proxies: [$cdn_server , B$i]}        
+          - {name: D$i, type: relay, proxies: [B$i , $cdn_server]}        
+        FFF
+        }
         timeout_clean(){
-        if [ "$(pidof clash)" ];then
-        kill $w 
-        # [ $i -gt 0 ] && i=$(($i - 1))
+        [ "$(pidof clash)" ] && kill $w
+        if [ ! $(tail -n1 config.yml | grep -q "name: D$i") ] && [ $(ls *.txt | grep -q good) ];then
+        i=$(($i +1))
+        write_i
+        touch yml_good
         fi
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml)
         if [ $i -gt 0 ];then
@@ -472,12 +482,7 @@ jobs:
         [ -f tout ] && echo "$data maybe busy,maybe" && rm tout
         ls *.txt | grep -q good || continue
         i=$(($i +1))
-        cdn_server=$(gawk -v data=$data 'BEGIN{match(data,/"name":"([^"]*)"/,a);print a[1]}')
-        cat >>config.yml<<-FFF
-          - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT,REJECT]}
-          - {name: C$i, type: relay, proxies: [$cdn_server , B$i]}        
-          - {name: D$i, type: relay, proxies: [B$i , $cdn_server]}        
-        FFF
+        write_i
         touch yml_good
         [ $i -eq $limit ] && break      
         done
