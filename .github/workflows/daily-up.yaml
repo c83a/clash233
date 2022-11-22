@@ -476,7 +476,7 @@ jobs:
         mv x.yaml z.yaml || :
         if [ 1 ];then
         grep -Ev '"CN_|type: ss' speed.yaml || :
-        gawk '{if(match($0,/"name":"(CN_[^_]*)[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
+        gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         grep 'type: ss' speed.yaml || :
         fi | awk '!a[$0]++' > x.yaml
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
