@@ -158,7 +158,7 @@ jobs:
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
-          if(index(r,"t") && match($0,/server: ([^,]*)/,tt) && ++ss[tt[1]] && ss[tt[1]] < 5){print p > file;print  d>"check-list.txt"}
+          if(index(r,"t") && match($0,/server: ([^,]*)/,tt) && ++ss[tt[1]] < 5){print p > file;print  d>"check-list.txt"}
         }}
         END{print NR " records in total."}
         EOF
