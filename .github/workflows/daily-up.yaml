@@ -408,7 +408,7 @@ jobs:
         timeout_clean(){
         if [ "$(pidof clash)" ];then
         kill $w 
-        [ $i -gt 0 ] && i=$(($i - 1))
+        # [ $i -gt 0 ] && i=$(($i - 1))
         fi
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml)
         if [ $i -gt 0 ];then
