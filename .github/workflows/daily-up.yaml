@@ -481,7 +481,8 @@ jobs:
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
-        grep -q '"CN_' speed.yaml || touch warp_blocked && cat cdn.yaml >> speed.yaml
+        grep -q '"CN_' speed.yaml || touch warp_blocked
+        cat cdn.yaml >> speed.yaml
         if [ 1 ];then
         grep -Ev '"CN_|type: ss' speed.yaml || :
         gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
