@@ -499,6 +499,7 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
+        [ -f warp_blocked ] && echo "$data" >> cdn.txt
         touch yml_good
         [ $i -eq $limit ] && break      
         done
