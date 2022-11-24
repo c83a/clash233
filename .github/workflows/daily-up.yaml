@@ -394,6 +394,7 @@ jobs:
         write_i
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
         echo "$data" >> cde.txt
+        cat good*.txt >> cde.txt
         touch yml_good
         fi
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml)
