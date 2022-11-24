@@ -411,7 +411,10 @@ jobs:
         FFF
         fi
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
-        cat speed_cde.yaml >> config.yml
+        if [ 1 ];then
+        cat speed_cde.yaml
+        grep '"CN_' x.yaml
+        fi| awk '!a[$0]++' >> config.yml
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
