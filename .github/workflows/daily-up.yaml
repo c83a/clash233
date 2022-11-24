@@ -517,7 +517,11 @@ jobs:
         if (ls cdn*.txt | grep -q cdn) ;then
         awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         cat speed_cdn.yaml >>speed_short.yaml
-        git add speed_short.yaml
+        if [ 1 ];then
+        echo 'proxies:'
+        cat speed_cdn.yaml
+        fi >> config.yaml
+        git add speed_short.yaml config.yaml
         fi
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
         git pull
