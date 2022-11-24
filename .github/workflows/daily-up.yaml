@@ -412,7 +412,7 @@ jobs:
           - {name: B0, type: select, proxies: [DIRECT, A1, $all_server]}
         FFF
         fi
-        if (ls cde*.txt | grep cde);then
+        if (ls cde*.txt | grep -q cde);then
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         grep -Ev '"CN_|type: ss' speed_cde.yaml
         grep '"CN_'              speed_cde.yaml
