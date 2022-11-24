@@ -548,3 +548,10 @@ jobs:
         rm yml_good
         sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
+    - name: debug2
+      continue-on-error: true 
+      run: |
+        ls
+        cat speed_cde.yaml
+        cat config.yaml
+        cat config.yml
