@@ -489,6 +489,10 @@ jobs:
         log-level: silent
         #external-ui: clash_webs
         external-controller: 0.0.0.0:9090
+        rules:
+          #- SRC-IP-CIDR,127.0.0.0/8,Z1
+          - GEOIP,CN,DIRECT
+          - MATCH,A0
         proxy-groups:
           - {name: A0, type: select, proxies: [Z1,Z2,R12,DIRECT]}
           - {name: R12 ,type: relay, proxies: [Z1,Z2]}
@@ -515,10 +519,6 @@ jobs:
               lazy: true
               interval: 600
               url: http://www.gstatic.com/generate_204
-        rules:
-          #- SRC-IP-CIDR,127.0.0.0/8,Z1
-          - GEOIP,CN,DIRECT
-          - MATCH,A0
         EOF
         if (ls cdn*.txt | grep -q cdn) ;then
         awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
