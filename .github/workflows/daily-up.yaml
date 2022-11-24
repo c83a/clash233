@@ -509,7 +509,7 @@ jobs:
           - MATCH,A0
         proxy-groups:
           - {name: A0, type: select, proxies: [Z1,Z2,R12,DIRECT]}
-          - {name: R12 ,type: relay, proxies: [Z1,Z2]}
+          - {name: R12, type: relay, proxies: [Z1,Z2]}
           - {name: Z1, type: select, use: [pr], proxies: [DIRECT,REJECT]}
           - {name: Z2, type: select, use: [ps], proxies: [DIRECT,REJECT]}
         proxy-providers:
