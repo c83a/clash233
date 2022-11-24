@@ -512,7 +512,7 @@ jobs:
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg >> warp.log || : 
-        if [ $(ls cdn*.txt | grep cdn) ];then
+        if $(ls cdn*.txt | grep -q cdn) ;then
         awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         cat speed_cdn.yaml >>speed_short.yaml
         git add speed_short.yaml
