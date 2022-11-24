@@ -410,7 +410,8 @@ jobs:
           - {name: B0, type: select, proxies: [DIRECT, A1, $all_server]}
         FFF
         fi
-        cat x.yaml >> config.yml
+        awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
+        cat speed_cde.yaml >> config.yml
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
@@ -465,6 +466,7 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
+        cat good*.txt >> cde.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
         touch yml_good
         [ $i -eq $limit ] && break      
