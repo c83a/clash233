@@ -243,11 +243,12 @@ jobs:
         echo "proxy-groups:";
         [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
         for i in `seq $max_worker`; do
-        echo "          - {name: S$i, type: select, use: [px]}"
-        if [ $SR = R ] ;then
-        [ -f warp_blocked ] &&  SS="S$i,S0" || SS="S0,S$i"
-        echo "          - {name: R$i, type: relay, proxies: [$SS]}";done 
-        fi
+          echo "          - {name: S$i, type: select, use: [px]}"
+          if [ $SR = R ] ;then
+            [ -f warp_blocked ] &&  SS="S$i,S0" || SS="S0,S$i"
+            echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
+          fi
+        done
         fi > y.yaml
         ./clash -t -f y.yaml -d "$wd" || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
