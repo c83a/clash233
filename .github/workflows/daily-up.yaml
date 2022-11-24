@@ -245,7 +245,7 @@ jobs:
         for i in `seq $max_worker`; do
           echo "          - {name: S$i, type: select, use: [px]}"
           if [ $SR = R ] ;then
-            [ -f warp_blocked ] &&  SS="S$i,S0" || SS="S0,S$i"
+            [ -f warp_on ] &&  SS="S$i,S0" || SS="S0,S$i"
             echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
           fi
         done
