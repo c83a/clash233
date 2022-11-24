@@ -400,7 +400,7 @@ jobs:
         if (ls cde*.txt | grep -q cde);then
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         fi
-        [ -f speed_cde.yaml ] || ls && cat cde.txt # cp speed_short.yaml speed_cde.yaml
+        [ -f speed_cde.yaml ] || ls && cat cde.txt >&2 # cp speed_short.yaml speed_cde.yaml
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_cde.yaml)
         if [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
