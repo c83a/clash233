@@ -393,6 +393,7 @@ jobs:
         i=$(($i +1))
         write_i
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
+        echo "$data" >> cde.txt
         touch yml_good
         fi
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' x.yaml)
@@ -412,9 +413,10 @@ jobs:
         fi
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         if [ 1 ];then
-        cat speed_cde.yaml
-        grep '"CN_' x.yaml
-        fi| awk '!a[$0]++' >> config.yml
+        grep -Ev '"CN_|type: ss' speed_cde.yaml
+        grep '"CN_'              speed_cde.yaml
+        grep 'type: ss'          speed_cde.yaml
+        fi | awk '!a[$0]++' >> config.yml
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
@@ -469,6 +471,7 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
+        echo "$data" >> cde.txt
         cat good*.txt >> cde.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
         touch yml_good
