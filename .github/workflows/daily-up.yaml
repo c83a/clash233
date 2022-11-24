@@ -176,10 +176,12 @@ jobs:
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
         done | gawk -v np="$np" -f gen.awk
-        fi
-        python add_ip.py x.yaml > z.yaml
+        cp x.yaml z.yaml
+        python add_ip.py z.yaml > x.yaml
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' x.yaml
+        grep '"CN_' x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a))print a[1]}' x.yaml > check-list.txt
+        fi
         if [ 1 ];then
         cat >kw.txt<<-EOF
         microsoft
@@ -242,7 +244,10 @@ jobs:
         [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
         for i in `seq $max_worker`; do
         echo "          - {name: S$i, type: select, use: [px]}"
-        [ $SR = R ]  && echo "          - {name: R$i, type: relay, proxies: [S0,S$i]}";done 
+        if [ $SR = R ] ;then
+        [ -f warp_blocked ] &&  SS="S$i,S0" || SS="S0,S$i"
+        echo "          - {name: R$i, type: relay, proxies: [$SS]}";done 
+        fi
         fi > y.yaml
         ./clash -t -f y.yaml -d "$wd" || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
@@ -475,7 +480,7 @@ jobs:
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
-        mv x.yaml z.yaml || :
+        [ grep -q '"CN_' speed.yaml ] || touch warp_blocked && cat cdn.yaml >> speed.yaml
         if [ 1 ];then
         grep -Ev '"CN_|type: ss' speed.yaml || :
         gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
