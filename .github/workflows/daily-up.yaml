@@ -304,50 +304,6 @@ jobs:
         kill $clash_pid || echo clash exited 
         fi
         ls *.txt
-        cat >config.yaml<<-EOF
-        ipv6: true
-        redir-port: 7892
-        socks-port: 7891
-        mixed-port: 7890
-        allow-lan: true
-        mode: rule
-        log-level: silent
-        #external-ui: clash_webs
-        external-controller: 0.0.0.0:9090
-        proxy-groups:
-          - {name: B0, type: select, proxies: [Z1,A1,RZA,FZ,DIRECT]}
-          - {name: A0, type: select, proxies: [A1,Z1,RZA,FZ,DIRECT]}
-          - {name: FZ, type: fallback, proxies: [RZA,A1], interval: 600, url: "http://www.gstatic.com/generate_204"}
-          - {name: RZA ,type: relay, proxies: [Z1,Z2]}
-          - {name: Z1, type: select, use: [pr], proxies: [DIRECT,REJECT]}
-          - {name: Z2, type: select, use: [ps], proxies: [DIRECT,REJECT]}
-          - {name: A1, type: load-balance, use: [ps], strategy: round-robin, interval: 600, url: "http://www.gstatic.com/generate_204"}
-        proxy-providers:
-          pr:
-            type: http
-            interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
-            path: s.yaml
-            health-check:
-              enable: true
-              lazy: true
-              interval: 600
-              url: http://www.gstatic.com/generate_204
-          ps:
-            type: http
-            interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: s.yaml
-            health-check:
-              enable: true
-              lazy: true
-              interval: 600
-              url: http://www.gstatic.com/generate_204
-        rules:
-          #- SRC-IP-CIDR,127.0.0.0/8,Z1
-          - GEOIP,CN,DIRECT
-          - MATCH,A0
-        EOF
         if [ ! "$sd" ];then
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
@@ -523,6 +479,47 @@ jobs:
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg >> warp.log || : 
+        cat >config.yaml<<-EOF
+        ipv6: true
+        redir-port: 7892
+        socks-port: 7891
+        mixed-port: 7890
+        allow-lan: true
+        mode: rule
+        log-level: silent
+        #external-ui: clash_webs
+        external-controller: 0.0.0.0:9090
+        proxy-groups:
+          - {name: A0, type: select, proxies: [Z1,Z2,R12,DIRECT]}
+          - {name: R12 ,type: relay, proxies: [Z1,Z2]}
+          - {name: Z1, type: select, use: [pr], proxies: [DIRECT,REJECT]}
+          - {name: Z2, type: select, use: [ps], proxies: [DIRECT,REJECT]}
+        proxy-providers:
+          pr:
+            type: http
+            interval: 9600
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
+            path: config.yaml
+            health-check:
+              enable: true
+              lazy: true
+              interval: 600
+              url: http://www.gstatic.com/generate_204
+          ps:
+            type: http
+            interval: 9600
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
+            path: s.yml
+            health-check:
+              enable: true
+              lazy: true
+              interval: 600
+              url: http://www.gstatic.com/generate_204
+        rules:
+          #- SRC-IP-CIDR,127.0.0.0/8,Z1
+          - GEOIP,CN,DIRECT
+          - MATCH,A0
+        EOF
         if (ls cdn*.txt | grep -q cdn) ;then
         awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         cat speed_cdn.yaml >>speed_short.yaml
@@ -532,7 +529,7 @@ jobs:
         echo 'proxies:'
         grep '"CN_' speed.yaml
         fi >> config.yaml
-        ./clash -t -f config.yaml && git add config.yaml || cat config.yaml
+        ./clash -t -f config.yaml && grep -q '"CN_' config.yaml && git add config.yaml || cat config.yaml
         git add speed_short.yaml
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
         git pull
