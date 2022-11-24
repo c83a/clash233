@@ -496,7 +496,7 @@ jobs:
           - {name: Z2, type: select, use: [ps], proxies: [DIRECT,REJECT]}
         proxy-providers:
           pr:
-            type: http
+            type: file
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
             path: config.yaml
