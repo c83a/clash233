@@ -406,7 +406,6 @@ jobs:
         chmod 755 check.sh 
         time_left=$(( 90 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh || echo "no enough time left ( $time_left m)" > check.log
-        ./clash -t -f config.yaml && git add config.yaml || :
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
         git add Country.mmdb speed.yaml warp.tgz
@@ -527,12 +526,14 @@ jobs:
         if (ls cdn*.txt | grep -q cdn) ;then
         awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         cat speed_cdn.yaml >>speed_short.yaml
-        if [ 1 ];then
         echo 'proxies:'
         cat speed_cdn.yaml
+        else
+        echo 'proxies:'
+        grep '"CN_' speed.yaml
         fi >> config.yaml
-        git add speed_short.yaml config.yaml
-        fi
+        ./clash -t -f config.yaml && git add config.yaml || cat config.yaml
+        git add speed_short.yaml
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
         git pull
         git commit -m "$(date)" && git push -u origin master
