@@ -527,7 +527,7 @@ jobs:
         cat speed_cdn.yaml
         else
         echo 'proxies:'
-        grep '"CN_' speed.yaml
+        grep '"CN_' speed_short.yaml
         fi >> config.yaml
         ./clash -t -f config.yaml && grep -q '"CN_' config.yaml && git add config.yaml || cat config.yaml
         git add speed_short.yaml
