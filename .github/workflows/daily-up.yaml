@@ -528,15 +528,11 @@ jobs:
               lazy: true
               interval: 600
               url: http://www.gstatic.com/generate_204
-        EOF
-        if (ls cdn*.txt | grep -q cdn) ;then
-        awk 'BEGIN{FS=",";f="speed_cdn.yaml";while("ls cdn*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
-        cat speed_cdn.yaml >>speed_short.yaml
+        EOF       
+        [ -f warp_blocked ] && grep '"CN_' speed_cde.yaml >> speed_short.yaml
+        if [ 1 ] ;then
         echo 'proxies:'
-        cat speed_cdn.yaml
-        else
-        echo 'proxies:'
-        grep '"CN_' speed_short.yaml
+        grep '"CN_' speed_cde.yaml
         fi >> config.yaml
         ./clash -t -f config.yaml -d . && grep -q '"CN_' config.yaml && git add config.yaml || cat config.yaml
         git add speed_short.yaml
