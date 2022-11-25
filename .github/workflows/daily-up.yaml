@@ -394,14 +394,14 @@ jobs:
         i=$(($i +1))
         write_i
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
-        echo "$data" >> cde.txt
-        cat good*.txt >> cde.txt
+        echo "$data" >> cde_$i.txt
+        cat good*.txt >> cde_$i.txt
         touch yml_good
         fi
         if (ls cde*.txt | grep -q cde);then
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         fi
-        [ -f speed_cde.yaml ] || ls && cat cde.txt >&2 # cp speed_short.yaml speed_cde.yaml
+        [ -f speed_cde.yaml ] || ls && cat cde*.txt >&2 # cp speed_short.yaml speed_cde.yaml
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_cde.yaml)
         if [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
@@ -489,8 +489,8 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
-        echo "$data" >> cde.txt
-        cat good*.txt >> cde.txt
+        echo "$data" >> cde_$i.txt
+        cat good*.txt >> cde_$i.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
         touch yml_good
         [ $i -eq $limit ] && break      
