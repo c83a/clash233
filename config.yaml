@@ -38,9 +38,11 @@ proxy-providers:
       interval: 600
       url: http://www.gstatic.com/generate_204
 proxies:
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_112420222c78-111"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.232.167.71, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.232.167.71_112420222c78-112"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-113"}
-- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-114"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_112420222c78-117"}
-- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: official.taipeicitygovernment.kyiv.ua, skip-cert-verify: true, type: trojan,"name":"CN_116.192.172.32_112520222cb9-4750"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_112420222c78-94"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.232.167.71, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.232.167.71_112420222c78-95"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-96"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-97"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_112420222c78-98"}
+- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: official.taipeicitygovernment.kyiv.ua, skip-cert-verify: true, type: trojan,"name":"CN_116.192.162.162_112520222cb9-99"}
+- {alterId: 4, cipher: auto, network: ws, port: 13156, server: 106.12.168.13, tls: false, type: vmess, uuid: 9bf4cba4-9e9e-4da4-8e65-f7c487c539df, ws-opts: {path: /},"name":"CN_106.12.168.13_11252022316d-3136"}
+- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_11252022316d-3419"}
