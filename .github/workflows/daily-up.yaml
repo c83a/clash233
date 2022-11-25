@@ -535,7 +535,6 @@ jobs:
               interval: 600
               url: http://www.gstatic.com/generate_204
         EOF
-        [ -f warp_blocked ] && grep '"CN_' speed_cde.yaml >> speed_short.yaml
         if [ -f speed_cde.yaml ] ;then
         echo 'proxies:'
         grep '"CN_' speed_cde.yaml
