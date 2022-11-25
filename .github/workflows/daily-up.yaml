@@ -407,14 +407,14 @@ jobs:
         cat >>config.yml<<-FFF
           - {name: A2, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "D"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A1, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, proxies: [A1,DIRECT,A2, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') $all_server]}
-          - {name: B0, type: select, proxies: [DIRECT,A2,A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",D"$0}') $all_server]}
+          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,A2, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",C"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A2,A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",D"$0}') ]}
         FFF
         else
         cat >>config.yml<<-FFF
-          - {name: A1, type: load-balance, proxies: [$all_server ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, proxies: [A1, DIRECT, $all_server]}
-          - {name: B0, type: select, proxies: [DIRECT, A1, $all_server]}
+          - {name: A1, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
+          - {name: A0, type: select, use: [ps], proxies: [A1, DIRECT]}
+          - {name: B0, type: select, use: [ps], proxies: [DIRECT, A1]}
         FFF
         fi
         if [ -f speed_cde.yaml ];then
@@ -458,6 +458,18 @@ jobs:
         rules:
           - GEOIP,CN,B0
           - MATCH,A0
+        proxy-providers:
+          ps:
+            type: http
+            interval: 9600
+            url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/config.yml"
+            path: s.yaml
+            health-check:
+               enable: true
+               lazy: true
+               interval: 600
+               url: http://www.gstatic.com/generate_204
+
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
@@ -515,10 +527,10 @@ jobs:
           - {name: Z2, type: select, use: [ps], proxies: [DIRECT,REJECT]}
         proxy-providers:
           pr:
-            type: file
+            type: http
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
-            path: config.yaml
+            path: r.yaml
             health-check:
               enable: true
               lazy: true
