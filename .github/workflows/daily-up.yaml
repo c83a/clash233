@@ -463,7 +463,7 @@ jobs:
             type: http
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: s.yaml
+            path: s.yml
             health-check:
               enable: true
               lazy: true
@@ -539,7 +539,7 @@ jobs:
             type: http
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: s.yml
+            path: s.yaml
             health-check:
               enable: true
               lazy: true
