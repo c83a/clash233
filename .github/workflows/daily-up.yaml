@@ -462,7 +462,7 @@ jobs:
           ps:
             type: http
             interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/config.yml"
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: s.yaml
             health-check:
               enable: true
