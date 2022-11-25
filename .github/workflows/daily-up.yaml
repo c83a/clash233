@@ -481,8 +481,9 @@ jobs:
         fi | awk '!a[$0]++' > x.yaml
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
-        echo "test cdn-server $data" >&2 
-        timeout 15m ./check.sh "$data" || touch tout && echo "$data" timeout  &
+        echo "test cdn-server $data" >&2
+        [ -f warp_blocked ] && st=5m || st=15m
+        timeout $st ./check.sh "$data" || touch tout && echo "$data" timeout  &
         w=$!
         wait $w
         [ -f tout ] && echo "$data maybe busy,maybe" && rm tout
