@@ -465,11 +465,10 @@ jobs:
             url: "https://cdn.jsdelivr.net/gh/jw853355718/clash_233/config.yml"
             path: s.yaml
             health-check:
-               enable: true
-               lazy: true
-               interval: 600
-               url: http://www.gstatic.com/generate_204
-
+              enable: true
+              lazy: true
+              interval: 600
+              url: http://www.gstatic.com/generate_204
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
