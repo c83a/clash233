@@ -482,7 +482,7 @@ jobs:
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
         current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
-        tested_good=$(echo "$cdef" | sed -n "/${current_ip}/p")
+        tested_good=$(echo "${cdef}" | sed -n "/${current_ip}/p")
         [ "${tested_good}" ] && continue
         echo "test cdn-server $data" >&2
         [ -f warp_blocked ] && st=7m || st=15m
