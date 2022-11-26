@@ -492,7 +492,8 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
-        cdef="${cdef}${data}"
+        last_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
+        cdef="${last_ip} ${cdef}"
         echo "$data" >> cde_$i.txt
         cat good*.txt >> cde_$i.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
