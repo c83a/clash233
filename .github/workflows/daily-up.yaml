@@ -481,7 +481,8 @@ jobs:
         fi | awk '!a[$0]++' > x.yaml
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
-        tested_good=$(echo "$cdef" | sed -n "/$data/p")
+        current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
+        tested_good=$(echo "$cdef" | sed -n "/${current_ip}/p")
         [ "${tested_good}" ] && continue
         echo "test cdn-server $data" >&2
         [ -f warp_blocked ] && st=7m || st=15m
@@ -492,8 +493,8 @@ jobs:
         ls *.txt | grep -q good || continue
         i=$(($i +1))
         write_i
-        last_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
-        cdef="${last_ip} ${cdef}"
+        last_good=${current_ip}
+        cdef="${last_good} ${cdef}"
         echo "$data" >> cde_$i.txt
         cat good*.txt >> cde_$i.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
