@@ -124,7 +124,7 @@ jobs:
         sd=$1
         [ ! -f z.yaml ] && mv x.yaml z.yaml || :
         [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "speed_short.yaml as x.yaml with pre-server $1" || echo "x.yaml with pre-server $1"
-        [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' cde_*.txt x.yaml > check-list.txt
+        [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' good*.txt cde_*.txt x.yaml > check-list.txt
         else
         echo 'ipv6: true' > 1.yaml
         if [ ! "$np" ];then
