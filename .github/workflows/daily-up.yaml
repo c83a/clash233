@@ -484,6 +484,7 @@ jobs:
         current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
         tested_good=$(echo "${cdef}" | sed -n "/${current_ip}/p")
         [ "${tested_good}" ] && continue
+        touch cde_0.txt || :
         echo "test cdn-server $data" >&2
         [ -f warp_blocked ] && st=7m || st=15m
         timeout $st ./check.sh "$data" || touch tout && echo "$data" timeout  &
