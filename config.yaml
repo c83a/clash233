@@ -38,13 +38,14 @@ proxy-providers:
       interval: 600
       url: http://www.gstatic.com/generate_204
 proxies:
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_112420222c78-115"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.232.167.71, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.232.167.71_112420222c78-116"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-117"}
-- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-118"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_112420222c78-119"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '27445:jgjgjgjgjgjg', server: 116.162.120.30, type: ssr,"name":"CN_116.162.120.30_1127202266c2-121"}
-- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_112820224555-123"}
-- {cipher: chacha20-ietf, obfs: plain, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '51760:LLL090ui8oll8', server: 116.162.120.26, type: ssr,"name":"CN_116.162.120.26_112820224555-124"}
-- {alterId: 0, cipher: auto, network: tcp, port: 9040, server: 116.129.254.184, skip-cert-verify: true, type: vmess, uuid: 3346872e-3104-3c5b-8f6f-4b809309fa8d, ws-opts: {path: '/guolicheng/us2?ed=2048'},"name":"CN_116.129.254.184_112820225238-680"}
-- {cipher: chacha20-ietf-poly1305, password: 6aee4e26-9e52-4f59-b710-05992d067d56, port: 31702, server: realmhk.vpntransfer.xyz, type: ss,"name":"CN_43.198.48.94_112820225238-4334"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_112420222c78-118"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.232.167.71, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.232.167.71_112420222c78-119"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-120"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-121"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_112420222c78-122"}
+- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_112820224555-124"}
+- {cipher: chacha20-ietf, obfs: plain, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '51760:LLL090ui8oll8', server: 116.162.120.26, type: ssr,"name":"CN_116.162.120.26_112820224555-125"}
+- {alterId: 0, cipher: auto, network: tcp, port: 9040, server: 116.129.254.184, skip-cert-verify: true, type: vmess, uuid: 3346872e-3104-3c5b-8f6f-4b809309fa8d, ws-opts: {path: '/guolicheng/us2?ed=2048'},"name":"CN_116.129.254.184_112820225238-126"}
+- {cipher: chacha20-ietf-poly1305, password: 6aee4e26-9e52-4f59-b710-05992d067d56, port: 31702, server: realmhk.vpntransfer.xyz, type: ss,"name":"CN_43.198.48.94_112820225238-127"}
+- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_11292022e380-968"}
+- {alterId: 4, cipher: auto, network: ws, port: 13156, server: 106.12.168.13, tls: false, type: vmess, uuid: 9bf4cba4-9e9e-4da4-8e65-f7c487c539df, ws-opts: {path: /},"name":"CN_106.12.168.13_11292022e380-4789"}
