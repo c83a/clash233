@@ -498,7 +498,7 @@ jobs:
         cdef="${last_good} ${cdef}"
         echo "$data" >> cde_$i.txt
         cat good*.txt >> cde_$i.txt
-        cat good*.txt > last_g.txt
+        rm last_g.txt && ln -s cde_$i.txt last_g.txt
         [ -f warp_blocked ] && echo "$data" >> cdn.txt
         touch yml_good
         [ $i -eq $limit ] && break      
