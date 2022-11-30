@@ -168,7 +168,7 @@ jobs:
         s!ws-path: ([^,]*)!ws-opts: {path: \1}!
         s/ !<str> ([0-9]+)/ "\1"/g
         s/password: ([0-9]+),/password: "\1",/g
-        s/server: ["']?\[([0-9a-fA-F:]+)]["']?/server: \1/
+        s/server: ["']?\[?([0-9a-fA-F:]+)]?["']?/server: \1/
         s/^  - \{//
         s/\}$//
         EOF
