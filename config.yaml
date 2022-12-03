@@ -38,11 +38,9 @@ proxy-providers:
       interval: 600
       url: http://www.gstatic.com/generate_204
 proxies:
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-150"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-151"}
-- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-152"}
-- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_120120228103-153"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 564, protocol: auth_aes128_md5, protocol-param: '32329:ff112233', server: 116.162.120.59, type: ssr,"name":"CN_116.162.120.59_12022022a71d-154"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '32329:ff112233', server: 116.162.120.60, type: ssr,"name":"CN_116.162.120.60_120220227c21-155"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 560, protocol: auth_aes128_md5, protocol-param: '32329:ff112233', server: 116.162.120.28, type: ssr,"name":"CN_116.162.120.28_12032022e2e7-156"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12032022e2e7-157"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-116"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-117"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_112420222c78-118"}
+- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_120120228103-119"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12032022e2e7-123"}
+- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_120320229568-887"}
