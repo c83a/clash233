@@ -38,13 +38,18 @@ proxy-providers:
       interval: 600
       url: http://www.gstatic.com/generate_204
 proxies:
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-156"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-157"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12032022e2e7-160"}
-- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_120320229568-161"}
-- {alterId: 0, cipher: auto, network: ws, port: 5888, server: 27.41.247.46, tls: false, type: vmess, uuid: 294eecf0-1194-4007-aa23-653099029a82, ws-opts: {path: /},"name":"CN_27.41.247.46_120420227fc8-366"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: 23ffd711.microsoft.com, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '5435:SVIPTIZ8', server: cnhkall.debugex.xyz, type: ssr,"name":"CN_116.162.120.33_120420220fa5-3196"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: 23ffd711.microsoft.com, password: mblank1port, port: 568, protocol: auth_aes128_md5, protocol-param: '5435:SVIPTIZ8', server: shgez3.eucdurl.me, type: ssr,"name":"CN_112.64.52.92_120420220fa5-3197"}
-- {alterId: 0, cipher: auto, port: 26209, server: V209.bgynd.xyz, skip-cert-verify: true, type: vmess, uuid: a5fe769e-61e1-3653-a356-696215ca85ed,"name":"CN_116.129.253.85_120420220fa5-3336"}
-- {alterId: 0, cipher: auto, port: 26204, server: V204.bgynd.xyz, skip-cert-verify: true, type: vmess, uuid: a5fe769e-61e1-3653-a356-696215ca85ed,"name":"CN_124.225.108.29_120420220fa5-3341"}
-- {alterId: 1, cipher: auto, port: 40581, server: twpro1411.juzi.monster, skip-cert-verify: true, type: vmess, uuid: 731119e8-2762-3f66-8154-6b1153409eb5,"name":"CN_106.126.0.186_120420220fa5-3342"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-138"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-139"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12032022e2e7-140"}
+- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_120320229568-141"}
+- {alterId: 0, cipher: auto, network: ws, port: 5888, server: 27.41.247.46, tls: false, type: vmess, uuid: 294eecf0-1194-4007-aa23-653099029a82, ws-opts: {path: /},"name":"CN_27.41.247.46_120420227fc8-142"}
+- {cipher: chacha20-ietf, obfs: plain, obfs-param: 23ffd711.microsoft.com, password: mblank1port, port: 568, protocol: auth_aes128_md5, protocol-param: '5435:SVIPTIZ8', server: shgez3.eucdurl.me, type: ssr,"name":"CN_112.64.52.92_120420220fa5-144"}
+- {alterId: 0, cipher: auto, port: 26209, server: V209.bgynd.xyz, skip-cert-verify: true, type: vmess, uuid: a5fe769e-61e1-3653-a356-696215ca85ed,"name":"CN_116.129.253.85_120420220fa5-145"}
+- {cipher: chacha20-ietf, obfs: plain, obfs-param: 23ffd711.microsoft.com, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '5435:SVIPTIZ8', server: 116.162.120.33, type: ssr,"name":"CN_116.162.120.33_120420220fa5-335"}
+- {alterId: 1, cipher: auto, port: 40581, server: 106.126.0.186, skip-cert-verify: true, type: vmess, uuid: 731119e8-2762-3f66-8154-6b1153409eb5,"name":"CN_106.126.0.186_120420220fa5-341"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_12042022c941-1017"}
+- {cipher: chacha20-ietf, obfs: plain, obfs-param: dC5tZS92cG5oYXQ, password: mblank1port, port: 562, protocol: auth_aes128_md5, protocol-param: '51809:111111', server: 116.162.120.31, type: ssr,"name":"CN_116.162.120.31_12042022c941-2774"}
+- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 560, protocol: auth_aes128_md5, protocol-param: '32329:ff112233', server: 116.162.120.51, type: ssr,"name":"CN_116.162.120.51_12042022c941-3059"}
+- {cipher: chacha20-ietf-poly1305, password: bd22341d-733b-419d-9712-04bfba1bec9f, port: 16169, server: 14.18.126.162, type: ss,"name":"CN_14.18.126.162_12042022c941-3125"}
+- {cipher: chacha20-ietf, obfs: plain, password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '51809:111111', server: 116.162.120.26, type: ssr,"name":"CN_116.162.120.26_12042022c941-3381"}
+- {cipher: chacha20-ietf, obfs: plain, obfs-param: t.me/vpnhat, password: mblank1port, port: 562, protocol: auth_aes128_md5, protocol-param: '51809:111111', server: 116.162.120.24, type: ssr,"name":"CN_116.162.120.24_12042022c941-3384"}
