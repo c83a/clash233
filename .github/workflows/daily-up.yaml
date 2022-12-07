@@ -132,7 +132,7 @@ jobs:
         export np=$(date '+%Y%m%d')${uuid:0:4}-
         fi
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
-        gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && a[$1]++)print}' config.yml speed_*.yaml speed.yaml  > database.yaml
+        gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' config.yml speed_*.yaml speed.yaml  > database.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
