@@ -38,30 +38,15 @@ proxy-providers:
       interval: 600
       url: http://www.gstatic.com/generate_204
 proxies:
-- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_1209202204f1-249"}
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-113"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-114"}
-- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_12042022c941-115"}
-- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12082022494e-116"}
-- {alterId: 64, cipher: auto, port: 50002, server: 139.186.198.63, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_139.186.198.63_120820222f00-117"}
-- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 65012, server: jp02a.roc-taiwan.net.ua, skip-cert-verify: true, type: trojan,"name":"CN_58.247.202.84_12092022405d-118"}
-- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 2053, server: 139.227.219.102, skip-cert-verify: true, type: trojan,"name":"CN_139.227.219.102_12092022405d-119"}
-- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: 116.192.163.238, skip-cert-verify: true, type: trojan,"name":"CN_116.192.163.238_12092022405d-120"}
-- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: 116.192.174.209, skip-cert-verify: true, type: trojan,"name":"CN_116.192.174.209_12092022405d-121"}
-- {alterId: 0, cipher: auto, port: 21029, server: dog-moble.gatknqh.cn, tls: false, type: vmess, uuid: da7d811a-5647-3b2e-bec3-6ee490e34c96,"name":"CN_111.45.22.140_12102022a23a-500"}
-- {alterId: 1, cipher: auto, network: ws, port: 50205, server: data-hk-v1.heisey.cn, tls: false, type: vmess, uuid: b1478e24-4916-3abe-8f17-15931012ecbe, ws-opts: {path: /hls/cctv5phd.m3u8},"name":"CN_112.18.159.71_12102022a23a-502"}
-- {alterId: 0, cipher: auto, port: 20014, server: zf.hpar.tk, tls: false, type: vmess, uuid: 88b256e8-84dd-353b-99ed-2ab27cec0bf5,"name":"CN_118.212.143.49_12102022a23a-505"}
-- {password: 6a5cb4b7-8dad-3077-b21c-6f47e8dfb9af, port: 20018, server: iplc.xiaohouzi.club, skip-cert-verify: true, type: trojan,"name":"CN_111.6.86.117_12102022a23a-506"}
-- {cipher: chacha20-ietf-poly1305, password: a54aa618-faf0-4e85-a8ff-13072ac113b3, port: 50137, server: v3meltransfer.lineshort.xyz, type: ss,"name":"CN_139.226.98.104_12102022a23a-524"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: ajax.microsoft.com, password: vCmp8ALih6, port: 10967, protocol: auth_aes128_md5, protocol-param: "", server: 42.157.196.104, type: ssr,"name":"CN_42.157.196.104_12102022a23a-652"}
-- {cipher: rc4-md5, obfs: http_post, obfs-param: ajax.microsoft.com, password: Yk4UdrOyQg, port: 10120, protocol: auth_aes128_md5, protocol-param: "", server: 42.157.196.103, type: ssr,"name":"CN_42.157.196.103_12102022a23a-704"}
-- {cipher: chacha20-ietf, obfs: plain, obfs-param: "", password: mblank1port, port: 561, protocol: auth_aes128_md5, protocol-param: '55956:111111', server: eduall.buzzline.org, type: ssr,"name":"CN_116.162.120.52_12102022a23a-713"}
-- {cipher: aes-256-cfb, password: cdnssr.ssrsub.com, port: 443, server: cdnssr.ssrsub.com, type: ss,"name":"CN_240e:f7:4f00:1d01::2:24_12102022a23a-768"}
-- {cipher: rc4-md5, password: passfw2xs4e!, port: 8333, server: ssr3.ssrsub.com, type: ss,"name":"CN_117.28.243.132_12102022a23a-769"}
-- {cipher: rc4-md5, password: passfw2xs4e!, port: 8333, server: ssr4.ssrsub.com, type: ss,"name":"CN_117.28.243.169_12102022a23a-770"}
-- {cipher: rc4-md5, password: passfw2xs4e!, port: 8333, server: ssr5.ssrsub.com, type: ss,"name":"CN_117.28.243.135_12102022a23a-772"}
-- {cipher: rc4-md5, password: passfw2xs4e!, port: 8333, server: ssr6.ssrsub.com, type: ss,"name":"CN_117.28.243.172_12102022a23a-773"}
-- {alterId: 0, cipher: auto, port: 16131, server: zfd-moble.gatknqh.cn, tls: false, type: vmess, uuid: f1d39fe1-bfa3-34ff-86a2-29250af03183,"name":"CN_117.164.185.222_12102022a23a-778"}
-- {alterId: 64, cipher: auto, port: 50002, server: 112.132.215.189, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_112.132.215.189_12102022a23a-780"}
-- {alterId: 0, cipher: auto, port: 25000, server: shnnb37f1.xz56bm2v8.lzmg3khpq.soabgo.com, tls: false, type: vmess, uuid: 1AD7CB74-F19E-22E0-F5A6-C227CE5EE440,"name":"CN_58.32.4.254_12102022a23a-798"}
-- {password: fcd76421-6b33-4563-b590-85dd74a200b5, port: 10796, server: 110.80.3.34, skip-cert-verify: true, type: trojan,"name":"CN_110.80.3.34_12102022a23a-2440"}
+- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_1209202204f1-120"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-121"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-122"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_12042022c941-123"}
+- {alterId: 64, cipher: auto, port: 50002, server: 49.234.84.132, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_49.234.84.132_12082022494e-124"}
+- {alterId: 64, cipher: auto, port: 50002, server: 139.186.198.63, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_139.186.198.63_120820222f00-125"}
+- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 65012, server: jp02a.roc-taiwan.net.ua, skip-cert-verify: true, type: trojan,"name":"CN_58.247.202.84_12092022405d-126"}
+- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 2053, server: 139.227.219.102, skip-cert-verify: true, type: trojan,"name":"CN_139.227.219.102_12092022405d-127"}
+- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: 116.192.163.238, skip-cert-verify: true, type: trojan,"name":"CN_116.192.163.238_12092022405d-128"}
+- {password: 96983eb4-c8f1-316e-ab00-500014ed3d8b, port: 8443, server: 116.192.174.209, skip-cert-verify: true, type: trojan,"name":"CN_116.192.174.209_12092022405d-129"}
+- {alterId: 64, cipher: auto, port: 50002, server: 112.132.215.189, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_112.132.215.189_12102022a23a-144"}
+- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_1211202201d1-2378"}
