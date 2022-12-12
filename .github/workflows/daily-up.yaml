@@ -523,7 +523,6 @@ jobs:
         #external-ui: clash_webs
         external-controller: 0.0.0.0:9090
         rules:
-          #- SRC-IP-CIDR,127.0.0.0/8,Z1
           - GEOIP,CN,DIRECT
           - MATCH,A0
         proxy-groups:
@@ -537,6 +536,7 @@ jobs:
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
             path: r.yaml
+            filter: '^CN_' 
             health-check:
               enable: false
               lazy: true
