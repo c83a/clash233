@@ -553,11 +553,11 @@ jobs:
               interval: 600
               url: http://www.gstatic.com/generate_204
         EOF
-        if [ -f yml_good ] ;then
+        if [ 1 ] ;then
         echo 'proxies:'
         gawk -F '"name":' '{if(NF > 1)a[$1]}END{i=0;h="ls database*.yaml";while(h | getline f){while(getline line < f){c=index(line,FS);if(c > 0 && !(substr(line,1,c-1) in a) && match(line,/"name":"[^_]*_([^_]*)_[^"]*"/,ip) && ++b[ip[1]] < 3 && ++i < 666)print line};close(f)}}' config.yml speed.yaml
         fi >> config.yaml
-        [ -f yml_good ] && ./clash -t -f config.yaml -d . && grep -q '"CN_' config.yaml && git add config.yaml || cat config.yaml
+        [ 1 ] && ./clash -t -f config.yaml -d . && git add config.yaml || cat config.yaml
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
         git pull
         git commit -m "$(date)" && git push -u origin master
