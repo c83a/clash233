@@ -107,7 +107,6 @@ jobs:
         [ -f p_t ] || exit 1
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d%Y')${uuid:0:4}-
-        cp config.yaml database2.yaml
         cat >check.sh<<-\EEE
         #!/bin/bash
         set +e 
@@ -134,6 +133,7 @@ jobs:
         fi
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
         gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' config.yml speed_*.yaml speed.yaml  > database.yaml
+        cp config.yaml database2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
@@ -173,7 +173,7 @@ jobs:
         s/^  - \{//
         s/\}$//
         EOF
-        for j in database.yaml database2.yaml tmp*.yaml ; do
+        for j in database*.yaml tmp*.yaml ; do
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
