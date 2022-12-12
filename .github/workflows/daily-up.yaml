@@ -555,7 +555,7 @@ jobs:
         EOF
         if [ 1 ] ;then
         echo 'proxies:'
-        gawk -F '"name":' '{if(NF > 1)a[$1]++}END{i=0;h="ls database*.yaml";while(h | getline f){while(getline line < f){if(i < 666 && split(line,c) && 2 in c && !a[c[1]]++ && match(c[2],/"[^_]*_([^_]*)_[^"]*"/,ip) && ++b[ip[1]] < 3 && ++i)print line};close(f)}}' config.yml speed.yaml
+        gawk -F '"name":' '{if(NF > 1)a[$1]++}END{i=0;h="ls database*.yaml";while(h | getline f){while(i < 666 && (getline line < f) > 0){if(split(line,c) && 2 in c && !a[c[1]]++ && match(c[2],/"[^_]*_([^_]*)_[^"]*"/,ip) && ++b[ip[1]] < 3 && ++i)print line};close(f)}}' config.yml speed.yaml
         fi >> config.yaml
         [ 1 ] && ./clash -t -f config.yaml -d . && git add config.yaml || cat config.yaml
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
