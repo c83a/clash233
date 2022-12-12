@@ -107,6 +107,7 @@ jobs:
         [ -f p_t ] || exit 1
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d%Y')${uuid:0:4}-
+        cp config.yaml database2.yaml
         cat >check.sh<<-\EEE
         #!/bin/bash
         set +e 
@@ -172,7 +173,7 @@ jobs:
         s/^  - \{//
         s/\}$//
         EOF
-        for j in database.yaml config.yaml tmp*.yaml ; do
+        for j in database.yaml database2.yaml tmp*.yaml ; do
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(..) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
@@ -556,7 +557,7 @@ jobs:
         EOF
         if [ -f speed_cde.yaml ] ;then
         echo 'proxies:'
-        awk -F '"name":' '{if(NF > 1)a[$1]}END{f="database.yaml";while(getline g < f){c=index(g,FS);if(c > 0 && !(substr(g,1,c-1) in a) )print g}}' config.yml speed.yaml | tail -n 666
+        awk -F '"name":' '{if(NF > 1)a[$1]}END{f="database.yaml";while(getline g < f){c=index(g,FS);if(c > 0 && !(substr(g,1,c-1) in a) )print g}}' database2.yaml config.yml speed.yaml | tail -n 666
         fi >> config.yaml
         [ -f yml_good ] && ./clash -t -f config.yaml -d . && grep -q '"CN_' config.yaml && git add config.yaml || cat config.yaml
         [ -f yml_good ] && ./clash -t -f config.yml -d . && git add config.yml || cat config.yml
