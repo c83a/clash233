@@ -538,7 +538,7 @@ jobs:
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yaml"
             path: r.yaml
             health-check:
-              enable: true
+              enable: false
               lazy: true
               interval: 600
               url: http://www.gstatic.com/generate_204
