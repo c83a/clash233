@@ -78,7 +78,7 @@ jobs:
         p="$! $p"
         done
         }
-        down_from_list pool_etc
+        [ $(date +%H) -lt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
         echo wait for download
         if [  ! -f clash ]; then
         os_type=linux
@@ -506,7 +506,8 @@ jobs:
         done
         EEE
         chmod 755 check2.sh
-        time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
+        [ $(date +%H) -lt 3 ] && tt=110 || tt=60
+        time_left=$(( $tt - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh > check2.log || echo "less than expected maybe"
         echo "operartion limited ${time_left}m end"
         if [ -f s1_t ];then
