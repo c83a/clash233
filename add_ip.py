@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import re
-from socket import gethostbyname as nslookup
 from socket import getaddrinfo as nslookup46
 import geoip2.database
 import sys
@@ -29,11 +28,6 @@ for line in sys.stdin:
           ip=nslookup46(domain,80)[0][4][0]
         except:
           pass
-        if not ip:
-          try:
-            ip=nslookup(domain)
-          except:
-            pass
         dns_cache[domain]=ip
       if ip in code_cache:
           code=code_cache[ip]
