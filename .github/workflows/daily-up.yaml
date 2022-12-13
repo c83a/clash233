@@ -164,7 +164,7 @@ jobs:
           h|getline r;close(h);
           if(index(r,"t") && ++rr[ss[1]tt[1]] )print p
         }}
-        END{print NR " records in total."}
+        END{}
         EOF
         cat >sub.sed<<-\EOF
         s/ [^ ]*: \{\},//g
