@@ -70,12 +70,13 @@ jobs:
         EEE
         fi
         down_from_list() {
-        while read url;do
+        for url in $(awk '!a[$0]++' $1);do
+        sleep 1
         filename=tmp_$RANDOM.yaml
         echo GET $url TO $filename
         ( curl -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
-        done<$1
+        done
         echo download from $1 started
         }
         down_from_list pool_etc
