@@ -180,9 +180,8 @@ jobs:
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(.proxies.[]) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
-        done | gawk -v np="$np" -f gen.awk |python add_ip.py > x.yaml
+        done | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
-        sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' x.yaml
         grep '"CN_' x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a))print a[1]}' x.yaml | grep -v '_None_' > check-list.txt
         fi
