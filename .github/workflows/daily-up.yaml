@@ -144,8 +144,8 @@ jobs:
           close(h)
         }
         {if(match($0,/type: ([^,]*)/,tt) && match($0,/server: ([^,]*)/,ss)){
-           if( ! rr[ss[1]tt[1]] ){rr[ss[1]tt[1]]=0;pg=1}
-           else pg=1
+           if( ! rr[ss[1]tt[1]] )rr[ss[1]tt[1]]=0
+           pg=1
          }else pg=""
         if( pg && rr[ss[1]tt[1]] < 6 && !a[$0]++){
           if(database_closed){
