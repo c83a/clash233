@@ -63,9 +63,9 @@ jobs:
         p=$!
         echo virtual env activate
         date
-        if [ ! -f pool_etc ];then
-        cat >pool_etc<<-EEE
-        https://sspool.herokuapp.com/clash/proxies
+        if [ 1 ];then
+        cat >>pool_etc<<-EEE
+        https://nodefree.org/dy/$(date '+%Y%m')/$(date '+%Y%m%d').yaml
         EEE
         fi
         down_from_list() {
