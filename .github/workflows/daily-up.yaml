@@ -162,7 +162,7 @@ jobs:
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
-          if(index(r,"t") && ++rr[ss[1]tt[1]] ){print p > file}
+          if(index(r,"t") && ++rr[ss[1]tt[1]] )print p
         }}
         END{print NR " records in total."}
         EOF
@@ -180,9 +180,8 @@ jobs:
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(.proxies.[]) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
-        done | gawk -v np="$np" -f gen.awk
-        cp x.yaml z.yaml
-        python add_ip.py z.yaml > x.yaml
+        done | gawk -v np="$np" -f gen.awk |python add_ip.py > x.yaml
+        touch z.yaml
         sed -Ei 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' x.yaml
         grep '"CN_' x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a))print a[1]}' x.yaml > check-list.txt
