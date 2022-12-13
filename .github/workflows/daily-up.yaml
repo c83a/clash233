@@ -65,7 +65,7 @@ jobs:
         date
         if [ 1 ];then
         cat >>pool_etc<<-EEE
-        https://nodefree.org/dy/$(date '+%Y%m')/$(date '+%Y%m%d').yaml
+        https://nodefree.org/dy/$(date '+%Y%m/%Y%m%d').yaml
         EEE
         fi
         down_from_list() {
