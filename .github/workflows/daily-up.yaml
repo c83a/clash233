@@ -144,10 +144,10 @@ jobs:
           close(h)
         }
         {if(match($0,/type: ([^,]*)/,tt) && match($0,/server: ([^,]*)/,ss)){
-           if( ! rr[ss[1]tt[1]] ){rr[ss[1]tt[1]]=0;g=1}
-           else g=""
-         }else g=""
-        if( g && rr[ss[1]tt[1]] < 6 && !a[$0]++){
+           if( ! rr[ss[1]tt[1]] ){rr[ss[1]tt[1]]=0;pg=1}
+           else pg=""
+         }else pg=""
+        if( pg && rr[ss[1]tt[1]] < 6 && !a[$0]++){
           if(database_closed){
             d="\42name\42:\42_" np NR "\42"
           }else{
