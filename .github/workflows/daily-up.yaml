@@ -65,6 +65,7 @@ jobs:
         date
         if [ 1 ];then
         cat >>pool_etc<<-EEE
+        https://raw.githubusercontent.com/pojiezhiyuanjun/freev2/master/$(date '+%m%d')clash.yml
         https://nodefree.org/dy/$(date '+%Y%m/%Y%m%d').yaml
         EEE
         fi
