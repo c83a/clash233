@@ -77,7 +77,6 @@ jobs:
         ( curl -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
         done
-        echo download from $1 started
         }
         down_from_list pool_etc
         echo wait for download
@@ -86,9 +85,9 @@ jobs:
         cpu_type=amd64
         clash_bin_url="https://github.com/Dreamacro/clash/releases"
         clash_html=tmp$RANDOM.html
-        wget -q -O $clash_html https://github.com/Dreamacro/clash/releases
+        curl -s -o $clash_html https://github.com/Dreamacro/clash/releases
         clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
-        wget -q -O clash.gz $clash_bin_url
+        curl -s -o clash.gz $clash_bin_url
         gunzip clash.gz
         git add clash
         fi
