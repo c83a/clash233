@@ -13,7 +13,7 @@ def get_location(ip):
   return response.country.iso_code
 def get_filename():
   return sys.argv[1]
-next(f)
+next(sys.stdin)
 print("proxies:")
 for line in sys.stdin:
     for server in re.finditer('server: ([^,]*)',line):
