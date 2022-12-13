@@ -13,10 +13,9 @@ def get_location(ip):
   return response.country.iso_code
 def get_filename():
   return sys.argv[1]
-with open(get_filename()) as f:
-  next(f)
-  print("proxies:")
-  for line in f:
+next(f)
+print("proxies:")
+for line in sys.stdin:
     for server in re.finditer('server: ([^,]*)',line):
       ip_domain=server.group(1)
       if re.match(ip_pattern,ip_domain):
@@ -46,4 +45,3 @@ with open(get_filename()) as f:
         code_cache[ip]=code
       print("#".join(map(str,(line.strip(), code, ip))))
       break
-
