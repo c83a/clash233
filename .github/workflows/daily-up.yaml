@@ -146,7 +146,7 @@ jobs:
            if( !(ss[1]tt[1] in rr) )rr[ss[1]tt[1]]=0
            pg=1
          }else pg=""
-        if( pg && rr[ss[1]tt[1]] < 6 && !a[$0]++){
+        if( pg && rr[ss[1]tt[1]] < 3 && !a[$0]++){
           if(database_closed){
             d="\42name\42:\42_" np NR "\42"
           }else{
