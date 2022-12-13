@@ -175,7 +175,7 @@ jobs:
         s/^  - \{//
         s/\}$//
         EOF
-        for j in database*.yaml tmp*.yaml ; do
+        for j in database*.yaml $(ls -l tmp*.yaml| sort | awk '{print $2}') ; do
         echo processing  $j >&2
         cat $j | sed -E 's/name: .*, server: /server: /' | yq -P 'sort_keys(.proxies.[]) ' | yq '.proxies.[] style="flow"' | yq 'del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) ' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
         echo $j end  processing $? >&2
