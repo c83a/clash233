@@ -136,7 +136,6 @@ jobs:
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
-          file="x.yaml"
           print "proxies:"
           g="1.yaml"
           h="./clash -t -f 1.yaml 1>/dev/null && echo t || echo f";
