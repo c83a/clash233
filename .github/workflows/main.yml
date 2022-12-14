@@ -57,5 +57,6 @@ jobs:
           chmod a+x clash
           ver=$(./clash -v)
           git add clash Country.mmdb
+          git pull
           git commit -m "$ver" && echo "Git Committed"
           git push -u origin master && echo "Git Pushed Origin"
