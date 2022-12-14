@@ -72,13 +72,13 @@ jobs:
         down_from_list() {
         for url in $(awk '!a[$0]++' $1);do
         sleep 1
-        filename=tmp_$RANDOM.yaml
+        filename=tmp_1$RANDOM.yaml
         echo GET $url TO $filename
         ( curl -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
         done
         }
-        [ $(($(date +%d) % 2 )) -eq 0 -a $(date +%H) -lt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ $(($(date +%d) % 2 )) -eq 0 -a $(date +%H) -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
         echo wait for download
         if [  ! -f clash ]; then
         os_type=linux
@@ -506,7 +506,7 @@ jobs:
         done
         EEE
         chmod 755 check2.sh
-        [ $(date +%H) -lt 3 ] && tt=110 || tt=60
+        [ -f tmp_0.yaml ] && tt=110 || tt=60
         time_left=$(( $tt - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh > check2.log || echo "less than expected maybe"
         echo "operartion limited ${time_left}m end"
