@@ -78,7 +78,7 @@ jobs:
         p="$! $p"
         done
         }
-        [ $(date +%H) -lt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ $(($(date +%d) % 2 )) -eq 0 -a $(date +%H) -lt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
         echo wait for download
         if [  ! -f clash ]; then
         os_type=linux
