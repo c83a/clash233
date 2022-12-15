@@ -358,8 +358,9 @@ jobs:
         normal_end=1
         # check finished
         EEE
-        chmod 755 check.sh 
-        time_left=$(( 90 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
+        chmod 755 check.sh
+        [ -f tmp_0.yaml ] && tta=60 || tta=110
+        time_left=$(( $tta - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh || echo "no enough time left ( $time_left m)" > check.log
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
