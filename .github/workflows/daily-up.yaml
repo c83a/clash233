@@ -83,9 +83,9 @@ jobs:
         os_type=linux
         cpu_type=amd64
         clash_r_url="https://github.com/Dreamacro/clash/releases"        
-        clash_bin_url="https://github.com$( curl -s $clash_r_url | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+        clash_bin_url=https://github.com$( curl -s $clash_r_url | grep '.gz' | grep '<a href=' | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
         curl -s -o clash.gz $clash_bin_url
-        gunzip clash.gz       
+        gunzip clash.gz
         chmod a+x clash && ./clash -v && git add clash || git checkout clash
         fi
         [ ! -x clash ] && chmod a+x clash
