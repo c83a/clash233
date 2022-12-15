@@ -78,18 +78,15 @@ jobs:
         p="$! $p"
         done
         }
-        [ $(($(date +%d) % 2 )) -eq 0 -a $(date +%H) -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
-        echo wait for download
+        [ $(($(date +%d) % 2 )) -eq 1 -a $(date +%H) -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
         if [  ! -f clash ]; then
         os_type=linux
         cpu_type=amd64
-        clash_bin_url="https://github.com/Dreamacro/clash/releases"
-        clash_html=tmp$RANDOM.html
-        curl -s -o $clash_html https://github.com/Dreamacro/clash/releases
-        clash_bin_url="https://github.com$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
+        clash_r_url="https://github.com/Dreamacro/clash/releases"        
+        clash_bin_url="https://github.com$( curl -s $clash_r_url | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )"
         curl -s -o clash.gz $clash_bin_url
-        gunzip clash.gz
-        git add clash
+        gunzip clash.gz       
+        chmod a+x clash && ./clash -v && git add clash || git checkout clash
         fi
         [ ! -x clash ] && chmod a+x clash
         for i in $p;do
