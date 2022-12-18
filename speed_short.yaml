@@ -1,15 +1,11 @@
 proxies:
 - {password: FLpONjB2Lb, port: 443, server: 139.162.45.139, skip-cert-verify: true, type: trojan,"name":"SG_139.162.45.139_11092022ffd3-1trojan"}
-- {password: HdsUZmsHQW, port: 443, server: 148.113.141.99, skip-cert-verify: true, type: trojan,"name":"CA_148.113.141.99_11282022b4e9-2trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 57194, server: 47.242.30.73, skip-cert-verify: true, tls: false, type: vmess, uuid: 190f9f72-0144-40c2-862b-8c7fbe7fc34a,"name":"HK_47.242.30.73_112820225238-3vmess"}
 - {alterId: 0, cipher: auto, port: 443, server: 168.138.171.65, skip-cert-verify: true, tls: true, type: vmess, uuid: 4af6fd9a-e8b4-46f2-da3a-207f4577656c,"name":"SG_168.138.171.65_112820225238-4vmess"}
 - {password: TvBypqQJ9b, port: 443, server: bdvasxmahl.injafarvpnwebelieve.gq, skip-cert-verify: false, type: trojan,"name":"DE_157.245.19.162_113020220bab-5trojan"}
 - {password: 7118b5f4-0ea4-4c11-be7f-11471cb91e4a, port: 443, server: 144.24.72.126, skip-cert-verify: true, type: trojan,"name":"KR_144.24.72.126_113020220bab-6trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 35756, server: 8.210.226.71, tls: false, type: vmess, uuid: 42b9acac-66ac-4f48-9e43-ce54ebd4778f,"name":"HK_8.210.226.71_120420220fa5-7vmess"}
 - {password: Sp3eDVp, port: 443, server: content-provider23.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"NL_185.212.200.74_12072022e015-8trojan"}
 - {password: shefelnak, port: 443, server: content-provider20.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"GB_185.16.206.209_12082022494e-9trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: amshare.jingledev.me, tls: true, type: vmess, uuid: 532a5f12-cadb-46e4-963f-ee7c075e40f0, ws-opts: {path: /pkhhvws},"name":"US_2606:4700:3031::ac43:d822_120820222f00-10vmess"}
-- {password: 8d2d5953-d649-4034-94f2-72f2df2623da, port: 443, server: jgwdb3.gaox.ml, skip-cert-verify: false, type: trojan,"name":"JP_168.138.44.176_12072022e015-11trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: amshare.jingledev.me, tls: true, type: vmess, uuid: 532a5f12-cadb-46e4-963f-ee7c075e40f0, ws-opts: {path: /pkhhvws},"name":"US_2606:4700:3034::6815:4342_120820222f00-10vmess"}
 - {password: origin, port: 443, server: content-provider26.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"FR_176.31.83.90_120720226ca2-12trojan"}
 - {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 26743, server: 194.87.248.27, tls: false, type: vmess, uuid: 59952a8e-b712-4190-d85e-f9aadd65faa0,"name":"RU_194.87.248.27_120820222708-13vmess"}
 - {alterId: 0, cipher: auto, network: ws, port: 3331, server: 5.44.249.43, skip-cert-verify: true, tls: true, type: vmess, uuid: 57e0cb4d-eae5-48ec-8091-149dc2b309e0, ws-opts: {path: '/s/f1f3227.fm.apple.com:111548'},"name":"SG_5.44.249.43_113020220bab-14vmess"}
@@ -17,412 +13,394 @@ proxies:
 - {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 34243, server: 43.156.121.93, tls: false, type: vmess, uuid: 2b164ad5-6900-4c12-8104-0369a1de84eb,"name":"SG_43.156.121.93_121020226649-16vmess"}
 - {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 22067, server: 156.234.39.207, tls: false, type: vmess, uuid: eb9e1b8a-ee56-4e98-8d1a-84e92101bcbe,"name":"HK_156.234.39.207_121020226649-17vmess"}
 - {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 53659, server: 156.234.39.247, tls: false, type: vmess, uuid: 4a5ebf34-b02b-44e3-8935-19c2306c8cef,"name":"HK_156.234.39.247_121020226649-18vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 58300, server: 8.218.97.196, tls: false, type: vmess, uuid: af2aa6a2-6350-454f-8b91-a25fd65b9ab0,"name":"HK_8.218.97.196_121020226649-19vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 53617, server: 8.218.122.246, tls: false, type: vmess, uuid: 682378b8-6467-4958-8630-db9581f425e1,"name":"HK_8.218.122.246_121020226649-20vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 36064, server: 8.218.88.198, tls: false, type: vmess, uuid: e4f08e23-1fb6-4a07-9f2e-6d90bfb9f525,"name":"HK_8.218.88.198_121020226649-21vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 56561, server: 8.218.132.197, tls: false, type: vmess, uuid: afa431c6-7477-443a-a0c0-3ebde6f29e6c,"name":"HK_8.218.132.197_121020226649-22vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 48468, server: 8.218.74.50, tls: false, type: vmess, uuid: e1998a7c-d905-4ea3-ad64-be5dd7407c98,"name":"HK_8.218.74.50_121020226649-23vmess"}
 - {password: origin, port: 443, server: 94.102.54.66, skip-cert-verify: true, type: trojan,"name":"NL_94.102.54.66_121020226649-24trojan"}
-- {password: d76294c5-a31f-408d-ba0b-89880107cab5, port: 443, server: aleph-tj015.thatfreeservicewhicheveryoneuse.uk, skip-cert-verify: true, type: trojan,"name":"DE_5.75.152.12_121120226507-25trojan"}
-- {password: shefelnak, port: 443, server: content-provider21.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"GB_185.16.206.211_121120226507-26trojan"}
-- {password: shefelnak, port: 443, server: content-provider22.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"GB_185.16.206.212_121120226507-27trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 3331, server: f1f3227.v8.glados-config.net, skip-cert-verify: true, tls: true, type: vmess, uuid: 57e0cb4d-eae5-48ec-8091-149dc2b309e0, ws-opts: {path: '/s/f1f3227.fm.apple.com:111548'},"name":"TW_203.69.187.221_121120226507-28vmess"}
-- {password: TestingServer@@2, port: 443, server: content-provider2.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"NL_94.102.53.20_121120226507-29trojan"}
-- {password: TestingServer@@, port: 443, server: 94.102.53.19, skip-cert-verify: true, type: trojan,"name":"NL_94.102.53.19_121120226507-30trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 24514, server: 8.210.95.105, skip-cert-verify: true, type: vmess, uuid: 9174e354-21e9-49b3-8d3c-079e0dd6c879,"name":"HK_8.210.95.105_121120226507-31vmess"}
-- {alterId: 0, cipher: auto, network: tcp, port: 443, server: 64.112.126.4, skip-cert-verify: true, type: vmess, uuid: 8560c0b4-6f4b-45e6-9906-777650dcc310, ws-opts: {path: /},"name":"US_64.112.126.4_121120226507-32vmess"}
-- {password: 9c822f05-cfdc-479a-9534-60f3d4127435, port: 443, server: jgwcc2.gaox.ml, skip-cert-verify: false, type: trojan,"name":"KR_138.2.113.248_12122022e712-33trojan"}
-- {password: yxGY7A5MczQYg6UqSFx9u78V, port: 443, server: 188.40.236.127, skip-cert-verify: true, type: trojan,"name":"DE_188.40.236.127_12122022e712-35trojan"}
-- {password: b291d129-ee55-4801-a9b8-b5316e5c37b7, port: 443, server: 138.2.113.84, skip-cert-verify: true, type: trojan,"name":"KR_138.2.113.84_121220223940-37trojan"}
-- {password: origin, port: 443, server: content-provider29.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"DE_188.40.250.247_12132022805d-38trojan"}
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [43.129.234.80]}, method: GET, path: [/]}, network: http, port: 56607, server: 43.129.234.80, skip-cert-verify: False, tls: False, type: vmess, uuid: e3d62ad7-9dc4-479c-b5fb-24e0bbdd09f1,"name":"HK_43.129.234.80_121320226dd7-39vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 62747, server: 47.242.94.89, skip-cert-verify: False, tls: False, type: vmess, uuid: 0657cd97-b123-4b48-99e9-456c967f1c77,"name":"HK_47.242.94.89_121320226dd7-40vmess"}
-- {password: origin, port: 443, server: 188.40.251.19, skip-cert-verify: true, type: trojan,"name":"DE_188.40.251.19_12122022e712-42trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vfly6.xyz, skip-cert-verify: False, tls: True, type: vmess, uuid: 6a69acd2-ffe1-44eb-c51c-1afc049c7541, ws-opts: {path: /myblog},"name":"US_2606:4700:3030::ac43:bcd8_121420222387-43vmess"}
-- {password: Sp3eDVp, port: 443, server: content-provider24.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"NL_185.212.200.75_121220223940-44trojan"}
-- {password: d1478689-439c-4590-b7ce-36e786a02dc3, port: 443, server: 107.181.161.163, skip-cert-verify: true, type: trojan,"name":"US_107.181.161.163_12142022f668-46trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: v2ray.wefuckgfw.tk, skip-cert-verify: true, tls: true, type: vmess, uuid: 2ae9835e-381b-4228-95df-bce39ee1a4eb, ws-opts: {path: /ezN9pvil/},"name":"US_2606:4700:3037::6815:406_121420227f0e-47vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: lu1.gogogoo.cyou, skip-cert-verify: False, tls: True, type: vmess, uuid: db5d1aa3-908b-44d1-be0a-4e6a8d4e4cda, ws-opts: {path: /go},"name":"US_2606:4700:3036::ac43:bbd3_12132022805d-49vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 11023, server: 204.15.74.75, skip-cert-verify: true, type: vmess, uuid: 713a91c6-e123-461c-a205-94a37796c791, ws-opts: {path: /},"name":"US_204.15.74.75_121520221f2b-52vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 37843, server: 8.210.88.243, skip-cert-verify: False, tls: False, type: vmess, uuid: 6e64595c-ccbb-47ad-9b71-0728473b0206,"name":"HK_8.210.88.243_121420222387-53vmess"}
-- {password: dbf9bf9c-2c3f-474a-8031-d4c00666a989, port: 443, server: 129.146.190.42, skip-cert-verify: true, type: trojan,"name":"US_129.146.190.42_121120226507-54trojan"}
-- {alterId: 0, cipher: auto, port: 31990, server: 95.174.68.218, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /},"name":"AE_95.174.68.218_1212202288a2-56vmess"}
-- {password: Sp3eDVp, port: 443, server: 51.77.71.131, skip-cert-verify: true, type: trojan,"name":"FR_51.77.71.131_121520221f2b-57trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: id-v.sshmax.xyz, skip-cert-verify: true, type: vmess, uuid: 6211eb8a-e5ca-40f3-980f-a7ae6e95e5cb, ws-opts: {path: /vmess},"name":"ID_103.157.27.148_121520221f2b-61vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 6245, server: 206.81.31.184, skip-cert-verify: true, type: vmess, uuid: 9d39cb34-5261-43fb-b0f8-4f8a22b10f15, ws-opts: {path: /},"name":"DE_206.81.31.184_121520221f2b-62vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 43863, server: 138.2.83.217, skip-cert-verify: False, tls: False, type: vmess, uuid: ca984457-b017-46e5-d973-42a3c3fdc292,"name":"SG_138.2.83.217_12162022a2ef-64vmess"}
-- {alterId: 64, cipher: auto, port: 20081, server: 138.2.44.211, tls: false, type: vmess, uuid: 593b8525-0c48-4b0f-d9af-2d73a9148973,"name":"JP_138.2.44.211_12162022a2ef-66vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vsg1.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"SG_139.177.190.219_121620224ce0-67vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 91.199.87.132, skip-cert-verify: true, tls: true, type: vmess, uuid: 12e08256-da5d-4b1c-aeca-8c973ccceef8, ws-opts: {path: /Falling42gcssgnode},"name":"SG_91.199.87.132_12172022afee-68vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: hucloud.tk, skip-cert-verify: true, tls: true, type: vmess, uuid: 2df3ed4a-4313-45f9-b742-2f02ce593a6e, ws-opts: {path: /huhu},"name":"US_2606:4700:3031::6815:4df7_12172022afee-69vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 42517, server: 54.180.150.171, skip-cert-verify: False, tls: False, type: vmess, uuid: b5b5209f-bcbd-4bac-b044-0d179698c62d, ws-opts: {path: /},"name":"KR_54.180.150.171_12172022afee-71vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vfly3.win, skip-cert-verify: true, tls: true, type: vmess, uuid: f4ef14c4-d811-455c-a4c3-c63dfeffb0a6, ws-opts: {path: /myblog},"name":"US_2606:4700:3030::6815:1b22_12172022afee-72vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 51.81.220.195, skip-cert-verify: False, tls: False, type: vmess, uuid: 6fea1649-425b-4092-bf53-29792152c925, ws-opts: {path: /sshkit/Variu88/634dab7abadf1/},"name":"US_51.81.220.195_121320226dd7-74vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 55819, server: 8.218.106.102, skip-cert-verify: true, type: vmess, uuid: 06e2f44b-d215-4965-823e-6269e7f4553f,"name":"HK_8.218.106.102_121520221f2b-78vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 34303, server: 135.181.235.21, skip-cert-verify: False, tls: False, type: vmess, uuid: 1ce52047-ad8a-4ef3-cdcd-46ff29b262fb, ws-opts: {path: /},"name":"FI_135.181.235.21_12162022a2ef-81vmess"}
-- {alterId: 32, cipher: auto, network: ws, port: 80, server: 182.16.1.194, skip-cert-verify: False, tls: False, type: vmess, uuid: 00a1da14-d55f-5f75-e346-79b985e1a723, ws-opts: {path: /opt/video/images},"name":"HK_182.16.1.194_121520221f2b-82vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 103.167.196.48, skip-cert-verify: False, tls: False, type: vmess, uuid: 56716a96-a265-448c-8969-03e626889580, ws-opts: {path: /},"name":"VN_103.167.196.48_12132022805d-83vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 46842, server: 150.230.249.15, tls: false, type: vmess, uuid: 4530b5ee-ced4-4e64-9285-1867fc5df7f8,"name":"KR_150.230.249.15_121620221e3a-84vmess"}
-- {password: 0d8285f8-33da-4076-bb24-d498bd83f2f9, port: 443, server: 146.56.176.239, skip-cert-verify: true, type: trojan,"name":"KR_146.56.176.239_12172022afee-86trojan"}
-- {alterId: 2, cipher: auto, network: ws, port: 443, server: 161.129.34.102, skip-cert-verify: true, tls: true, type: vmess, uuid: ec736482-173e-3eff-9114-b49df8056e7d, ws-opts: {path: /},"name":"US_161.129.34.102_121720225653-88vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 8880, server: 51.159.2.152, skip-cert-verify: False, tls: False, type: vmess, uuid: a2ecce43-c6fb-4978-8b1d-8018ddd9faf4, ws-opts: {path: /},"name":"FR_51.159.2.152_121720225653-89vmess"}
-- {alterId: 0, cipher: auto, port: 21365, server: 168.138.207.66, skip-cert-verify: False, tls: False, type: vmess, uuid: 905f99b1-e7ba-45e0-ae4d-b0ffdf0ad245,"name":"JP_168.138.207.66_121720225653-90vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 42724, server: 45.11.185.121, tls: false, type: vmess, uuid: 745f2dcb-f1a0-4fc6-8073-247941b82c48,"name":"HK_45.11.185.121_121720225653-91vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 15.235.147.186, skip-cert-verify: False, tls: False, type: vmess, uuid: 6fea1649-425b-4092-bf53-29792152c925, ws-opts: {path: /sshkit/Ertusg86/635014638c264/},"name":"SG_15.235.147.186_121520228278-93vmess"}
-- {password: 67960bfb-00de-4a6b-9a7a-e74fc9e8b158, port: 443, server: 149.56.141.11, skip-cert-verify: true, type: trojan,"name":"CA_149.56.141.11_12162022a2ef-94trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 141.147.181.219, skip-cert-verify: true, tls: true, type: vmess, uuid: 0b873cff-11ab-4716-c41a-04f886135091, ws-opts: {path: /roewesu},"name":"JP_141.147.181.219_121420222387-95vmess"}
-- {alterId: 0, cipher: auto, network: tcp, port: 37121, server: 146.56.133.109, skip-cert-verify: true, tls: true, type: vmess, uuid: 575e4d92-1056-44c2-8cac-75ef1c859ad5, ws-opts: {path: /},"name":"KR_146.56.133.109_121420222387-96vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 10021, server: 138.2.49.230, skip-cert-verify: true, type: vmess, uuid: a12e496e-f89a-434a-8011-108846f0e412, ws-opts: {path: /},"name":"JP_138.2.49.230_12162022a2ef-97vmess"}
-- {password: xxoo, port: 443, server: 146.19.230.241, skip-cert-verify: true, type: trojan,"name":"GB_146.19.230.241_12162022a2ef-98trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 45.159.250.210, skip-cert-verify: true, type: vmess, uuid: 2e9b8445-2eed-48e6-89f2-f8b20cbb6e33, ws-opts: {path: /},"name":"KZ_45.159.250.210_12162022a2ef-99vmess"}
-- {alterId: 0, cipher: auto, port: 18050, server: 146.56.155.70, skip-cert-verify: False, tls: False, type: vmess, uuid: f9771c19-c91c-41b5-9064-8768b51cec6d,"name":"KR_146.56.155.70_12152022d914-100vmess"}
-- {alterId: 64, cipher: auto, network: ws, port: 443, server: 202.79.171.157, skip-cert-verify: true, tls: true, type: vmess, uuid: fb3583a3-7717-4fe5-9146-3301861f9f41, ws-opts: {path: /path/243535322906},"name":"SG_202.79.171.157_12172022afee-101vmess"}
-- {alterId: 0, cipher: auto, port: 31990, server: 185.22.153.16, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b,"name":"RU_185.22.153.16_12172022afee-102vmess"}
-- {password: 0f5e6d9a-49af-4bc0-b04b-503102382144, port: 443, server: 51.195.219.173, skip-cert-verify: true, type: trojan,"name":"FR_51.195.219.173_121420227f0e-103trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 185.216.72.172, skip-cert-verify: true, tls: true, type: vmess, uuid: 6d11cad4-be87-4b05-aa1d-0d19b011a6d3, ws-opts: {path: /zvtyvws},"name":"US_185.216.72.172_121620221e3a-104vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 8880, server: 174.138.25.187, skip-cert-verify: true, type: vmess, uuid: a5c804aa-8a4d-4fd2-97a1-4f0cc1384953, ws-opts: {path: /hkaa0},"name":"SG_174.138.25.187_12172022afee-105vmess"}
-- {alterId: 0, cipher: auto, network: tcp, port: 3000, server: 37.252.1.197, skip-cert-verify: true, type: vmess, uuid: 6f7ae49c-f5e2-4ec2-ac5e-38f057d51fee, ws-opts: {path: /},"name":"RU_37.252.1.197_121720225653-106vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 3389, server: 5.161.105.171, skip-cert-verify: False, tls: False, type: vmess, uuid: 06d52c29-1230-49a7-8fa6-66dbc9749a95, ws-opts: {path: /},"name":"US_5.161.105.171_121420227f0e-107vmess"}
-- {password: 3a2c0c6c-9ee5-c05f-c951-fcd73831983e, port: 3052, server: 138.2.115.240, skip-cert-verify: true, type: trojan,"name":"KR_138.2.115.240_12172022afee-108trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 40128, server: 47.243.200.183, tls: false, type: vmess, uuid: 99971419-8734-4530-9b62-17b2516508b5,"name":"HK_47.243.200.183_12152022d914-109vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 38.54.93.130, skip-cert-verify: False, tls: False, type: vmess, uuid: 0cc9a7d6-75f6-4c05-9da3-83aa9dcc4845, ws-opts: {path: /sshocean},"name":"KH_38.54.93.130_12162022a2ef-110vmess"}
-- {password: origin, port: 443, server: 51.77.71.134, skip-cert-verify: true, type: trojan,"name":"FR_51.77.71.134_121720226bd6-111trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 80, server: 168.138.206.141, skip-cert-verify: true, type: vmess, uuid: ad05e01f-c2c0-41da-e79c-ff68237317f7,"name":"JP_168.138.206.141_121720226bd6-115vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 16014, server: 168.119.178.182, skip-cert-verify: true, type: vmess, uuid: 5740f1b8-3dee-4bba-9a80-ad57f0ce0380, ws-opts: {path: /},"name":"PK_168.119.178.182_121720226bd6-116vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 28164, server: 165.227.175.88, skip-cert-verify: true, type: vmess, uuid: eba8ccf5-5ab9-4b6b-de4b-83ab920c1005, ws-opts: {path: /},"name":"DE_165.227.175.88_121720226bd6-117vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 43417, server: 13.125.5.159, skip-cert-verify: true, type: vmess, uuid: b5b5209f-bcbd-4bac-b044-0d179698c62d, ws-opts: {path: /},"name":"KR_13.125.5.159_121720226bd6-118vmess"}
-- {password: 4f9ca636-5195-406a-b48c-0388689dd9a7, port: 443, server: 212.24.103.3, skip-cert-verify: true, type: trojan,"name":"LT_212.24.103.3_121720226bd6-119trojan"}
-- {password: 2b7a055e-5b0a-44bd-901b-5577e61aa832, port: 443, server: 80.92.205.201, skip-cert-verify: true, type: trojan,"name":"US_80.92.205.201_121720226bd6-121trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 61592, server: 8.218.40.241, skip-cert-verify: true, type: vmess, uuid: 46ba91fd-34a6-412b-9c3f-1ac91e6b8686,"name":"HK_8.218.40.241_121720226bd6-122vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 28730, server: 8.218.16.156, skip-cert-verify: true, type: vmess, uuid: 596d10b4-ce14-4be9-b37b-53c95b9220de,"name":"HK_8.218.16.156_121720226bd6-123vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 37003, server: 8.218.81.81, skip-cert-verify: true, type: vmess, uuid: 61ef9730-05d4-435d-bdaf-a10c12c7e5c5,"name":"HK_8.218.81.81_121720226bd6-124vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 61213, server: 8.218.64.146, skip-cert-verify: true, type: vmess, uuid: 22b0bc98-caf1-4519-9140-c26023df64d0,"name":"HK_8.218.64.146_121720226bd6-125vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 46148, server: 8.218.105.233, skip-cert-verify: true, type: vmess, uuid: 5072f86c-2a3f-430e-861f-bfd965da9b79,"name":"HK_8.218.105.233_121720226bd6-126vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 63421, server: 8.218.71.98, skip-cert-verify: true, type: vmess, uuid: 11f44049-f3d5-492a-8e8d-aa5fc27ffc8e,"name":"HK_8.218.71.98_121720226bd6-127vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 20256, server: 47.243.23.80, skip-cert-verify: true, type: vmess, uuid: f707fd08-f017-4b9b-aeae-da908b34e313,"name":"HK_47.243.23.80_121720226bd6-128vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 26237, server: 47.242.146.123, skip-cert-verify: true, type: vmess, uuid: c8f5a5fd-0a69-4cf6-8fa6-2ea02171d6a3,"name":"HK_47.242.146.123_121720226bd6-129vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 10693, server: 65.109.5.94, skip-cert-verify: true, type: vmess, uuid: 38cb0897-c457-4f91-c1ef-700f38928942, ws-opts: {path: /},"name":"FI_65.109.5.94_121720226bd6-130vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 135.148.47.240, skip-cert-verify: true, type: vmess, uuid: deafc56d-ba76-4ff2-b3b3-a9335b0982e0, ws-opts: {path: /vmess},"name":"US_135.148.47.240_121720226bd6-131vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 47460, server: 47.242.85.127, skip-cert-verify: true, type: vmess, uuid: 8655a473-6c7f-41b2-b102-5edc30970e3a,"name":"HK_47.242.85.127_121720226bd6-132vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 26953, server: 47.243.36.34, skip-cert-verify: true, type: vmess, uuid: 6a1f0373-d449-4305-8e46-e72a789076d5,"name":"HK_47.243.36.34_121720226bd6-133vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 49564, server: 47.242.174.112, skip-cert-verify: true, type: vmess, uuid: 61a57665-7db8-424e-8cbf-b95f9dc9d799,"name":"HK_47.242.174.112_121720226bd6-134vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 23429, server: 103.200.112.207, skip-cert-verify: true, type: vmess, uuid: ff1e8103-f898-4954-9491-aeaa6fc6300c,"name":"HK_103.200.112.207_121720226bd6-135vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 62275, server: 103.200.112.181, skip-cert-verify: true, type: vmess, uuid: a82b7192-a209-4575-a163-1e80c60c1873,"name":"HK_103.200.112.181_121720226bd6-136vmess"}
-- {password: 60d47bb6-47d1-45b1-b67b-4d236a4a5957, port: 443, server: 103.167.34.206, skip-cert-verify: true, type: trojan,"name":"ID_103.167.34.206_121720226bd6-137trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 172.105.228.53, skip-cert-verify: true, tls: true, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"JP_172.105.228.53_121720226bd6-138vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: xjp4h.mayaa.ml, skip-cert-verify: true, tls: true, type: vmess, uuid: 82d5ea73-8002-4319-cd3c-29d1560bd290, ws-opts: {path: /dsadsa1dsadsa33434},"name":"US_2606:4700:3036::6815:13d4_121720226bd6-139vmess"}
-- {alterId: 0, cipher: auto, port: 23292, server: 150.230.41.9, skip-cert-verify: False, tls: False, type: vmess, uuid: 956c6c2f-bf54-4b87-fafd-4b767ca12750,"name":"US_150.230.41.9_121720226bd6-140vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: de100.tehvp.xyz, skip-cert-verify: False, tls: True, type: vmess, uuid: 9bd493b0-f91e-4059-ef7c-9e2b3da5f26d, ws-opts: {path: /},"name":"US_2606:4700:3030::ac43:9c67_121720226bd6-141vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 5.75.250.163, skip-cert-verify: False, tls: False, type: vmess, uuid: e175ba8e-f3e8-4ec5-a350-f058537dca8e, ws-opts: {path: /},"name":"DE_5.75.250.163_121720226bd6-142vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 44867, server: 47.242.200.57, skip-cert-verify: False, tls: False, type: vmess, uuid: 9ace1a35-55e2-4fa0-a6ee-ec03b3af8665,"name":"HK_47.242.200.57_121720226bd6-143vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 36536, server: 8.218.86.59, skip-cert-verify: False, tls: False, type: vmess, uuid: ae3c56f1-c243-4373-bd65-07fd0569c455,"name":"HK_8.218.86.59_121720226bd6-153vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 64862, server: 8.218.72.12, skip-cert-verify: False, tls: False, type: vmess, uuid: b9adc9e5-4821-4c9c-ac05-43b3a8fad445,"name":"HK_8.218.72.12_121720226bd6-154vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 24520, server: 8.218.94.182, skip-cert-verify: False, tls: False, type: vmess, uuid: 3ae2a476-6929-4544-8037-1c79f0dfa701,"name":"HK_8.218.94.182_121720226bd6-155vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 44207, server: 47.242.17.241, skip-cert-verify: False, tls: False, type: vmess, uuid: 77c6c520-2d37-495a-a954-c8d056e89053,"name":"HK_47.242.17.241_121720226bd6-156vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 63376, server: 47.242.44.222, skip-cert-verify: False, tls: False, type: vmess, uuid: 5343352c-ccc5-43f9-b08a-7425e5cc73dd,"name":"HK_47.242.44.222_121720226bd6-157vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 15.235.192.195, skip-cert-verify: False, tls: False, type: vmess, uuid: b5a9c7bc-8bdb-4ff3-b03f-96b941c414c6, ws-opts: {path: /vmess},"name":"SG_15.235.192.195_121720226bd6-158vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 157.230.36.235, skip-cert-verify: False, tls: False, type: vmess, uuid: b484d576-b3e3-4ac5-b108-88a300dfe7e3, ws-opts: {path: /graphql},"name":"SG_157.230.36.235_121720226bd6-159vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 51.77.158.169, skip-cert-verify: False, tls: False, type: vmess, uuid: c92fd902-b5d3-4208-bb48-630b1c7babea, ws-opts: {path: /},"name":"FR_51.77.158.169_121720226bd6-160vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 25459, server: 65.109.129.15, skip-cert-verify: False, tls: False, type: vmess, uuid: ead3843c-d06a-4224-88db-8946e448de6b, ws-opts: {path: /},"name":"FI_65.109.129.15_121720226bd6-161vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 198.244.232.39, skip-cert-verify: False, tls: False, type: vmess, uuid: df46384b-1ad5-40a6-812e-48d60fb80283, ws-opts: {path: /},"name":"GB_198.244.232.39_121720226bd6-162vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vjp1.0bad.com, skip-cert-verify: false, tls: true, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"JP_172.105.211.90_121720226bd6-166vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vus2.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"US_45.33.53.143_121720226bd6-167vmess"}
-- {password: b640d791-ff83-4300-b509-c2a02f97f167, port: 80, server: uk1.trojanvh.xyz, skip-cert-verify: False, type: trojan,"name":"GB_51.38.71.175_121720226bd6-168trojan"}
-- {password: d622d1e6-4fb3-4d0e-b5cf-1f802e3d1195, port: 443, server: ust2.sshocean.net, skip-cert-verify: False, type: trojan,"name":"US_135.148.41.243_121720226bd6-169trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vus4.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"US_45.33.48.36_121720226bd6-170vmess"}
-- {password: 011eb011-c68e-4f92-80eb-f9bbef707bef, port: 80, server: us2.trojanvh.xyz, skip-cert-verify: False, type: trojan,"name":"US_135.148.149.209_121720226bd6-172trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: gcoresg.sylu.cyou, skip-cert-verify: False, tls: True, type: vmess, uuid: 12e08256-da5d-4b1c-aeca-8c973ccceef8, ws-opts: {path: /Falling42gcoresgnode},"name":"SG_91.243.81.57_121720226bd6-173vmess"}
-- {password: t5wt9NwaB9, port: 80, server: wdock.aslibekhar.com, skip-cert-verify: False, type: trojan,"name":"FI_45.136.71.186_121720226bd6-174trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: do5.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das321},"name":"SG_43.153.195.103_121720226bd6-175vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: az.mvzaixian3.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das2},"name":"SG_43.153.214.136_121720226bd6-176vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: do7.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /book},"name":"SG_43.159.50.39_121720226bd6-177vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: do9.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das321S8},"name":"SG_43.153.215.113_121720226bd6-178vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: xjp1.mvzaixian3.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das3218ssxc},"name":"SG_43.153.196.39_121720226bd6-179vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: do3.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das212},"name":"KR_144.24.80.0_121720226bd6-180vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 55324, server: 47.242.4.244, skip-cert-verify: False, tls: False, type: vmess, uuid: 425b68df-af14-45c5-864c-11444734d7b5,"name":"HK_47.242.4.244_12162022a2ef-184vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 194.233.81.125, skip-cert-verify: true, type: vmess, uuid: ceb8a921-ec72-4804-ae92-cbd309f2f213, ws-opts: {path: /vmess},"name":"SG_194.233.81.125_12172022afee-185vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 51.75.160.126, skip-cert-verify: False, tls: False, type: vmess, uuid: ed2c7ae0-e199-4f98-ada0-8f5fdc80ca8d, ws-opts: {path: /vmess},"name":"GB_51.75.160.126_12182022fd2e-197vmess"}
-- {password: e05c749b-7c6b-41b8-9c71-9dcf685edf4a, port: 443, server: jgwhdlb1.gaox.ml, skip-cert-verify: False, type: trojan,"name":"IN_152.67.162.166_12182022fd2e-198trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vau1.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"AU_172.105.255.4_12182022fd2e-200vmess"}
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-201vmess"}
-- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-202vmess"}
-- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_12042022c941-203vmess"}
-- {alterId: 64, cipher: auto, port: 50002, server: 139.186.198.63, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_139.186.198.63_120820222f00-204vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 13156, server: 106.12.168.13, skip-cert-verify: False, tls: False, type: vmess, uuid: 9bf4cba4-9e9e-4da4-8e65-f7c487c539df, ws-opts: {path: /},"name":"CN_106.12.168.13_121420222387-205vmess"}
-- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_12172022afee-206vmess"}
-- {alterId: 64, cipher: auto, port: 50002, server: 112.132.215.189, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_112.132.215.189_12162022a2ef-207vmess"}
-- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_121720225653-208trojan"}
-- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 134.195.198.106, type: ss,"name":"CA_134.195.198.106_11292022e5f5-209ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 103.157.96.103, type: ss,"name":"ID_103.157.96.103_121120226507-210ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 104.149.149.158, type: ss,"name":"US_104.149.149.158_1209202204f1-211ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.223.96, type: ss,"name":"SG_51.79.223.96_121120226507-212ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 194.156.230.46, type: ss,"name":"JP_194.156.230.46_121120226507-213ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 81.90.190.175, type: ss,"name":"JP_81.90.190.175_121120226507-214ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 185.225.19.64, type: ss,"name":"RO_185.225.19.64_121120226507-215ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 172.107.199.110, type: ss,"name":"US_172.107.199.110_121120226507-216ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 185.153.180.10, type: ss,"name":"US_185.153.180.10_12122022e712-217ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 185.172.113.58, type: ss,"name":"JP_185.172.113.58_1212202288a2-218ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 83.229.73.120, type: ss,"name":"IL_83.229.73.120_12132022805d-219ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 812, server: 217.197.161.136, type: ss,"name":"SG_217.197.161.136_121320226dd7-220ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 51.79.145.10, type: ss,"name":"SG_51.79.145.10_121320226dd7-221ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 812, server: 217.197.161.138, type: ss,"name":"SG_217.197.161.138_12132022805d-222ss"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: 3g0dHlKME, port: 32001, protocol: origin, protocol-param: "", server: sg-am3.eqsunshine.com, type: ssr,"name":"SG_13.250.113.126_121420227f0e-223ssr"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 79.133.43.126, type: ss,"name":"AT_79.133.43.126_121120226507-224ss"}
-- {cipher: aes-256-cfb, password: "9344665077", port: 50006, server: 5.181.4.239, type: ss,"name":"HK_5.181.4.239_121120226507-225ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 185.162.125.91, type: ss,"name":"IL_185.162.125.91_121120226507-226ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 206.189.86.169, type: ss,"name":"SG_206.189.86.169_12122022e712-227ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.241.247, type: ss,"name":"SG_51.79.241.247_12132022805d-228ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 45.136.198.122, type: ss,"name":"BG_45.136.198.122_112820225238-229ss"}
-- {cipher: aes-256-cfb, password: "9344665077", port: 50006, server: 123.204.4.18, type: ss,"name":"TW_123.204.4.18_12162022a2ef-230ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 169.197.142.187, type: ss,"name":"US_169.197.142.187_12122022e712-232ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 123.253.34.235, type: ss,"name":"MY_123.253.34.235_121320226dd7-234ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 134.195.196.85, type: ss,"name":"CA_134.195.196.85_121520228278-235ss"}
-- {cipher: chacha20-ietf-poly1305, password: BpXVyHLdIGHv2iT5Vo6nY4f7KDZW, port: 9000, server: 93.114.194.214, type: ss,"name":"RO_93.114.194.214_12162022a2ef-236ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 193.176.86.190, type: ss,"name":"DE_193.176.86.190_12162022a2ef-237ss"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, password: eAokbaDN6, port: 8081, protocol: origin, server: jp-am48-6.eqnode.net, type: ssr,"name":"JP_43.206.223.34_12172022afee-238ssr"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5000, server: 85.208.108.92, type: ss,"name":"JP_85.208.108.92_121120226507-240ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 167.88.63.82, type: ss,"name":"US_167.88.63.82_12122022e712-241ss"}
-- {cipher: aes-256-cfb, obfs: http_simple, obfs-param: "", password: azadi2030, port: 11909, protocol: origin, protocol-param: "", server: 167.99.214.62, type: ssr,"name":"NL_167.99.214.62_121520221f2b-242ssr"}
-- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8008, server: 54.36.174.181, type: ss,"name":"FR_54.36.174.181_121520228278-243ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: ak1444.free.www.outline.network, type: ss,"name":"NL_91.232.105.253_121520221f2b-244ss"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: dongtaiwang.com, port: 10002, protocol: auth_chain_a, protocol-param: "", server: ssrfree.zhujicn2.net, type: ssr,"name":"US_45.63.60.105_12172022afee-245ssr"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: dongtaiwang.com, port: 10002, protocol: auth_chain_a, protocol-param: "", server: 45.63.52.54, type: ssr,"name":"US_45.63.52.54_12172022afee-247ssr"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 88.119.174.197, type: ss,"name":"US_88.119.174.197_121420227f0e-248ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr05, port: 254, server: 144.168.58.170, type: ss,"name":"US_144.168.58.170_121620221e3a-249ss"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 193.108.118.79, type: ss,"name":"DE_193.108.118.79_12122022e712-250ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: 167.88.61.213, type: ss,"name":"US_167.88.61.213_121720225653-251ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 111.90.146.193, type: ss,"name":"MY_111.90.146.193_121720225653-252ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 38.107.226.49, type: ss,"name":"US_38.107.226.49_12162022a2ef-253ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 139.99.123.85, type: ss,"name":"SG_139.99.123.85_121720226bd6-254ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 51.79.173.183, type: ss,"name":"SG_51.79.173.183_121720226bd6-255ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 38.114.114.143, type: ss,"name":"US_38.114.114.143_121720226bd6-256ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 167.88.61.119, type: ss,"name":"US_167.88.61.119_121720225653-258ss"}
-- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 172.99.190.7, type: ss,"name":"GB_172.99.190.7_121620224ce0-282ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.102.74, type: ss,"name":"US_38.91.102.74_1212202288a2-283ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.114.114.49, type: ss,"name":"US_38.114.114.49_1212202288a2-285ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 62.109.22.113, type: ss,"name":"RU_62.109.22.113_121320226dd7-286ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 807, server: 162.251.61.221, type: ss,"name":"US_162.251.61.221_121720225653-290ss"}
-- {password: cb43b7c2-b744-41c5-bcc2-fd7467b332cf, port: 443, server: 140.238.205.173, skip-cert-verify: true, type: trojan,"name":"AU_140.238.205.173_12162022a2ef-291trojan"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 45.136.196.45, type: ss,"name":"ES_45.136.196.45_120720226ca2-292ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 5.183.101.229, type: ss,"name":"US_5.183.101.229_12132022805d-293ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 38.68.134.196, type: ss,"name":"US_38.68.134.196_12162022a2ef-294ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 808, server: 169.197.143.15, type: ss,"name":"US_169.197.143.15_121120226507-295ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 195.54.170.70, type: ss,"name":"NO_195.54.170.70_11092022ffd3-296ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 167.88.61.175, type: ss,"name":"US_167.88.61.175_12122022e712-301ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 38.91.102.123, type: ss,"name":"US_38.91.102.123_121320226dd7-302ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 85.208.108.20, type: ss,"name":"JP_85.208.108.20_121220223940-303ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 82.145.41.125, type: ss,"name":"GB_82.145.41.125_121120226507-307ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 38.121.43.71, type: ss,"name":"US_38.121.43.71_12122022e712-308ss"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 172.99.190.61, type: ss,"name":"GB_172.99.190.61_121420222387-309ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 195.154.200.150, type: ss,"name":"FR_195.154.200.150_121120226507-311ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 38.121.43.97, type: ss,"name":"US_38.121.43.97_121220223940-312ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 169.197.141.187, type: ss,"name":"US_169.197.141.187_12132022805d-313ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 85.208.108.21, type: ss,"name":"JP_85.208.108.21_121420222387-314ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 162.251.61.47, type: ss,"name":"US_162.251.61.47_121420222387-315ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 167.88.63.44, type: ss,"name":"US_167.88.63.44_121420227f0e-316ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr03, port: 254, server: 172.96.192.58, type: ss,"name":"US_172.96.192.58_121420227f0e-317ss"}
-- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.41.174, type: ss,"name":"SG_139.162.41.174_121420227f0e-318ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.103.176.29, type: ss,"name":"AR_190.103.176.29_121420227f0e-319ss"}
-- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 51.79.177.159, type: ss,"name":"SG_51.79.177.159_121420227f0e-320ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 194.26.213.155, type: ss,"name":"IE_194.26.213.155_121420227f0e-321ss"}
-- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1035, server: 38.64.138.53, type: ss,"name":"US_38.64.138.53_121420227f0e-322ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 217.182.198.219, type: ss,"name":"DE_217.182.198.219_121420227f0e-323ss"}
-- {cipher: chacha20-ietf-poly1305, password: pydQILh06AvJ, port: 27092, server: 13.49.241.14, type: ss,"name":"SE_13.49.241.14_121420227f0e-324ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.107.216, type: ss,"name":"US_38.91.107.216_121420227f0e-326ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.102.124, type: ss,"name":"US_38.91.102.124_121420227f0e-327ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 38.91.106.75, type: ss,"name":"US_38.91.106.75_121420227f0e-328ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.86.135.36, type: ss,"name":"US_38.86.135.36_121420222387-330ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.121.43.204, type: ss,"name":"US_38.121.43.204_12142022f668-331ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr06, port: 254, server: 95.169.4.174, type: ss,"name":"US_95.169.4.174_12152022d914-332ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 9090, server: 193.108.118.30, type: ss,"name":"DE_193.108.118.30_12152022d914-333ss"}
-- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.236.79, type: ss,"name":"GB_139.162.236.79_12152022d914-334ss"}
-- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8090, server: 167.88.63.79, type: ss,"name":"US_167.88.63.79_12132022805d-335ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 38.114.114.139, type: ss,"name":"US_38.114.114.139_12152022d914-337ss"}
-- {cipher: aes-128-cfb, password: shadowsocks, port: 443, server: 156.146.62.160, type: ss,"name":"CH_156.146.62.160_121520228278-338ss"}
-- {cipher: chacha20-ietf-poly1305, password: bhcoDfavlz5r, port: 855, server: 95.142.161.114, type: ss,"name":"FR_95.142.161.114_121520228278-339ss"}
-- {cipher: chacha20-ietf-poly1305, password: qYAt85SFGV56, port: 443, server: 185.77.217.217, type: ss,"name":"FI_185.77.217.217_121520228278-340ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 196.247.59.154, type: ss,"name":"CA_196.247.59.154_121220223940-341ss"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 169.197.143.232, type: ss,"name":"US_169.197.143.232_12132022805d-342ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.91.107.37, type: ss,"name":"US_38.91.107.37_121420222387-343ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 38.68.135.19, type: ss,"name":"US_38.68.135.19_121420227f0e-344ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 193.108.117.75, type: ss,"name":"DE_193.108.117.75_121420227f0e-345ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 163.172.110.153, type: ss,"name":"FR_163.172.110.153_121420227f0e-346ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 196.247.59.156, type: ss,"name":"CA_196.247.59.156_12152022d914-349ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 78.129.253.9, type: ss,"name":"GB_78.129.253.9_121520228278-350ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 4444, server: 145.239.6.202, type: ss,"name":"FR_145.239.6.202_121520221f2b-351ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 5.183.100.87, type: ss,"name":"US_5.183.100.87_121520221f2b-352ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.120.231.45, type: ss,"name":"CO_190.120.231.45_121520221f2b-353ss"}
-- {cipher: aes-256-cfb, password: FAdUvMJUq5vDgKEq, port: 9006, server: 213.183.59.231, type: ss,"name":"NL_213.183.59.231_121520221f2b-354ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 62.210.222.195, type: ss,"name":"FR_62.210.222.195_121520221f2b-355ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 169.197.142.48, type: ss,"name":"US_169.197.142.48_121520221f2b-356ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 213.169.137.221, type: ss,"name":"CY_213.169.137.221_121520221f2b-357ss"}
-- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8090, server: 167.88.63.99, type: ss,"name":"US_167.88.63.99_121420222387-358ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 134.195.196.19, type: ss,"name":"CA_134.195.196.19_121420227f0e-359ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 9090, server: 38.75.136.102, type: ss,"name":"US_38.75.136.102_12152022d914-361ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 149.202.82.172, type: ss,"name":"FR_149.202.82.172_12152022d914-362ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: 85.208.108.18, type: ss,"name":"JP_85.208.108.18_121520228278-363ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 85.208.108.94, type: ss,"name":"JP_85.208.108.94_121520228278-364ss"}
-- {cipher: aes-256-cfb, password: f63gg8EruDnUrmz4, port: 9010, server: 213.183.59.209, type: ss,"name":"NL_213.183.59.209_121520221f2b-365ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8118, server: 38.143.66.64, type: ss,"name":"US_38.143.66.64_121520221f2b-366ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 85.208.108.19, type: ss,"name":"JP_85.208.108.19_121520221f2b-367ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 5.183.101.230, type: ss,"name":"US_5.183.101.230_121620224ce0-368ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr05, port: 246, server: 172.96.192.100, type: ss,"name":"US_172.96.192.100_121620224ce0-369ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 169.197.141.14, type: ss,"name":"US_169.197.141.14_121620224ce0-371ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 38.143.66.55, type: ss,"name":"US_38.143.66.55_12122022e712-372ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 85.208.108.58, type: ss,"name":"JP_85.208.108.58_121120226507-373ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.68.135.239, type: ss,"name":"US_38.68.135.239_12142022f668-374ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 38.68.134.48, type: ss,"name":"US_38.68.134.48_12152022d914-375ss"}
-- {cipher: chacha20-ietf-poly1305, password: 811c0115-faea-4cea-8186-5eef384ccb8a, port: 7445, server: 13.208.40.105, type: ss,"name":"JP_13.208.40.105_121520228278-376ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 38.107.226.238, type: ss,"name":"US_38.107.226.238_121520221f2b-377ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 8888, server: 85.208.108.91, type: ss,"name":"JP_85.208.108.91_121620224ce0-378ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 172.99.188.99, type: ss,"name":"NL_172.99.188.99_121620224ce0-379ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 31.133.100.49, type: ss,"name":"IL_31.133.100.49_121620221e3a-380ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr05, port: 254, server: 172.96.204.170, type: ss,"name":"US_172.96.204.170_121620221e3a-381ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 103.121.91.58, type: ss,"name":"VN_103.121.91.58_121620221e3a-382ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 169.197.141.39, type: ss,"name":"US_169.197.141.39_121620221e3a-383ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 85.208.108.61, type: ss,"name":"JP_85.208.108.61_121420222387-384ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 193.108.118.34, type: ss,"name":"DE_193.108.118.34_121420227f0e-385ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 38.86.135.27, type: ss,"name":"US_38.86.135.27_121520221f2b-386ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 134.195.196.107, type: ss,"name":"CA_134.195.196.107_121520221f2b-387ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.86.135.169, type: ss,"name":"US_38.86.135.169_121520221f2b-388ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8118, server: 38.91.106.51, type: ss,"name":"US_38.91.106.51_121620224ce0-389ss"}
-- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 85.208.108.60, type: ss,"name":"JP_85.208.108.60_121620224ce0-390ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 805, server: 134.195.196.143, type: ss,"name":"CA_134.195.196.143_121620221e3a-391ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 193.182.144.183, type: ss,"name":"IL_193.182.144.183_12162022a2ef-393ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 85.208.108.62, type: ss,"name":"JP_85.208.108.62_12162022a2ef-394ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 85.208.108.90, type: ss,"name":"JP_85.208.108.90_121420227f0e-395ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 145.239.1.100, type: ss,"name":"FR_145.239.1.100_121520221f2b-396ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 167.88.62.62, type: ss,"name":"US_167.88.62.62_121620224ce0-397ss"}
-- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 38.86.135.75, type: ss,"name":"US_38.86.135.75_12162022a2ef-398ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 51.68.206.229, type: ss,"name":"GB_51.68.206.229_12172022afee-399ss"}
-- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1036, server: 79.133.109.56, type: ss,"name":"US_79.133.109.56_12172022afee-402ss"}
-- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: sk80Likez95, port: 9595, protocol: auth_chain_a, protocol-param: Non%�, server: 154.53.48.30, type: ssr,"name":"US_154.53.48.30_12132022805d-403ssr"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 134.195.196.231, type: ss,"name":"CA_134.195.196.231_121420227f0e-404ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 38.111.114.246, type: ss,"name":"CA_38.111.114.246_121420227f0e-405ss"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 85.208.108.93, type: ss,"name":"JP_85.208.108.93_121420227f0e-406ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 807, server: 5.188.0.151, type: ss,"name":"US_5.188.0.151_121520228278-407ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 51.161.118.38, type: ss,"name":"CA_51.161.118.38_121520228278-408ss"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 38.114.114.19, type: ss,"name":"US_38.114.114.19_121520228278-409ss"}
-- {cipher: aes-256-cfb, password: 4R3hUfZ2FHhDmNcP, port: 9061, server: 213.183.59.229, type: ss,"name":"NL_213.183.59.229_121520221f2b-410ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 142.202.48.7, type: ss,"name":"US_142.202.48.7_121620224ce0-411ss"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.143.66.20, type: ss,"name":"US_38.143.66.20_121620224ce0-412ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 4444, server: 38.114.114.67, type: ss,"name":"US_38.114.114.67_12172022afee-413ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 167.88.61.50, type: ss,"name":"US_167.88.61.50_12172022afee-414ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 185.113.140.247, type: ss,"name":"PT_185.113.140.247_121720225653-415ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr03, port: 252, server: 144.168.60.70, type: ss,"name":"US_144.168.60.70_121720225653-416ss"}
-- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 51.89.138.162, type: ss,"name":"GB_51.89.138.162_121720225653-417ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.75.136.34, type: ss,"name":"US_38.75.136.34_12162022a2ef-420ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 212.38.189.174, type: ss,"name":"GB_212.38.189.174_121420227f0e-423ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 803, server: 103.62.49.141, type: ss,"name":"NZ_103.62.49.141_121420227f0e-424ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 812, server: 38.68.134.135, type: ss,"name":"US_38.68.134.135_121420227f0e-425ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 134.195.196.149, type: ss,"name":"CA_134.195.196.149_121520221f2b-427ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8118, server: 38.143.66.99, type: ss,"name":"US_38.143.66.99_12162022a2ef-428ss"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 85.208.108.59, type: ss,"name":"JP_85.208.108.59_12162022a2ef-430ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.121.43.65, type: ss,"name":"US_38.121.43.65_12172022afee-431ss"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.75.137.9, type: ss,"name":"US_38.75.137.9_12172022afee-432ss"}
-- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 38.91.102.30, type: ss,"name":"US_38.91.102.30_12172022afee-433ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 800, server: 51.159.30.61, type: ss,"name":"FR_51.159.30.61_12172022afee-434ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 172.99.190.39, type: ss,"name":"GB_172.99.190.39_12172022afee-435ss"}
-- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6697, server: 167.88.63.59, type: ss,"name":"US_167.88.63.59_121720225653-436ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.91.107.66, type: ss,"name":"US_38.91.107.66_121720225653-437ss"}
-- {password: xxoo, port: 443, server: 138.124.183.216, skip-cert-verify: true, type: trojan,"name":"US_138.124.183.216_121720226bd6-438trojan"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 801, server: 81.90.189.49, type: ss,"name":"SG_81.90.189.49_121720226bd6-439ss"}
-- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.166.171, type: ss,"name":"SG_51.79.166.171_121720226bd6-440ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 5500, server: 38.91.106.136, type: ss,"name":"US_38.91.106.136_121720226bd6-441ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 192.71.244.150, type: ss,"name":"SI_192.71.244.150_121720226bd6-442ss"}
-- {cipher: chacha20-ietf-poly1305, password: shwozEjWey, port: 444, server: 176.97.67.103, type: ss,"name":"AE_176.97.67.103_121720226bd6-443ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 38.54.33.116, type: ss,"name":"TH_38.54.33.116_121720226bd6-445ss"}
-- {cipher: aes-256-cfb, password: bwhskrskr06, port: 253, server: 93.179.112.70, type: ss,"name":"US_93.179.112.70_121720226bd6-446ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 81.90.189.52, type: ss,"name":"SG_81.90.189.52_121720226bd6-447ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 152.67.218.38, skip-cert-verify: true, type: vmess, uuid: b5e9480a-b7aa-40a4-f9a7-5299b5e363b4, ws-opts: {path: /},"name":"KR_152.67.218.38_121720226bd6-448vmess"}
-- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 38.68.134.191, type: ss,"name":"US_38.68.134.191_121720226bd6-449ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 172.99.190.87, type: ss,"name":"GB_172.99.190.87_121720226bd6-450ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 185.164.35.9, type: ss,"name":"BA_185.164.35.9_121720226bd6-453ss"}
-- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.5.19, type: ss,"name":"SG_139.162.5.19_121720226bd6-454ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 185.231.233.130, type: ss,"name":"PT_185.231.233.130_121720226bd6-455ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 213.174.129.4, type: ss,"name":"US_213.174.129.4_121720226bd6-456ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 50728, server: 51.77.230.27, skip-cert-verify: true, type: vmess, uuid: 58362f48-b66c-4fec-a91e-25714d4ff299, ws-opts: {path: /},"name":"BE_51.77.230.27_121720226bd6-457vmess"}
-- {cipher: chacha20-ietf-poly1305, password: 1JQTTbpHfPso, port: 443, server: 104.128.80.237, type: ss,"name":"US_104.128.80.237_121720226bd6-458ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 2.56.178.201, type: ss,"name":"US_2.56.178.201_121720226bd6-459ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: 51fly99.win, skip-cert-verify: true, tls: true, type: vmess, uuid: fefe2ff7-153c-41a8-aa04-e8d2e641505c, ws-opts: {path: /myblog},"name":"US_2606:4700:3031::6815:740_121720226bd6-460vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 146.59.92.219, skip-cert-verify: true, tls: false, type: vmess, uuid: aca71b13-ec8a-466d-c28f-43516d3cf246, ws-opts: {path: /},"name":"FR_146.59.92.219_121720226bd6-461vmess"}
-- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 139.99.68.21, type: ss,"name":"SG_139.99.68.21_12172022afee-462ss"}
-- {password: da777aae-defb-41d0-a183-2c27da2b4677, port: 443, server: 150.230.96.103, skip-cert-verify: true, type: trojan,"name":"JP_150.230.96.103_121720226bd6-467trojan"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: 172.99.188.71, type: ss,"name":"NL_172.99.188.71_121420227f0e-482ss"}
-- {password: Sp3eDVp, port: 443, server: 91.121.225.119, skip-cert-verify: true, type: trojan,"name":"FR_91.121.225.119_121520228278-483trojan"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 134.195.198.95, type: ss,"name":"CA_134.195.198.95_121520221f2b-486ss"}
-- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6679, server: 167.88.62.68, type: ss,"name":"US_167.88.62.68_121520221f2b-487ss"}
-- {alterId: 0, cipher: auto, network: tcp, port: 31990, server: 157.230.244.255, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /sg1/getData},"name":"SG_157.230.244.255_121520221f2b-488vmess"}
-- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6697, server: 38.91.101.159, type: ss,"name":"US_38.91.101.159_121620221e3a-489ss"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 38.75.136.21, type: ss,"name":"US_38.75.136.21_12162022a2ef-490ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 37.120.147.230, type: ss,"name":"US_37.120.147.230_12162022a2ef-491ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 193.239.87.134, type: ss,"name":"US_193.239.87.134_12172022afee-492ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 804, server: 134.195.196.178, type: ss,"name":"CA_134.195.196.178_121720226bd6-493ss"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 134.195.196.230, type: ss,"name":"CA_134.195.196.230_121720226bd6-495ss"}
-- {password: 02e653c9-7c93-46a9-999d-11834bd0c577, port: 443, server: 132.145.51.172, skip-cert-verify: true, type: trojan,"name":"GB_132.145.51.172_121720226bd6-496trojan"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 148.66.56.99, type: ss,"name":"HK_148.66.56.99_121720226bd6-497ss"}
-- {cipher: aes-128-cfb, password: shadowsocks, port: 443, server: 109.201.152.181, type: ss,"name":"NL_109.201.152.181_12182022fd2e-505ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.120.229.28, type: ss,"name":"PE_190.120.229.28_12182022fd2e-506ss"}
-- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1034, server: 38.91.101.242, type: ss,"name":"US_38.91.101.242_12182022fd2e-509ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 42517, server: 52.79.182.230, skip-cert-verify: False, tls: False, type: vmess, uuid: b5b5209f-bcbd-4bac-b044-0d179698c62d, ws-opts: {path: /},"name":"KR_52.79.182.230_12182022fd2e-510vmess"}
-- {cipher: aes-256-cfb, password: 4R3hUfZ2FHhDmNcP, port: 9061, server: 213.183.53.221, type: ss,"name":"RU_213.183.53.221_12182022fd2e-513ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 2086, server: 107.189.28.253, skip-cert-verify: true, type: vmess, uuid: e91c45c9-2c0f-46a9-c56d-21663b9e2c18, ws-opts: {path: /aries},"name":"LU_107.189.28.253_12182022fd2e-515vmess"}
-- {password: f2117e99-9b6e-47fd-b0a9-634a0b15b998, port: 443, server: 146.56.189.146, skip-cert-verify: true, type: trojan,"name":"KR_146.56.189.146_121720226bd6-526trojan"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 804, server: ak1507.free.www.outline.network, type: ss,"name":"DE_93.186.201.124_121520221f2b-529ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: ak1400.free.www.outline.network, type: ss,"name":"DE_193.108.118.36_121420227f0e-531ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 2096, server: sea.caspian.cf, skip-cert-verify: False, tls: True, type: vmess, uuid: 6135ebcc-6be1-46a6-9fc1-2264dcb1ed60, ws-opts: {path: /},"name":"FR_62.210.136.177_121520228278-533vmess"}
-- {password: 05742120-ce23-4cc8-88f5-6d221ce45bf4, port: 443, server: fhcarm1.gaox.ml, skip-cert-verify: false, type: trojan,"name":"US_129.146.242.130_12162022a2ef-534trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: ca.0112233.xyz, skip-cert-verify: true, tls: true, type: vmess, uuid: c3000e9d-bee7-4fdb-b312-dd07030f325d,"name":"US_2606:4700:3033::6815:4bba_121420222387-588vmess"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: ak1379.free.www.outline.network, type: ss,"name":"PL_51.77.53.200_121420227f0e-597ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 808, server: 38.91.107.225, type: ss,"name":"US_38.91.107.225_12152022d914-612ss"}
-- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.64.138.145, type: ss,"name":"US_38.64.138.145_12152022d914-617ss"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.114.114.69, type: ss,"name":"US_38.114.114.69_121520221f2b-629ss"}
-- {password: vvip-periantara, port: 443, server: 38.9.140.66, skip-cert-verify: true, type: trojan,"name":"ID_38.9.140.66_121620224ce0-656trojan"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 54519, server: 47.243.176.147, skip-cert-verify: true, type: vmess, uuid: a8c577b3-1069-41eb-92e2-5599302af067,"name":"HK_47.243.176.147_121620221e3a-669vmess"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.114.114.104, type: ss,"name":"US_38.114.114.104_121620221e3a-678ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: ak1488.free.www.outline.network, type: ss,"name":"US_167.88.61.14_121620221e3a-692ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 2053, server: v2ray.wefuckgfw.ga, skip-cert-verify: true, tls: true, type: vmess, uuid: ce3f0dd3-8a04-4daa-9416-e67c5d42083a, ws-opts: {path: /DQsafRJn/},"name":"US_2606:4700:3032::6815:240a_12162022a2ef-707vmess"}
-- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 38309, server: 8.210.57.239, skip-cert-verify: False, tls: False, type: vmess, uuid: d8d413a1-d60c-4b8c-b48b-aedc9b221ca7,"name":"HK_8.210.57.239_12172022afee-760vmess"}
-- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 38.91.100.207, type: ss,"name":"US_38.91.100.207_12172022afee-769ss"}
-- {alterId: 0, cipher: auto, port: 29210, server: 161.35.47.70, skip-cert-verify: False, tls: False, type: vmess, uuid: 582e74ff-e708-41b2-e1c0-7393dbff0c90,"name":"GB_161.35.47.70_12172022afee-786vmess"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 8888, server: 85.208.108.22, type: ss,"name":"JP_85.208.108.22_121720225653-814ss"}
-- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 803, server: 185.104.184.78, type: ss,"name":"DK_185.104.184.78_121720225653-831ss"}
-- {password: 54080134-2cba-4535-8599-95650bd9aa54, port: 443, server: jgwhdlb2.gaox.ml, skip-cert-verify: false, type: trojan,"name":"IN_152.67.160.174_121720226bd6-838trojan"}
-- {alterId: 0, cipher: auto, port: 32586, server: 129.159.41.233, tls: false, type: vmess, uuid: 341a9182-c423-499c-c46e-d17838b29037,"name":"US_129.159.41.233_121720226bd6-839vmess"}
-- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: 38.68.135.18, type: ss,"name":"US_38.68.135.18_121720226bd6-849ss"}
-- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 142.202.48.52, type: ss,"name":"US_142.202.48.52_121720226bd6-853ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: surongwei.eu.org, skip-cert-verify: true, tls: true, type: vmess, uuid: 6093eefb-7ab6-41df-aba0-d5fa58147e10, ws-opts: {path: /reffs7y26g0ua},"name":"KR_130.162.141.104_121720226bd6-877vmess"}
-- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 38.91.102.72, type: ss,"name":"US_38.91.102.72_121720226bd6-887ss"}
-- {alterId: 0, cipher: auto, network: tcp, port: 31990, server: FR-166-134.shoptunnel.live, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /},"name":"FR_163.172.166.134_121720226bd6-888vmess"}
-- {password: c09eb137-bf68-4658-84e0-102d94b74168, port: 443, server: jgwdj4.gaox.ml, skip-cert-verify: False, type: trojan,"name":"JP_150.230.217.213_121720226bd6-892trojan"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: buyvm.imkcp.eu.org, skip-cert-verify: False, tls: True, type: vmess, uuid: 6fb9a750-55b8-4e6e-857b-242b795399dc, ws-opts: {path: /imkcpyyds},"name":"US_2606:4700:3034::ac43:aaa9_121720226bd6-906vmess"}
-- {alterId: 0, cipher: auto, network: tcp, port: 40771, server: 139.162.16.228, skip-cert-verify: true, tls: true, type: vmess, uuid: 61194810-5193-48bc-eb0a-7978a059d681, ws-opts: {path: /},"name":"SG_139.162.16.228_12182022fd2e-970vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 18.143.123.35, skip-cert-verify: true, tls: false, type: vmess, uuid: 68df4838-46d0-4b5b-c3f0-a40ec7063245, ws-opts: {path: /},"name":"SG_18.143.123.35_12182022fd2e-980vmess"}
-- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8008, server: 38.68.134.9, type: ss,"name":"US_38.68.134.9_12182022fd2e-992ss"}
-- {alterId: 10, cipher: auto, port: 8189, server: hk1vdf-node.aiqiche123.com, tls: true, type: vmess, uuid: a90597c1-bab3-4217-ad6f-0838675c8638,"name":"US_206.119.112.6_12182022bebb-1012vmess"}
-- {password: e8c1ab3c-89b3-4933-92df-682e6dce7819, port: 443, server: jgwxn4.gaox.ml, skip-cert-verify: False, type: trojan,"name":"AU_152.67.98.30_12182022bebb-1018trojan"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 135.125.244.103, type: ss,"name":"FR_135.125.244.103_12182022bebb-1025ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 141.164.57.47, type: ss,"name":"KR_141.164.57.47_12182022bebb-1026ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: 139.99.120.234, type: ss,"name":"SG_139.99.120.234_12182022bebb-1040ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 101.50.0.243, type: ss,"name":"ID_101.50.0.243_12182022bebb-1044ss"}
-- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 5500, server: 172.99.190.149, type: ss,"name":"GB_172.99.190.149_12182022bebb-1049ss"}
-- {cipher: aes-256-cfb, password: 1e5111699c45496da84112f35db665c4, port: 29332, server: 165.232.169.142, type: ss,"name":"SG_165.232.169.142_12182022bebb-1052ss"}
-- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 194.71.126.31, type: ss,"name":"RS_194.71.126.31_12182022bebb-1053ss"}
-- {alterId: 0, cipher: auto, port: 1069, server: 152.69.197.60, skip-cert-verify: False, tls: False, type: vmess, uuid: ac8e26fe-8150-4b60-ae64-82fc77eba2cf,"name":"JP_152.69.197.60_12182022bebb-1054vmess"}
-- {alterId: 0, cipher: auto, network: tcp, port: 31990, server: 146.185.248.113, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /ray},"name":"AM_146.185.248.113_12182022bebb-1056vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 46075, server: 129.150.44.64, skip-cert-verify: true, type: vmess, uuid: da257e73-f02b-45ab-9916-7baf154c47a3, ws-opts: {path: /jhndsmlanj11223},"name":"SG_129.150.44.64_12182022bebb-1057vmess"}
-- {password: f39bd244-f5fe-415c-8b98-a1e5250bf178, port: 443, server: 129.146.255.158, skip-cert-verify: true, type: trojan,"name":"US_129.146.255.158_12182022bebb-1060trojan"}
-- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 193.108.117.24, type: ss,"name":"DE_193.108.117.24_12182022bebb-1061ss"}
-- {alterId: 0, cipher: auto, network: ws, port: 80, server: 152.69.230.170, skip-cert-verify: true, type: vmess, uuid: 6aa24ded-5f15-48c7-8cba-3e2a159d6b77, ws-opts: {path: /},"name":"KR_152.69.230.170_12182022bebb-1071vmess"}
-- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 38.75.136.135, type: ss,"name":"US_38.75.136.135_12182022bebb-1073ss"}
-- {cipher: aes-256-cfb, password: ZET59LF6DvCC8KVt, port: 9005, server: 213.183.59.185, type: ss,"name":"NL_213.183.59.185_12182022bebb-1077ss"}
-- {password: d6530eef-8d92-475f-9d28-e1a36ad7f441, port: 443, server: sgt3.sshocean.net, skip-cert-verify: False, type: trojan,"name":"SG_15.235.163.25_12182022bebb-1153trojan"}
-- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 38.91.107.227, type: ss,"name":"US_38.91.107.227_12182022bebb-1219ss"}
-- {alterId: 64, cipher: auto, network: ws, port: 443, server: 67.21.72.44, skip-cert-verify: true, tls: true, type: vmess, uuid: 2566d00f-218c-48f7-9a36-13d3d6f1a724, ws-opts: {path: /path/120208301422},"name":"US_67.21.72.44_12182022bebb-1225vmess"}
-- {alterId: 0, cipher: auto, network: ws, port: 443, server: vn2.hello4g.pw, skip-cert-verify: False, tls: True, type: vmess, uuid: 62f2d3ba-abc6-4858-82ef-219f62f8e070, ws-opts: {path: /},"name":"VN_103.167.199.74_12182022bebb-1258vmess"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 3.125.45.20, type: ss,"name":"DE_3.125.45.20_12182022bebb-1294ss"}
-- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 38.54.33.118, type: ss,"name":"TH_38.54.33.118_12182022bebb-1295ss"}
-- {cipher: aes-256-cfb, password: e75b274c8159482d9e4e07d344d882b7, port: 22109, server: 68.183.87.182, type: ss,"name":"IN_68.183.87.182_12182022bebb-1320ss"}
-- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [47.243.182.119]}, method: GET, path: [/]}, network: http, port: 60833, server: 47.243.182.119, skip-cert-verify: False, tls: False, type: vmess, uuid: 583ab9b0-7553-46df-959c-dce58e6f4f96,"name":"HK_47.243.182.119_12182022bebb-1329vmess"}
-- {password: xxoo, port: 443, server: 138.124.183.226, skip-cert-verify: true, type: trojan,"name":"US_138.124.183.226_12182022bebb-1480trojan"}
-- {cipher: aes-256-gcm, password: VdaItKYmFf, port: 24576, server: 130.162.53.215, type: ss,"name":"DE_130.162.53.215_12182022bebb-1578ss"}
+- {password: shefelnak, port: 443, server: content-provider21.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"GB_185.16.206.211_121120226507-25trojan"}
+- {password: shefelnak, port: 443, server: content-provider22.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"GB_185.16.206.212_121120226507-26trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 3331, server: f1f3227.v8.glados-config.net, skip-cert-verify: true, tls: true, type: vmess, uuid: 57e0cb4d-eae5-48ec-8091-149dc2b309e0, ws-opts: {path: '/s/f1f3227.fm.apple.com:111548'},"name":"TW_203.69.187.221_121120226507-27vmess"}
+- {password: TestingServer@@2, port: 443, server: content-provider2.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"NL_94.102.53.20_121120226507-28trojan"}
+- {password: TestingServer@@, port: 443, server: 94.102.53.19, skip-cert-verify: true, type: trojan,"name":"NL_94.102.53.19_121120226507-29trojan"}
+- {alterId: 0, cipher: auto, network: tcp, port: 443, server: 64.112.126.4, skip-cert-verify: true, type: vmess, uuid: 8560c0b4-6f4b-45e6-9906-777650dcc310, ws-opts: {path: /},"name":"US_64.112.126.4_121120226507-31vmess"}
+- {password: 9c822f05-cfdc-479a-9534-60f3d4127435, port: 443, server: jgwcc2.gaox.ml, skip-cert-verify: false, type: trojan,"name":"KR_138.2.113.248_12122022e712-32trojan"}
+- {password: yxGY7A5MczQYg6UqSFx9u78V, port: 443, server: 188.40.236.127, skip-cert-verify: true, type: trojan,"name":"DE_188.40.236.127_12122022e712-33trojan"}
+- {password: b291d129-ee55-4801-a9b8-b5316e5c37b7, port: 443, server: 138.2.113.84, skip-cert-verify: true, type: trojan,"name":"KR_138.2.113.84_121220223940-34trojan"}
+- {password: origin, port: 443, server: content-provider29.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"DE_188.40.250.247_12132022805d-35trojan"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [43.129.234.80]}, method: GET, path: [/]}, network: http, port: 56607, server: 43.129.234.80, skip-cert-verify: False, tls: False, type: vmess, uuid: e3d62ad7-9dc4-479c-b5fb-24e0bbdd09f1,"name":"HK_43.129.234.80_121320226dd7-36vmess"}
+- {password: origin, port: 443, server: 188.40.251.19, skip-cert-verify: true, type: trojan,"name":"DE_188.40.251.19_12122022e712-38trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vfly6.xyz, skip-cert-verify: False, tls: True, type: vmess, uuid: 6a69acd2-ffe1-44eb-c51c-1afc049c7541, ws-opts: {path: /myblog},"name":"US_2606:4700:3030::ac43:bcd8_121420222387-39vmess"}
+- {password: Sp3eDVp, port: 443, server: content-provider24.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"NL_185.212.200.75_121220223940-40trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 2096, server: v2ray.wefuckgfw.tk, skip-cert-verify: true, tls: true, type: vmess, uuid: 2ae9835e-381b-4228-95df-bce39ee1a4eb, ws-opts: {path: /ezN9pvil/},"name":"US_2606:4700:3030::ac43:836c_121420227f0e-42vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: lu1.gogogoo.cyou, skip-cert-verify: False, tls: True, type: vmess, uuid: db5d1aa3-908b-44d1-be0a-4e6a8d4e4cda, ws-opts: {path: /go},"name":"US_2606:4700:3036::ac43:bbd3_12132022805d-43vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 11023, server: 204.15.74.75, skip-cert-verify: true, type: vmess, uuid: 713a91c6-e123-461c-a205-94a37796c791, ws-opts: {path: /},"name":"US_204.15.74.75_121520221f2b-44vmess"}
+- {password: dbf9bf9c-2c3f-474a-8031-d4c00666a989, port: 443, server: 129.146.190.42, skip-cert-verify: true, type: trojan,"name":"US_129.146.190.42_121120226507-46trojan"}
+- {password: Sp3eDVp, port: 443, server: 51.77.71.131, skip-cert-verify: true, type: trojan,"name":"FR_51.77.71.131_121520221f2b-48trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: id-v.sshmax.xyz, skip-cert-verify: true, type: vmess, uuid: 6211eb8a-e5ca-40f3-980f-a7ae6e95e5cb, ws-opts: {path: /vmess},"name":"ID_103.157.27.148_121520221f2b-49vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 6245, server: 206.81.31.184, skip-cert-verify: true, type: vmess, uuid: 9d39cb34-5261-43fb-b0f8-4f8a22b10f15, ws-opts: {path: /},"name":"DE_206.81.31.184_121520221f2b-50vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 43863, server: 138.2.83.217, skip-cert-verify: False, tls: False, type: vmess, uuid: ca984457-b017-46e5-d973-42a3c3fdc292,"name":"SG_138.2.83.217_12162022a2ef-51vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: 91.199.87.132, skip-cert-verify: true, tls: true, type: vmess, uuid: 12e08256-da5d-4b1c-aeca-8c973ccceef8, ws-opts: {path: /Falling42gcssgnode},"name":"SG_91.199.87.132_12172022afee-52vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: hucloud.tk, skip-cert-verify: true, tls: true, type: vmess, uuid: 2df3ed4a-4313-45f9-b742-2f02ce593a6e, ws-opts: {path: /huhu},"name":"US_2606:4700:3034::ac43:d556_12172022afee-53vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 42517, server: 54.180.150.171, skip-cert-verify: False, tls: False, type: vmess, uuid: b5b5209f-bcbd-4bac-b044-0d179698c62d, ws-opts: {path: /},"name":"KR_54.180.150.171_12172022afee-54vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vfly3.win, skip-cert-verify: true, tls: true, type: vmess, uuid: f4ef14c4-d811-455c-a4c3-c63dfeffb0a6, ws-opts: {path: /myblog},"name":"US_2606:4700:3030::6815:1b22_12172022afee-55vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 51.81.220.195, skip-cert-verify: False, tls: False, type: vmess, uuid: 6fea1649-425b-4092-bf53-29792152c925, ws-opts: {path: /sshkit/Variu88/634dab7abadf1/},"name":"US_51.81.220.195_121320226dd7-56vmess"}
+- {alterId: 32, cipher: auto, network: ws, port: 80, server: 182.16.1.194, skip-cert-verify: False, tls: False, type: vmess, uuid: 00a1da14-d55f-5f75-e346-79b985e1a723, ws-opts: {path: /opt/video/images},"name":"HK_182.16.1.194_121520221f2b-57vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 46842, server: 150.230.249.15, tls: false, type: vmess, uuid: 4530b5ee-ced4-4e64-9285-1867fc5df7f8,"name":"KR_150.230.249.15_121620221e3a-59vmess"}
+- {password: 0d8285f8-33da-4076-bb24-d498bd83f2f9, port: 443, server: 146.56.176.239, skip-cert-verify: true, type: trojan,"name":"KR_146.56.176.239_12172022afee-60trojan"}
+- {alterId: 2, cipher: auto, network: ws, port: 443, server: 161.129.34.102, skip-cert-verify: true, tls: true, type: vmess, uuid: ec736482-173e-3eff-9114-b49df8056e7d, ws-opts: {path: /},"name":"US_161.129.34.102_121720225653-61vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 8880, server: 51.159.2.152, skip-cert-verify: False, tls: False, type: vmess, uuid: a2ecce43-c6fb-4978-8b1d-8018ddd9faf4, ws-opts: {path: /},"name":"FR_51.159.2.152_121720225653-62vmess"}
+- {password: 67960bfb-00de-4a6b-9a7a-e74fc9e8b158, port: 443, server: 149.56.141.11, skip-cert-verify: true, type: trojan,"name":"CA_149.56.141.11_12162022a2ef-66trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: 141.147.181.219, skip-cert-verify: true, tls: true, type: vmess, uuid: 0b873cff-11ab-4716-c41a-04f886135091, ws-opts: {path: /roewesu},"name":"JP_141.147.181.219_121420222387-67vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 10021, server: 138.2.49.230, skip-cert-verify: true, type: vmess, uuid: a12e496e-f89a-434a-8011-108846f0e412, ws-opts: {path: /},"name":"JP_138.2.49.230_12162022a2ef-68vmess"}
+- {password: 0f5e6d9a-49af-4bc0-b04b-503102382144, port: 443, server: 51.195.219.173, skip-cert-verify: true, type: trojan,"name":"FR_51.195.219.173_121420227f0e-71trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: 185.216.72.172, skip-cert-verify: true, tls: true, type: vmess, uuid: 6d11cad4-be87-4b05-aa1d-0d19b011a6d3, ws-opts: {path: /zvtyvws},"name":"US_185.216.72.172_121620221e3a-72vmess"}
+- {alterId: 0, cipher: auto, network: tcp, port: 3000, server: 37.252.1.197, skip-cert-verify: true, type: vmess, uuid: 6f7ae49c-f5e2-4ec2-ac5e-38f057d51fee, ws-opts: {path: /},"name":"RU_37.252.1.197_121720225653-73vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 3389, server: 5.161.105.171, skip-cert-verify: False, tls: False, type: vmess, uuid: 06d52c29-1230-49a7-8fa6-66dbc9749a95, ws-opts: {path: /},"name":"US_5.161.105.171_121420227f0e-74vmess"}
+- {password: origin, port: 443, server: 51.77.71.134, skip-cert-verify: true, type: trojan,"name":"FR_51.77.71.134_121720226bd6-76trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 16014, server: 168.119.178.182, skip-cert-verify: true, type: vmess, uuid: 5740f1b8-3dee-4bba-9a80-ad57f0ce0380, ws-opts: {path: /},"name":"PK_168.119.178.182_121720226bd6-77vmess"}
+- {password: 4f9ca636-5195-406a-b48c-0388689dd9a7, port: 443, server: 212.24.103.3, skip-cert-verify: true, type: trojan,"name":"LT_212.24.103.3_121720226bd6-78trojan"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 61592, server: 8.218.40.241, skip-cert-verify: true, type: vmess, uuid: 46ba91fd-34a6-412b-9c3f-1ac91e6b8686,"name":"HK_8.218.40.241_121720226bd6-80vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 28730, server: 8.218.16.156, skip-cert-verify: true, type: vmess, uuid: 596d10b4-ce14-4be9-b37b-53c95b9220de,"name":"HK_8.218.16.156_121720226bd6-81vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 37003, server: 8.218.81.81, skip-cert-verify: true, type: vmess, uuid: 61ef9730-05d4-435d-bdaf-a10c12c7e5c5,"name":"HK_8.218.81.81_121720226bd6-82vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 61213, server: 8.218.64.146, skip-cert-verify: true, type: vmess, uuid: 22b0bc98-caf1-4519-9140-c26023df64d0,"name":"HK_8.218.64.146_121720226bd6-83vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 46148, server: 8.218.105.233, skip-cert-verify: true, type: vmess, uuid: 5072f86c-2a3f-430e-861f-bfd965da9b79,"name":"HK_8.218.105.233_121720226bd6-84vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 63421, server: 8.218.71.98, skip-cert-verify: true, type: vmess, uuid: 11f44049-f3d5-492a-8e8d-aa5fc27ffc8e,"name":"HK_8.218.71.98_121720226bd6-85vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 20256, server: 47.243.23.80, skip-cert-verify: true, type: vmess, uuid: f707fd08-f017-4b9b-aeae-da908b34e313,"name":"HK_47.243.23.80_121720226bd6-86vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 26237, server: 47.242.146.123, skip-cert-verify: true, type: vmess, uuid: c8f5a5fd-0a69-4cf6-8fa6-2ea02171d6a3,"name":"HK_47.242.146.123_121720226bd6-87vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 135.148.47.240, skip-cert-verify: true, type: vmess, uuid: deafc56d-ba76-4ff2-b3b3-a9335b0982e0, ws-opts: {path: /vmess},"name":"US_135.148.47.240_121720226bd6-89vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 47460, server: 47.242.85.127, skip-cert-verify: true, type: vmess, uuid: 8655a473-6c7f-41b2-b102-5edc30970e3a,"name":"HK_47.242.85.127_121720226bd6-90vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 26953, server: 47.243.36.34, skip-cert-verify: true, type: vmess, uuid: 6a1f0373-d449-4305-8e46-e72a789076d5,"name":"HK_47.243.36.34_121720226bd6-91vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 49564, server: 47.242.174.112, skip-cert-verify: true, type: vmess, uuid: 61a57665-7db8-424e-8cbf-b95f9dc9d799,"name":"HK_47.242.174.112_121720226bd6-92vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 23429, server: 103.200.112.207, skip-cert-verify: true, type: vmess, uuid: ff1e8103-f898-4954-9491-aeaa6fc6300c,"name":"HK_103.200.112.207_121720226bd6-93vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 62275, server: 103.200.112.181, skip-cert-verify: true, type: vmess, uuid: a82b7192-a209-4575-a163-1e80c60c1873,"name":"HK_103.200.112.181_121720226bd6-94vmess"}
+- {password: 60d47bb6-47d1-45b1-b67b-4d236a4a5957, port: 443, server: 103.167.34.206, skip-cert-verify: true, type: trojan,"name":"ID_103.167.34.206_121720226bd6-95trojan"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 36536, server: 8.218.86.59, skip-cert-verify: False, tls: False, type: vmess, uuid: ae3c56f1-c243-4373-bd65-07fd0569c455,"name":"HK_8.218.86.59_121720226bd6-100vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 64862, server: 8.218.72.12, skip-cert-verify: False, tls: False, type: vmess, uuid: b9adc9e5-4821-4c9c-ac05-43b3a8fad445,"name":"HK_8.218.72.12_121720226bd6-101vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 24520, server: 8.218.94.182, skip-cert-verify: False, tls: False, type: vmess, uuid: 3ae2a476-6929-4544-8037-1c79f0dfa701,"name":"HK_8.218.94.182_121720226bd6-102vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 44207, server: 47.242.17.241, skip-cert-verify: False, tls: False, type: vmess, uuid: 77c6c520-2d37-495a-a954-c8d056e89053,"name":"HK_47.242.17.241_121720226bd6-103vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 63376, server: 47.242.44.222, skip-cert-verify: False, tls: False, type: vmess, uuid: 5343352c-ccc5-43f9-b08a-7425e5cc73dd,"name":"HK_47.242.44.222_121720226bd6-104vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 15.235.192.195, skip-cert-verify: False, tls: False, type: vmess, uuid: b5a9c7bc-8bdb-4ff3-b03f-96b941c414c6, ws-opts: {path: /vmess},"name":"SG_15.235.192.195_121720226bd6-105vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 157.230.36.235, skip-cert-verify: False, tls: False, type: vmess, uuid: b484d576-b3e3-4ac5-b108-88a300dfe7e3, ws-opts: {path: /graphql},"name":"SG_157.230.36.235_121720226bd6-106vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 51.77.158.169, skip-cert-verify: False, tls: False, type: vmess, uuid: c92fd902-b5d3-4208-bb48-630b1c7babea, ws-opts: {path: /},"name":"FR_51.77.158.169_121720226bd6-107vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 25459, server: 65.109.129.15, skip-cert-verify: False, tls: False, type: vmess, uuid: ead3843c-d06a-4224-88db-8946e448de6b, ws-opts: {path: /},"name":"FI_65.109.129.15_121720226bd6-108vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 198.244.232.39, skip-cert-verify: False, tls: False, type: vmess, uuid: df46384b-1ad5-40a6-812e-48d60fb80283, ws-opts: {path: /},"name":"GB_198.244.232.39_121720226bd6-109vmess"}
+- {password: b640d791-ff83-4300-b509-c2a02f97f167, port: 80, server: uk1.trojanvh.xyz, skip-cert-verify: False, type: trojan,"name":"GB_51.38.71.175_121720226bd6-111trojan"}
+- {password: 011eb011-c68e-4f92-80eb-f9bbef707bef, port: 80, server: us2.trojanvh.xyz, skip-cert-verify: False, type: trojan,"name":"US_135.148.149.209_121720226bd6-114trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: gcoresg.sylu.cyou, skip-cert-verify: False, tls: True, type: vmess, uuid: 12e08256-da5d-4b1c-aeca-8c973ccceef8, ws-opts: {path: /Falling42gcoresgnode},"name":"SG_91.243.81.57_121720226bd6-115vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: do7.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /book},"name":"SG_43.159.50.39_121720226bd6-118vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: do9.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das321S8},"name":"SG_43.153.215.113_121720226bd6-119vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: xjp1.mvzaixian3.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das3218ssxc},"name":"SG_43.153.196.39_121720226bd6-120vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: do3.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das212},"name":"KR_144.24.80.0_121720226bd6-121vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 51.75.160.126, skip-cert-verify: False, tls: False, type: vmess, uuid: ed2c7ae0-e199-4f98-ada0-8f5fdc80ca8d, ws-opts: {path: /vmess},"name":"GB_51.75.160.126_12182022fd2e-124vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vau1.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"AU_172.105.255.4_12182022fd2e-126vmess"}
+- {password: xxoo, port: 443, server: 138.124.183.216, skip-cert-verify: true, type: trojan,"name":"US_138.124.183.216_121720226bd6-128trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 2096, server: 146.59.92.219, skip-cert-verify: true, tls: false, type: vmess, uuid: aca71b13-ec8a-466d-c28f-43516d3cf246, ws-opts: {path: /},"name":"FR_146.59.92.219_121720226bd6-131vmess"}
+- {password: f2117e99-9b6e-47fd-b0a9-634a0b15b998, port: 443, server: 146.56.189.146, skip-cert-verify: true, type: trojan,"name":"KR_146.56.189.146_121720226bd6-136trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 2096, server: sea.caspian.cf, skip-cert-verify: False, tls: True, type: vmess, uuid: 6135ebcc-6be1-46a6-9fc1-2264dcb1ed60, ws-opts: {path: /},"name":"FR_62.210.136.177_121520228278-137vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: ca.0112233.xyz, skip-cert-verify: true, tls: true, type: vmess, uuid: c3000e9d-bee7-4fdb-b312-dd07030f325d,"name":"US_2606:4700:3036::ac43:b41f_121420222387-139vmess"}
+- {password: vvip-periantara, port: 443, server: 38.9.140.66, skip-cert-verify: true, type: trojan,"name":"ID_38.9.140.66_121620224ce0-140trojan"}
+- {alterId: 0, cipher: auto, port: 29210, server: 161.35.47.70, skip-cert-verify: False, tls: False, type: vmess, uuid: 582e74ff-e708-41b2-e1c0-7393dbff0c90,"name":"GB_161.35.47.70_12172022afee-143vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: surongwei.eu.org, skip-cert-verify: true, tls: true, type: vmess, uuid: 6093eefb-7ab6-41df-aba0-d5fa58147e10, ws-opts: {path: /reffs7y26g0ua},"name":"KR_130.162.141.104_121720226bd6-145vmess"}
+- {alterId: 0, cipher: auto, network: tcp, port: 31990, server: FR-166-134.shoptunnel.live, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /},"name":"FR_163.172.166.134_121720226bd6-146vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: buyvm.imkcp.eu.org, skip-cert-verify: False, tls: True, type: vmess, uuid: 6fb9a750-55b8-4e6e-857b-242b795399dc, ws-opts: {path: /imkcpyyds},"name":"US_2606:4700:3034::ac43:aaa9_121720226bd6-147vmess"}
+- {alterId: 10, cipher: auto, port: 8189, server: hk1vdf-node.aiqiche123.com, tls: true, type: vmess, uuid: a90597c1-bab3-4217-ad6f-0838675c8638,"name":"US_206.119.112.6_12182022bebb-149vmess"}
+- {alterId: 0, cipher: auto, port: 1069, server: 152.69.197.60, skip-cert-verify: False, tls: False, type: vmess, uuid: ac8e26fe-8150-4b60-ae64-82fc77eba2cf,"name":"JP_152.69.197.60_12182022bebb-150vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 46075, server: 129.150.44.64, skip-cert-verify: true, type: vmess, uuid: da257e73-f02b-45ab-9916-7baf154c47a3, ws-opts: {path: /jhndsmlanj11223},"name":"SG_129.150.44.64_12182022bebb-151vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 152.69.230.170, skip-cert-verify: true, type: vmess, uuid: 6aa24ded-5f15-48c7-8cba-3e2a159d6b77, ws-opts: {path: /},"name":"KR_152.69.230.170_12182022bebb-152vmess"}
+- {password: d6530eef-8d92-475f-9d28-e1a36ad7f441, port: 443, server: sgt3.sshocean.net, skip-cert-verify: False, type: trojan,"name":"SG_15.235.163.25_12182022bebb-153trojan"}
+- {alterId: 0, cipher: auto, http-opts: {headers: {Host: [124.221.131.176]}, method: GET, path: [/]}, network: http, port: 50797, server: 124.221.131.176, tls: false, type: vmess, uuid: fa4b6f8f-1264-45ec-9651-6160c12cabc5,"name":"CN_124.221.131.176_11292022e5f5-156vmess"}
+- {alterId: 64, cipher: auto, port: 50002, server: 47.104.237.32, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_47.104.237.32_112420222c78-157vmess"}
+- {alterId: 64, cipher: auto, port: 50002, server: 39.103.165.178, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_39.103.165.178_12042022c941-158vmess"}
+- {alterId: 64, cipher: auto, port: 50002, server: 139.186.198.63, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_139.186.198.63_120820222f00-159vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 13156, server: 106.12.168.13, skip-cert-verify: False, tls: False, type: vmess, uuid: 9bf4cba4-9e9e-4da4-8e65-f7c487c539df, ws-opts: {path: /},"name":"CN_106.12.168.13_121420222387-160vmess"}
+- {alterId: 0, cipher: auto, port: 31372, server: 106.55.234.95, tls: false, type: vmess, uuid: 374d3519-455c-45b8-e3b1-0e2e9fcf4411,"name":"CN_106.55.234.95_12172022afee-161vmess"}
+- {alterId: 64, cipher: auto, port: 50002, server: 112.132.215.189, tls: false, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24,"name":"CN_112.132.215.189_12162022a2ef-162vmess"}
+- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 134.195.198.106, type: ss,"name":"CA_134.195.198.106_11292022e5f5-163ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 103.157.96.103, type: ss,"name":"ID_103.157.96.103_121120226507-164ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 104.149.149.158, type: ss,"name":"US_104.149.149.158_1209202204f1-165ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.223.96, type: ss,"name":"SG_51.79.223.96_121120226507-166ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 194.156.230.46, type: ss,"name":"JP_194.156.230.46_121120226507-167ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 81.90.190.175, type: ss,"name":"JP_81.90.190.175_121120226507-168ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 185.225.19.64, type: ss,"name":"RO_185.225.19.64_121120226507-169ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 172.107.199.110, type: ss,"name":"US_172.107.199.110_121120226507-170ss"}
+- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 185.153.180.10, type: ss,"name":"US_185.153.180.10_12122022e712-171ss"}
+- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 185.172.113.58, type: ss,"name":"JP_185.172.113.58_1212202288a2-172ss"}
+- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 83.229.73.120, type: ss,"name":"IL_83.229.73.120_12132022805d-173ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 812, server: 217.197.161.136, type: ss,"name":"SG_217.197.161.136_121320226dd7-174ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 51.79.145.10, type: ss,"name":"SG_51.79.145.10_121320226dd7-175ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 79.133.43.126, type: ss,"name":"AT_79.133.43.126_121120226507-178ss"}
+- {cipher: aes-256-cfb, password: "9344665077", port: 50006, server: 5.181.4.239, type: ss,"name":"HK_5.181.4.239_121120226507-179ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 185.162.125.91, type: ss,"name":"IL_185.162.125.91_121120226507-180ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.241.247, type: ss,"name":"SG_51.79.241.247_12132022805d-182ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 45.136.198.122, type: ss,"name":"BG_45.136.198.122_112820225238-183ss"}
+- {cipher: aes-256-cfb, password: "9344665077", port: 50006, server: 123.204.4.18, type: ss,"name":"TW_123.204.4.18_12162022a2ef-184ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 123.253.34.235, type: ss,"name":"MY_123.253.34.235_121320226dd7-186ss"}
+- {cipher: chacha20-ietf-poly1305, password: BpXVyHLdIGHv2iT5Vo6nY4f7KDZW, port: 9000, server: 93.114.194.214, type: ss,"name":"RO_93.114.194.214_12162022a2ef-188ss"}
+- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, password: eAokbaDN6, port: 8081, protocol: origin, server: jp-am48-6.eqnode.net, type: ssr,"name":"JP_54.92.24.42_12172022afee-190ssr"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 167.88.63.82, type: ss,"name":"US_167.88.63.82_12122022e712-191ss"}
+- {cipher: aes-256-cfb, obfs: http_simple, obfs-param: "", password: azadi2030, port: 11909, protocol: origin, protocol-param: "", server: 167.99.214.62, type: ssr,"name":"NL_167.99.214.62_121520221f2b-192ssr"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: ak1444.free.www.outline.network, type: ss,"name":"NL_91.232.105.253_121520221f2b-193ss"}
+- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: dongtaiwang.com, port: 10002, protocol: auth_chain_a, protocol-param: "", server: ssrfree.zhujicn2.net, type: ssr,"name":"US_45.63.60.105_12172022afee-194ssr"}
+- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: dongtaiwang.com, port: 10002, protocol: auth_chain_a, protocol-param: "", server: 45.63.52.54, type: ssr,"name":"US_45.63.52.54_12172022afee-195ssr"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 88.119.174.197, type: ss,"name":"US_88.119.174.197_121420227f0e-196ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr05, port: 254, server: 144.168.58.170, type: ss,"name":"US_144.168.58.170_121620221e3a-197ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: 167.88.61.213, type: ss,"name":"US_167.88.61.213_121720225653-199ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 139.99.123.85, type: ss,"name":"SG_139.99.123.85_121720226bd6-200ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 51.79.173.183, type: ss,"name":"SG_51.79.173.183_121720226bd6-201ss"}
+- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 172.99.190.7, type: ss,"name":"GB_172.99.190.7_121620224ce0-203ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.114.114.49, type: ss,"name":"US_38.114.114.49_1212202288a2-205ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 62.109.22.113, type: ss,"name":"RU_62.109.22.113_121320226dd7-206ss"}
+- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 5.183.101.229, type: ss,"name":"US_5.183.101.229_12132022805d-207ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.121.43.65, type: ss,"name":"US_38.121.43.65_12172022afee-210ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 51.79.166.171, type: ss,"name":"SG_51.79.166.171_121720226bd6-211ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 141.164.57.47, type: ss,"name":"KR_141.164.57.47_12182022bebb-212ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 34303, server: 135.181.235.21, skip-cert-verify: False, tls: False, type: vmess, uuid: 1ce52047-ad8a-4ef3-cdcd-46ff29b262fb, ws-opts: {path: /},"name":"FI_135.181.235.21_12162022a2ef-232vmess"}
+- {alterId: 0, cipher: auto, network: tcp, port: 37121, server: 146.56.133.109, skip-cert-verify: true, tls: true, type: vmess, uuid: 575e4d92-1056-44c2-8cac-75ef1c859ad5, ws-opts: {path: /},"name":"KR_146.56.133.109_121420222387-233vmess"}
+- {alterId: 0, cipher: auto, port: 18050, server: 146.56.155.70, skip-cert-verify: False, tls: False, type: vmess, uuid: f9771c19-c91c-41b5-9064-8768b51cec6d,"name":"KR_146.56.155.70_12152022d914-234vmess"}
+- {alterId: 64, cipher: auto, network: ws, port: 443, server: 202.79.171.157, skip-cert-verify: true, tls: true, type: vmess, uuid: fb3583a3-7717-4fe5-9146-3301861f9f41, ws-opts: {path: /path/243535322906},"name":"SG_202.79.171.157_12172022afee-235vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 8880, server: 174.138.25.187, skip-cert-verify: true, type: vmess, uuid: a5c804aa-8a4d-4fd2-97a1-4f0cc1384953, ws-opts: {path: /hkaa0},"name":"SG_174.138.25.187_12172022afee-237vmess"}
+- {password: 3a2c0c6c-9ee5-c05f-c951-fcd73831983e, port: 3052, server: 138.2.115.240, skip-cert-verify: true, type: trojan,"name":"KR_138.2.115.240_12172022afee-238trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 38.54.93.130, skip-cert-verify: False, tls: False, type: vmess, uuid: 0cc9a7d6-75f6-4c05-9da3-83aa9dcc4845, ws-opts: {path: /sshocean},"name":"KH_38.54.93.130_12162022a2ef-239vmess"}
+- {alterId: 0, cipher: auto, http-opts: {method: GET, path: [/]}, network: http, port: 80, server: 168.138.206.141, skip-cert-verify: true, type: vmess, uuid: ad05e01f-c2c0-41da-e79c-ff68237317f7,"name":"JP_168.138.206.141_121720226bd6-240vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 28164, server: 165.227.175.88, skip-cert-verify: true, type: vmess, uuid: eba8ccf5-5ab9-4b6b-de4b-83ab920c1005, ws-opts: {path: /},"name":"DE_165.227.175.88_121720226bd6-241vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: xjp4h.mayaa.ml, skip-cert-verify: true, tls: true, type: vmess, uuid: 82d5ea73-8002-4319-cd3c-29d1560bd290, ws-opts: {path: /dsadsa1dsadsa33434},"name":"US_2606:4700:3036::6815:13d4_121720226bd6-243vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: de100.tehvp.xyz, skip-cert-verify: False, tls: True, type: vmess, uuid: 9bd493b0-f91e-4059-ef7c-9e2b3da5f26d, ws-opts: {path: /},"name":"US_2606:4700:3030::ac43:9c67_121720226bd6-244vmess"}
+- {password: xxoo, port: 443, server: 194.156.99.39, skip-cert-verify: true, type: trojan,"name":"CN_194.156.99.39_121720225653-261trojan"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5000, server: 85.208.108.92, type: ss,"name":"JP_85.208.108.92_121120226507-264ss"}
+- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8008, server: 54.36.174.181, type: ss,"name":"FR_54.36.174.181_121520228278-265ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 111.90.146.193, type: ss,"name":"MY_111.90.146.193_121720225653-268ss"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 38.107.226.49, type: ss,"name":"US_38.107.226.49_12162022a2ef-269ss"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 38.114.114.143, type: ss,"name":"US_38.114.114.143_121720226bd6-270ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 807, server: 162.251.61.221, type: ss,"name":"US_162.251.61.221_121720225653-271ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 45.136.196.45, type: ss,"name":"ES_45.136.196.45_120720226ca2-272ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 808, server: 169.197.143.15, type: ss,"name":"US_169.197.143.15_121120226507-273ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 195.54.170.70, type: ss,"name":"NO_195.54.170.70_11092022ffd3-274ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 167.88.61.175, type: ss,"name":"US_167.88.61.175_12122022e712-275ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 85.208.108.20, type: ss,"name":"JP_85.208.108.20_121220223940-276ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 38.121.43.71, type: ss,"name":"US_38.121.43.71_12122022e712-278ss"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 172.99.190.61, type: ss,"name":"GB_172.99.190.61_121420222387-279ss"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 38.121.43.97, type: ss,"name":"US_38.121.43.97_121220223940-281ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 169.197.141.187, type: ss,"name":"US_169.197.141.187_12132022805d-282ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 85.208.108.21, type: ss,"name":"JP_85.208.108.21_121420222387-283ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 162.251.61.47, type: ss,"name":"US_162.251.61.47_121420222387-284ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 167.88.63.44, type: ss,"name":"US_167.88.63.44_121420227f0e-285ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr03, port: 254, server: 172.96.192.58, type: ss,"name":"US_172.96.192.58_121420227f0e-286ss"}
+- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.41.174, type: ss,"name":"SG_139.162.41.174_121420227f0e-287ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.103.176.29, type: ss,"name":"AR_190.103.176.29_121420227f0e-288ss"}
+- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 51.79.177.159, type: ss,"name":"SG_51.79.177.159_121420227f0e-289ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 194.26.213.155, type: ss,"name":"IE_194.26.213.155_121420227f0e-290ss"}
+- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1035, server: 38.64.138.53, type: ss,"name":"US_38.64.138.53_121420227f0e-291ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 217.182.198.219, type: ss,"name":"DE_217.182.198.219_121420227f0e-292ss"}
+- {cipher: chacha20-ietf-poly1305, password: pydQILh06AvJ, port: 27092, server: 13.49.241.14, type: ss,"name":"SE_13.49.241.14_121420227f0e-293ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.107.216, type: ss,"name":"US_38.91.107.216_121420227f0e-294ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.102.124, type: ss,"name":"US_38.91.102.124_121420227f0e-295ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 38.91.106.75, type: ss,"name":"US_38.91.106.75_121420227f0e-296ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.86.135.36, type: ss,"name":"US_38.86.135.36_121420222387-297ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.121.43.204, type: ss,"name":"US_38.121.43.204_12142022f668-298ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr06, port: 254, server: 95.169.4.174, type: ss,"name":"US_95.169.4.174_12152022d914-299ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 9090, server: 193.108.118.30, type: ss,"name":"DE_193.108.118.30_12152022d914-300ss"}
+- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.236.79, type: ss,"name":"GB_139.162.236.79_12152022d914-301ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 38.114.114.139, type: ss,"name":"US_38.114.114.139_12152022d914-303ss"}
+- {cipher: aes-128-cfb, password: shadowsocks, port: 443, server: 156.146.62.160, type: ss,"name":"CH_156.146.62.160_121520228278-304ss"}
+- {cipher: chacha20-ietf-poly1305, password: bhcoDfavlz5r, port: 855, server: 95.142.161.114, type: ss,"name":"FR_95.142.161.114_121520228278-305ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 196.247.59.154, type: ss,"name":"CA_196.247.59.154_121220223940-307ss"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 169.197.143.232, type: ss,"name":"US_169.197.143.232_12132022805d-308ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.91.107.37, type: ss,"name":"US_38.91.107.37_121420222387-309ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 38.68.135.19, type: ss,"name":"US_38.68.135.19_121420227f0e-310ss"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 193.108.117.75, type: ss,"name":"DE_193.108.117.75_121420227f0e-311ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 163.172.110.153, type: ss,"name":"FR_163.172.110.153_121420227f0e-312ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 196.247.59.156, type: ss,"name":"CA_196.247.59.156_12152022d914-313ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 78.129.253.9, type: ss,"name":"GB_78.129.253.9_121520228278-314ss"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 4444, server: 145.239.6.202, type: ss,"name":"FR_145.239.6.202_121520221f2b-315ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.120.231.45, type: ss,"name":"CO_190.120.231.45_121520221f2b-317ss"}
+- {cipher: aes-256-cfb, password: FAdUvMJUq5vDgKEq, port: 9006, server: 213.183.59.231, type: ss,"name":"NL_213.183.59.231_121520221f2b-318ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 62.210.222.195, type: ss,"name":"FR_62.210.222.195_121520221f2b-319ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 169.197.142.48, type: ss,"name":"US_169.197.142.48_121520221f2b-320ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 134.195.196.19, type: ss,"name":"CA_134.195.196.19_121420227f0e-323ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 149.202.82.172, type: ss,"name":"FR_149.202.82.172_12152022d914-325ss"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: 85.208.108.18, type: ss,"name":"JP_85.208.108.18_121520228278-326ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 85.208.108.94, type: ss,"name":"JP_85.208.108.94_121520228278-327ss"}
+- {cipher: aes-256-cfb, password: f63gg8EruDnUrmz4, port: 9010, server: 213.183.59.209, type: ss,"name":"NL_213.183.59.209_121520221f2b-328ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 85.208.108.19, type: ss,"name":"JP_85.208.108.19_121520221f2b-330ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 5.183.101.230, type: ss,"name":"US_5.183.101.230_121620224ce0-331ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr05, port: 246, server: 172.96.192.100, type: ss,"name":"US_172.96.192.100_121620224ce0-332ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 169.197.141.14, type: ss,"name":"US_169.197.141.14_121620224ce0-333ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 38.143.66.55, type: ss,"name":"US_38.143.66.55_12122022e712-334ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.68.135.239, type: ss,"name":"US_38.68.135.239_12142022f668-336ss"}
+- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 38.68.134.48, type: ss,"name":"US_38.68.134.48_12152022d914-337ss"}
+- {cipher: chacha20-ietf-poly1305, password: 811c0115-faea-4cea-8186-5eef384ccb8a, port: 7445, server: 13.208.40.105, type: ss,"name":"JP_13.208.40.105_121520228278-338ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 38.107.226.238, type: ss,"name":"US_38.107.226.238_121520221f2b-339ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 8888, server: 85.208.108.91, type: ss,"name":"JP_85.208.108.91_121620224ce0-340ss"}
+- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 172.99.188.99, type: ss,"name":"NL_172.99.188.99_121620224ce0-341ss"}
+- {cipher: aes-256-cfb, password: "4415934295", port: 50004, server: 31.133.100.49, type: ss,"name":"IL_31.133.100.49_121620221e3a-342ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr05, port: 254, server: 172.96.204.170, type: ss,"name":"US_172.96.204.170_121620221e3a-343ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 169.197.141.39, type: ss,"name":"US_169.197.141.39_121620221e3a-345ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 85.208.108.61, type: ss,"name":"JP_85.208.108.61_121420222387-346ss"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 443, server: 38.86.135.27, type: ss,"name":"US_38.86.135.27_121520221f2b-348ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 134.195.196.107, type: ss,"name":"CA_134.195.196.107_121520221f2b-349ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.86.135.169, type: ss,"name":"US_38.86.135.169_121520221f2b-350ss"}
+- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8118, server: 38.91.106.51, type: ss,"name":"US_38.91.106.51_121620224ce0-351ss"}
+- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 85.208.108.60, type: ss,"name":"JP_85.208.108.60_121620224ce0-352ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 805, server: 134.195.196.143, type: ss,"name":"CA_134.195.196.143_121620221e3a-353ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 193.182.144.183, type: ss,"name":"IL_193.182.144.183_12162022a2ef-354ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: 85.208.108.62, type: ss,"name":"JP_85.208.108.62_12162022a2ef-355ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 145.239.1.100, type: ss,"name":"FR_145.239.1.100_121520221f2b-357ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 167.88.62.62, type: ss,"name":"US_167.88.62.62_121620224ce0-358ss"}
+- {cipher: aes-256-gcm, password: PCnnH6SQSnfoS27, port: 8091, server: 38.86.135.75, type: ss,"name":"US_38.86.135.75_12162022a2ef-359ss"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8080, server: 51.68.206.229, type: ss,"name":"GB_51.68.206.229_12172022afee-360ss"}
+- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1036, server: 79.133.109.56, type: ss,"name":"US_79.133.109.56_12172022afee-361ss"}
+- {cipher: aes-256-cfb, obfs: tls1.2_ticket_auth, obfs-param: "", password: sk80Likez95, port: 9595, protocol: auth_chain_a, protocol-param: Non%�, server: 154.53.48.30, type: ssr,"name":"US_154.53.48.30_12132022805d-362ssr"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 134.195.196.231, type: ss,"name":"CA_134.195.196.231_121420227f0e-363ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 38.111.114.246, type: ss,"name":"CA_38.111.114.246_121420227f0e-364ss"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 85.208.108.93, type: ss,"name":"JP_85.208.108.93_121420227f0e-365ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 807, server: 5.188.0.151, type: ss,"name":"US_5.188.0.151_121520228278-366ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 811, server: 51.161.118.38, type: ss,"name":"CA_51.161.118.38_121520228278-367ss"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7307, server: 38.114.114.19, type: ss,"name":"US_38.114.114.19_121520228278-368ss"}
+- {cipher: aes-256-cfb, password: 4R3hUfZ2FHhDmNcP, port: 9061, server: 213.183.59.229, type: ss,"name":"NL_213.183.59.229_121520221f2b-369ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 142.202.48.7, type: ss,"name":"US_142.202.48.7_121620224ce0-370ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.143.66.20, type: ss,"name":"US_38.143.66.20_121620224ce0-371ss"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 4444, server: 38.114.114.67, type: ss,"name":"US_38.114.114.67_12172022afee-372ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 167.88.61.50, type: ss,"name":"US_167.88.61.50_12172022afee-373ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 185.113.140.247, type: ss,"name":"PT_185.113.140.247_121720225653-374ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr03, port: 252, server: 144.168.60.70, type: ss,"name":"US_144.168.60.70_121720225653-375ss"}
+- {cipher: aes-256-cfb, password: "8460400130", port: 50003, server: 51.89.138.162, type: ss,"name":"GB_51.89.138.162_121720225653-376ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.75.136.34, type: ss,"name":"US_38.75.136.34_12162022a2ef-377ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 212.38.189.174, type: ss,"name":"GB_212.38.189.174_121420227f0e-378ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 803, server: 103.62.49.141, type: ss,"name":"NZ_103.62.49.141_121420227f0e-379ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 812, server: 38.68.134.135, type: ss,"name":"US_38.68.134.135_121420227f0e-380ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 134.195.196.149, type: ss,"name":"CA_134.195.196.149_121520221f2b-381ss"}
+- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8118, server: 38.143.66.99, type: ss,"name":"US_38.143.66.99_12162022a2ef-382ss"}
+- {cipher: aes-256-gcm, password: zDNVedRFPQexG9v, port: 6379, server: 85.208.108.59, type: ss,"name":"JP_85.208.108.59_12162022a2ef-383ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: 38.75.137.9, type: ss,"name":"US_38.75.137.9_12172022afee-384ss"}
+- {cipher: aes-256-gcm, password: cdBIDV42DCwnfIN, port: 8119, server: 38.91.102.30, type: ss,"name":"US_38.91.102.30_12172022afee-385ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 172.99.190.39, type: ss,"name":"GB_172.99.190.39_12172022afee-387ss"}
+- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6697, server: 167.88.63.59, type: ss,"name":"US_167.88.63.59_121720225653-388ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.91.107.66, type: ss,"name":"US_38.91.107.66_121720225653-389ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 801, server: 81.90.189.49, type: ss,"name":"SG_81.90.189.49_121720226bd6-390ss"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 5500, server: 38.91.106.136, type: ss,"name":"US_38.91.106.136_121720226bd6-391ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 192.71.244.150, type: ss,"name":"SI_192.71.244.150_121720226bd6-392ss"}
+- {cipher: chacha20-ietf-poly1305, password: shwozEjWey, port: 444, server: 176.97.67.103, type: ss,"name":"AE_176.97.67.103_121720226bd6-393ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 38.54.33.116, type: ss,"name":"TH_38.54.33.116_121720226bd6-394ss"}
+- {cipher: aes-256-cfb, password: bwhskrskr06, port: 253, server: 93.179.112.70, type: ss,"name":"US_93.179.112.70_121720226bd6-395ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 81.90.189.52, type: ss,"name":"SG_81.90.189.52_121720226bd6-396ss"}
+- {cipher: aes-256-gcm, password: XKFKl2rULjIp74, port: 8009, server: 38.68.134.191, type: ss,"name":"US_38.68.134.191_121720226bd6-397ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3389, server: 172.99.190.87, type: ss,"name":"GB_172.99.190.87_121720226bd6-398ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 185.164.35.9, type: ss,"name":"BA_185.164.35.9_121720226bd6-399ss"}
+- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.5.19, type: ss,"name":"SG_139.162.5.19_121720226bd6-400ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 185.231.233.130, type: ss,"name":"PT_185.231.233.130_121720226bd6-401ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 213.174.129.4, type: ss,"name":"US_213.174.129.4_121720226bd6-402ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 2.56.178.201, type: ss,"name":"US_2.56.178.201_121720226bd6-405ss"}
+- {password: da777aae-defb-41d0-a183-2c27da2b4677, port: 443, server: 150.230.96.103, skip-cert-verify: true, type: trojan,"name":"JP_150.230.96.103_121720226bd6-407trojan"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: 172.99.188.71, type: ss,"name":"NL_172.99.188.71_121420227f0e-408ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 134.195.198.95, type: ss,"name":"CA_134.195.198.95_121520221f2b-409ss"}
+- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6679, server: 167.88.62.68, type: ss,"name":"US_167.88.62.68_121520221f2b-410ss"}
+- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6697, server: 38.91.101.159, type: ss,"name":"US_38.91.101.159_121620221e3a-411ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5600, server: 38.75.136.21, type: ss,"name":"US_38.75.136.21_12162022a2ef-412ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 37.120.147.230, type: ss,"name":"US_37.120.147.230_12162022a2ef-413ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 193.239.87.134, type: ss,"name":"US_193.239.87.134_12172022afee-414ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 804, server: 134.195.196.178, type: ss,"name":"CA_134.195.196.178_121720226bd6-415ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 134.195.196.230, type: ss,"name":"CA_134.195.196.230_121720226bd6-416ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 810, server: 148.66.56.99, type: ss,"name":"HK_148.66.56.99_121720226bd6-417ss"}
+- {cipher: aes-128-cfb, password: shadowsocks, port: 443, server: 109.201.152.181, type: ss,"name":"NL_109.201.152.181_12182022fd2e-418ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 190.120.229.28, type: ss,"name":"PE_190.120.229.28_12182022fd2e-419ss"}
+- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1034, server: 38.91.101.242, type: ss,"name":"US_38.91.101.242_12182022fd2e-420ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 42517, server: 52.79.182.230, skip-cert-verify: False, tls: False, type: vmess, uuid: b5b5209f-bcbd-4bac-b044-0d179698c62d, ws-opts: {path: /},"name":"KR_52.79.182.230_12182022fd2e-421vmess"}
+- {cipher: aes-256-cfb, password: 4R3hUfZ2FHhDmNcP, port: 9061, server: 213.183.53.221, type: ss,"name":"RU_213.183.53.221_12182022fd2e-422ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 804, server: 93.186.201.124, type: ss,"name":"DE_93.186.201.124_121520221f2b-423ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7002, server: 193.108.118.36, type: ss,"name":"DE_193.108.118.36_121420227f0e-424ss"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 51.77.53.200, type: ss,"name":"PL_51.77.53.200_121420227f0e-427ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: 38.64.138.145, type: ss,"name":"US_38.64.138.145_12152022d914-429ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.114.114.69, type: ss,"name":"US_38.114.114.69_121520221f2b-430ss"}
+- {cipher: aes-256-gcm, password: RexnBgU7EV5ADxG, port: 7001, server: 38.114.114.104, type: ss,"name":"US_38.114.114.104_121620221e3a-431ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 2053, server: v2ray.wefuckgfw.ga, skip-cert-verify: true, tls: true, type: vmess, uuid: ce3f0dd3-8a04-4daa-9416-e67c5d42083a, ws-opts: {path: /DQsafRJn/},"name":"US_2606:4700:3037::ac43:b6b1_12162022a2ef-433vmess"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 38.91.100.207, type: ss,"name":"US_38.91.100.207_12172022afee-434ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 8888, server: 85.208.108.22, type: ss,"name":"JP_85.208.108.22_121720225653-435ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 803, server: 185.104.184.78, type: ss,"name":"DK_185.104.184.78_121720225653-436ss"}
+- {alterId: 0, cipher: auto, port: 32586, server: 129.159.41.233, tls: false, type: vmess, uuid: 341a9182-c423-499c-c46e-d17838b29037,"name":"US_129.159.41.233_121720226bd6-438vmess"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: 38.68.135.18, type: ss,"name":"US_38.68.135.18_121720226bd6-439ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 38.91.102.72, type: ss,"name":"US_38.91.102.72_121720226bd6-442ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 135.125.244.103, type: ss,"name":"FR_135.125.244.103_12182022bebb-449ss"}
+- {cipher: aes-256-cfb, password: 1e5111699c45496da84112f35db665c4, port: 29332, server: 165.232.169.142, type: ss,"name":"SG_165.232.169.142_12182022bebb-452ss"}
+- {alterId: 0, cipher: auto, network: tcp, port: 31990, server: 146.185.248.113, skip-cert-verify: true, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b, ws-opts: {path: /ray},"name":"AM_146.185.248.113_12182022bebb-454vmess"}
+- {password: f39bd244-f5fe-415c-8b98-a1e5250bf178, port: 443, server: 129.146.255.158, skip-cert-verify: true, type: trojan,"name":"US_129.146.255.158_12182022bebb-455trojan"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 193.108.117.24, type: ss,"name":"DE_193.108.117.24_12182022bebb-456ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 38.75.136.135, type: ss,"name":"US_38.75.136.135_12182022bebb-457ss"}
+- {cipher: aes-256-cfb, password: ZET59LF6DvCC8KVt, port: 9005, server: 213.183.59.185, type: ss,"name":"NL_213.183.59.185_12182022bebb-458ss"}
+- {alterId: 64, cipher: auto, network: ws, port: 443, server: 67.21.72.44, skip-cert-verify: true, tls: true, type: vmess, uuid: 2566d00f-218c-48f7-9a36-13d3d6f1a724, ws-opts: {path: /path/120208301422},"name":"US_67.21.72.44_12182022bebb-461vmess"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 3.125.45.20, type: ss,"name":"DE_3.125.45.20_12182022bebb-463ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 38.54.33.118, type: ss,"name":"TH_38.54.33.118_12182022bebb-464ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vsg1.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"SG_139.177.190.86_121620224ce0-469vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vus2.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"US_173.230.144.249_121720226bd6-470vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: do5.yyhm9.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 776352ac-0a91-3d71-8450-d3b3a2b43c73, ws-opts: {path: /das321},"name":"SG_43.153.195.103_121720226bd6-471vmess"}
+- {cipher: aes-256-gcm, password: KixLvKzwjekG00rm, port: 8000, server: ak1488.free.www.outline.network, type: ss,"name":"US_167.88.61.14_121620221e3a-475ss"}
+- {password: e8c1ab3c-89b3-4933-92df-682e6dce7819, port: 443, server: jgwxn4.gaox.ml, skip-cert-verify: False, type: trojan,"name":"AU_152.67.98.30_12182022bebb-477trojan"}
+- {password: 02e653c9-7c93-46a9-999d-11834bd0c577, port: 443, server: jgwld1.gaox.ml, skip-cert-verify: true, type: trojan,"name":"GB_132.145.51.172_121720226bd6-481trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 2086, server: buyvm.oppo.quest, skip-cert-verify: true, type: vmess, uuid: e91c45c9-2c0f-46a9-c56d-21663b9e2c18, ws-opts: {path: /aries},"name":"LU_107.189.28.253_12182022fd2e-482vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vjp3.0bad.com, skip-cert-verify: true, tls: true, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"JP_172.105.228.53_121720226bd6-493vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: sg-lb.vhax.net, skip-cert-verify: False, tls: False, type: vmess, uuid: 6fea1649-425b-4092-bf53-29792152c925, ws-opts: {path: /sshkit/Ertusg86/635014638c264/},"name":"SG_15.235.147.186_121520228278-496vmess"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: ak1342.free.www.outline.network, type: ss,"name":"DE_193.108.118.34_121420227f0e-497ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 808, server: ak1405.free.www.outline.network, type: ss,"name":"SG_217.197.161.138_121420227f0e-537ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: ak1532.free.www.outline.network, type: ss,"name":"US_167.88.63.79_121420227f0e-542ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: youtube-bai-piao-wang-zhe-usa.98848.xyz, skip-cert-verify: False, tls: True, type: vmess, uuid: d1478689-439c-4590-b7ce-36e786a02dc3, ws-opts: {path: /YouTube@bai-piao-wang-zhe_vws},"name":"US_107.181.161.163_12152022d914-548vmess"}
+- {alterId: 0, cipher: auto, port: 31990, server: 95.174.68.218, skip-cert-verify: False, tls: False, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b,"name":"AE_95.174.68.218_121520228278-559vmess"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: ak1552.free.www.outline.network, type: ss,"name":"FR_195.154.200.150_121520221f2b-566ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: ak1458.free.www.outline.network, type: ss,"name":"US_38.91.102.74_121520221f2b-577ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 809, server: 38.91.107.225, type: ss,"name":"US_38.91.107.225_121620221e3a-596ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 8888, server: 85.208.108.58, type: ss,"name":"JP_85.208.108.58_12162022a2ef-628ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 800, server: 38.68.134.196, type: ss,"name":"US_38.68.134.196_12162022a2ef-638ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 5601, server: ak1415.free.www.outline.network, type: ss,"name":"US_38.143.66.64_12162022a2ef-649ss"}
+- {alterId: 64, cipher: auto, port: 20081, server: 138.2.44.211, skip-cert-verify: False, tls: False, type: vmess, uuid: 593b8525-0c48-4b0f-d9af-2d73a9148973,"name":"JP_138.2.44.211_12162022a2ef-650vmess"}
+- {cipher: aes-256-gcm, password: pKEW8JPByTVTLtM, port: 4444, server: 167.88.63.99, type: ss,"name":"US_167.88.63.99_12162022a2ef-653ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5004, server: 85.208.108.90, type: ss,"name":"JP_85.208.108.90_12172022afee-663ss"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 803, server: 193.176.86.190, type: ss,"name":"DE_193.176.86.190_12172022afee-665ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 194.233.81.125, tls: false, type: vmess, uuid: 0baaf014-af04-4028-be53-f5c75bb276ae, ws-opts: {path: /vmess},"name":"SG_194.233.81.125_121720225653-702vmess"}
+- {password: d76294c5-a31f-408d-ba0b-89880107cab5, port: 443, server: aleph-tj015.thatfreeservicewhicheveryoneuse.uk, skip-cert-verify: False, type: trojan,"name":"DE_5.75.152.12_121720225653-705trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: kz1.v2rayserv.com, skip-cert-verify: true, type: vmess, uuid: 2e9b8445-2eed-48e6-89f2-f8b20cbb6e33, ws-opts: {path: /},"name":"KZ_45.159.250.210_121720225653-717vmess"}
+- {cipher: chacha20-ietf-poly1305, password: G!yBwPWH3Vao, port: 805, server: 51.159.30.61, type: ss,"name":"FR_51.159.30.61_121720225653-725ss"}
+- {cipher: aes-256-gcm, password: TEzjfAYq2IjtuoS, port: 6679, server: 82.145.41.125, type: ss,"name":"GB_82.145.41.125_121720225653-729ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 103.167.196.48, skip-cert-verify: true, type: vmess, uuid: 56716a96-a265-448c-8969-03e626889580, ws-opts: {path: /},"name":"VN_103.167.196.48_121720226bd6-736vmess"}
+- {alterId: 0, cipher: auto, port: 31990, server: SG-244-255.shoptunnel.live, skip-cert-verify: False, tls: False, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b,"name":"SG_157.230.244.255_121720226bd6-761vmess"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 167.88.61.119, type: ss,"name":"US_167.88.61.119_121720226bd6-769ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2375, server: ak1417.free.www.outline.network, type: ss,"name":"DE_193.108.118.79_121720226bd6-781ss"}
+- {cipher: aes-256-gcm, password: Y6R9pAtvxxzmGC, port: 3306, server: 38.75.136.102, type: ss,"name":"US_38.75.136.102_121720226bd6-782ss"}
+- {password: 8d2d5953-d649-4034-94f2-72f2df2623da, port: 443, server: 168.138.44.176, skip-cert-verify: true, type: trojan,"name":"JP_168.138.44.176_121720226bd6-787trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: 51fly99.win, skip-cert-verify: False, tls: True, type: vmess, uuid: fefe2ff7-153c-41a8-aa04-e8d2e641505c, ws-opts: {path: /myblog},"name":"US_2606:4700:3031::6815:740_121720226bd6-800vmess"}
+- {password: cb43b7c2-b744-41c5-bcc2-fd7467b332cf, port: 443, server: jgwxn3.gaox.ml, skip-cert-verify: true, type: trojan,"name":"AU_140.238.205.173_12182022bebb-859trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 18.143.123.35, skip-cert-verify: true, type: vmess, uuid: 68df4838-46d0-4b5b-c3f0-a40ec7063245, ws-opts: {path: /},"name":"SG_18.143.123.35_121820226c7d-925vmess"}
+- {password: "123456", port: 443, server: 194.233.88.109, skip-cert-verify: true, type: trojan,"name":"SG_194.233.88.109_121820226c7d-926trojan"}
+- {password: 05742120-ce23-4cc8-88f5-6d221ce45bf4, port: 443, server: 129.146.242.130, skip-cert-verify: true, type: trojan,"name":"US_129.146.242.130_121820226c7d-935trojan"}
+- {alterId: 64, cipher: auto, network: ws, port: 443, server: 67.21.72.41, skip-cert-verify: true, tls: true, type: vmess, uuid: 2566d00f-218c-48f7-9a36-13d3d6f1a724, ws-opts: {path: /path/173418141123},"name":"US_67.21.72.41_121820226c7d-936vmess"}
+- {password: c09eb137-bf68-4658-84e0-102d94b74168, port: 443, server: 150.230.217.213, skip-cert-verify: true, type: trojan,"name":"JP_150.230.217.213_121820226c7d-938trojan"}
+- {alterId: 64, cipher: auto, network: ws, port: 443, server: 142.0.135.66, skip-cert-verify: true, tls: true, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24, ws-opts: {path: /path/243535322906},"name":"US_142.0.135.66_121820226c7d-940vmess"}
+- {password: bb5b1337-fa9e-4e00-b8c6-1110e626171d, port: 443, server: sg-01.tiktokcdn.top, skip-cert-verify: False, type: trojan,"name":"SG_159.223.89.239_121820226c7d-956trojan"}
+- {password: Sp3eDVp, port: 443, server: content-provider6.cdn-delivery.akamaicd.com, skip-cert-verify: true, type: trojan,"name":"FR_91.121.225.119_121820226c7d-959trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: petal.ga, skip-cert-verify: true, tls: true, type: vmess, uuid: b744f5cc-eab2-d2cd-f477-76646d17987f, ws-opts: {path: /petalvws},"name":"HK_20.255.59.85_121820226c7d-970vmess"}
+- {cipher: aes-256-cfb, password: eIW0Dnk69454e6nSwuspv9DmS201tQ0D, port: 8099, server: 139.162.128.90, type: ss,"name":"DE_139.162.128.90_121820226c7d-974ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 195.123.245.50, type: ss,"name":"CZ_195.123.245.50_121820226c7d-976ss"}
+- {cipher: chacha20-ietf-poly1305, password: Neavloims, port: 444, server: 194.38.23.137, type: ss,"name":"UA_194.38.23.137_121820226c7d-994ss"}
+- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1034, server: 135.125.150.55, type: ss,"name":"FR_135.125.150.55_121820226c7d-997ss"}
+- {cipher: chacha20-ietf-poly1305, password: )1N1E6v0SU_rGTpg, port: 1035, server: 92.223.93.233, type: ss,"name":"IT_92.223.93.233_121820226c7d-999ss"}
+- {cipher: aes-256-cfb, password: 7d99ae502227454ea998d71e4b62a388, port: 23335, server: 165.22.73.126, type: ss,"name":"DE_165.22.73.126_121820226c7d-1000ss"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 37.252.5.234, type: ss,"name":"EE_37.252.5.234_121820226c7d-1007ss"}
+- {cipher: aes-256-cfb, password: "3135771619", port: 50000, server: 37.235.49.146, type: ss,"name":"IS_37.235.49.146_121820226c7d-1009ss"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 38.91.107.72, type: ss,"name":"US_38.91.107.72_121820226c7d-1010ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9102, server: 38.68.134.9, type: ss,"name":"US_38.68.134.9_121820226c7d-1016ss"}
+- {password: 006baa3f-4bc3-4915-b60d-c8c5dae11a11, port: 443, server: 152.67.190.183, skip-cert-verify: true, type: trojan,"name":"IN_152.67.190.183_121820226c7d-1047trojan"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: sun.prxpro.cc, skip-cert-verify: true, type: vmess, uuid: 4ddd24d6-d901-5e5f-9a7c-080015c2e246, ws-opts: {path: /p3573l6m92h1ham3q23t},"name":"US_2606:4700:3033::6815:1481_121820226c7d-1052vmess"}
+- {cipher: aes-256-gcm, password: g5MeD6Ft3CWlJId, port: 5003, server: 169.197.142.187, type: ss,"name":"US_169.197.142.187_121820226c7d-1055ss"}
+- {cipher: aes-256-gcm, password: e4FCWrgpkji3QY, port: 9101, server: ak1446.free.www.outline.network, type: ss,"name":"US_38.91.102.123_121820226c7d-1070ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: 152.67.218.38, skip-cert-verify: False, tls: False, type: vmess, uuid: b5e9480a-b7aa-40a4-f9a7-5299b5e363b4, ws-opts: {path: /},"name":"KR_152.67.218.38_121820226c7d-1102vmess"}
+- {cipher: aes-256-gcm, password: FoOiGlkAA9yPEGP, port: 7306, server: 142.202.48.52, type: ss,"name":"US_142.202.48.52_121820226c7d-1105ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 443, server: vjp1.0bad.com, skip-cert-verify: False, tls: True, type: vmess, uuid: 927094d3-d678-4763-8591-e240d0bcae87, ws-opts: {path: /chat},"name":"JP_172.105.211.90_121820226c7d-1119vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 8443, server: dosg.gmlovebaipiao.tech, skip-cert-verify: true, tls: true, type: vmess, uuid: 706596c5-2315-41e9-c97b-5a4d32ffd5e6, ws-opts: {path: /GenshinMinecraft},"name":"US_2606:4700:3030::6815:352c_121820226c7d-1125vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 10009, server: ah.yd01.paopaocloud.cyou, skip-cert-verify: true, tls: true, type: vmess, uuid: d8c5b486-84bb-3887-a1d9-07455ea608f2, ws-opts: {path: /v2ray},"name":"HK_20.205.35.119_121820226c7d-1138vmess"}
+- {alterId: 0, cipher: auto, port: 31990, server: 193.109.120.85, tls: false, type: vmess, uuid: a6a37e04-5e81-44c9-be53-baa3ff46eb8b,"name":"EE_193.109.120.85_121820226c7d-1151vmess"}
+- {cipher: chacha20-ietf-poly1305, password: srt1xudOe3tF, port: 443, server: 167.86.116.89, type: ss,"name":"DE_167.86.116.89_121820226c7d-1153ss"}
+- {alterId: 64, cipher: auto, network: ws, port: 443, server: 213.202.233.147, skip-cert-verify: true, tls: true, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24, ws-opts: {path: /path/243535322906},"name":"DE_213.202.233.147_121820226c7d-1154vmess"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 51.15.0.113, type: ss,"name":"NL_51.15.0.113_121820226c7d-1177ss"}
+- {cipher: dummy, obfs: plain, obfs-param: "", password: UHabmcbzb, port: 50005, protocol: auth_chain_a, protocol-param: "", server: 154.3.4.48, type: ssr,"name":"US_154.3.4.48_121820226c7d-1181ssr"}
+- {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 107.150.94.26, type: ss,"name":"TR_107.150.94.26_121820226c7d-1187ss"}
+- {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8881, server: 38.91.102.125, type: ss,"name":"US_38.91.102.125_121820226c7d-1239ss"}
+- {cipher: aes-256-cfb, password: QWDDvVE9npNurQfA, port: 9026, server: 213.183.53.177, type: ss,"name":"RU_213.183.53.177_121820226c7d-1240ss"}
+- {cipher: aes-256-cfb, password: daFYagqDdBdA6VTX, port: 9073, server: 213.183.53.214, type: ss,"name":"RU_213.183.53.214_121820226c7d-1248ss"}
+- {cipher: aes-256-gcm, password: faBAoD54k87UJG7, port: 2376, server: 167.88.63.123, type: ss,"name":"US_167.88.63.123_121820226c7d-1302ss"}
+- {alterId: 0, cipher: auto, network: ws, port: 31132, server: 18.133.149.100, skip-cert-verify: False, tls: False, type: vmess, uuid: f3f6d2cc-1dad-4c23-dced-b4138c394e44, ws-opts: {path: /},"name":"GB_18.133.149.100_121820226c7d-1313vmess"}
+- {alterId: 0, cipher: auto, network: ws, port: 80, server: 236ba16f-7989-71de-e510-1cad33923355.cnnic.rip, skip-cert-verify: true, type: vmess, uuid: 0bd3dda2-88e8-4e7c-a46e-7db7d1d3cb4d, ws-opts: {path: /},"name":"HK_20.187.82.129_121820226c7d-1571vmess"}
+- {password: 0f098bb2-9fad-3cc3-8acf-2a3268c1eb27, port: 10102, server: supsig.xiaohouzi.club, skip-cert-verify: False, type: trojan,"name":"SG_43.153.195.194_121820226c7d-1573trojan"}
