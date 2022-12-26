@@ -368,7 +368,7 @@ jobs:
         git pull
         git commit -m "${np}update"
         git push -u origin master
-        time_left=$(( 110 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
+        time_left=$(( 115 - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ]  && touch s1_t
     - name: check2
       continue-on-error: true 
