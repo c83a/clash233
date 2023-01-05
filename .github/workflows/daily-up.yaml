@@ -140,7 +140,7 @@ jobs:
           qi=0
           close(h)
         }
-        {if(qi > 9999) exit
+        {if(qi > 12345) exit
         if(match($0,/type: ([^,]*)/,tt) && match($0,/server: ([^,]*)/,ss)){
            if( !(ss[1]tt[1] in rr) )rr[ss[1]tt[1]]=0
            pg=1
