@@ -18,6 +18,7 @@ def get_file():
   yield from f
 async def print_item(gen):
   for line in gen:
+    await asyncio.sleep(0)
     for server in re.finditer('server: ([^,]*)',line):
       ip_domain=server.group(1)
       if re.match(ip_pattern,ip_domain):
@@ -42,7 +43,6 @@ async def print_item(gen):
         code_cache[ip]=code
       print("#".join(map(str,(line.strip(), code, ip))))
       break
-    await asyncio.sleep(0)
 async def main():
   nslookup46=asyncio.get_event_loop().getaddrinfo
   gen=get_file()  
