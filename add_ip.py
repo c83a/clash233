@@ -49,5 +49,5 @@ async def main():
   task_list=[asyncio.create_task(print_item(gen)) for i in range(2)]
   next(gen)
   print('proxies:')
-  await asyncio.gather(*task_list,return_exceptions=true)
+  await asyncio.gather(*task_list,return_exceptions=True)
 asyncio.run(main())
