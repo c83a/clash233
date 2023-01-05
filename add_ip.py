@@ -46,7 +46,7 @@ async def print_item(gen):
 async def main():
   nslookup46=asyncio.get_running_loop().getaddrinfo
   gen=get_file()  
-  task_list=[asyncio.create_task(print_item(gen)) for i in range(2)]
+  task_list=[asyncio.create_task(print_item(gen)) for i in range(3)]
   next(gen)
   print('proxies:')
   await asyncio.gather(*task_list,return_exceptions=True)
