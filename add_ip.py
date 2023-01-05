@@ -42,6 +42,7 @@ async def print_item(gen):
         code_cache[ip]=code
       print("#".join(map(str,(line.strip(), code, ip))))
       break
+    await asyncio.sleep(0)
 async def main():
   nslookup46=asyncio.get_event_loop().getaddrinfo
   gen=get_file()  
