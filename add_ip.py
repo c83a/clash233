@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import re
-from socket import getaddrinfo as nslookup46
+import asyncio
 import geoip2.database
 import sys
 reader = geoip2.database.Reader('Country.mmdb')
@@ -10,11 +10,14 @@ code_cache={}
 def get_location(ip):
   response = reader.country(ip)
   return response.country.iso_code
-def get_filename():
-  return sys.argv[1]
-next(sys.stdin)
-print("proxies:")
-for line in sys.stdin:
+def get_file():
+  try:
+    f=open(sys.argv[1])
+  except:
+    f=sys.stdin
+  yield from f
+async def print_item(gen):
+  for line in gen:
     for server in re.finditer('server: ([^,]*)',line):
       ip_domain=server.group(1)
       if re.match(ip_pattern,ip_domain):
@@ -25,7 +28,7 @@ for line in sys.stdin:
         domain=ip_domain
         ip=None
         try:
-          ip=nslookup46(domain,80)[0][4][0]
+          ip=await nslookup46(domain,80)[0][4][0]
         except:
           pass
         dns_cache[domain]=ip
@@ -39,3 +42,11 @@ for line in sys.stdin:
         code_cache[ip]=code
       print("#".join(map(str,(line.strip(), code, ip))))
       break
+async def main():
+  nslookup46=asyncio.get_event_loop().getaddrinfo
+  gen=get_file()  
+  task_list=[asyncio.create_task(print_item(gen)) for i in range(2)]
+  next(gen)
+  print('proxies:')
+  await asyncio.gather(*task_list,return_exceptions=true)
+asyncio.run(main())
