@@ -3,7 +3,7 @@ import re
 import asyncio
 import geoip2.database
 import sys
-reader = geoip2.database.Reader('Country.mmdb')
+reader = geoip2.database.Reader('Country.mmdb',mode=geoip2.database.MODE_MEMORY)
 ip_pattern='''^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'''
 dns_cache={}
 code_cache={}
