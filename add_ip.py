@@ -17,6 +17,7 @@ def get_file():
     f=sys.stdin
   yield from f
 async def print_item(gen):
+  nslookup46=asyncio.get_running_loop().getaddrinfo
   for line in gen:
     await asyncio.sleep(0)
     for server in re.finditer('server: ([^,]*)',line):
@@ -44,7 +45,6 @@ async def print_item(gen):
       print("#".join(map(str,(line.strip(), code, ip))))
       break
 async def main():
-  nslookup46=asyncio.get_running_loop().getaddrinfo
   gen=get_file()  
   task_list=[asyncio.create_task(print_item(gen)) for i in range(3)]
   next(gen)
