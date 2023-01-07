@@ -35,7 +35,7 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}" 
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           echo del clash for  autoupdate
-          mmdb_url='https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb'
+          mmdb_url='https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb'
           curl -s -o Country.mmdb "$mmdb_url"
           rm clash
           if [  ! -f clash ]; then
