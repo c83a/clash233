@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 import re
 import asyncio
-import geoip2.database
+import maxminddb
 import sys
-reader = geoip2.database.Reader('Country.mmdb',mode=geoip2.database.MODE_MEMORY)
+reader = maxminddb.open_database('Country.mmdb',mode=maxminddb.MODE_MEMORY)
 ip_pattern='''^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'''
 dns_cache={}
 code_cache={}
 def get_location(ip):
-  response = reader.country(ip)
-  return response.country.iso_code
+  response = reader.get(ip)
+  return response['country']['iso_code']
 def get_file():
   try:
     f=open(sys.argv[1])
