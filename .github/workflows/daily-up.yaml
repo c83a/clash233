@@ -59,7 +59,7 @@ jobs:
         python -m venv ipvenv
         fi
         . ipvenv/bin/activate
-        python -m pip install  geoip2 & 
+        python -m pip install maxminddb & 
         p=$!
         echo virtual env activate
         date
