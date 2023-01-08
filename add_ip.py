@@ -19,7 +19,7 @@ def get_file():
   yield from f
 async def a_read(gen):
   loop=asyncio.get_running_loop()
-  with import concurrent.futures.ThreadPoolExecutor(max_worke=1) as pool:
+  with concurrent.futures.ThreadPoolExecutor(max_worke=1) as pool:
     try:
       r = await loop.run_in_executor(pool, lambda: next(gen))
       yield r
