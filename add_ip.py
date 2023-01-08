@@ -12,13 +12,13 @@ def get_location(ip):
   response = reader.get(ip)
   return response['country']['iso_code']
 def get_file():
-  loop=asyncio.get_running_loop()
   try:
     open(sys.argv[1]) as f:
   except:
     f=sys.stdin
   yield from f
 async def a_read(gen):
+  loop=asyncio.get_running_loop()
   with import concurrent.futures.ThreadPoolExecutor(max_worke=1) as pool:
     try:
       r = await loop.run_in_executor(pool, lambda: next(gen))
