@@ -11,7 +11,7 @@ code_cache={}
 def get_location(ip):
   response = reader.get(ip)
   return response['country']['iso_code']
-async def get_file():
+def get_file():
   loop=asyncio.get_running_loop()
   try:
     open(sys.argv[1]) as f:
