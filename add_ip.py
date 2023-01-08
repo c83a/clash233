@@ -54,7 +54,7 @@ async def print_item(agen,alock):
           domain=ip_domain
           ip=None
           try:
-            ip=(await nslookup46(domain,80))[0][4][0]
+            ip=(await asyncio.wait_for(nslookup46(domain,80),timeout=10.0))[0][4][0]
           except:
             pass
           dns_cache[domain]=ip
