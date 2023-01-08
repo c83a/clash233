@@ -13,10 +13,15 @@ def get_location(ip):
   return response['country']['iso_code']
 def get_file():
   try:
-    f=open(sys.argv[1])
+    with open(sys.argv[1]) as f:
+      pass
   except:
     f=sys.stdin
-  yield from f
+  if f.closed:
+    with open(sys.argv[1]) as f:
+      yield from f
+  else:
+    yield from f
   raise EOFError()
 async def a_read():
   loop=asyncio.get_running_loop()
