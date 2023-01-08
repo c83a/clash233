@@ -74,4 +74,5 @@ async def main():
   task_list=[asyncio.create_task(print_item(agen,alock)) for i in range(20)]
   print('proxies:')
   await asyncio.gather(*task_list,return_exceptions=True)
-asyncio.run(main())
+if __name__ == '__main__': 
+  asyncio.run(main())
