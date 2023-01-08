@@ -78,7 +78,7 @@ jobs:
         p="$! $p"
         done
         }
-        [ $(($(date +%d) % 2 )) -eq 1 -a $(date +%H) -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ $(($(date +%d | sed 's/^0//') % 2 )) -eq 1 -a $(date +%H | sed 's/^0//') -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
         if [  ! -f clash ]; then
         os_type=linux
         cpu_type=amd64
