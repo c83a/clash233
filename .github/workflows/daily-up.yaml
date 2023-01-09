@@ -440,7 +440,7 @@ jobs:
         FFF
         fi
         if [ -f speed_cde.yaml ];then
-        grep -Ev '"CN_|type: ss' speed_cde.yaml
+        grep -Ev 'type: ss' speed_cde.yaml
         grep '"CN_'              speed_cde.yaml
         grep 'type: ss'          speed_cde.yaml
         else
@@ -518,7 +518,7 @@ jobs:
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         [ -f warp_blocked ] && gawk -v f1=cdn.yaml -v f2=speed.yaml -f mix2.awk
-        [ ! -f warp_blocked ] && grep -Ev '"CN_|type: ss' speed.yaml || :
+        [ ! -f warp_blocked ] && grep -Ev 'type: ss' speed.yaml || :
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         [ ! -f warp_blocked ] && grep 'type: ss' speed.yaml || :
         fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml       
