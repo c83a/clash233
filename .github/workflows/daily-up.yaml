@@ -19,11 +19,6 @@ jobs:
     - name: cloudflare warp
       continue-on-error: false 
       run: |
-          set +e
-          curl -o /dev/null --dns-servers 8.8.8.8 http://baidu.com && echo test1 good
-          curl -o /dev/null --doh-url https://dns.google/dns-query http://baidu.com && echo test 2 good
-          curl -o /dev/null --dns-servers 8.8.4.4:53 http://baidu.com && echo test1 good
-          exit 1
           set +e  
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
           curl -s -o warp.sh $warp_url || exit 1
