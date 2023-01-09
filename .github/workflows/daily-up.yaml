@@ -495,7 +495,7 @@ jobs:
         FFF
         sudo ./run.sh || : >> warp.log
         [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
-        cat >mix2.awk<<-FFF
+        cat >mix2.awk<<-\FFF
         BEGIN{
         if (!f1 || !f2) exit
         FS="\42name\42:"
@@ -504,11 +504,13 @@ jobs:
             if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
           }else{
             f1closed=1
+            close(f1)
           }
           if (!	f2closed && (getline line < f2 ) > 0){
             if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
           }else{
             f2closed=1
+            close(f2)
           }
         }}
         FFF
