@@ -226,6 +226,7 @@ jobs:
         else clash_check='false' ; tls='' ;fi
         seed=$(cat /proc/sys/kernel/random/uuid | sed  -E 's/[^0-9]*//g')
         mport=$((1$seed % 100 + 10305))
+        dns_port=$(($mport + 1))
         cat <<-EOF
         mixed-port: $mport
         ipv6: true
@@ -240,6 +241,19 @@ jobs:
             enable: $clash_check
             interval: 600
             url: http${tls}://www.gstatic.com/generate_204
+        dns:
+          enable: true
+          listen: 0.0.0.0:${dns_port}
+          ipv6: true
+          default-nameserver:
+            - 8.8.4.4
+            - 8.8.8.8
+          enhanced-mode: redir-host   
+          nameserver:
+            - 8.8.4.4
+            - 8.8.8.8
+            - tls://dns.google:853
+            - https://dns.google/dns-query
         EOF
         [ "$1" ] && SR="R" || SR="S"
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
@@ -279,7 +293,7 @@ jobs:
         url=$(eval echo https://'$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1        
-        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy $url)
+        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --dns-servers 127.0.0.1:${dns_port} $url)
         s=$?
         r=${r2:0:3}
         t_a=${r2:4}
