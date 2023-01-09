@@ -11,12 +11,11 @@ try:
   reader = maxminddb.open_database('Country.mmdb',mode=maxminddb.MODE_MEMORY)
 except:
   reader = None
-def get_location(ip):
-  if reader:
+  get_location=lambda x: 'ZZ'
+else:
+  def get_location(ip):
     response = reader.get(ip)
     return response['country']['iso_code']
-  else:
-    return 'ZZ'
 def get_file():
   try:
     with open(sys.argv[1]) as f:
