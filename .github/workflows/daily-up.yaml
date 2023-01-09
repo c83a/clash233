@@ -184,7 +184,7 @@ jobs:
         echo $j end  processing $? >&2
         done | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
-        cat database*.yaml x.yaml | grep '"CN_'  | awk '!a[$0]++' > cdn.yaml
+        cat database*.yaml x.yaml | grep '"CN_'  | awk  -F '"name":' 'NF == 2 && !a[$2]++' > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml > check-list.txt
         fi
         if [ 1 ];then
