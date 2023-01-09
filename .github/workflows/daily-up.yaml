@@ -296,7 +296,7 @@ jobs:
         domain=$(eval echo '$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1        
-        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:443:1.1.1.${num} $url)
+        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:443:198.18.0.${num} $url)
         s=$?
         r=${r2:0:3}
         t_a=${r2:4}
