@@ -215,7 +215,7 @@ jobs:
         limit=20
         i=0
         for kwi in $(awk '!a[$0]++' kw.txt);do
-        curl -s https://${kwi}.com > /dev/null || continue
+        curl -I -s https://${kwi}.com > /dev/null || continue
         i=$(($i + 1))
         eval kw$i=$kwi  
         [ $i -eq $limit ] && break 
