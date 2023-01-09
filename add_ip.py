@@ -2,15 +2,21 @@
 import re
 import asyncio
 import concurrent.futures
-import maxminddb
 import sys
-reader = maxminddb.open_database('Country.mmdb',mode=maxminddb.MODE_MEMORY)
 ip_pattern='''^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'''
 dns_cache={}
 code_cache={}
+try:
+  import maxminddb
+  reader = maxminddb.open_database('Country.mmdb',mode=maxminddb.MODE_MEMORY)
+except:
+  reader = None
 def get_location(ip):
-  response = reader.get(ip)
-  return response['country']['iso_code']
+  if reader:
+    response = reader.get(ip)
+    return response['country']['iso_code']
+  else:
+    return 'ZZ'
 def get_file():
   try:
     with open(sys.argv[1]) as f:
