@@ -282,9 +282,9 @@ jobs:
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
         fi & 
         p="$! $p"
-        [ "$1" ] && c_timeout=20 || c_timeout=15
-        [ "$1" ] && timeout=25 || timeout=20
-        try_n=1
+        [ "$1" ] && c_timeout=17 || c_timeout=7
+        [ "$1" ] && timeout=21 || timeout=11
+        try_n=0
         proxy="http://127.0.0.1:$mport"
         peer()
         {
@@ -296,7 +296,7 @@ jobs:
         domain=$(eval echo '$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1        
-        r2=$(curl -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:443:198.18.0.${num} $url)
+        r2=$(curl -I -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:443:198.18.0.${num} $url)
         s=$?
         r=${r2:0:3}
         t_a=${r2:4}
