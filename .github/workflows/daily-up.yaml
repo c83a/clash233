@@ -495,12 +495,13 @@ jobs:
         FFF
         sudo ./run.sh || : >> warp.log
         [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
+        echo 'proxies:' > x.yaml
         if [ 1 ];then
         grep -Ev '"CN_|type: ss' speed.yaml || :
         gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         [ -f warp_blocked ] && cat cdn.yaml
         grep 'type: ss' speed.yaml || :
-        fi | awk '!a[$0]++' > x.yaml
+        fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml       
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
         current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
