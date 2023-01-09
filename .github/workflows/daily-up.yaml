@@ -51,10 +51,13 @@ jobs:
         cat >prepare.sh<<-\FFF
         #!/bin/bash
         set +e
+        date
         show_ip(){
-        curl -s http://api64.ipify.org
+        echo 'quering ip'
+        curl -m 15 --doh-url https://dns.google/dns-query -s http://api64.ipify.org || echo 'ip q timeout'
+        echo 'ip q done'
         }
-        show_ip
+        show_ip &
         if [ ! -e ipvenv ]; then
         python -m venv ipvenv
         fi
