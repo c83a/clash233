@@ -495,13 +495,30 @@ jobs:
         FFF
         sudo ./run.sh || : >> warp.log
         [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
+        cat >mix2.awk<<-FFF
+        BEGIN{
+        if (!f1 || !f2) exit
+        FS="\42name\42:"
+        while ( !(f1closed && f2closed) ){
+          if (! f1closed && (getline line < f1 ) > 0){
+            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+          }else{
+            f1closed=1
+          }
+          if (!	f2closed && (getline line < f2 ) > 0){
+            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+          }else{
+            f2closed=1
+          }
+        }}
+        FFF
         echo 'proxies:' > x.yaml
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
-        [ -f warp_blocked ] && cat cdn.yaml
-        grep -Ev '"CN_|type: ss' speed.yaml || :
+        [ -f warp_blocked ] && gawk -v f1=speed.yaml -v f2=cdn.yaml -f mix2.awk
+        [ ! -f warp_blocked ] && grep -Ev '"CN_|type: ss' speed.yaml || :
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
-        grep 'type: ss' speed.yaml || :
+        [ ! -f warp_blocked ] && grep 'type: ss' speed.yaml || :
         fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml       
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
