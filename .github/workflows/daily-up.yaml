@@ -494,7 +494,7 @@ jobs:
         proxy-groups:
         FFF
         sudo ./run.sh || : >> warp.log
-        touch warp_blocked && echo 'pretending block CF warp'
+        [ ! 1 ] && touch warp_blocked && echo 'pretending block CF warp'
         [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
         cat >mix2.awk<<-\FFF
         BEGIN{
