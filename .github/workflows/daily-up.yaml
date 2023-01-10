@@ -130,8 +130,30 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%Y%m%d')${uuid:0:4}-
         fi
+        cat >mix2.awk<<-\FFF
+        BEGIN{
+        if (!f1 || !f2) exit
+        FS="\42name\42:"
+        while ( !(f1closed && f2closed) ){
+          if (! f1closed && (getline line < f1 ) > 0){
+            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+          }else{
+            f1closed=1
+            close(f1)
+          }
+          if (!	f2closed && (getline line < f2 ) > 0){
+            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+          }else{
+            f2closed=1
+            close(f2)
+          }
+        }}
+        FFF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
-        gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' config.yml speed_*.yaml speed.yaml  > database.yaml
+        if [ 1 ];then
+        gawk -v f1=speed_ip.yaml -v f2=config.yaml -f mix2.awk
+        cat config.yml speed_*.yaml speed.yaml
+        fi | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
         cp config.yaml database2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
@@ -496,25 +518,6 @@ jobs:
         sudo ./run.sh || : >> warp.log
         [ ! 1 ] && touch warp_blocked && echo 'pretending block CF warp'
         [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
-        cat >mix2.awk<<-\FFF
-        BEGIN{
-        if (!f1 || !f2) exit
-        FS="\42name\42:"
-        while ( !(f1closed && f2closed) ){
-          if (! f1closed && (getline line < f1 ) > 0){
-            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
-          }else{
-            f1closed=1
-            close(f1)
-          }
-          if (!	f2closed && (getline line < f2 ) > 0){
-            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
-          }else{
-            f2closed=1
-            close(f2)
-          }
-        }}
-        FFF
         echo 'proxies:' > x.yaml
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
