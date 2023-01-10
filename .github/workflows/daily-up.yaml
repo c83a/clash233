@@ -151,7 +151,7 @@ jobs:
         FFF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
         if [ 1 ];then
-        gawk -v f1=speed_ip.yaml -v f2=config.yaml -f mix2.awk
+        gawk -v f1=speed_ip.yaml -v f2=config.yml -f mix2.awk
         cat config.yml speed_*.yaml speed.yaml
         fi | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
         cp config.yaml database2.yaml
