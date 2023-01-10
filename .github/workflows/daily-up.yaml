@@ -236,16 +236,17 @@ jobs:
         EOF
         limit=20
         i=0
+        tls='s';[ "$1" ] && [ ! -f warp_blocked ] && t_s=0 || t_s=1
         for kwi in $(awk '!a[$0]++' kw.txt);do
-        curl -I -s https://${kwi}.com > /dev/null || continue
+        curl -I -s http${tls:0:$t_s}://${kwi}.com > /dev/null || continue
         i=$(($i + 1))
         eval kw$i=$kwi  
         [ $i -eq $limit ] && break 
         done
         max_worker=$i
         if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
-        then clash_check='true' ; tls='s' 
-        else clash_check='false' ; tls='' ;fi
+        then clash_check='true' ;
+        else clash_check='false';fi
         seed=$(cat /proc/sys/kernel/random/uuid | sed  -E 's/[^0-9]*//g')
         mport=$((1$seed % 100 + 10305))
         dns_port=$(($mport + 1))
@@ -262,7 +263,7 @@ jobs:
           health-check:
             enable: $clash_check
             interval: 600
-            url: http${tls}://www.gstatic.com/generate_204
+            url: http${tls:0:$t_s}://www.gstatic.com/generate_204
         dns:
           enable: true
           listen: 0.0.0.0:${dns_port}
@@ -314,11 +315,11 @@ jobs:
         num=$1
         good="good$num.txt"
         bad="bad$num.txt"
-        url=$(eval echo https://'$kw'${num}.com)
+        url=$(eval echo http${tls:0:$t_s}://'$kw'${num}.com)
         domain=$(eval echo '$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1        
-        r2=$(curl -I -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:443:198.18.0.${num} $url)
+        r2=$(curl -I -s -w "%{http_code} %{time_total}" -o /dev/null --retry $try_n -m $timeout --connect-timeout $c_timeout -x $proxy --resolve ${domain}:${p_p}:198.18.0.${num} $url)
         s=$?
         r=${r2:0:3}
         t_a=${r2:4}
