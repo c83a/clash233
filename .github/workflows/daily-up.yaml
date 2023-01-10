@@ -316,6 +316,7 @@ jobs:
         good="good$num.txt"
         bad="bad$num.txt"
         url=$(eval echo http${tls:0:$t_s}://'$kw'${num}.com)
+        [ "a$t_s" == "a0" ] && p_p=80 || p_p=443
         domain=$(eval echo '$kw'${num}.com)
         t=$(curl -s -X PUT -w "%{http_code}" -d "{$data}" "http://127.0.0.1:$port/proxies/S$num")
         [ "$t" = "204" ] || return 1        
