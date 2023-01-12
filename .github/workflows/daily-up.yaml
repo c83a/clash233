@@ -149,7 +149,6 @@ jobs:
             for (fn in closed) sum_closed+=closed[fn]
             if(sum_closed == n_fd) break
           }
-        
         }
         FFF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
@@ -210,7 +209,7 @@ jobs:
         eval $cmd1 | yq -M 'del(.rules) | del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
         done
-        ls -s raw-tmp*.yaml | sort | awk '{print $2} | gawk -f mixn.awk | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
+        ls -s raw_tmp*.yaml | sort | awk '{print $2} | gawk -f mixn.awk | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml > check-list.txt
@@ -530,7 +529,7 @@ jobs:
         echo 'proxies:' > x.yaml
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
-        [ -f warp_blocked ] && echo -e 'cdn.yaml\nspeed.yaml' | gawk -f mixn.awk || :
+        [ -f warp_blocked ] && (echo -e 'cdn.yaml\nspeed.yaml' | gawk -f mixn.awk) || :
         [ ! -f warp_blocked ] && grep -v 'type: ss' speed.yaml || :
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         [ ! -f warp_blocked ] && grep 'type: ss' speed.yaml || :
