@@ -298,7 +298,7 @@ jobs:
         port=$((2$seed % 100 + 20406))
         ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
-        if [ $clash_check = 'true' ]; then
+        if [ ! 1 ] && [ $clash_check = 'true' ]; then
         t=$((23+$(awk 'END{print NR}' x.yaml)/33))
         sleep $t
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
@@ -351,10 +351,10 @@ jobs:
         ls *.txt
         if [ ! "$sd" ];then
         awk 'BEGIN{FS=",";f="speed_short.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
-        [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
+        [ ! 1 ] && [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed_short.yaml
         cp speed_short.yaml speed.yaml || :
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
-        [ ! "$clash_check" = "true" ] && git add speed_short.yaml
+        [ 1 ] && git add speed_short.yaml
         else
         cat good*.txt || :
         fi
@@ -387,7 +387,7 @@ jobs:
         worker $i
         p="$! $p"
         done
-        if [ $clash_check = 'true' ]; then
+        if [ ! 1 ] && [ $clash_check = 'true' ]; then
         while [ 1 ];do
         sleep 10
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/)){a=$2;n++}}END{print n " " a}' >> stat.txt || break
@@ -397,7 +397,7 @@ jobs:
         for w in $p;do
         wait $w
         done
-        if [ $clash_check = 'true' ]; then
+        if [ ! 1 ] && [ $clash_check = 'true' ]; then
         curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
         fi 
         kill $clash_pid
