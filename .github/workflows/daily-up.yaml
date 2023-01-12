@@ -335,7 +335,7 @@ jobs:
         file=$bad
         fi
         [ $good = $file ] && echo $t_a >> delay$num.txt
-        echo $data $file $t $r $s $t_a
+        echo $data $file $t $r $s $t_a $sd 1>&2
         echo $data >> $file
         }
         [ -f queue ] && rm queue
