@@ -139,11 +139,12 @@ jobs:
           while ( 1 ){
             sum_closed=0
             for (i=1;i<=n;i++){
-              if (! closed[file[i]] && (getline line < file[i] ) > 0){
-                if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line }
-              else{
-                if(! closed[file[i]] ){close(file[i]);closed[file[i]]=1} }
-            } 
+              if (! closed[file[i]] ){
+                if (getline line < file[i] ) > 0)
+                    if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+              }else
+                close(file[i]);closed[file[i]]=1
+            }               
             for (fn in closed) sum_closed+=closed[fn]
             if(sum_closed == n_fd) break
           }
