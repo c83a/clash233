@@ -351,7 +351,7 @@ jobs:
         kill $clash_pid || echo clash exited 
         fi
         ls *.txt
-        if [ ! "$1" ];then
+        if [ ! "$sd" ];then
         awk 'BEGIN{FS=",";f="speed.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
         [ 1 ] && git add speed_short.yaml
