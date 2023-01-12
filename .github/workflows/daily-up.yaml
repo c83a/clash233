@@ -129,26 +129,29 @@ jobs:
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%Y%m%d')${uuid:0:4}-
         fi
-        cat >mix2.awk<<-\FFF
-        BEGIN{
-        if (!f1 || !f2) exit
-        FS="\42name\42:"
-        while ( !(f1closed && f2closed) ){
-          if (! f1closed && (getline line < f1 ) > 0){
-            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
-          }else{
-            if(! f1closed && ++f1closed) close(f1)
+        cat >mixn.awk<<-\FFF
+        BEGIN{ aFS="\42name\42:" }
+        { file[NR]=$0; closed[$0]=0 }
+        END{
+          n=NR
+          n_fd=0
+          for (i in closed) n_fd++
+          while ( 1 ){
+            sum_closed=0
+            for (i=1;i<=n;i++){
+              if (! closed[file[i]] && (getline line < file[i] ) > 0){
+                if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line }
+              else{
+                if(! closed[file[i]] ){close(file[i]);closed[file[i]]=1} }
+            sum_closed+=closed[file[i]]
+            } 
+            if(sum_closed == n_fd) break
           }
-          if (! f2closed && (getline line < f2 ) > 0){
-            if (split(line,a) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
-          }else{
-            if(! f2closed && ++f2closed) close(f2)
-          }
-        }}
+        }
         FFF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
         if [ 1 ];then
-        gawk -v f1=speed_ip.yaml -v f2=config.yml -f mix2.awk
+        echo -e 'speed_ip.yaml\nconfig.yml'| gawk -f mixn.awk
         cat config.yml speed_*.yaml speed.yaml
         fi | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
         cp config.yaml database2.yaml
@@ -198,12 +201,13 @@ jobs:
         s/^  - \{//
         s/\}$//
         EOF
-        for j in database*.yaml $(ls -s tmp*.yaml| sort | awk '{print $2}') ; do
+        for j in database*.yaml $(ls -s tmp*.yaml | sort | awk '{print $2}') ; do
         echo processing  $j >&2
         grep -q -e 'name: [^,]*, server: ' $j && cmd1="sed -E 's/name: [^,]*, server: /server: /' $j" || cmd1="cat $j"
-        eval $cmd1 | yq -M 'del(.rules) | del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed  
+        eval $cmd1 | yq -M 'del(.rules) | del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
-        done | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
+        done
+        ls -s raw-tmp*.yaml | sort | awk '{print $2} | gawk -f mixn.awk | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml > check-list.txt
@@ -523,7 +527,7 @@ jobs:
         echo 'proxies:' > x.yaml
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
-        [ -f warp_blocked ] && gawk -v f1=cdn.yaml -v f2=speed.yaml -f mix2.awk || :
+        [ -f warp_blocked ] && echo -e 'cdn.yaml\nspeed.yaml' | gawk -f mixn.awk || :
         [ ! -f warp_blocked ] && grep -v 'type: ss' speed.yaml || :
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed.yaml || :
         [ ! -f warp_blocked ] && grep 'type: ss' speed.yaml || :
