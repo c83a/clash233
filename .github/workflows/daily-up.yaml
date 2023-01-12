@@ -376,7 +376,7 @@ jobs:
         peer "$1" "$data"
         done&
         }
-        if [ ! $max_worker -eq 0 ];then
+        if [ $max_worker -ne 0 ];then
         drop_lock
         cat check-list.txt       
         fi>&99 &
