@@ -141,7 +141,10 @@ jobs:
             for (i=1;i<=n;i++){
               if (! closed[file[i]] ){
                 if ((getline line < file[i] ) > 0){
-                    if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
+                    if ( raw && !a[line]++) 
+                       print line
+                    else
+                       if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
                 }else{
                   close(file[i]);closed[file[i]]=1}
               }               
@@ -211,7 +214,7 @@ jobs:
         done
         if [ 1 ];then
         cat raw_database*.yaml
-        ls -s raw_tmp*.yaml | sort | awk '{print $2}' | gawk -f mixn.awk 
+        ls -s raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
         fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
