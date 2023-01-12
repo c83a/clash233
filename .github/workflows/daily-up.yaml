@@ -242,8 +242,9 @@ jobs:
         eval kw$i=$kwi  
         [ $i -eq $limit ] && break 
         done
+        [ $i -eq 0 ] && exit 1
         max_worker=$i
-        if [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
+        if [ ! 1 ] && [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
         then clash_check='true' ;
         else clash_check='false';fi
         seed=$(cat /proc/sys/kernel/random/uuid | sed  -E 's/[^0-9]*//g')
