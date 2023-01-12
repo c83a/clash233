@@ -143,8 +143,8 @@ jobs:
                 if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line }
               else{
                 if(! closed[file[i]] ){close(file[i]);closed[file[i]]=1} }
-            for (fn in closed) sum_closed+=closed[fn]
             } 
+            for (fn in closed) sum_closed+=closed[fn]
             if(sum_closed == n_fd) break
           }
         }
