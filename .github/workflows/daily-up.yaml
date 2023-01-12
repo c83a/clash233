@@ -305,7 +305,7 @@ jobs:
         port=$((2$seed % 100 + 20406))
         ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
-        # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
+        # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}' # may change with new version of clash
         [ "$1" ] && c_timeout=17 || c_timeout=7
         [ "$1" ] && timeout=21 || timeout=11
         try_n=0
@@ -387,7 +387,7 @@ jobs:
         worker $i
         p="$! $p"
         done
-        fi
+        # wait for all workers
         for w in $p;do
         wait $w
         done 
