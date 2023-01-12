@@ -109,15 +109,7 @@ jobs:
         #!/bin/bash
         set +e 
         . ipvenv/bin/activate        
-        [ "$2" ] && wd="$2" || wd=$(pwd)
-        if [ "$2" ];then
-        mkdir -p "$wd" || :
-        for i in $(ls);do
-        ln -s "`pwd`/$i" "$wd/$i" ;done
-        cd "$wd"
-        fi
         echo working dir is `pwd`
-        [ -d "$wd" ] || exit 1
         if [ "$1" ];then
         sd=$1 # alias for func
         [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
