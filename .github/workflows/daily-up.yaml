@@ -292,10 +292,10 @@ jobs:
           fi
         done
         fi > y.yaml
-        ./clash -t -f y.yaml -d "$wd" || error_config=1
+        ./clash -t -f y.yaml -d . || error_config=1
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=$((2$seed % 100 + 20406))
-        ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
+        ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
         # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}' # may change with new version of clash
         # use above cmd to get proxies alive , maybe bad
