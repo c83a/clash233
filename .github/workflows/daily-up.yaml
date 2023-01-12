@@ -158,7 +158,7 @@ jobs:
         echo -e 'speed_ip.yaml\nconfig.yml'| gawk -f mixn.awk
         cat config.yml speed_*.yaml speed.yaml
         fi | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
-        cp config.yaml database2.yaml
+        cp config.yaml database_2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
@@ -213,7 +213,7 @@ jobs:
         done
         if [ 1 ];then
         cat raw_database.yaml
-        ls -s raw_database*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
+        ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
         fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
@@ -615,7 +615,7 @@ jobs:
               interval: 600
               url: http://www.gstatic.com/generate_204
         EOF
-        echo '- {password: make-your-own, port: 443, server: "::1", type: trojan,"name":"ZZ_127.0.0.1_DoItYourself-0"}' >> database3.yaml
+        echo '- {password: make-your-own, port: 443, server: "::1", type: trojan,"name":"ZZ_127.0.0.1_DoItYourself-0"}' >> database_3.yaml
         if [ 1 ] ;then
         echo 'proxies:'
         gawk -F '"name":' '{if(NF > 1)a[$1]++}END{i=0;h="ls database*.yaml";while(h | getline f){while(i < 2333 && (getline line < f) > 0){if(split(line,c) && 2 in c && !a[c[1]]++ && match(c[2],/"([^_]*_[^_]*_[^-]*)-[^"]*"/,id) && ++b[id[1]] < 3 && ++i)print c[1] FS "\42" id[1] "-" i "\42}"};close(f)}}' config.yml speed.yaml
