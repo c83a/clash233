@@ -325,11 +325,11 @@ jobs:
         s=$?
         r=${r2:0:3}
         t_a=${r2:4}
-        if [ 0200 = "0$r" ] ; then
+        if [ a200 = "a$r" ] ; then
         file=$good
-        elif [ 0302 = "0$r" ] ;then
+        elif [ a302 = "a$r" ] ;then
         file=$good
-        elif [ 0301 = "0$r" ] ;then
+        elif [ a301 = "a$r" ] ;then
         file=$good
         else
         file=$bad
