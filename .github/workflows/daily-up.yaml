@@ -120,7 +120,7 @@ jobs:
         [ -d "$wd" ] || exit 1
         if [ "$1" ];then
         sd=$1
-        [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Waring: speed_short.yaml as x.yaml with pre-server $1" 1>&2
+        [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
         [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
         else
         echo 'ipv6: true' > 1.yaml
@@ -253,9 +253,6 @@ jobs:
         done
         [ $i -eq 0 ] && exit 1
         max_worker=$i
-        if [ ! 1 ] && [ ! "$1" ] && [ $max_worker -eq 0 -o "a$clash_check" = 'atrue' ]
-        then clash_check='true' ;
-        else clash_check='false';fi
         seed=$(cat /proc/sys/kernel/random/uuid | sed  -E 's/[^0-9]*//g')
         mport=$((1$seed % 100 + 10305))
         dns_port=$(($mport + 1))
@@ -270,7 +267,7 @@ jobs:
           interval: 9600
           path: x.yaml
           health-check:
-            enable: $clash_check
+            enable: false
             interval: 600
             url: http${tls:0:$t_s}://www.gstatic.com/generate_204
         dns:
@@ -308,12 +305,7 @@ jobs:
         port=$((2$seed % 100 + 20406))
         ./clash -d "$wd" -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
-        if [ ! 1 ] && [ $clash_check = 'true' ]; then
-        t=$((23+$(awk 'END{print NR}' x.yaml)/33))
-        sleep $t
-        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
-        fi & 
-        p="$! $p"
+        # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}'
         [ "$1" ] && c_timeout=17 || c_timeout=7
         [ "$1" ] && timeout=21 || timeout=11
         try_n=0
@@ -361,7 +353,6 @@ jobs:
         ls *.txt
         if [ ! "$1" ];then
         awk 'BEGIN{FS=",";f="speed.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
-        [ ! 1 ] && [ "$clash_check" = "true" ] && awk 'BEGIN{FS=",";f="speed_bad.yaml";print "proxies:" > f;while("ls bad*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' speed.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
         [ 1 ] && git add speed_short.yaml
         else
@@ -396,19 +387,10 @@ jobs:
         worker $i
         p="$! $p"
         done
-        if [ ! 1 ] && [ $clash_check = 'true' ]; then
-        while [ 1 ];do
-        sleep 10
-        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/)){a=$2;n++}}END{print n " " a}' >> stat.txt || break
-        if [ -f goodz2.txt ]; then break; fi
-        done&
         fi
         for w in $p;do
         wait $w
-        done
-        if [ ! 1 ] && [ $clash_check = 'true' ]; then
-        curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz2.txt"}'
-        fi 
+        done 
         kill $clash_pid
         normal_end=1
         # check finished
