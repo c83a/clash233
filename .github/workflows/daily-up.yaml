@@ -54,10 +54,9 @@ jobs:
         date
         show_ip(){
         echo 'quering ip'
-        curl -m 15 --doh-url https://dns.google/dns-query -s http://api64.ipify.org || echo 'ip q timeout'
-        echo 'ip q done'
+        (curl -m 15 --doh-url https://dns.google/dns-query -s http://api64.ipify.org && echo ' ip q done'|| echo 'ip q timeout') &
         }
-        show_ip &
+        show_ip
         if [ ! -e ipvenv ]; then
         python -m venv ipvenv
         fi
