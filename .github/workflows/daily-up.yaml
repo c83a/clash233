@@ -209,7 +209,10 @@ jobs:
         eval $cmd1 | yq -M 'del(.rules) | del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
         done
-        ls -s raw_tmp*.yaml | sort | awk '{print $2}' | gawk -f mixn.awk | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
+        if [ 1 ];then
+        cat raw_database*.yaml
+        ls -s raw_tmp*.yaml | sort | awk '{print $2}' | gawk -f mixn.awk 
+        fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         touch z.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml > check-list.txt
