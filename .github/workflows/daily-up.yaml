@@ -140,14 +140,16 @@ jobs:
             sum_closed=0
             for (i=1;i<=n;i++){
               if (! closed[file[i]] ){
-                if ( (getline line < file[i] ) > 0)
+                if ((getline line < file[i] ) > 0){
                     if (split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)print line
-              }else
-                close(file[i]);closed[file[i]]=1
-            }               
+                }else{
+                  close(file[i]);closed[file[i]]=1}
+              }               
+            }
             for (fn in closed) sum_closed+=closed[fn]
             if(sum_closed == n_fd) break
           }
+        
         }
         FFF
         gawk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( ! match(ip[1],/:/)){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
