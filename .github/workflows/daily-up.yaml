@@ -185,7 +185,9 @@ jobs:
           h|getline r;close(h);
           if(index(r,"t") && ++rr[ss[1]tt[1]] && ++qi)print p
         }}
-        END{print NR " records IN, " qi "records OUT" | "cat 1>&2" }
+        END{
+        print NR " records IN, " qi " records OUT" | "cat 1>&2" 
+        }
         EOF
         cat >sub.sed<<-\EOF
         s/ [^ ]*: \{\},//g
