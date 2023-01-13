@@ -86,7 +86,7 @@ jobs:
         cpu_type=amd64
         clash_r_url="https://github.com/Dreamacro/clash/releases"        
         clash_bin_url=https://github.com$( curl -s $clash_r_url | grep '.gz' | grep '<a href=' | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
-        curl -s -o clash.gz $clash_bin_url
+        curl -L -s -o clash.gz $clash_bin_url
         gunzip clash.gz
         chmod a+x clash && ./clash -v && git add clash || git checkout clash
         fi
@@ -393,7 +393,7 @@ jobs:
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh || echo "no enough time left ( $time_left m)" > check.log
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
         [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
-        git add speed.yaml speed_short.yaml warp.tgz
+        git add speed.yaml speed_short.yaml warp.tgz Country.mmdb
         git pull && echo "pull ok" || echo "pull maybe busy,try commit anyway"
         git commit -m "${np}update"
         git push -u origin master
