@@ -19,10 +19,10 @@ jobs:
     - name: cloudflare warp
       continue-on-error: true 
       run: |
-          set +e  
+          set +e
+          touch warp.sh; chmod 755 ./warp.sh 
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
-          curl -s -o warp.sh $warp_url || exit 1
-          chmod 755 ./warp.sh
+          curl -s -o warp.sh $warp_url && chmod 755 ./warp.sh || exit 1         
           cat >run.sh<<-\EOF
           #!/bin/bash
           [ -f warp.tgz ] && tar xzvf warp.tgz -C /
