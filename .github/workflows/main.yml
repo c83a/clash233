@@ -43,9 +43,9 @@ jobs:
           cpu_type=amd64
           clash_bin_url="https://github.com/Dreamacro/clash/releases"
           clash_html=tmp$RANDOM.html
-          curl -s -o $clash_html $clash_bin_url
+          curl -L -s -o $clash_html $clash_bin_url
           clash_bin_url="https://github.com"$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
-          curl -s -o clash.gz $clash_bin_url
+          curl -L -s -o clash.gz $clash_bin_url
           gunzip clash.gz
           fi
           if [  ! -f clash ]; then
