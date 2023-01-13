@@ -20,7 +20,7 @@ jobs:
       continue-on-error: true 
       run: |
           set +e
-          touch warp.sh; chmod 755 ./warp.sh 
+          touch run.sh; chmod 755 ./run.sh 
           warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
           curl -s -o warp.sh $warp_url && chmod 755 ./warp.sh || exit 1         
           cat >run.sh<<-\EOF
