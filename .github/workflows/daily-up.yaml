@@ -458,12 +458,21 @@ jobs:
         limit=7
         i=0
         write_i(){
+        if [ ! "$data" ];then
+        all_server2=$(gawk -f ./gen2.awk)
+        cat >>config.yml<<-FFF
+          - {name: E1, type: select, proxies: [$all_server2 DIRECT,REJECT]}
+          - {name: F1, type: select, proxies: [$all_server2 DIRECT,REJECT]}        
+          - {name: G1, type: relay, proxies: [E1,F1]}        
+        FFF
+        else
         cdn_server=$(gawk -v data=$data 'BEGIN{match(data,/"name":"([^"]*)"/,a);print a[1]}')
         cat >>config.yml<<-FFF
           - {name: B$i, type: select, proxies: [$(gawk -f ./gen2.awk) DIRECT,REJECT]}
           - {name: C$i, type: relay, proxies: [$cdn_server , B$i]}        
           - {name: D$i, type: relay, proxies: [B$i , $cdn_server]}        
         FFF
+        fi
         }
         timeout_clean(){
         [ "$(pidof clash)" ] && kill $w
@@ -475,12 +484,13 @@ jobs:
         cat good*.txt >> cde_$i.txt
         touch yml_good
         fi
+        [ ! "$data" ] && (ls *.txt | grep -q good) && cat *good*.txt  | awk '!a[$0]++' > cde_all.txt
         if (ls cde*.txt | grep -q cde);then
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         fi
         [ -f speed_cde.yaml ] || ls && cat cde*.txt >&2 # cp speed_short.yaml speed_cde.yaml
         all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_cde.yaml)
-        if [ $i -gt 0 ];then
+        if [ "$data" ] && [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
           - {name: A2, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "D"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A1, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "C"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
@@ -490,8 +500,8 @@ jobs:
         else
         cat >>config.yml<<-FFF
           - {name: A1, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, use: [ps], proxies: [A1, DIRECT]}
-          - {name: B0, type: select, use: [ps], proxies: [DIRECT, A1]}
+          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E1,F1,G1,]}
+          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E1,F1,G1,]}
         FFF
         fi
         if [ -f speed_cde.yaml ];then
