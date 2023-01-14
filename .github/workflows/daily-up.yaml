@@ -328,6 +328,13 @@ jobs:
         num=$1
         good="good$num.txt"
         bad="bad$num.txt"
+        if [ "$mode" = 2 ]; then
+          p2=$(echo "$data" | awk '{print $2}')
+          p1=$(echo "$data" | awk '{print $1}')
+          t_p1=$(curl -s -X PUT -w "%{http_code}" -d "{$p1}" "http://127.0.0.1:$port/proxies/T$num")
+          [ "$t_p1" = "204" ] || return 1        
+          data=$p2
+        fi
         url=$(eval echo http${tls:0:$t_s}://'$kw'${num}.com)
         [ "a$t_s" = "a0" ] && p_p=80 || p_p=443
         domain=$(eval echo '$kw'${num}.com)
@@ -347,8 +354,11 @@ jobs:
         file=$bad
         fi
         [ $good = $file ] && echo $t_a >> delay$num.txt
-        echo $data $file $t $r $s $t_a $sd 1>&2
-        echo $data >> $file
+        echo $data $file $t $r $s $t_a ${sd}${p1} 1>&2
+        cat >>$file<<-FFF
+        echo $data
+        [ "mode" = 2 ] && echo $p1
+        FFF  
         }
         [ -f queue ] && rm queue
         [ -f read_lock ] && rm read_lock
