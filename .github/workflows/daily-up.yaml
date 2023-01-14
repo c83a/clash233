@@ -448,7 +448,7 @@ jobs:
           offset=0
           while(offset < len_a){
             for (j=0;j<len_b;j++){
-              print b[j] " " a[ j % len_a ]     
+              print b[j] " " a[ (offset+j) % len_a ]     
             }
             offset++
           } 
