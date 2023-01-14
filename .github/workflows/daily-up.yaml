@@ -434,16 +434,25 @@ jobs:
         #!/bin/bash
         rm clash.log || :
         cat >gen-check.awk<<-FFF
-        BEGIN{FS=","}
+        BEGIN{FS=",";i=0;j=0}
         {
           if (match($NF,/^("name":"[^"]*")/,c)){
             if (index(c[1],"CN_"))
-              a[c[1]]
+              a[i++]=c[1]
             else 
-              b[c[1]]
+              b[j++]=c[1]
           }
         }
-        END{}
+        END{
+          len_a=i;len_b=j
+          offset=0
+          while(offset < len_a){
+            for (j=0;j<len_b;j++){
+              print b[j] " " a[ j % len_a ]     
+            }
+            offset++
+          } 
+        }
         FFF
         limit=7
         i=0
