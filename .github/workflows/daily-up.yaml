@@ -585,7 +585,7 @@ jobs:
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed_short.yaml || :
         [ ! -f warp_blocked ] && grep 'type: ss' speed_short.yaml || :
         fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml  
-        gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b))print a[1]}' x.yaml | gawk -f gen-check.awk > check-list.txt
+        gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b))print a[1]}' x.yaml | gawk -f gen-check.awk | head -n 6666 > check-list.txt
         bash ./check.sh 'HELLO' 'WORLD'
         exit     
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
