@@ -459,7 +459,7 @@ jobs:
         i=0
         write_i(){
         if [ ! "$data" ];then
-        all_server2=$(gawk -f ./gen2.awk)
+        all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         cat >>config.yml<<-FFF
           - {name: E1, type: select, proxies: [$all_server2 DIRECT,REJECT]}
           - {name: F1, type: select, proxies: [$all_server2 DIRECT,REJECT]}        
