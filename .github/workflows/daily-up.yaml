@@ -318,8 +318,8 @@ jobs:
         clash_pid=$!
         # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}' # may change with new version of clash
         # use above cmd to get proxies alive , maybe bad
-        [ "$1" ] && c_timeout=11 || c_timeout=7
-        [ "$1" ] && timeout=15 || timeout=11
+        [ "$mode" != 0 ] && c_timeout=11 || c_timeout=7
+        [ "$mode" != 0 ] && timeout=15 || timeout=11
         try_n=0
         proxy="http://127.0.0.1:$mport"
         peer()
