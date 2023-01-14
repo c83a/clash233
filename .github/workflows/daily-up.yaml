@@ -331,7 +331,7 @@ jobs:
         if [ "$mode" = 2 ]; then
           p2=$(echo "$data" | awk '{print $2}')
           p1=$(echo "$data" | awk '{print $1}')
-          t_p2=$(curl -s -X PUT -w "%{http_code}" -d "{$p1}" "http://127.0.0.1:$port/proxies/T$num")
+          t_p2=$(curl -s -X PUT -w "%{http_code}" -d "{$p2}" "http://127.0.0.1:$port/proxies/T$num")
           [ "$t_p2" = "204" ] || return 1        
           data=$p1
         fi
