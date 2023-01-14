@@ -110,11 +110,19 @@ jobs:
         set +e 
         . ipvenv/bin/activate        
         echo working dir is `pwd`
-        if [ "$1" ];then
-        sd=$1 # alias for func
-        [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
-        [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
-        else
+        if [ ! "$mode" ] && [ "$2" ];then
+          mode=2
+        fi
+        if [ ! "$mode" ] && [ "$1" ];then
+          mode=1
+          sd=$1 # alias for func
+          [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
+          [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
+        fi
+        if [ ! "$mode" ];then
+          mode=0
+        fi
+        if [ "$mode" = 0 ];then
         echo 'ipv6: true' > 1.yaml
         if [ ! "$np" ];then
         uuid=`cat  /proc/sys/kernel/random/uuid`
@@ -208,7 +216,7 @@ jobs:
         fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml > check-list.txt
-        fi
+        fi # END of mode 0
         if [ 1 ];then
         cat >kw.txt<<-EOF
         microsoft
@@ -345,7 +353,7 @@ jobs:
         kill $clash_pid || echo clash exited 
         fi
         ls *.txt
-        if [ ! "$sd" ];then
+        if [ "$mode" = "0" ];then
         awk 'BEGIN{FS=",";f="speed.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
         else
