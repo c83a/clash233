@@ -356,7 +356,7 @@ jobs:
         [ $good = $file ] && echo $t_a >> delay$num.txt
         echo $data $file $t $r $s $t_a ${sd}${p2} 1>&2
         echo $data >>$file
-        [ "mode" = 2 ] && echo $p2 >>p2_$file
+        [ "$mode" = 2 ] && echo $p2 >>p2_$file
         }
         [ -f queue ] && rm queue
         [ -f read_lock ] && rm read_lock
