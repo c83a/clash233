@@ -511,7 +511,23 @@ jobs:
               print z[1]
         }
         BEGIN{
-        ORS=","
+        ORS="," 
+        if( mode == 2 ){
+          while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g) && ("ls p2_good*.txt" | getline h) ){
+            while( (getline t < f) && (getline s < g) &&  (getline r < h) ){
+              delay[s]+=t;delay[r]+=t
+              count[s]++ ;count[r]++
+              a[s]       ;b[r]
+              count["all"]+=2
+            }         
+            close(f);close(g);close(h) 
+          }
+          for (i in a) c[sprintf("%03d %05d %s", delay[i] * 10 / count[i], count["all"] - count[i], i)]
+          for (i in b) d[sprintf("%03d %05d %s", delay[i] * 10 / count[i], count["all"] - count[i], i)]
+          fsp(c);fsp(d)  
+          exit
+        }
+        ORS="," 
         while(("ls delay*.txt" |getline f) && ("ls good*.txt" | getline g)){
           while( (getline t < f) && (getline s < g) ){
             if( match(s,/"CN_/) ) b[sprintf("%03d %s",t * 10, s)]
