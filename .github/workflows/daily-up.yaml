@@ -244,7 +244,7 @@ jobs:
         EOF
         limit=20
         i=0
-        tls='s';[ "$1" ] && [ ! -f warp_blocked ] && t_s=0 || t_s=1
+        tls='s';[ "$mode" != 0 ] && [ ! -f warp_blocked ] && t_s=0 || t_s=1
         for kwi in $(awk '!a[$0]++' kw.txt);do
         curl -I -s http${tls:0:$t_s}://${kwi}.com > /dev/null || continue
         i=$(($i + 1))
