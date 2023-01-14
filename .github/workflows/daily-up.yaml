@@ -355,10 +355,10 @@ jobs:
         fi
         [ $good = $file ] && echo $t_a >> delay$num.txt
         echo $data $file $t $r $s $t_a ${sd}${p1} 1>&2
-        cat >>$file<<-FFF
+        if [ 1 ];then
         echo $data
         [ "mode" = 2 ] && echo $p1
-        FFF  
+        fi >>$file  
         }
         [ -f queue ] && rm queue
         [ -f read_lock ] && rm read_lock
