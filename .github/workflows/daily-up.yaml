@@ -286,17 +286,27 @@ jobs:
             - tls://dns.google:853
             - https://dns.google/dns-query
         EOF
-        [ "$1" ] && SR="R" || SR="S"
+        [ "$mode" = 0 ] && SR="S"
+        [ "$mode" = 1 ] && SR="R"
+        [ "$mode" = 2 ] && SR="R"       
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,${SR}${i}";done
         echo "          - MATCH,REJECT"
         echo "proxy-groups:";
-        [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
+        [ "$mode" = 1 ] && [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
         for i in `seq $max_worker`; do
-          echo "          - {name: S$i, type: select, use: [px]}"
-          if [ $SR = R ] ;then
-            # [ -f warp_on ] &&  SS="S$i,S0" || SS="S0,S$i"
+          if [ "$mode" = 0 ];then
+            echo "          - {name: S$i, type: select, use: [px]}"
+          fi
+          if [ "$mode" = 1 ];then
             [ ! -f SOME_GEO_CODE ] && SS="S$i,S0" || SS="S0,S$i"
+            echo "          - {name: S$i, type: select, use: [px]}"
+            echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
+          fi
+          if [ "$mode" = 2 ];then
+            [ ! -f SOME_GEO_CODE ] && SS="S$i,T$i" || SS="T$i,S$i"
+            echo "          - {name: S$i, type: select, use: [px]}"
+            echo "          - {name: T$i, type: select, use: [px]}" 
             echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
           fi
         done
