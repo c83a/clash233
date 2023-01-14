@@ -400,7 +400,8 @@ jobs:
         cat check-list.txt       
         fi>&99 &
         p="$! $p"
-        [ "$1" ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0") && rm good*.txt bad*.txt delay*.txt || :
+        [ "$mode" = 1 ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0")
+        [ "$mode" != 0 ] && rm good*.txt bad*.txt delay*.txt p2_good*.txt p2_bad*.txt || :
         for i in `seq $max_worker`;do
         sleep 1
         worker $i
