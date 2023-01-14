@@ -476,12 +476,12 @@ jobs:
         }
         timeout_clean(){
         [ "$(pidof clash)" ] && kill $w
-        if  ! (tail -n1 config.yml | grep -q "name: D$i")  && (ls *.txt | grep -q good) ;then
+        if ! (tail -n1 config.yml | grep -q "name: D$i")  && (ls *.txt | grep -q good) ;then
         i=$(($i +1))
         write_i
-        [ -f warp_blocked ] && echo "$data" >> cdn.txt
-        echo "$data" >> cde_$i.txt
-        cat good*.txt >> cde_$i.txt
+        [ -f warp_blocked ] && [ "$data" ] && echo "$data" >> cdn.txt
+        [ "$data" ] && echo "$data" >> cde_$i.txt || :
+        cat good*.txt >> cde_$i.txt || :
         touch yml_good
         fi
         [ ! "$data" ] && (ls *.txt | grep -q good) && cat *good*.txt  | awk '!a[$0]++' > cde_all.txt
