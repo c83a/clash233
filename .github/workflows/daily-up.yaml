@@ -354,7 +354,7 @@ jobs:
         file=$bad
         fi
         [ $good = $file ] && echo $t_a >> delay$num.txt
-        echo $data $file $t $r $s $t_a ${sd}${p1} 1>&2
+        echo $data $file $t $r $s $t_a ${sd}${p2} 1>&2
         echo $data >>$file
         [ "mode" = 2 ] && echo $p2 >>p2_$file
         }
@@ -433,6 +433,18 @@ jobs:
         cat >check2.sh<<-\EEE
         #!/bin/bash
         rm clash.log || :
+        cat >gen-check.awk<<-FFF
+        BEGIN{FS=","}
+        {
+          if (match($NF,/^("name":"[^"]*")/,c)){
+            if (index(c[1],"CN_"))
+              a[c[1]]
+            else 
+              b[c[1]]
+          }
+        }
+        END{}
+        FFF
         limit=7
         i=0
         write_i(){
