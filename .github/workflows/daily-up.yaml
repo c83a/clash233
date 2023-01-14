@@ -433,7 +433,7 @@ jobs:
         cat >check2.sh<<-\EEE
         #!/bin/bash
         rm clash.log || :
-        cat >gen-check.awk<<-FFF
+        cat >gen-check.awk<<-\FFF
         BEGIN{FS=",";i=0;j=0}
         {
           if (match($NF,/^("name":"[^"]*")/,c)){
