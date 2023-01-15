@@ -593,7 +593,7 @@ jobs:
         fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml
         [ -f warp_blocked ] && mode=2
         if [ "$mode" = 2 ];then 
-        gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b))print a[1]}' x.yaml | gawk -f gen-check.awk | head -n 6666 > check-list.txt
+        gawk '{if( ! index($0, "type: ss") && match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b))print a[1]}' x.yaml | gawk -f gen-check.awk | head -n 6666 > check-list.txt
         bash ./check.sh 'HELLO' 'WORLD'
         exit
         fi #END of mode2     
