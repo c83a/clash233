@@ -538,8 +538,8 @@ jobs:
             }         
             close(f);close(g);close(h) 
           }
-          for (i in a) c[sprintf("%03d %05d %s", delay[i] * 10 / count[i], count["all"] - count[i], i)]
-          for (i in b) d[sprintf("%03d %05d %s", delay[i] * 10 / count[i], count["all"] - count[i], i)]
+          for (i in a) c[sprintf("%05d %03d %s",  count["all"] - count[i], delay[i] * 10 / count[i], i)]
+          for (i in b) d[sprintf("%05d %03d %s",  count["all"] - count[i], delay[i] * 10 / count[i], i)]
           fsp(c);fsp(d)  
           exit
         }
