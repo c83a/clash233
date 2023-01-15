@@ -375,7 +375,7 @@ jobs:
         awk 'BEGIN{FS=",";f="speed.yaml";print "proxies:" > f;while("ls good*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         awk 'BEGIN{print "proxies:"}{if (match($0,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) print}' speed.yaml > speed_short.yaml
         else
-        cat good*.txt || :
+        cat good*.txt | awk '!a[$0]++' || :
         fi
         echo clean finished
         }
@@ -481,7 +481,7 @@ jobs:
         write_i
         [ -f warp_blocked ] && [ "$data" ] && echo "$data" >> cdn.txt
         [ "$data" ] && echo "$data" >> cde_$i.txt || :
-        cat good*.txt >> cde_$i.txt || :
+        cat good*.txt | awk '!a[$0]++' >> cde_$i.txt || :
         touch yml_good
         fi
         [ ! "$data" ] && (ls *.txt | grep -q good) && cat *good*.txt  | awk '!a[$0]++' > cde_all.txt
