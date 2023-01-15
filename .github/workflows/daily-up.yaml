@@ -465,7 +465,7 @@ jobs:
         if [ 1 ];then
         echo "  - {name: E0, type: select, proxies: &all [DIRECT,REJECT,${all_server2}]}"
         for j in $( seq ${limit} );do
-        cat <-FFF
+        cat <<-FFF
           - {name: E${j}, type: select, proxies: *all}        
           - {name: F${j}, type: select, proxies: *all}        
           - {name: G${j}, type: relay, proxies: [E${j},F${j}]}
