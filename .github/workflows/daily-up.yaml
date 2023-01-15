@@ -460,7 +460,7 @@ jobs:
         mode="$1"
         ! [ "$mode" = 2 -o "$mode" = 1 ] && mode=2 # default
         write_i(){
-        if [ ! "$data" ];then
+        if [ "$mode" = 2 ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         if [ 1 ];then
         echo "  - {name: E0, type: select, proxies: &all [DIRECT,REJECT,${all_server2}]}"
