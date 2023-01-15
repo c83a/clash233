@@ -304,7 +304,7 @@ jobs:
             echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
           fi
           if [ "$mode" = 2 ];then
-            [ ! -f SOME_GEO_CODE ] && SS="T$i,S$i,T$i" || SS="S$i,T$i,S$i"
+            [ ! -f SOME_GEO_CODE ] && SS="T$i,S$i,T$i" || SS="S$i,T$i"
             echo "          - {name: S$i, type: select, use: [px]}"
             echo "          - {name: T$i, type: select, use: [px]}" 
             echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
