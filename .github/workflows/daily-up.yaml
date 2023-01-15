@@ -461,7 +461,7 @@ jobs:
         if [ ! "$data" ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         if [ 1 ];then
-        echo "  - {name: E0, type: select, proxies: &all [$all_server2 DIRECT,REJECT]}"
+        echo "  - {name: E0, type: select, proxies: &all [DIRECT,${all_server2}REJECT]}"
         for j in $( seq ${limit} );do
         cat <-FFF
           - {name: E${j}, type: select, proxies: *all}        
