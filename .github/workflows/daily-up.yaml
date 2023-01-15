@@ -461,8 +461,8 @@ jobs:
         if [ ! "$data" ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         cat >>config.yml<<-FFF
-          - {name: E1, type: select, proxies: [$all_server2 DIRECT,REJECT]}
-          - {name: F1, type: select, proxies: [$all_server2 DIRECT,REJECT]}        
+          - {name: E1, type: select, proxies: &all [$all_server2 DIRECT,REJECT]}
+          - {name: F1, type: select, proxies: *all}        
           - {name: G1, type: relay, proxies: [E1,F1]}        
         FFF
         else
