@@ -505,8 +505,8 @@ jobs:
         cat >>config.yml<<-FFF
           - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A1, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,A2]}
-          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,A2]}
+          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,A2,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,A2,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
         FFF
         fi
         if [ -f speed_cde.yaml ];then
