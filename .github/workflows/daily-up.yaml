@@ -481,15 +481,14 @@ jobs:
         write_i
         [ -f warp_blocked ] && [ "$data" ] && echo "$data" >> cdn.txt
         [ "$data" ] && echo "$data" >> cde_$i.txt || :
-        cat good*.txt | awk '!a[$0]++' >> cde_$i.txt || :
+        (ls *.txt | grep -q good) && awk '!a[$0]++' *good*.txt >> cde_$i.txt || :
         touch yml_good
         fi
-        [ ! "$data" ] && (ls *.txt | grep -q good) && cat *good*.txt  | awk '!a[$0]++' > cde_all.txt
         if (ls cde*.txt | grep -q cde);then
         awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
         fi
         [ -f speed_cde.yaml ] || ls && cat cde*.txt >&2 # cp speed_short.yaml speed_cde.yaml
-        all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_cde.yaml)
+        # all_server=$(gawk 'BEGIN{ORS=","}{if(match($0,/"name":"([^"]*)"/,a))print a[1]}' speed_cde.yaml)
         if [ "$data" ] && [ $i -gt 0 ];then
         cat >>config.yml<<-FFF
           - {name: A2, type: load-balance, proxies: [$(seq $i | awk 'BEGIN{ORS=","}{print "D"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
