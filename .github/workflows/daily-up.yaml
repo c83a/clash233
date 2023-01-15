@@ -457,6 +457,8 @@ jobs:
         FFF
         limit=7
         i=0
+        mode="$1"
+        ! [ "$mode" = 2 -o "$mode" = 1 ] && mode=2 # default
         write_i(){
         if [ ! "$data" ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
@@ -588,10 +590,14 @@ jobs:
         [ ! -f warp_blocked ] && grep -v 'type: ss' speed_short.yaml || :
         [ ! -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed_short.yaml || :
         [ ! -f warp_blocked ] && grep 'type: ss' speed_short.yaml || :
-        fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml  
+        fi | gawk  -F '"name":' 'NF == 2 && !b[$1]++ && !a[$2]++' >> x.yaml 
+        if [ "$mode" = 2 ];then 
         gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b))print a[1]}' x.yaml | gawk -f gen-check.awk | head -n 6666 > check-list.txt
         bash ./check.sh 'HELLO' 'WORLD'
-        exit     
+        exit
+        fi #END of mode2     
+        if [ 1 ];then # mode 1, anyway
+        mode=1    
         for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
         [ ! "$data" ] && exit 1
         current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
@@ -616,6 +622,7 @@ jobs:
         touch yml_good
         [ $i -eq $limit ] && break      
         done
+        fi # END of mode1
         EEE
         chmod 755 check2.sh
         [ -f tmp_0.yaml ] && tt=110 || tt=116
