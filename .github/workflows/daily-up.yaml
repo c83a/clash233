@@ -582,7 +582,7 @@ jobs:
         FFF
         sudo ./run.sh || : >> warp.log
         [ ! 1 ] && touch warp_blocked && echo 'pretending block CF warp'
-        [ $(grep '"CN_' speed_short.yaml | wc -l) -gt 3 ] || touch warp_blocked
+        [ $(grep '"CN_' speed_short.yaml | grep -v 'type: ss' | wc -l) -gt 3 ] || touch warp_blocked
         echo 'proxies:' > x.yaml
         if [ 1 ];then
         [ -f warp_blocked ] && gawk '{if(match($0,/"name":"CN_([^_]*)_[^"]*"/,a) && !b[a[1]]++ )print}' speed_short.yaml || :
