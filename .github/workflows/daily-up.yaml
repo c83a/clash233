@@ -556,15 +556,15 @@ jobs:
         FFF
         cat >config.yml<<-FFF
         ipv6: true
-        redir-port: 7892
-        socks-port: 7891
+        #redir-port: 7892
         mixed-port: 7890
         allow-lan: true
         mode: rule
         log-level: silent
         #external-ui: clash_webs
         external-controller: 0.0.0.0:9090
-        rules:
+        #tunnels: ["tcp/udp,0.0.0.0:7891,[::1]:7890,DIRECT"]
+        rules:  # - SRC-IP-CIDR,0.0.0.0/0,A0
           - GEOIP,CN,B0
           - MATCH,A0
         proxy-providers:
