@@ -463,7 +463,17 @@ jobs:
         if [ "$mode" = 2 ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         if [ 1 ];then
-        echo "  - {name: E0, type: select, proxies: &all [DIRECT,REJECT,${all_server2}]}"
+        cat <<-FFF
+          - {name: E0, type: select, proxies: &all [DIRECT,REJECT,${all_server2}]}
+          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: G0, type: relay, proxies: [A2,A3]}
+          - {name: A3, type: select, proxies: [A5,A4,A2]}
+          - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 600, strategy: &strategy round-robin}
+          - {name: A4, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
+          - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
+          - {name: A5, type: load-balance, proxies: *all, url: *url, interval: *seconds, strategy: *strategy} 
+        FFF
         for j in $( seq ${limit} );do
         cat <<-FFF
           - {name: E${j}, type: select, use: [ps], proxies: *all}        
@@ -504,15 +514,7 @@ jobs:
           - {name: B0, type: select, use: [ps], proxies: [DIRECT,A2,A1, $(seq $i | awk 'BEGIN{ORS=","}{print "B"$0",D"$0}') ]}
         FFF
         else
-        cat >>config.yml<<-FFF
-          - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,A4,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
-          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,A4,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
-          - {name: G0, type: relay, proxies: [A2,A3]}
-          - {name: A4, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-          - {name: A3, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
-        FFF
+          [ 1 ] || :
         fi
         if [ -f speed_cde.yaml ];then
         grep -v 'type: ss' speed_cde.yaml
