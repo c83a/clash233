@@ -455,7 +455,7 @@ jobs:
           } 
         }
         FFF
-        limit=7
+        limit=6
         i=0
         mode="$1"
         ! [ "$mode" = 2 -o "$mode" = 1 ] && mode=1 # default
@@ -508,6 +508,9 @@ jobs:
           - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
           - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
           - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: G0, type: relay, proxies: [A2,A3]}
+          - {name: A2, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
+          - {name: A3, type: load-balance, use: [ps], url: "http://www.gstatic.com/generate_204", interval: 600, strategy: round-robin}
         FFF
         fi
         if [ -f speed_cde.yaml ];then
