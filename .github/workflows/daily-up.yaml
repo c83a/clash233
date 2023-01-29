@@ -464,7 +464,7 @@ jobs:
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
         if [ 1 ];then
         cat <<-FFF
-          - {name: E0, type: select, proxies: &all [DIRECT,REJECT,${all_server2}]}
+          - {name: E0, type: select, proxies: &all [REJECT,DIRECT,${all_server2}]}
           - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
           - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
           - {name: G0, type: relay, proxies: [A2,A3]}
