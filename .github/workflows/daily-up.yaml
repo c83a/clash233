@@ -214,7 +214,7 @@ jobs:
         cat raw_database.yaml
         ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
         fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
-        gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' database*.yaml x.yaml > cdn.yaml
+        gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ > check-list.txt
         fi # END of mode 0
         if [ 1 ];then
