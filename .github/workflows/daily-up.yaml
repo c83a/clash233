@@ -586,7 +586,7 @@ jobs:
               url: http://www.gstatic.com/generate_204
         proxy-groups:
         FFF
-        sudo ./run.sh || : >> warp.log
+        # sudo ./run.sh || : >> warp.log
         [ ! 1 ] && touch warp_blocked && echo 'pretending block CF warp'
         [ $(grep '"CN_' speed_short.yaml | grep -v 'type: ss' | wc -l) -gt 3 ] || touch warp_blocked
         echo 'proxies:' > x.yaml
