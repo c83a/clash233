@@ -472,7 +472,7 @@ jobs:
           - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 600, strategy: &strategy round-robin}
           - {name: A4, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
           - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
-          - {name: A5, type: load-balance, proxies: *all, url: *url, interval: *seconds, strategy: *strategy} 
+          - {name: A5, type: load-balance, use: [ps], url: *url, interval: *seconds, strategy: *strategy} 
         FFF
         for j in $( seq ${limit} );do
         cat <<-FFF
