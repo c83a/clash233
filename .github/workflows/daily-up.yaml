@@ -317,8 +317,7 @@ jobs:
         port=$((2$seed % 100 + 20406))
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
         clash_pid=$!
-        # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}' # may change with new version of clash
-        # use above cmd to get proxies alive , maybe bad
+        # curl -s  http://127.0.0.1:$port/providers/proxies| awk -F, 'BEGIN{RS="(,\42delay\42)|(,\42udp\42)"}{if(NF == 3 && !match($1,/:0/))print $2 > "goodz.txt"}' # get servers alive from clash, both good and bad
         [ "$mode" != 0 ] && c_timeout=11 || c_timeout=7
         [ "$mode" != 0 ] && timeout=15 || timeout=11
         try_n=0
@@ -580,6 +579,7 @@ jobs:
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: s.yml
+            filter: '^[^C]|^C[^N]'
             health-check:
               enable: true
               lazy: true
