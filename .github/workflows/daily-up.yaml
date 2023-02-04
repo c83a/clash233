@@ -181,10 +181,14 @@ jobs:
           }else{
               while(1){
                 if((getline dl < database) > 0){
-                    if(match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) && d="\42name\42:\42_" mp[1] qi tt[1] "\42" ) break
-                    else continue 
+                    if( ! match(dl,/"name":"[^_]*_[^_]*_([^_-]*-)/,mp) )
+                        continue
+                    d="\42name\42:\42_" mp[1] qi tt[1] "\42";
+                    break;
                 }else{
-                    close(database) ; database_closed=1 ; d="\42name\42:\42_" np qi tt[1] "\42"; break;}}}
+                    close(database) ; database_closed=1 ;
+                    d="\42name\42:\42_" np qi tt[1] "\42";
+                    break;}}}
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
