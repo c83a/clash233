@@ -141,13 +141,14 @@ jobs:
             for (i=1;i<=n;i++){
               if ( closed[file[i]] ) 
                 continue
-              if ((getline line < file[i] ) > 0){
-                  if ( raw || split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)
-                    print line
-              }else{ 
-                    close(file[i])
-                    closed[file[i]]=1
-                    sum_closed++}             
+              if ( ! (getline line < file[i] ) ){
+                close(file[i])
+                closed[file[i]]=1
+                sum_closed++
+                continue
+               } 
+              if ( raw || split(line,a,aFS) && 2 in a && !b[a[1]]++ && !c[a[2]]++)
+                print line            
             }
           }
         }
