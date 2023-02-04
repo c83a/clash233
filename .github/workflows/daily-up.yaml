@@ -134,10 +134,10 @@ jobs:
         { file[NR]=$0; closed[$0]=0 }
         END{
           n=NR
+          sum_closed=0
           n_fd=0
           for (i in closed) n_fd++
           while ( 1 ){
-            sum_closed=0
             for (i=1;i<=n;i++){
               if (! closed[file[i]] ){
                 if ((getline line < file[i] ) > 0){
@@ -146,9 +146,9 @@ jobs:
                 }else{ 
                     close(file[i])
                     closed[file[i]]=1}
+                    sum_closed+=1
               }               
             }
-            for (fn in closed) sum_closed+=closed[fn]
             if(sum_closed == n_fd) break
           }
         }
