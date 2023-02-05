@@ -173,9 +173,10 @@ jobs:
           if(qi > 23333) exit
           if( ! match($0,/type: ([^,]*)/,tt) || ! match($0,/server: ([^,]*)/,ss))
             next
-          if( !(ss[1]tt[1] in rr) )
-            rr[ss[1]tt[1]]=0
-          if( rr[ss[1]tt[1]] > 2 || a[$0]++) next
+          u=ss[1]tt[1]
+          if( !(u in rr) )
+            rr[u]=0
+          if( rr[u] > 2 || a[$0]++) next
           if(database_closed){
               d="\42name\42:\42_" np qi tt[1] "\42"
           }else{
@@ -191,7 +192,7 @@ jobs:
           p="  - {" $0 "," d "}";
           print "proxies:\n"p > g;close(g);
           h|getline r;close(h);
-          if(index(r,"t") && ++rr[ss[1]tt[1]] && ++qi)print p
+          if(index(r,"t") && ++rr[u] && ++qi)print p
         }
         END{
           print NR " records IN, " qi " records OUT" | "cat 1>&2" 
