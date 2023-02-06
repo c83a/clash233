@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 import re
 import asyncio
+import contextvars
 import concurrent.futures
 import sys
 ip_pattern='''^\d+\.\d+\.\d+\.\d+$|^[0-9a-fA-F:]+$'''
 dns_cache={}
 code_cache={}
+loop_var = contextvars.ContextVar('loop')
+nslookup46_var = contextvars.ContextVar('nslookup46')
 try:
   import maxminddb
   reader = maxminddb.open_database('Country.mmdb',mode=maxminddb.MODE_MEMORY)
@@ -28,7 +31,7 @@ def get_file():
   else:
     yield from f
 async def a_read():
-  loop=asyncio.get_running_loop()
+  loop=loop_var.get()
   gen=get_file()
   end=EOFError()
   with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
@@ -45,7 +48,7 @@ async def get_code_ip(ip_domain):
           domain=ip_domain
           ip=None
           try:
-            nslookup46=asyncio.get_running_loop().getaddrinfo
+            nslookup46=nslookup46_var.get()
             ip=(await asyncio.wait_for(nslookup46(domain,80),timeout=10.0))[0][4][0]
           except:
             pass
@@ -73,6 +76,9 @@ async def print_item(agen,alock):
         print("#".join(map(str,(line.strip(), code, ip))))
         break
 async def main():
+  loop=asyncio.get_running_loop()
+  loop_var.set(loop)
+  nslookup46_var.set(loop.getaddrinfo)
   alock=asyncio.Lock()
   agen=a_read()
   task_list=[asyncio.create_task(print_item(agen,alock)) for i in range(20)]
