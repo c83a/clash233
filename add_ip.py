@@ -36,18 +36,7 @@ async def a_read():
         r = await loop.run_in_executor(pool, next, gen, end)
         if r is end: break
         yield r
-async def print_item(agen,alock):
-  nslookup46=asyncio.get_running_loop().getaddrinfo
-  end=EOFError()
-  while True:
-    async with alock:
-        line=await anext(agen, end)
-    if line is end:
-        break
-    else:
-      await asyncio.sleep(0)
-      for server in re.finditer('server: ([^,]*)',line):
-        ip_domain=server.group(1)
+async def get_code_ip(ip_domain):
         if re.match(ip_pattern,ip_domain):
           ip=ip_domain
         elif ip_domain in dns_cache:
@@ -56,6 +45,7 @@ async def print_item(agen,alock):
           domain=ip_domain
           ip=None
           try:
+            nslookup46=asyncio.get_running_loop().getaddrinfo
             ip=(await asyncio.wait_for(nslookup46(domain,80),timeout=10.0))[0][4][0]
           except:
             pass
@@ -68,6 +58,18 @@ async def print_item(agen,alock):
           except:
             code='ZZ'
           code_cache[ip]=code
+        return (code, ip)
+async def print_item(agen,alock):
+  end=EOFError()
+  while True:
+    async with alock:
+        line=await anext(agen, end)
+    if line is end:
+        break
+    else:
+      await asyncio.sleep(0)
+      for server in re.finditer('server: ([^,]*)',line):
+        code, ip = await get_code_ip(server.group(1))
         print("#".join(map(str,(line.strip(), code, ip))))
         break
 async def main():
