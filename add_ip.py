@@ -27,17 +27,15 @@ def get_file():
       yield from f
   else:
     yield from f
-  raise EOFError()
 async def a_read():
   loop=asyncio.get_running_loop()
   gen=get_file()
+  end=EOFError()
   with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
     while True:
-      try:
-        r = await loop.run_in_executor(pool, lambda: next(gen))
+        r = await loop.run_in_executor(pool, next, gen, end)
+        if r is end: break
         yield r
-      except EOFError:
-            break
 async def print_item(agen,alock):
   nslookup46=asyncio.get_running_loop().getaddrinfo
   while True:
