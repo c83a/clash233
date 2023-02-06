@@ -38,12 +38,11 @@ async def a_read():
         yield r
 async def print_item(agen,alock):
   nslookup46=asyncio.get_running_loop().getaddrinfo
+  end=EOFError()
   while True:
-    line=None
     async with alock:
-        async for line in agen:
-            break
-    if line is None:
+        line=await anext(agen, end)
+    if line is end:
         break
     else:
       await asyncio.sleep(0)
