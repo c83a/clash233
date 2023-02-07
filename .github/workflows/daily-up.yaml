@@ -157,8 +157,8 @@ jobs:
         if [ 1 ];then
         echo -e 'speed_ip.yaml\nconfig.yml'| gawk -f mixn.awk
         cat config.yml speed_*.yaml speed.yaml
-        fi |  sed 's/^- {/  - {/;s/: True,/: true,/g;s/: False,/: false,/g' |gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
-        sed 's/^- {/  - {/;s/: True,/: true,/g;s/: False,/: false,/g' config.yaml  > database_2.yaml
+        fi |  gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
+        cp config.yaml database_2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
@@ -211,7 +211,7 @@ jobs:
         for j in database*.yaml $(ls -s tmp*.yaml | sort | awk '{print $2}') ; do
         echo processing  $j >&2
         grep -q -e 'name: [^,]*, server: ' $j && cmd1="sed -E 's/name: [^,]*, server: /server: /' $j" || cmd1="cat $j"
-        eval $cmd1 | yq -M -o=json | yq -M 'del(.proxy-groups) | del(.rules) | del(.proxies.[].name) | del(.proxies.[].udp) | del(.proxies.[].sni) | del(.proxies.[].servername) | del(.proxies.[].country) | del (.proxies.[].group) | del(.proxies.[].index) | del(.proxies.[].ws-opts.headers) | del(.proxies.[].ws-headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
+        eval $cmd1 | yq -M -o=json | yq -M 'del(.["proxy-groups","rules"]) | del(.proxies.[].["name","udp","sni","servername","country","group","index","ws-headers"])| del(.proxies.[].ws-opts.headers) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
         done
         if [ 1 ];then
