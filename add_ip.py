@@ -73,7 +73,7 @@ async def print_item(agen,alock):
       await asyncio.sleep(0)
       for server in re.finditer('server: ([^,]*)',line):
         code, ip = await get_code_ip(server.group(1))
-        print("#".join(map(str,(line.strip(), code, ip))))
+        print("#".join(map(str,(line.rstrip(), code, ip))))
         break
 async def main():
   loop=asyncio.get_running_loop()
