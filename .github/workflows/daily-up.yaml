@@ -157,8 +157,8 @@ jobs:
         if [ 1 ];then
         echo -e 'speed_ip.yaml\nconfig.yml'| gawk -f mixn.awk
         cat config.yml speed_*.yaml speed.yaml
-        fi | yq -M -o=json | yq -M '... style = "" | .proxies.[] style="flow"' | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
-        yq -M -o=json config.yaml | yq -M '... style = "" | .proxies.[] style="flow"' > database_2.yaml
+        fi | yq -M -o=json | yq -M '... style = "" | .*.[] style="flow"' | gawk -F '"name":' 'BEGIN{print "proxies:"}{if(NF > 1 && !a[$1]++)print}' > database.yaml
+        yq -M -o=json config.yaml | yq -M '... style = "" | .*.[] style="flow"' > database_2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
           database="database.yaml"
