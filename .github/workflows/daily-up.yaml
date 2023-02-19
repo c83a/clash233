@@ -664,7 +664,7 @@ jobs:
           pr:
             type: http
             interval: 9600
-            url: &src-1 "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: s.yaml
             filter: '^CN_' 
             health-check: &check
@@ -675,7 +675,7 @@ jobs:
           ps:
             type: http
             interval: *seconds
-            url: *src-1
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml"
             filter: '^[^C]|^C[^N]' 
             path: s.yaml
             health-check: *check
