@@ -478,7 +478,7 @@ jobs:
           - {name: A5, type: load-balance, use: [ps], url: *url, interval: *seconds, strategy: *strategy} 
         FFF
         for j in $( seq ${limit} );do
-        part2=$( echo -n $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( index($0,"_") && (! match($0,/^CN/)) && ((i++)%k == j) )print $0}' )
+        part2=$( echo -n $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( (! match($0,/^CN/)) && ((i++)%k == j) )print $0}' )
         part=$( echo -n $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( match($0,/^CN/)  && ((i++)%k == j) )print $0}' )
         cat <<-FFF
           - {name: E${j}, type: url-test, proxies: [REJECT,${part}], url: *baidu, interval: *seconds}    
