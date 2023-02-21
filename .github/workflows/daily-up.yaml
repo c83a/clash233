@@ -468,8 +468,8 @@ jobs:
         if [ 1 ];then
         cat <<-FFF
           - {name: E0, type: select, proxies: &all [REJECT,DIRECT,${all_server2}]}
-          - {name: A0, type: select, use: [ps], proxies: [A1,DIRECT,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
-          - {name: B0, type: select, use: [ps], proxies: [DIRECT,A1,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: A0, type: select, use: [ps], proxies: [A2,A1,DIRECT,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [G0,DIRECT,A1,E0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
           - {name: G0, type: relay, proxies: [A2,A3]}
           - {name: A3, type: fallback, proxies: [A5,A4,A2], url: &baidu "http://www.baidu.com", interval: &delay 600}
           - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 3000, strategy: &strategy round-robin}
@@ -574,11 +574,12 @@ jobs:
         mode: rule
         log-level: silent
         #external-ui: clash_webs
-        external-controller: 0.0.0.0:9090
-        #tunnels: ["tcp/udp,0.0.0.0:7891,[::1]:7890,DIRECT"]
-        rules:  # - SRC-IP-CIDR,0.0.0.0/0,A0
-          - GEOIP,CN,B0
-          - MATCH,A0
+        external-controller: 127.0.0.1:9090
+        tunnels: ["tcp/udp,0.0.0.0:7891,[::1]:7890,DIRECT"]
+        rules:  
+          - GEOIP,CN,DIRECT
+          - SRC-IP-CIDR,0.0.0.0/0,A0 
+          - MATCH,B0
         proxy-providers:
           ps:
             type: http
