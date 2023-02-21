@@ -458,7 +458,7 @@ jobs:
           } 
         }
         FFF
-        limit=5
+        limit=3
         i=0
         mode="$1"
         ! [ "$mode" = 2 -o "$mode" = 1 ] && mode=1 # default
@@ -568,7 +568,6 @@ jobs:
         cat >config.yml<<-FFF
         # $(date)
         ipv6: true
-        #redir-port: 7892
         mixed-port: 7890
         allow-lan: true
         mode: rule
