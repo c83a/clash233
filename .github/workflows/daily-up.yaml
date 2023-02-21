@@ -482,7 +482,7 @@ jobs:
         part=$( echo $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( match($0,/^CN/)  && ((i++)%k == j) )print $0}' )
         cat <<-FFF
           - {name: E${j}, type: url-test, proxies: [REJECT,${part}], url: "http://www.baidu.com", interval: *seconds}    
-          - {name: F${j}, type: load-balance, proxies: [REJECT,${part2}], url: *url, interval: *seconds, strategy: * strategy}    
+          - {name: F${j}, type: load-balance, proxies: [REJECT,${part2}], url: *url, interval: *seconds, strategy: *strategy}    
           - {name: G${j}, type: relay, proxies: [E${j},F${j}]}
         FFF
         done
