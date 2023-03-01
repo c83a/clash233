@@ -481,8 +481,8 @@ jobs:
         part2=$( echo -n $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( (! match($0,/^CN/)) && ((i++)%k == j) )print $0}' )
         part=$( echo -n $all_server2|gawk -v j=$(($j - 1)) -v k=$limit 'BEGIN{RS=",";ORS=RS;i=0}{if( match($0,/^CN/)  && ((i++)%k == j) )print $0}' )
         cat <<-FFF
-          - {name: E${j}, type: url-test, proxies: [REJECT,${part}], url: *baidu, interval: *seconds}    
-          - {name: F${j}, type: load-balance, proxies: [REJECT,${part2}], url: *url, interval: *seconds, strategy: *strategy}    
+          - {name: E${j}, type: url-test, proxies: [${part}REJECT], url: *baidu, interval: *seconds}    
+          - {name: F${j}, type: load-balance, proxies: [${part2}REJECT], url: *url, interval: *seconds, strategy: *strategy}    
           - {name: G${j}, type: relay, proxies: [E${j},F${j}]}
         FFF
         done
