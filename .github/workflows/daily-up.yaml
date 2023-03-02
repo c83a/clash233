@@ -468,11 +468,12 @@ jobs:
         if [ 1 ];then
         cat <<-FFF
           - {name: E0, type: select, proxies: &all [REJECT,DIRECT,${all_server2}]}
-          - {name: A0, type: select, use: [ps], proxies: [A2,A1,DIRECT,E0,G0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
-          - {name: B0, type: select, use: [ps], proxies: [G0,DIRECT,A1,E0,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ]}
-          - {name: G0, type: relay, proxies: [A2,A3]}
+          - {name: A0, type: select, use: [ps], proxies: [A2,A1,DIRECT,E0,A3A2,A2A3,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0"F"$0",F"$0"E"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [A2A3,DIRECT,A1,A2,E0,A3A2,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0"F"$0",F"$0"E"$0}') ]}
+          - {name: A2A3, type: relay, proxies: [A2,A3]}
+          - {name: A3A2, type: relay, proxies: [A3,A2]}
           - {name: A3, type: fallback, proxies: [A5,A4,A2], url: &baidu "http://www.baidu.com", interval: &delay 600}
-          - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "G"$0}') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 3000, strategy: &strategy round-robin}
+          - {name: A1, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0"F"$0') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 3000, strategy: &strategy round-robin}
           - {name: A4, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
           - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
           - {name: A5, type: load-balance, use: [ps], url: *url, interval: *seconds, strategy: *strategy} 
@@ -483,7 +484,8 @@ jobs:
         cat <<-FFF
           - {name: E${j}, type: url-test, proxies: [${part}REJECT], url: *baidu, interval: *seconds}    
           - {name: F${j}, type: load-balance, proxies: [${part2}REJECT], url: *url, interval: *seconds, strategy: *strategy}    
-          - {name: G${j}, type: relay, proxies: [E${j},F${j}]}
+          - {name: E${j}F${j}, type: relay, proxies: [E${j},F${j}]}
+          - {name: F${j}E${j}, type: relay, proxies: [F${j},E${j}]}
         FFF
         done
         fi >>config.yml
