@@ -468,8 +468,8 @@ jobs:
         if [ 1 ];then
         cat <<-FFF
           - {name: E0, type: select, proxies: &all [REJECT,DIRECT,${all_server2}]}
-          - {name: A0, type: select, use: [ps], proxies: [A2,DIRECT,E0,A3A2,A2A3,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0",F"$0"}') ]}
-          - {name: B0, type: select, use: [ps], proxies: [A2A3,DIRECT,A2,E0,A3A2,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0",F"$0"}') ]}
+          - {name: A0, type: select, use: [ps], proxies: [A2,DIRECT,E0,A3A2,A2A3,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0",F"$0}') ]}
+          - {name: B0, type: select, use: [ps], proxies: [A2A3,DIRECT,A2,E0,A3A2,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0",F"$0}') ]}
           - {name: "@ $(date)", type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0",F"$0}') ], url: &url "http://www.gstatic.com/generate_204", interval: &seconds 3000, strategy: &strategy round-robin}
           - {name: A2A3, type: relay, proxies: [A2,A3]}
           - {name: A3A2, type: relay, proxies: [A3,A2]}
