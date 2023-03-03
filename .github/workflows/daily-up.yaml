@@ -474,7 +474,7 @@ jobs:
           - {name: A2A3, type: relay, proxies: [A2,A3]}
           - {name: A3A2, type: relay, proxies: [A3,A2]}
           - {name: A3, type: fallback, proxies: [A5,A4,A2], url: &baidu "http://www.baidu.com", interval: &delay 600}
-          - {name: A4, type: load-balance, proxies: [DIRECT,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
+          - {name: A4, type: load-balance, proxies: [A5,$(seq ${limit} | awk 'BEGIN{ORS=","}{print "F"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
           - {name: A2, type: load-balance, proxies: [$(seq ${limit} | awk 'BEGIN{ORS=","}{print "E"$0}') ], url: *url, interval: *seconds, strategy: *strategy }
           - {name: A5, type: load-balance, use: [ps], url: *url, interval: *seconds, strategy: *strategy} 
         FFF
