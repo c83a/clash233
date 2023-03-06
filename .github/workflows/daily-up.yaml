@@ -16,37 +16,6 @@ jobs:
         [ "${GITHUB_ACTOR}" ] && user="${GITHUB_ACTOR}"  || user="jw853355718"
         git config --global user.name "$user" 
         git config --global user.email "${user}@users.noreply.github.com"
-    - name: cloudflare warp
-      continue-on-error: true 
-      run: |
-          set +e
-          touch warp.sh; chmod 755 ./warp.sh 
-          touch run.sh; chmod 755 ./run.sh 
-          exit #  maybe better
-          warp_url="https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh"
-          curl -s -o warp.sh $warp_url && chmod 755 ./warp.sh || exit 1         
-          cat >run.sh<<-\EOF
-          #!/bin/bash
-          [ -f warp.tgz ] && tar xzvf warp.tgz -C /
-          ./warp.sh 6
-          . ./warp.sh
-          tar zcvf warp.tgz $WGCF_ProfilePath $WireGuard_ConfPath
-          chmod 666 warp.tgz
-          m=3
-          i=1
-          while [ 1 ];do
-          r4=0
-          r6=0
-          ping -c1 -W1 $TestIPv4_1 || ping -c1 -W1 $TestIPv4_2 || r4=1         
-          ping6 -c1 -W1 $TestIPv6_1 || ping6 -c1 -W1 $TestIPv6_2 || r6=1
-          if [ "a00" = "a$r4$r6" ]; then touch warp_on; chmod 666 warp_on; break ;fi
-          if [ $i -lt $m ]; then i=$(( $i + 1)); ./warp.sh rwg; continue; fi
-          ./warp.sh x
-          break
-          done
-          EOF
-          chmod 755 ./run.sh
-          timeout 15m sudo ./run.sh  > warp.log || sudo ./warp.sh x  
     - name: update pool 
       continue-on-error: true 
       run: |
@@ -408,8 +377,7 @@ jobs:
         time_left=$(( $tta - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check.sh || echo "no enough time left ( $time_left m)" > check.log
         if [ $(awk 'END{print NR}' speed_short.yaml) -lt 2 ]; then exit 1;fi      
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh x  || : >> warp.log
-        git add speed.yaml speed_short.yaml warp.tgz Country.mmdb
+        git add speed.yaml speed_short.yaml Country.mmdb
         git pull && echo "pull ok" || echo "pull maybe busy,try commit anyway"
         git commit -m "${np}update"
         git push -u origin master
@@ -554,7 +522,6 @@ jobs:
               url: http://www.gstatic.com/generate_204
         proxy-groups:
         FFF
-        # sudo ./run.sh || : >> warp.log
         [ ! 1 ] && touch warp_blocked && echo 'pretending block CF warp'
         [ $(grep '"CN_' speed_short.yaml | grep -v 'type: ss' | wc -l) -gt 3 ] || touch warp_blocked
         echo 'proxies:' > x.yaml
@@ -581,7 +548,6 @@ jobs:
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
         fi
-        [ -f warp_on ] && rm warp_on && sudo ./warp.sh dwg >> warp.log || : 
         cat >config.yaml<<-EOF
         # $(date)
         ipv6: true
