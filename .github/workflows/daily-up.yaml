@@ -114,12 +114,12 @@ jobs:
         if [ ! "$mode" ] && [ "$2" ];then
           mode=2
         fi
-        if [ ! "$mode" ] && [ "$1" ];then
-          mode=1
-          sd=$1 # alias for func
-          [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
-          [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
-        fi
+        #if [ ! "$mode" ] && [ "$1" ];then
+        #  mode=1
+        #  sd=$1 # alias for func
+        #  [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
+        #  [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
+        #fi
         if [ ! "$mode" ];then
           mode=0
         fi
@@ -403,10 +403,10 @@ jobs:
         cat check-list.txt       
         fi>&99 &
         p="$! $p"
-        [ "$mode" = 1 ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0")
+        #[ "$mode" = 1 ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0")
         [ "$mode" != 0 ] && rm good*.txt bad*.txt delay*.txt p2_good*.txt p2_bad*.txt || :
         for i in $(seq $max_worker | sort -R);do
-        [ "$mode" = 0 -o "$mode" = 1 ] && sleep 1
+        #[ "$mode" = 0 -o "$mode" = 1 ] && sleep 1
         worker $i
         p="$! $p"
         done
