@@ -485,12 +485,10 @@ jobs:
         touch yml_good
         fi
         if (ls cde*.txt | grep -q cde);then
-        awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
+          awk 'BEGIN{FS=",";f="speed_cde.yaml";print "proxies:" > f;while("ls cde*.txt" | getline g){while ((getline n < g) >0)a[n"}"];close(g)}}{if($NF in a)print $0 >f}' x.yaml
+          cat cde*.txt >&2 || ls
         fi
-        [ -f speed_cde.yaml ] || ls && cat cde*.txt >&2 # cp speed_short.yaml speed_cde.yaml
-        if [ -f speed_cde.yaml ];then
-        cat speed_cde.yaml
-        fi | awk '!a[$0]++' >> config.yml
+        [ -f speed_cde.yaml ] && awk '!a[$0]++' speed_cde.yaml >> config.yml
         }
         trap 'timeout_clean' EXIT
         cat >gen2.awk<<-\FFF
