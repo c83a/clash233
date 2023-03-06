@@ -114,12 +114,6 @@ jobs:
         if [ ! "$mode" ] && [ "$2" ];then
           mode=2
         fi
-        #if [ ! "$mode" ] && [ "$1" ];then
-        #  mode=1
-        #  sd=$1 # alias for func
-        #  [ ! -e x.yaml ] && ln speed_short.yaml x.yaml && echo "Warning: speed_short.yaml as x.yaml with pre-server $1" 1>&2
-        #  [ ! -f check-list.txt ] && gawk '{if(match($0,/("name":"[^"]*")/,a) && match(a[1],/:"[^_]*_([^_]*)_[^"]*"/,b) && !c[b[1]]++)print a[1]}' last_g.txt cde_*.txt x.yaml > check-list.txt
-        #fi
         if [ ! "$mode" ];then
           mode=0
         fi
@@ -291,22 +285,15 @@ jobs:
             - https://dns.google/dns-query
         EOF
         [ "$mode" = 0 ] && SR="S"
-        # [ "$mode" = 1 ] && SR="R"
         [ "$mode" = 2 ] && SR="R"       
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,${SR}${i}";done
         echo "          - MATCH,REJECT"
         echo "proxy-groups:";
-        # [ "$mode" = 1 ] && [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
         for i in `seq $max_worker`; do
           if [ "$mode" = 0 ];then
             echo "          - {name: S$i, type: select, use: [px]}"
           fi
-          #if [ "$mode" = 1 ];then
-          #  [ ! -f GOT_WHAT_DOES_THIS_DO ] && SS="S$i,S0,S$i" || SS="S0,S$i"
-          #  echo "          - {name: S$i, type: select, use: [px]}"
-          #  echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
-          #fi
           if [ "$mode" = 2 ];then
             [ ! -f GOT_WHAT_DOES_THIS_DO ] && SS="S$i,T$i,S$i" || SS="T$i,S$i"
             echo "          - {name: S$i, type: select, use: [px]}"
@@ -403,10 +390,8 @@ jobs:
         cat check-list.txt       
         fi>&99 &
         p="$! $p"
-        #[ "$mode" = 1 ] && sleep 1 && t0=$(curl -s -X PUT -w "%{http_code}" -d "{$1}" "http://127.0.0.1:$port/proxies/S0")
         [ "$mode" != 0 ] && rm good*.txt bad*.txt delay*.txt p2_good*.txt p2_bad*.txt || :
         for i in $(seq $max_worker | sort -R);do
-        #[ "$mode" = 0 -o "$mode" = 1 ] && sleep 1
         worker $i
         p="$! $p"
         done
@@ -610,33 +595,6 @@ jobs:
         bash ./check.sh 'HELLO' 'WORLD'
         exit
         fi #END of mode2     
-        #if [ 1 ];then # mode 1, anyway
-        #mode=1    
-        #for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
-        #[ ! "$data" ] && exit 1
-        #current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
-        #tested_good=$(echo "${cdef}" | sed -n "/${current_ip}/p")
-        #[ "${tested_good}" ] && continue
-        #touch cde_0.txt last_g.txt || :
-        #echo "test cdn-server $data" >&2
-        #[ -f warp_blocked ] && st=7m || st=15m
-        #timeout $st ./check.sh "$data" || touch tout && echo "$data" timeout  &
-        #w=$!
-        #wait $w
-        #[ -f tout ] && echo "$data maybe busy,maybe" && rm tout
-        #ls *.txt | grep -q good || continue
-        #i=$(($i +1))
-        #write_i
-        #last_good=${current_ip}
-        #cdef="${last_good} ${cdef}"
-        #echo "$data" >> cde_$i.txt
-        #cat good*.txt >> cde_$i.txt
-        #rm last_g.txt && ln -s cde_$i.txt last_g.txt
-        #[ -f warp_blocked ] && echo "$data" >> cdn.txt
-        #touch yml_good
-        #[ $i -eq $limit ] && break      
-        #done
-        #fi # END of mode1
         EEE
         chmod 755 check2.sh
         [ -f tmp_0.yaml ] && tt=110 || tt=116
