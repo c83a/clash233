@@ -291,22 +291,22 @@ jobs:
             - https://dns.google/dns-query
         EOF
         [ "$mode" = 0 ] && SR="S"
-        [ "$mode" = 1 ] && SR="R"
+        # [ "$mode" = 1 ] && SR="R"
         [ "$mode" = 2 ] && SR="R"       
         echo "rules:"; for i in `seq $max_worker`; do kw=$(eval echo '$kw'$i)
         echo "          - DOMAIN-KEYWORD,$kw,${SR}${i}";done
         echo "          - MATCH,REJECT"
         echo "proxy-groups:";
-        [ "$mode" = 1 ] && [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
+        # [ "$mode" = 1 ] && [ $SR = R ]  && echo "          - {name: S0, type: select, use: [px], proxies: [DIRECT]}" || :
         for i in `seq $max_worker`; do
           if [ "$mode" = 0 ];then
             echo "          - {name: S$i, type: select, use: [px]}"
           fi
-          if [ "$mode" = 1 ];then
-            [ ! -f GOT_WHAT_DOES_THIS_DO ] && SS="S$i,S0,S$i" || SS="S0,S$i"
-            echo "          - {name: S$i, type: select, use: [px]}"
-            echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
-          fi
+          #if [ "$mode" = 1 ];then
+          #  [ ! -f GOT_WHAT_DOES_THIS_DO ] && SS="S$i,S0,S$i" || SS="S0,S$i"
+          #  echo "          - {name: S$i, type: select, use: [px]}"
+          #  echo "          - {name: R$i, type: relay, proxies: [$SS]}" 
+          #fi
           if [ "$mode" = 2 ];then
             [ ! -f GOT_WHAT_DOES_THIS_DO ] && SS="S$i,T$i,S$i" || SS="T$i,S$i"
             echo "          - {name: S$i, type: select, use: [px]}"
@@ -610,33 +610,33 @@ jobs:
         bash ./check.sh 'HELLO' 'WORLD'
         exit
         fi #END of mode2     
-        if [ 1 ];then # mode 1, anyway
-        mode=1    
-        for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
-        [ ! "$data" ] && exit 1
-        current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
-        tested_good=$(echo "${cdef}" | sed -n "/${current_ip}/p")
-        [ "${tested_good}" ] && continue
-        touch cde_0.txt last_g.txt || :
-        echo "test cdn-server $data" >&2
-        [ -f warp_blocked ] && st=7m || st=15m
-        timeout $st ./check.sh "$data" || touch tout && echo "$data" timeout  &
-        w=$!
-        wait $w
-        [ -f tout ] && echo "$data maybe busy,maybe" && rm tout
-        ls *.txt | grep -q good || continue
-        i=$(($i +1))
-        write_i
-        last_good=${current_ip}
-        cdef="${last_good} ${cdef}"
-        echo "$data" >> cde_$i.txt
-        cat good*.txt >> cde_$i.txt
-        rm last_g.txt && ln -s cde_$i.txt last_g.txt
-        [ -f warp_blocked ] && echo "$data" >> cdn.txt
-        touch yml_good
-        [ $i -eq $limit ] && break      
-        done
-        fi # END of mode1
+        #if [ 1 ];then # mode 1, anyway
+        #mode=1    
+        #for data in $(gawk '{if (match($0,/("name":"CN_[^"]*")/,a)){print a[1]} }' x.yaml) ;do        
+        #[ ! "$data" ] && exit 1
+        #current_ip=$(gawk -v data=$data 'BEGIN{match(data,/"name":"[^_]*_([^_]*)_[^"]*"/,a);print a[1]}')
+        #tested_good=$(echo "${cdef}" | sed -n "/${current_ip}/p")
+        #[ "${tested_good}" ] && continue
+        #touch cde_0.txt last_g.txt || :
+        #echo "test cdn-server $data" >&2
+        #[ -f warp_blocked ] && st=7m || st=15m
+        #timeout $st ./check.sh "$data" || touch tout && echo "$data" timeout  &
+        #w=$!
+        #wait $w
+        #[ -f tout ] && echo "$data maybe busy,maybe" && rm tout
+        #ls *.txt | grep -q good || continue
+        #i=$(($i +1))
+        #write_i
+        #last_good=${current_ip}
+        #cdef="${last_good} ${cdef}"
+        #echo "$data" >> cde_$i.txt
+        #cat good*.txt >> cde_$i.txt
+        #rm last_g.txt && ln -s cde_$i.txt last_g.txt
+        #[ -f warp_blocked ] && echo "$data" >> cdn.txt
+        #touch yml_good
+        #[ $i -eq $limit ] && break      
+        #done
+        #fi # END of mode1
         EEE
         chmod 755 check2.sh
         [ -f tmp_0.yaml ] && tt=110 || tt=116
