@@ -446,7 +446,7 @@ jobs:
         limit=3
         i=0
         mode="$1"
-        ! [ "$mode" = 2 -o "$mode" = 1 ] && mode=1 # default
+        ! [ "$mode" = 2 ] && mode=2 # default
         write_i(){
         if [ "$mode" = 2 ];then
         all_server2=$(gawk -v mode=2 -f ./gen2.awk)
