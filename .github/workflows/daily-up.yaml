@@ -1,7 +1,7 @@
 name: "clash proxy provider 2"
 on:
   schedule:
-    - cron: '0 */8 * * *'  
+    - cron: '0 */12 * * *'  
   workflow_dispatch:
 jobs:
   job_1:
@@ -50,7 +50,7 @@ jobs:
         p="$! $p"
         done
         }
-        [ $(date +%H | sed 's/^0//') -gt 15 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ $(date +%H | sed 's/^0//') -lt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
         if [  ! -f clash ]; then
         os_type=linux
         cpu_type=amd64
