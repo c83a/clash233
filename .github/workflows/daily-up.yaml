@@ -533,7 +533,7 @@ jobs:
         chmod 755 check2.sh
         [ -f tmp_0.yaml ] && tt=110 || tt=116
         time_left=$(( $tt - ( $(date '+%s') - $(cat time_a) ) / 60 ))
-        [ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh 2 > check2.log || echo "less than expected maybe"
+        #[ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh 2 > check2.log || echo "less than expected maybe"
         echo "operartion limited ${time_left}m end"
         if [ -f s1_t ];then
         rm s1_t
@@ -593,5 +593,5 @@ jobs:
         git commit -m "$(date)" && git push -u origin master
         if [ -f yml_good ];then
         rm yml_good
-        sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
+        #sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
