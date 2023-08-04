@@ -73,6 +73,7 @@ jobs:
       continue-on-error: true 
       run: | 
         [ -f p_t ] || exit 1
+        echo "proxies:" > config.yml
         uuid=`cat  /proc/sys/kernel/random/uuid`
         export np=$(date '+%m%d%Y')${uuid:0:4}-
         cat >check.sh<<-\EEE
