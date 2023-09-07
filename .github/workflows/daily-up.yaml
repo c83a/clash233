@@ -596,7 +596,7 @@ jobs:
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: r.yaml
-            filter: '^CN_' 
+            # filter: '.' 
             health-check: &check
               enable: true
               lazy: true
