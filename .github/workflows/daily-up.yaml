@@ -551,11 +551,11 @@ jobs:
           - SRC-IP-CIDR,0.0.0.0/0,A0 
           - MATCH,B0
         proxy-providers:
-          ps:
+          pr:
             type: http
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: s.yml
+            path: r.yml
             filter: '^[^C]|^C[^N]'
             health-check:
               enable: true
@@ -566,11 +566,11 @@ jobs:
           - {name: "@ $(date)", type: select, proxies: [REJECT]}
           - {name: A0, type: select, proxies: [A1,E0,DIRECT]}
           - {name: B0, type: select, proxies: [A1,E0,DIRECT]}
-          - {name: E0, type: select, use: [ps], proxies: [REJECT]}
-          - {name: A1, type: load-balance, use: [ps], url: *baidu, interval: *seconds, strategy: round-robin}
+          - {name: E0, type: select, use: [pr], proxies: [REJECT]}
+          - {name: A1, type: load-balance, use: [pr], url: *baidu, interval: *seconds, strategy: round-robin}
         $(grep -v ' vless, ' speed_short.yaml)
         FFF
-        cp config.yml s.yml
+        cp config.yml r.yml
         touch yml_good
         if [ -f s1_t ];then
         rm s1_t
