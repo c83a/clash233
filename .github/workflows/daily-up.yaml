@@ -536,6 +536,41 @@ jobs:
         time_left=$(( $tt - ( $(date '+%s') - $(cat time_a) ) / 60 ))
         #[ $time_left -gt 0 ] && timeout ${time_left}m bash ./check2.sh 2 > check2.log || echo "less than expected maybe"
         echo "operartion limited ${time_left}m end"
+        cat >config.yml<<-FFF
+        # $(date)
+        ipv6: true
+        mixed-port: 7890
+        allow-lan: true
+        mode: rule
+        log-level: silent
+        #external-ui: clash_webs
+        external-controller: 127.0.0.1:9090
+        tunnels: ["tcp/udp,0.0.0.0:7891,[::1]:7890,DIRECT"]
+        rules:  
+          - GEOIP,CN,DIRECT
+          - SRC-IP-CIDR,0.0.0.0/0,A0 
+          - MATCH,B0
+        proxy-providers:
+          ps:
+            type: file
+            interval: 9600
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
+            path: s.yml
+            filter: '^[^C]|^C[^N]'
+            health-check:
+              enable: true
+              lazy: true
+              interval: &seconds 3600
+              url: &baidu https://www.baidu.com/
+        proxy-groups:
+          - {name: A0, type: select, proxies: [A1,E0,DIRECT]}
+          - {name: B0, type: select, proxies: [A1,E0,DIRECT]}
+          - {name: E0, type: select, use: [ps], proxies: [REJECT]}
+          - {name: A1, type: load-balance, use: [ps], url: *baidu, interval: *seconds, strategy: round-robin}
+        $(grep -v ' vless, ' speed_short.yaml)
+        FFF
+        cp config.yml s.yml
+        touch yml_good
         if [ -f s1_t ];then
         rm s1_t
         curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed.yaml
