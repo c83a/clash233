@@ -552,7 +552,7 @@ jobs:
           - MATCH,B0
         proxy-providers:
           ps:
-            type: file
+            type: http
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: s.yml
