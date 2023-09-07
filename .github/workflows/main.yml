@@ -41,7 +41,7 @@ jobs:
           if [  ! -f clash ]; then
           os_type=linux
           cpu_type=amd64
-          clash_bin_url="https://github.com/Dreamacro/clash/releases"
+          clash_bin_url="https://github.com/MetaCubeX/Clash.Meta/releases"
           clash_html=tmp$RANDOM.html
           curl -L -s -o $clash_html $clash_bin_url
           clash_bin_url="https://github.com"$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
