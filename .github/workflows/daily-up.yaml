@@ -50,6 +50,7 @@ jobs:
         done
         }
         [ $(date +%H | sed 's/^0//') -gt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ -f tmp_0.yaml ] && down_from_list pool_etc || touch tmp_0.yaml
         if [  ! -f clash ]; then
         os_type=linux
         cpu_type=amd64
