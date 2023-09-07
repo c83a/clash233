@@ -563,6 +563,7 @@ jobs:
               interval: &seconds 3600
               url: &baidu https://www.baidu.com/
         proxy-groups:
+          - {name: "@ $(date)", type: select, proxies: [REJECT]}
           - {name: A0, type: select, proxies: [A1,E0,DIRECT]}
           - {name: B0, type: select, proxies: [A1,E0,DIRECT]}
           - {name: E0, type: select, use: [ps], proxies: [REJECT]}
