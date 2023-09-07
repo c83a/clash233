@@ -45,7 +45,7 @@ jobs:
         for url in $(awk '!a[$0]++' $1);do
         filename=tmp_1$RANDOM.yaml
         echo GET $url TO $filename
-        ( curl -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
+        ( curl -L -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
         done
         }
