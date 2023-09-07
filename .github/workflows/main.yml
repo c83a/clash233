@@ -45,6 +45,7 @@ jobs:
           clash_html=tmp$RANDOM.html
           curl -L -s -o $clash_html $clash_bin_url
           clash_bin_url="https://github.com"$( cat $clash_html | grep ".gz" | grep "<a href=" | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' )
+          clash_bin_url=https://github.com/MetaCubeX/Clash.Meta/releases/download/v1.15.1/clash.meta-linux-amd64-compatible-v1.15.1.gz
           curl -L -s -o clash.gz $clash_bin_url
           gunzip clash.gz
           fi
