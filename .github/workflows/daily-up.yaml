@@ -26,12 +26,14 @@ jobs:
           clash_bin_url=$(curl -s https://api.github.com/repos/$repo/releases/latest \
                           | awk -v repo="$repo" '{ver=substr($2,2, length($2)-3);print "https://github.com/"repo"/releases/download/"ver"/clash.meta-linux-amd64-compatible-"ver".gz"}')
           curl -L -s -o clash.gz $clash_bin_url
-          gunzip clash.gz && chmod 755 ./clash && ./clash -v || \
+          gunzip clash.gz
+          chmod 755 ./clash && ./clash -v || \
                 (git checkout clash && chmod 755 ./clash && ./clash -v)
         fi
         if [ ! -f Country.mmdb];then
           mmdb_url='https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb'
-          curl -L -s -o Country.mmdb "$mmdb_url" && chmod 644 Country.mmdb && ls -l Country.mmdb || \
+          curl -L -s -o Country.mmdb "$mmdb_url"
+          chmod 644 Country.mmdb && ls -l Country.mmdb || \
                 (git checkout Country.mmdb && chmod 644 Country.mmdb && ls -l Country.mmdb)
         fi
         FFF
