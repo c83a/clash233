@@ -21,8 +21,7 @@ jobs:
       run: |
         if [ ! -f clash ]; then
           repo="MetaCubeX/Clash.Meta"
-          ver=$(curl -s https://api.github.com/repos/$repo/releases/latest \
-                          | awk '{ver=substr($2,2, length($2)-3);print ver}
+          ver=$(curl -s https://api.github.com/repos/$repo/releases/latest | grep "tag_name" | awk '{ver=substr($2,2, length($2)-3);print ver}')
           clash_bin_url="https://github.com/$repo/releases/download/$ver/clash.meta-linux-amd64-compatible-$ver.gz"
           echo $ver
           echo $clash_bin_url
