@@ -77,7 +77,7 @@ jobs:
         clash_bin_url=https://github.com$( curl -s $clash_r_url | grep '.gz' | grep '<a href=' | grep $os_type | head | grep $cpu_type | sed -E 's/.*href="([^"]*)".*/\1/' |head -n1)
         curl -L -s -o clash.gz $clash_bin_url
         gunzip clash.gz
-        chmod a+x clash && ./clash -v && git add clash || git checkout clash
+        chmod a+x clash && ./clash -v || git checkout clash
         fi
         [ ! -x clash ] && chmod a+x clash
         for i in $p;do
