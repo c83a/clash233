@@ -17,9 +17,9 @@ jobs:
         git config --global user.name "$user" 
         git config --global user.email "${user}@users.noreply.github.com"
     - name: update Country.mmdb, clash if not exist 
-      continue-on-error: true 
+      # continue-on-error: true 
       run: |
-        if [ ! -f clash ];then
+        if [ ! -f clash ]; then
           repo=MetaCubeX/Clash.Meta
           clash_bin_url=$(curl -s https://api.github.com/repos/$repo/releases/latest \
                           | awk -v repo="$repo" '{ver=substr($2,2, length($2)-3);print "https://github.com/"repo"/releases/download/"ver"/clash.meta-linux-amd64-compatible-"ver".gz"}')
@@ -28,7 +28,7 @@ jobs:
           chmod 755 ./clash && ./clash -v || \
                 (git checkout clash && chmod 755 ./clash && ./clash -v)
         fi
-        if [ ! -f Country.mmdb];then
+        if [ ! -f Country.mmdb ]; then
           mmdb_url='https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb'
           curl -L -s -o Country.mmdb "$mmdb_url"
           chmod 644 Country.mmdb && ls -l Country.mmdb || \
