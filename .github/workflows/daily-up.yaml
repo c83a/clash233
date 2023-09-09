@@ -16,11 +16,9 @@ jobs:
         [ "${GITHUB_ACTOR}" ] && user="${GITHUB_ACTOR}"  || user="jw853355718"
         git config --global user.name "$user" 
         git config --global user.email "${user}@users.noreply.github.com"
-    - name: update [Country.mmdb, clash] if not exist 
+    - name: update Country.mmdb, clash if not exist 
       continue-on-error: true 
       run: |
-        cat >custom-clash-core.sh<<-\FFF
-        #!/bin/bash
         if [ ! -f clash ];then
           repo=MetaCubeX/Clash.Meta
           clash_bin_url=$(curl -s https://api.github.com/repos/$repo/releases/latest \
@@ -36,8 +34,6 @@ jobs:
           chmod 644 Country.mmdb && ls -l Country.mmdb || \
                 (git checkout Country.mmdb && chmod 644 Country.mmdb && ls -l Country.mmdb)
         fi
-        FFF
-        bash ./custom-clash-core.sh
     - name: update pool 
       continue-on-error: true 
       run: |
