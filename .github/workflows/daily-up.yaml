@@ -20,6 +20,7 @@ jobs:
       continue-on-error: true 
       run: |
         cat >custom-clash-core.sh<<-\FFF
+        #!/bin/bash
         if [ ! -f clash ];then
           repo=MetaCubeX/Clash.Meta
           clash_bin_url=$(curl -s https://api.github.com/repos/$repo/releases/latest \
@@ -38,6 +39,7 @@ jobs:
     - name: update pool 
       continue-on-error: true 
       run: |
+        ls -l
         cat >prepare.sh<<-\FFF
         #!/bin/bash
         set +e
