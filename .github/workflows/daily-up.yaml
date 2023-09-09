@@ -630,7 +630,7 @@ jobs:
             path: s.yaml
             health-check: *check
         proxy-groups:
-          - {name: "$(./clash -v) @ $(date)", type: select, proxies: [REJECT]}
+          - {name: "$(./clash -v | awk -v ORS=" " '1' ) @ $(date)", type: select, proxies: [REJECT]}
           - {name: A0, type: select, proxies: [A1,C0,D0,C0D0,DIRECT]}
           - {name: B0, type: select, proxies: [A1,C0D0,D0,C0,DIRECT]}
           - {name: C0, type: select, proxies: [C1,C2,D1,D2,DIRECT]}
