@@ -16,6 +16,17 @@ jobs:
         [ "${GITHUB_ACTOR}" ] && user="${GITHUB_ACTOR}"  || user="jw853355718"
         git config --global user.name "$user" 
         git config --global user.email "${user}@users.noreply.github.com"
+    - name: Cache core and mmdb
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-core-mmdb
+      with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: |
+            clash
+            Country.mmdb
+          key: |
+            ${{ runner.os }}-${{ env.cache-name }}-
     - name: update Country.mmdb, clash if not exist 
       # continue-on-error: true 
       run: |
