@@ -21,7 +21,6 @@ jobs:
       env:
         cache-name: cache-core-mmdb
       with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: |
             clash
             Country.mmdb
@@ -47,6 +46,7 @@ jobs:
                         chmod 755 ./clash &&\
                         ./clash -v)
         fi
+        chmod 755 ./clash
         if [ ! -f Country.mmdb ]; then
           mmdb_url='https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb'
           curl -L -s -o Country.mmdb "$mmdb_url" && \
