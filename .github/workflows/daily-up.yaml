@@ -576,7 +576,7 @@ jobs:
             interval: 9600
             url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
             path: r.yml
-            filter: '^[^C]|^C[^N]'
+            # filter: '^[^C]|^C[^N]'
             health-check:
               enable: true
               lazy: true
@@ -613,9 +613,9 @@ jobs:
         proxy-providers:
           pr:
             type: http
-            interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: r.yaml 
+            interval: &interval 9600
+            url: &url-cdn "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml"
+            path: &path-config r.yml 
             filter: '[0-9]ss$'
             health-check: &check
               enable: true
@@ -623,23 +623,19 @@ jobs:
               interval: &seconds 6000
               url: &baidu "https://www.baidu.com"
           psr:
-            type: file
-            interval: 9600
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
-            path: r.yaml 
+            type: http
+            interval: *interval
+            url: *url-cdn
+            path: *path-config
             filter: '[0-9]ss$'
             dialer-proxy: D1
-            health-check: &check
-              enable: true
-              lazy: true
-              interval: &seconds 6000
-              url: &baidu "https://www.baidu.com"
+            health-check: *check
           ps:
             type: http
-            interval: *seconds
-            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/speed_short.yaml"
+            interval: *interval
+            url: *url-cdn
+            path: *path-config
             filter: '[a-z]..$'
-            path: s.yaml
             health-check: *check
         proxy-groups:
           - {name: "$(./clash -v | awk -v ORS=" " '1' ) @ $(date)", type: select, proxies: [REJECT]}
