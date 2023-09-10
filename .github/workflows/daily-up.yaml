@@ -622,6 +622,18 @@ jobs:
               lazy: true
               interval: &seconds 6000
               url: &baidu "https://www.baidu.com"
+          psr:
+            type: file
+            interval: 9600
+            url: "https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml"
+            path: r.yaml 
+            filter: '[0-9]ss$'
+            dialer-proxy: D1
+            health-check: &check
+              enable: true
+              lazy: true
+              interval: &seconds 6000
+              url: &baidu "https://www.baidu.com"
           ps:
             type: http
             interval: *seconds
@@ -631,8 +643,8 @@ jobs:
             health-check: *check
         proxy-groups:
           - {name: "$(./clash -v | awk -v ORS=" " '1' ) @ $(date)", type: select, proxies: [REJECT]}
-          - {name: A0, type: select, proxies: [A1,C0,D0,C0D0,DIRECT]}
-          - {name: B0, type: select, proxies: [A1,C0D0,D0,C0,DIRECT]}
+          - {name: A0, type: select, proxies: [SR1,SR2,SR3,C0,D0,C0D0,DIRECT]}
+          - {name: B0, type: select, proxies: [SR1,SR2,SR3,C0D0,D0,C0,DIRECT]}
           - {name: C0, type: select, proxies: [C1,C2,D1,D2,DIRECT]}
           - {name: D0, type: select, proxies: [D1,D2,C1,C2,DIRECT]}
           - {name: C0D0, type: relay, proxies: [C0,D0]}
@@ -640,7 +652,9 @@ jobs:
           - {name: C2, type: select, use: [pr,ps], proxies: [DIRECT,REJECT]}
           - {name: D1, type: load-balance, use: [ps], url: *baidu, interval: *seconds, strategy: round-robin}
           - {name: D2, type: select, use: [ps,pr], proxies: [D1,DIRECT,REJECT]}
-          - {name: A1, type: load-balance, use: [pr], url: *baidu, interval: *seconds, strategy: round-robin, dialer-proxy: D2}
+          - {name: SR1, type: load-balance, use: [psr], url: *baidu, interval: *seconds, strategy: round-robin}
+          - {name: SR2, type: url-test, use: [psr], url: *baidu, interval: *seconds}
+          - {name: SR3, type: select, use: [psr], proxies: [DIRECT,REJECT]}
         EOF
         if [ 1 ] ;then
         echo 'proxies:'
