@@ -112,7 +112,7 @@ jobs:
          cache-name: filter
       with:
           path: filter/
-          key: filter-${{ hashFiles('time_a') }}
+          key: filter-${{ hashFiles('speed_short.yaml') }}
           restore-keys: |
             filter-
     - name: gen filter.txt
