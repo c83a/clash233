@@ -98,7 +98,6 @@ jobs:
           echo "filter_switch=0"
         else
           echo "filter_switch=1" 
-          exit 1
         fi>> $GITHUB_OUTPUT
     - name: Download filter.tgz
       uses: actions/download-artifact@v3
