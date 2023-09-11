@@ -721,10 +721,6 @@ jobs:
         #sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
     - name: update filter.tgz
-      env:
-        filter: steps.filter_switch.output.filter_switch
-      #if: ${{ failure() }} 
-      if: env.filter == '1'
       continue-on-error: true 
       run: |
         cat >add_filter_today.awk<<-\FFF
