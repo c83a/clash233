@@ -90,13 +90,9 @@ jobs:
         timeout 15m bash ./prepare.sh > prepare.log || exit 1
         touch p_t
         cat prepare.log
-    - name: update repo
+    - name: check.sh
       continue-on-error: true 
-      run: | 
-        [ -f p_t ] || exit 1
-        # echo "proxies:" > config.yml
-        uuid=`cat  /proc/sys/kernel/random/uuid`
-        export np=$(date '+%m%d%Y')${uuid:0:4}-
+      run: |
         cat >check.sh<<-\EEE
         #!/bin/bash
         set +e 
@@ -394,6 +390,13 @@ jobs:
         normal_end=1
         # check finished
         EEE
+    - name: update repo
+      continue-on-error: true 
+      run: | 
+        [ -f p_t ] || exit 1
+        # echo "proxies:" > config.yml
+        uuid=`cat  /proc/sys/kernel/random/uuid`
+        export np=$(date '+%m%d%Y')${uuid:0:4}-
         chmod 755 check.sh
         [ -f tmp_0.yaml ] && tta=60 || tta=110
         time_left=$(( $tta - ( $(date '+%s') - $(cat time_a) ) / 60 ))
