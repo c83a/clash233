@@ -115,6 +115,11 @@ jobs:
           key: filter-${{ hashFiles('speed_short.yaml') }}
           restore-keys: |
             filter-
+    - name: remove old cache
+      continue-on-error: true 
+      run: |
+        old=$(date "+%Y%m%d" -d "-3 days")
+        [ -f filter/$old ] && rm filter/$old
     - name: gen filter.txt
       continue-on-error: true
       run: |
