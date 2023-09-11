@@ -110,8 +110,8 @@ jobs:
     - name: gen filter.txt
       continue-on-error: true 
       run: |
-        if [ -f tmp_0 ]; then
-          [ -f filter.tgz ] && echo "filter should be disabled" # && rm filter.tgz
+        if [ -f tmp_0.yaml ]; then
+          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz
         else
           if [ ! -f filter.tgz ]; then
             mkdir filter
@@ -755,7 +755,7 @@ jobs:
         }
         }
         FFF
-        [ ! -f tmp_0.yaml ] && exit 
+        [ -f tmp_0.yaml ] && exit 
         target=filter/$(date "+%Y%m%d")
         ls filter/* | tail -n 3 | awk -f add_filter_today.awk >> $target
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
