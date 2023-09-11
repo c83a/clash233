@@ -756,6 +756,7 @@ jobs:
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
     - name: 'Upload filter.tgz'
       uses: actions/upload-artifact@v3
+      continue-on-error: true 
       with:
         name: filter.tgz
         path: filter.tgz
