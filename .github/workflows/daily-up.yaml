@@ -100,6 +100,7 @@ jobs:
         fi>> $GITHUB_OUTPUT
     - name: Download filter.tgz
       uses: actions/download-artifact@v3
+      continue-on-error: true 
       if: steps.filter_switch.output.filter_switch == 1
       with:
         name: filter.tgz
