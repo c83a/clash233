@@ -116,7 +116,7 @@ jobs:
             tar xzvf filter.tgz
           fi
           touch filter.txt
-          awk  -v FS="_" '!a[$2]++' $(ls filter | tail -n 3) >> filter.txt
+          awk  -v FS="_" '!a[$2]++' $(ls filter/* | tail -n 3) >> filter.txt
         fi
     - name: check.sh
       continue-on-error: true 
