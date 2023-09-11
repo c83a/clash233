@@ -91,6 +91,7 @@ jobs:
         touch p_t
         cat prepare.log
     - name: filter_switch
+      continue-on-error: true 
       id: filter_switch
       run: |
         if [ -f tmp_0.yaml ]; then
