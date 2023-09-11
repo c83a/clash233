@@ -724,7 +724,7 @@ jobs:
         #sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
     - name: update filter.tgz
-      if: ${{ failure() }}
+      # if: ${{ failure() }}
       # if: steps.filter_switch.output.filter_switch == '1'
       continue-on-error: true 
       run: |
@@ -761,7 +761,7 @@ jobs:
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
     - name: 'Upload filter.tgz'
       uses: actions/upload-artifact@v3
-      if: ${{ failure() }}
+      # if: ${{ failure() }}
       # if: steps.filter_switch.output.filter_switch == '1'
       with:
         name: filter.tgz
