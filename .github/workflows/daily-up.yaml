@@ -103,7 +103,7 @@ jobs:
     - name: Download filter.tgz
       uses: actions/download-artifact@v3
       continue-on-error: true 
-      if: ${{ failure() }} 
+      #if: ${{ failure() }} 
       # if: steps.filter_switch.output.filter_switch == '1'
       with:
         name: filter.tgz
@@ -111,7 +111,7 @@ jobs:
       continue-on-error: true 
       run: |
         if [ -f tmp_0 ]; then
-          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz
+          [ -f filter.tgz ] && echo "filter should be disabled" # && rm filter.tgz
         else
           if [ ! -f filter.tgz ]; then
             mkdir filter
@@ -755,6 +755,7 @@ jobs:
         }
         }
         FFF
+        [ ! -f tmp_0.yaml ] && exit 
         target=filter/$(date "+%Y%m%d")
         ls filter/* | tail -n 3 | awk -f add_filter_today.awk >> $target
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
