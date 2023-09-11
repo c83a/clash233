@@ -26,6 +26,8 @@ jobs:
             Country.mmdb
           key: |
             ${{ runner.os }}-${{ env.cache-name }}-
+          restore-key: |
+            ${{ runner.os }}-${{ env.cache-name }}-
     - name: update Country.mmdb, clash if not exist 
       # continue-on-error: true 
       run: |
