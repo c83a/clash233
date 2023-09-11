@@ -90,6 +90,34 @@ jobs:
         timeout 15m bash ./prepare.sh > prepare.log || exit 1
         touch p_t
         cat prepare.log
+    - name: filter_switch
+      id: filter_switch
+      run: |
+        if [ -f tmp_0.yaml ]; then
+          echo "filter_switch=0"
+        else
+          echo "filter_switch=1" 
+        fi>> $GITHUB_OUTPUT
+    - name: Download filter.tgz
+      uses: actions/download-artifact@v3
+      if: steps.filter_switch.output.filter_switch == 1
+      with:
+        name: filter.tgz
+    - name: gen filter.txt
+      continue-on-error: true 
+      run: |
+        if [ -f tmp_0 ]; then
+          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz
+        else
+          if [ ! -f filter.tgz ]; then
+            mkdir filter
+            touch filter/$(date "+%Y%m%d")
+          else
+            tar xzvf filter.tgz
+          fi
+          touch filter.txt
+          awk  -v FS="_" '!a[$2]++' $(ls filter | tail -n 3) >> filter.txt
+        fi
     - name: check.sh
       continue-on-error: true 
       run: |
@@ -142,6 +170,10 @@ jobs:
         cp config.yaml database_2.yaml
         cat >gen.awk<<-\EOF
         BEGIN{
+          if (filter){
+            while(getline line < "filter.txt") pass[line]
+            close("filter.txt")
+          }
           database="database.yaml"
           print "proxies:"
           g="1.yaml"
@@ -153,6 +185,8 @@ jobs:
         {
           if(qi > 23333) exit
           if( ! match($0,/type: ([^,]*)/,tt) || ! match($0,/server: ([^,]*)/,ss))
+            next
+          if(filter && ss[1] in pass)
             next
           u=ss[1]tt[1]
           if( !(u in rr) )
@@ -195,10 +229,11 @@ jobs:
         eval $cmd1 | yq -M -o=json | yq -M 'del(.["proxy-groups","rules"]) | del(.proxies.[].["name","udp","country","group","index"]) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
         done
+        if [ -f tmp_0.yaml ]; then filter=0; else filter=1; fi
         if [ 1 ];then
         cat raw_database.yaml
         ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
-        fi | gawk -v np="$np" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
+        fi | gawk -v np="$np" -v filter="$filter" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' x.yaml > cdn.yaml
         gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ > check-list.txt
         fi # END of mode 0
@@ -684,3 +719,44 @@ jobs:
         rm yml_good
         #sleep 15 && curl -s https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}/config.yml
         fi
+    - name: update filter.tgz
+      if: steps.filter_switch.output.filter_switch == 1
+      continue-on-error: true 
+      run: |
+        cat >add_filter_today.awk<<-\FFF
+        {files[$0]}
+        END{
+        for (file in files){
+          while( getline line < file){
+          split(line,a,"_")
+          c[a[2]]++
+          }
+          close(file)
+        }
+        while("ls good*.txt" | getline file ){
+          while( getline line < file ){
+            split(line,a,"_")
+            b[a[2]]
+          }
+          close(file)
+        }
+        while("ls bad*.txt" | getline file ){
+          while( getline line < file ){
+            split(line,a,"_")
+            if(a[2] in b) continue
+            if(!c[a[2]]++) print a[2]
+          }
+          close(file)
+        }
+        }
+        FFF
+        target=filter/$(date "+%Y%m%d")
+        ls filter | tail -n 3 | awk -f add_filter_today.awk >> $target
+        tar czvf filter.tgz $(ls filter | tail -n 3 | awk -F ORS=" " "1")
+    - name: 'Upload filter.tgz'
+      uses: actions/upload-artifact@v3
+      if: steps.filter_switch.output.filter_switch == 1
+      with:
+        name: filter.tgz
+        path: filter.tgz
+        retention-days: 3
