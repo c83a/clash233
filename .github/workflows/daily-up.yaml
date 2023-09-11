@@ -752,7 +752,7 @@ jobs:
         FFF
         target=filter/$(date "+%Y%m%d")
         ls filter | tail -n 3 | awk -f add_filter_today.awk >> $target
-        tar czvf filter.tgz $(ls filter | tail -n 3 | awk -F ORS=" " "1")
+        tar czvf filter.tgz $(ls filter | tail -n 3 | awk -v ORS=" " "1")
     - name: 'Upload filter.tgz'
       uses: actions/upload-artifact@v3
       if: steps.filter_switch.output.filter_switch == 1
