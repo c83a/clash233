@@ -101,19 +101,11 @@ jobs:
         fi>> $GITHUB_OUTPUT
     - name: Download filter.tgz
       uses: actions/download-artifact@v3
-      continue-on-error: true 
-      env:
-        filter: steps.filter_switch.output.filter_switch
-      #if: ${{ failure() }} 
-      if: env.filter == '1'
+      continue-on-error: true
       with:
         name: filter.tgz
     - name: gen filter.txt
       continue-on-error: true
-      env:
-        filter: steps.filter_switch.output.filter_switch
-      #if: ${{ failure() }} 
-      if: env.filter == '1'
       run: |
         if [ -f tmp_0.yaml ]; then
           [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz
@@ -128,7 +120,7 @@ jobs:
           awk  -v FS="_" '!a[$2]++' $(ls filter/* | tail -n 3) >> filter.txt
         fi
     - name: check.sh
-      continue-on-error: true 
+      continue-on-error: true
       run: |
         cat >check.sh<<-\EEE
         #!/bin/bash
@@ -768,10 +760,6 @@ jobs:
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
     - name: 'Upload filter.tgz'
       uses: actions/upload-artifact@v3
-      env:
-        filter: steps.filter_switch.output.filter_switch
-      #if: ${{ failure() }} 
-      if: env.filter == '1'
       with:
         name: filter.tgz
         path: filter.tgz
