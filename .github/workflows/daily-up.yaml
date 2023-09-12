@@ -119,12 +119,12 @@ jobs:
       continue-on-error: true 
       run: |
         old=$(date "+%Y%m%d" -d "-3 days")
-        [ -f filter/$old ] && rm filter/$old
+        [ -f filter/$old ] && rm filter/$old || :
     - name: gen filter.txt
       continue-on-error: true
       run: |
         if [ -f tmp_0.yaml ]; then
-          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz
+          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz || :
         else
           if [ ! -f filter.tgz ]; then
             mkdir filter
@@ -135,6 +135,23 @@ jobs:
           touch filter.txt
           awk  -v FS="_" '!a[$2]++' $(ls filter/* | tail -n 3) >> filter.txt
         fi
+    - name: gen check-list-filter.awk
+      continue-on-error: true
+      run: |
+        cat >check-list-filter.awk<<-\EOF
+        BEGIN{
+        if (filter){
+          while(getline line <"filter.txt")
+            b[line]
+          close("filter.txt")}
+        }
+        {
+          if(filter) {
+            split($0,a,"_")
+            if (a[2] in b) next}
+          print
+        }
+        EOF
     - name: check.sh
       continue-on-error: true
       run: |
@@ -252,7 +269,7 @@ jobs:
         ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
         fi | gawk -v np="$np" -v filter=$filter -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' x.yaml > cdn.yaml
-        gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ > check-list.txt
+        gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ | awk -v filter=$filter -f check-list-filter.awk > check-list.txt
         fi # END of mode 0
         if [ 1 ];then
         cat >kw.txt<<-EOF
