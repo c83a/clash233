@@ -1,7 +1,7 @@
 name: "clash proxy provider 2"
 on:
   schedule:
-    - cron: '0 */12 * * *'  
+    - cron: '0 */8 * * *'  
   workflow_dispatch:
 jobs:
   job_1:
@@ -784,7 +784,10 @@ jobs:
         FFF
         [ -f tmp_0.yaml ] && exit 
         target=filter/$(date "+%Y%m%d")
-        ls filter/* | tail -n 3 | awk -f add_filter_today.awk >> $target
+        tmp=$(date "+%Y%m%d").tmp
+        touch $tmp
+        ls filter/* | tail -n 3 | awk -f add_filter_today.awk >$tmp 
+        cat $tmp >>$target
         tar czvf filter.tgz $(ls filter/* | tail -n 3 | awk -v ORS=" " "1")
     - name: 'Upload filter.tgz'
       uses: actions/upload-artifact@v3
