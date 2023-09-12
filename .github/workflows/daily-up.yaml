@@ -124,16 +124,15 @@ jobs:
       continue-on-error: true
       run: |
         if [ -f tmp_0.yaml ]; then
-          [ -f filter.tgz ] && echo "filter should be disabled" && rm filter.tgz || :
+          :
         else
-          if [ ! -f filter.tgz ]; then
+          if [ ! -d filter ]; then
             mkdir filter
             touch filter/$(date "+%Y%m%d")
-          else
-            tar xzvf filter.tgz
           fi
+          touch filter/$(date "+%Y%m%d")
           touch filter.txt
-          awk  -v FS="_" '!a[$2]++' $(ls filter/* | tail -n 3) >> filter.txt
+          awk '!a[$0]++' $(ls filter/* | tail -n 3) >> filter.txt
         fi
     - name: gen check-list-filter.awk
       continue-on-error: true
