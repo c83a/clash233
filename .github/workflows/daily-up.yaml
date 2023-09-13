@@ -137,7 +137,7 @@ jobs:
         warp_url=https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh
         curl -s -o warp.sh $warp_url
         if [ ! -f warp.sh ]; then  exit;  else chmod 755 ./warp.sh;  fi
-        cat >>gen_dialer-proxy.yaml<<-\EOF
+        cat >>gen_dialer-proxy.yaml.sh<<-\EOF
         . ./warp.sh
         my_warp_conf=my_warp.conf
         if [ ! -f $WGCF_ProfilePath ]; then
@@ -163,7 +163,10 @@ jobs:
         proxies:
         - {name: cf-warp, server: $server, port: $port, type: wireguard, ip: WireGuard_Interface_Address_IPv4, public-key: $WireGuard_Peer_PublicKey, private-key: $WireGuard_Interface_PrivateKey, udp: true}
         EEE
+        chmod 666 dialer-proxy.yaml
         EOF
+        chmod 755 gen_dialer-proxy.yaml.sh
+        sudo ./gen_dialer-proxy.yaml.sh
         cat >test_dialer.conf<<-\FFF
         mixed-port: 7890
         ipv6: true
@@ -173,7 +176,7 @@ jobs:
           - MATCH,cf-warp
         $(cat dialer-proxy.yaml)
         FFF
-        clash -d `pwd` -f test_dialer.conf &
+        ./clash -d `pwd` -f test_dialer.conf &
         sleep 1
         pidof clash && \
           curl -s -I -x http://127.0.0.1:7890 https://www.baidu.com && \
@@ -420,6 +423,7 @@ jobs:
         done
         fi > y.yaml
         ./clash -t -f y.yaml -d . || error_config=1
+        cat y.yaml
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=$((2$seed % 100 + 20406))
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
