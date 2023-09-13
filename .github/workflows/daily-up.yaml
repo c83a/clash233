@@ -217,7 +217,7 @@ jobs:
           limit=233;i=0
           for (file in pass){ 
           while (i < limit && getline line < file) 
-            if (split(line,b,"\42name\42:") == 2 && split(b[2],c,"_") > 2 && !a[[c2]]++)
+            if (split(line,b,"\42name\42:") == 2 && split(b[2],c,"_") > 2 && !a[c[2]]++)
               i++      
           close(file) 
           if (i == limit) break
