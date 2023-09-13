@@ -178,6 +178,7 @@ jobs:
           - MATCH,cf-warp
         $(cat dialer-proxy.yaml)
         FFF
+        cat test-dialer.conf
         ./clash -d `pwd` -f test_dialer.conf &
         sleep 1
         pidof clash && \
@@ -426,6 +427,7 @@ jobs:
         fi > y.yaml
         ./clash -t -f y.yaml -d . || error_config=1
         cat y.yaml
+        exit
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=$((2$seed % 100 + 20406))
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
