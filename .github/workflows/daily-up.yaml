@@ -393,6 +393,7 @@ jobs:
         ipv6: true
         mode: rule
         #log-level: silent
+        allow-lan: true
         $(if [ -f use_dialer ];then cat dialer-proxy.yaml;\
                                else echo '# pass';fi)
         proxy-providers:
