@@ -161,10 +161,14 @@ jobs:
         [ "$WireGuard_Interface_Address_IPv4" ] && \
             ipv4=$(echo "$WireGuard_Interface_Address_IPv4" | awk -F"/" '{print $1}') || \
             ipv4=172.16.0.2
+        [ "$WireGuard_Interface_Address_IPv6" ] && \
+            ipv6=$(echo "$WireGuard_Interface_Address_IPv4" | awk -F"/" '{print $1}') || \
+            ipv6=''
+
         cat >dialer-proxy.yaml<<-EEE
         
         proxies:
-          - { name: cf-warp, server: $server, port: $port, type: wireguard, ip: $ipv4, public-key: $WireGuard_Peer_PublicKey, private-key: $WireGuard_Interface_PrivateKey, udp: true }
+          - { name: cf-warp, server: $server, port: $port, type: wireguard, ip: $ipv4, $(if [ "$ipv6" ];then echo -n "ipv6: $ipv6, ";fi )public-key: $WireGuard_Peer_PublicKey, private-key: $WireGuard_Interface_PrivateKey, udp: true }
         
         EEE
         chmod 666 dialer-proxy.yaml
