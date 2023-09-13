@@ -138,6 +138,7 @@ jobs:
         curl -s -o warp.sh $warp_url
         if [ ! -f warp.sh ]; then  exit;  else chmod 755 ./warp.sh;  fi
         cat >>gen_dialer-proxy.yaml.sh<<-\EOF
+        #!/bin/bash
         . ./warp.sh
         my_warp_conf=my_warp.conf
         if [ ! -f $WGCF_ProfilePath ]; then
