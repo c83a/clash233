@@ -211,7 +211,15 @@ jobs:
           fi
           touch filter/$(date "+%Y%m%d")
           touch filter.txt
-          awk '!a[$0]++' $(ls filter/* | tail -n 3) >> filter.txt
+          awk 'BEGIN{ \
+          ignore["config.yml"];ignore["config.yaml"] \
+          for (file in ignore){ \
+          while (getline line < file) \
+            if (split(line,b,"\42name\42:") == 2 && split(b[2],c,"_") > 2) \
+              a[c[2]]++ \
+          close(file) \
+          } \
+          }{!a[$0]++}' $(ls filter/* | tail -n 3) >> filter.txt
         fi
     - name: gen check-list-filter.awk
       continue-on-error: true
