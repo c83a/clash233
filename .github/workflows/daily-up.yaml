@@ -151,6 +151,10 @@ jobs:
             chmod 666 $my_warp_conf
           fi
         fi
+        if [ $(( $(date "+%u") % 2 )) -eq 1 ];then
+        Set_WARP_DualStack_nonGlobal
+        Disable_WireGuard
+        fi
         Read_WGCF_Profile
         server=$(echo $WireGuard_Peer_Endpoint_Domain | awk -v n=1 -F: '{print $n}')
         port=$(echo $WireGuard_Peer_Endpoint_Domain | awk -v n=2 -F: '{print $n}')
@@ -179,6 +183,7 @@ jobs:
         mixed-port: 7890
         ipv6: true
         mode: rule
+        allow-lan: true
         #log-level: silent
         rules:
           - MATCH,cf-warp
