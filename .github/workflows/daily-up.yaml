@@ -213,9 +213,9 @@ jobs:
           touch filter.txt
         cat >gen-filter-txt.awk<<-\EOF
           BEGIN{ 
-          pass["speed_short.yaml"];pass["config.yaml"] 
+          except_files["speed_short.yaml"];except_files["config.yaml"] 
           limit=233;i=0
-          for (file in pass){ 
+          for (file in except_files){ 
           while (i < limit && getline line < file) 
             if (split(line,b,"\42name\42:") == 2 && split(b[2],c,"_") > 2 && !a[c[2]]++)
               i++      
@@ -223,6 +223,7 @@ jobs:
           if (i == limit) break
           } 
           }{!a[$0]++}
+          END{print "filter records: " length(a) | "cat 1>&2"}
         EOF
           awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) >> filter.txt
         fi
