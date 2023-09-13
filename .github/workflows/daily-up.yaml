@@ -169,7 +169,7 @@ jobs:
         EOF
         chmod 755 gen_dialer-proxy.yaml.sh
         sudo ./gen_dialer-proxy.yaml.sh
-        cat >test_dialer.conf<<-\FFF
+        cat >test_dialer.conf<<-FFF
         mixed-port: 7890
         ipv6: true
         mode: rule
