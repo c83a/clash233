@@ -211,7 +211,7 @@ jobs:
           fi
           touch filter/$(date "+%Y%m%d")
           touch filter.txt
-          cat >gen-filter-txt.awk<<-\EOF
+        cat >gen-filter-txt.awk<<-\EOF
           BEGIN{ 
           pass["config.yml"];pass["config.yaml"] 
           for (file in pass){ 
@@ -221,7 +221,7 @@ jobs:
           close(file) 
           } 
           }{!a[$0]++}
-          EOF
+        EOF
           awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) >> filter.txt
         fi
     - name: gen check-list-filter.awk
