@@ -342,6 +342,7 @@ jobs:
         cat >sub.sed<<-\EOF
         s/ [^ ]*: \{\},//g
         s!alterId: "([0-9]+)"!alterId: \1!
+        s!port: "([0-9]+)"!port: \1!
         s!ws-path: ([^,]*)!ws-opts: {path: \1}!
         s/ !<str> ([0-9]+)/ "\1"/g
         s/password: ([0-9]+),/password: "\1",/g
