@@ -152,6 +152,7 @@ jobs:
           fi
         fi
         if [ $(( $(date "+%u") % 2 )) -eq 1 ];then
+        Get_System_Info
         Set_WARP_DualStack_nonGlobal
         Disable_WireGuard
         fi
