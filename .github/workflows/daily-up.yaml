@@ -187,8 +187,11 @@ jobs:
         cat test_dialer.conf
         ./clash -d `pwd` -f `pwd`/test_dialer.conf &
         sleep 1
+        CF_Trace_URL='https://www.cloudflare.com/cdn-cgi/trace'
         pidof clash && \
           curl -s -I -x http://127.0.0.1:7890 https://www.baidu.com && \
+          echo ipv6 $(curl -s6 ${CF_Trace_URL} --connect-timeout 2 | grep warp | cut -d= -f2) && \
+          echo ipv4 $(curl -s4 ${CF_Trace_URL} --connect-timeout 2 | grep warp | cut -d= -f2) && \
           touch use_dialer && killall clash || :
     - name: gen filter.txt
       continue-on-error: true
