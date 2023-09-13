@@ -185,7 +185,7 @@ jobs:
         sleep 1
         pidof clash && \
           curl -s -I -x http://127.0.0.1:7890 https://www.baidu.com && \
-          touch use-dialer && killall clash || :
+          touch use_dialer && killall clash || :
     - name: gen filter.txt
       continue-on-error: true
       run: |
@@ -428,7 +428,7 @@ jobs:
         done
         fi > y.yaml
         ./clash -t -f y.yaml -d . || error_config=1
-        cat y.yaml
+        [ -f use_dialer ] && cat y.yaml || echo "no dialer proxy"
         if [ "$error_config" ];then cat y.yaml; exit 1;fi
         port=$((2$seed % 100 + 20406))
         ./clash -d . -f y.yaml  -ext-ctl "127.0.0.1:$port" >>clash.log &
