@@ -10,9 +10,10 @@ jobs:
     timeout-minutes: 120
     steps:
     - uses: actions/checkout@v3
-    - name: time_a
+    - name: time_a Year_month
       run: |
         echo $(date "+%s") > time_a
+        echo $(date "+%Y%m") > Year_month
         [ "${GITHUB_ACTOR}" ] && user="${GITHUB_ACTOR}"  || user="jw853355718"
         git config --global user.name "$user" 
         git config --global user.email "${user}@users.noreply.github.com"
@@ -120,6 +121,63 @@ jobs:
       run: |
         old=$(date "+%Y%m%d" -d "-3 days")
         [ -f filter/$old ] && rm filter/$old || :
+    - name: Cache my_warp.conf
+      id: cache-warp
+      uses: actions/cache@v3
+      env:
+         cache-name: warp
+      with:
+          path: my_warp.conf
+          key: my_warp.conf-${{ hashFiles('Year_month') }}
+          restore-keys: |
+            my_warp.conf-
+    - name: cf_warp
+      continue-on-error: true 
+      run: |
+        warp_url=https://raw.githubusercontent.com/P3TERX/warp.sh/main/warp.sh
+        curl -s -o warp.sh $warp_url
+        if [ ! -f warp.sh ]; then  exit;  else chmod 755 ./warp.sh;  fi
+        cat >>gen_dialer-proxy.yaml<<-\EOF
+        . ./warp.sh
+        my_warp_conf=my_warp.conf
+        if [ ! -f $WGCF_ProfilePath ]; then
+          if [ -f $my_warp_conf ]; then
+            mkdir $WGCF_ProfileDir || :
+            cp $my_warp_conf $WGCF_ProfilePath
+          else
+            Load_WGCF_Profile
+            cp $WGCF_ProfilePath $my_warp_conf
+            chmod 666 $my_warp_conf
+          fi
+        fi
+        Read_WGCF_Profile
+        server=$(echo $WireGuard_Peer_Endpoint_Domain | awk -v n=1 -F: '{print $n}')
+        port=$(echo $WireGuard_Peer_Endpoint_Domain | awk -v n=2 -F: '{print $n}')
+        [ "$server" ] || \
+            server=engage.cloudflareclient.com
+        [ "$port" ] || \
+            port=2408
+        [ "$WireGuard_Interface_Address_IPv4" ] || \
+            WireGuard_Interface_Address_IPv4=172.16.0.2
+        cat >dialer-proxy.yaml<<-EEE
+        proxies:
+        - {name: cf-warp, server: $server, port: $port, type: wireguard, ip: WireGuard_Interface_Address_IPv4, public-key: $WireGuard_Peer_PublicKey, private-key: $WireGuard_Interface_PrivateKey, udp: true}
+        EEE
+        EOF
+        cat >test_dialer.conf<<-\FFF
+        mixed-port: 7890
+        ipv6: true
+        mode: rule
+        #log-level: silent
+        rules:
+          - MATCH,cf-warp
+        $(cat dialer-proxy.yaml)
+        FFF
+        clash -d `pwd` -f test_dialer.conf &
+        sleep 1
+        pidof clash && \
+          curl -s -I -x http://127.0.0.1:7890 https://www.baidu.com && \
+          touch use-dialer && killall clash || :
     - name: gen filter.txt
       continue-on-error: true
       run: |
@@ -314,11 +372,15 @@ jobs:
         ipv6: true
         mode: rule
         #log-level: silent
+        $(if [ -f use_dialer ];then cat dialer-proxy.yaml;\
+                               else echo '# pass';fi)
         proxy-providers:
          px:
           type: file
           interval: 9600
           path: x.yaml
+          $(if [ -f use_dialer ];then echo "dialer-proxy: cf-warp";\
+                                 else echo '# pass';fi)
           health-check:
             enable: false
             interval: 600
