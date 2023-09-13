@@ -213,7 +213,7 @@ jobs:
           touch filter.txt
         cat >gen-filter-txt.awk<<-\EOF
           BEGIN{ 
-          pass["config.yml"];pass["config.yaml"] 
+          pass["speed_short.yml"];pass["config.yaml"] 
           limit=666;i=0
           for (file in pass){ 
           while (i < limit && getline line < file) 
