@@ -220,6 +220,7 @@ jobs:
             if (split(line,b,"\42name\42:") == 2 && split(b[2],c,"_") > 2 && !a[[c2]]++)
               i++      
           close(file) 
+          if (i == limit) break
           } 
           }{!a[$0]++}
         EOF
