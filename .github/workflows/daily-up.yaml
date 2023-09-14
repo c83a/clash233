@@ -235,8 +235,8 @@ jobs:
             if (a[2] in b && ++filter) next}
           print
         }
-        END
-        {print filter - 1  " filtered." length(b) " rules."| "cat 1>&2"}
+        END{
+        print filter - 1  " filtered. " length(b) " rules." | "cat 1>&2" }
         EOF
     - name: check.sh
       continue-on-error: true
