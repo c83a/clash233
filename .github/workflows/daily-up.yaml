@@ -858,6 +858,8 @@ jobs:
         cat >add_filter_today.awk<<-\FFF
         {files[$0]}
         END{
+        while("ls good*.txt" | getline file )files[file]
+        close("ls good*.txt")
         for (file in files){
           while( getline line < file){
           split(line,a,"_")
@@ -865,17 +867,9 @@ jobs:
           }
           close(file)
         }
-        while("ls good*.txt" | getline file ){
-          while( getline line < file ){
-            split(line,a,"_")
-            b[a[2]]
-          }
-          close(file)
-        }
         while("ls bad*.txt" | getline file ){
           while( getline line < file ){
             split(line,a,"_")
-            if(a[2] in b) continue
             if(!c[a[2]]++) print a[2]
           }
           close(file)
