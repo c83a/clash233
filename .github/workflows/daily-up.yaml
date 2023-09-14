@@ -223,7 +223,7 @@ jobs:
           if (i == limit) break
           } 
           }{!a[$0]++}
-          END{print "filter records: " length(a) | "cat 1>&2"}
+          END{print "filter records: " length(a) - i | "cat 1>&2"}
         EOF
           awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) >> filter.txt
         fi
@@ -876,7 +876,7 @@ jobs:
         }
         }
         FFF
-        [ -f tmp_0.yaml ] && exit 
+        #[ -f tmp_0.yaml ] && exit 
         target=filter/$(date "+%Y%m%d")
         tmp=$(date "+%Y%m%d").tmp
         touch $tmp
