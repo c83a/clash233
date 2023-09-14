@@ -866,8 +866,9 @@ jobs:
         while("ls bad*.txt" | getline file ){
           while( getline line < file ){
             split(line,a,"_")
-            if(!c[a[2]]++ &&\
-            ! a[1] in except ) print a[2]
+            if(c[a[2]]++ || \
+               a[1] in except) continue
+            print a[2]
           }
           close(file)
         }
