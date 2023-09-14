@@ -232,9 +232,11 @@ jobs:
         {
           if(filter) {
             split($0,a,"_")
-            if (a[2] in b) next}
+            if (a[2] in b && ++filter) next}
           print
         }
+        END
+        {print filter - 1  " filtered." length(b) " rules."| "cat 1>&2"}
         EOF
     - name: check.sh
       continue-on-error: true
@@ -289,7 +291,8 @@ jobs:
         cat >gen.awk<<-\EOF
         BEGIN{
           if (filter){
-            while(getline line < "filter.txt") pass[line]
+            while(getline line < "filter.txt")
+              pass[line]
             close("filter.txt")
           }
           database="database.yaml"
