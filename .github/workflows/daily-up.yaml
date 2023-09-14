@@ -337,7 +337,7 @@ jobs:
           if(index(r,"t")){print p; ++rr[u]; ++qi;}
         }
         END{
-          print NR " records IN, " qi " records OUT, " filter - 1 "filtered." | "cat 1>&2" 
+          print NR " records IN, " qi " records OUT, " filter - 1 " filtered." | "cat 1>&2" 
         }
         EOF
         cat >sub.sed<<-\EOF
@@ -361,9 +361,9 @@ jobs:
         if [ 1 ];then
         cat raw_database.yaml
         ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
-        fi | gawk -v np="$np" -v filter=$filter -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
+        fi | gawk -v np="$np" -v filter="$filter" -f gen.awk | python add_ip.py | sed -E 's!"([^"]*)"}#([^#]*)#([^#]*)$!"\2_\3\1"}!' > x.yaml
         gawk  -F '"name":' 'NF == 2 && index($2,"\42CN_") && !b[$1]++ && !a[$2]++' x.yaml > cdn.yaml
-        gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ | awk -v filter=$filter -f check-list-filter.awk > check-list.txt
+        gawk '{if(match($0,/("name":"[^"]*")/,a) && !index(a[1],"_None_"))print a[1]}' x.yaml | grep -v CN_ | awk -v filter="$filter" -f check-list-filter.awk > check-list.txt
         fi # END of mode 0
         if [ 1 ];then
         cat >kw.txt<<-EOF
