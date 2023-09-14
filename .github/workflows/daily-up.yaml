@@ -292,7 +292,7 @@ jobs:
         BEGIN{
           if (filter){
             while(getline line < "filter.txt")
-              pass[line]
+              igonre[line]
             close("filter.txt")
           }
           database="database.yaml"
@@ -307,7 +307,7 @@ jobs:
           if(qi > 23333) exit
           if( ! match($0,/type: ([^,]*)/,tt) || ! match($0,/server: ([^,]*)/,ss))
             next
-          if(filter && ss[1] in pass && filter++)
+          if(filter && ss[1] in ignore && filter++)
             next
           u=ss[1]tt[1]
           if( !(u in rr) )
