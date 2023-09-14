@@ -853,6 +853,7 @@ jobs:
         cat >add_filter_today.awk<<-\FFF
         {files[$0]}
         END{
+        except["CLOUDFLARE"]
         while("ls good*.txt" | getline file )files[file]
         close("ls good*.txt")
         for (file in files){
@@ -866,7 +867,7 @@ jobs:
           while( getline line < file ){
             split(line,a,"_")
             if(!c[a[2]]++ &&\
-            "CLOUDFLARE" != a[1] ) print a[2]
+            ! a[1] in except ) print a[2]
           }
           close(file)
         }
