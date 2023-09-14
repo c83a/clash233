@@ -226,6 +226,7 @@ jobs:
           END{print "filter records: " length(a) - i | "cat 1>&2"}
         EOF
           awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) >> filter.txt
+          cp filter.txt filter/.filter
         fi
     - name: gen check-list-filter.awk
       continue-on-error: true
@@ -312,7 +313,7 @@ jobs:
           if(qi > 23333) exit
           if( ! match($0,/type: ([^,]*)/,tt) || ! match($0,/server: ([^,]*)/,ss))
             next
-          if(filter && ss[1] in pass)
+          if(filter && ss[1] in pass && filter++)
             next
           u=ss[1]tt[1]
           if( !(u in rr) )
@@ -336,7 +337,7 @@ jobs:
           if(index(r,"t")){print p; ++rr[u]; ++qi;}
         }
         END{
-          print NR " records IN, " qi " records OUT" | "cat 1>&2" 
+          print NR " records IN, " qi " records OUT, " filter - 1 "filtered." | "cat 1>&2" 
         }
         EOF
         cat >sub.sed<<-\EOF
