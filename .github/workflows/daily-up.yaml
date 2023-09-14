@@ -216,7 +216,7 @@ jobs:
           }{if(!a[$0]++)print}
           END{print "filter records: " length(a) - i | "cat 1>&2"}
         EOF
-          awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) | tee filter.txt
+          awk -f gen-filter-txt.awk $(ls filter/* | tail -n 3) >> filter.txt
           cp filter.txt filter/.filter
         fi
     - name: gen check-list-filter.awk
@@ -331,7 +331,7 @@ jobs:
           if(index(r,"t")){print p; ++rr[u]; ++qi;}
         }
         END{
-          print NR " records IN, " qi " records OUT, " filter - 1 " filtered." length(fff) | "cat 1>&2" 
+          print NR " records IN, " qi " records OUT, " filter - 1 " filtered. " length(fff) " rules."| "cat 1>&2" 
         }
         EOF
         cat >sub.sed<<-\EOF
@@ -351,7 +351,7 @@ jobs:
         eval $cmd1 | yq -M -o=json | yq -M 'del(.["proxy-groups","rules"]) | del(.proxies.[].["name","udp","country","group","index"]) | sort_keys(.proxies.[])| ... style = "" | .proxies.[] style="flow"' | awk 'index($0,"port")&&index($0,"server")' |sed -E -f sub.sed >raw_$j  
         echo $j end  processing $? >&2
         done
-        filter=1
+        if [ -f tmp_0.yaml ];then filter=1;else filter=0;fi
         if [ 1 ];then
         cat raw_database.yaml
         ls -s raw_database_*.yaml raw_tmp*.yaml | sort | awk '{print $2}' | gawk -v raw=1 -f mixn.awk 
