@@ -113,17 +113,12 @@ jobs:
               i_value=a[2]
         
             if (i_name == "tls_vision"){
-              if(i_value == "tls"){
-                i_name="tls"
-                i_value="true"
-              }else if (i_value == "none"){
+              if(i_value == "none"){
                 continue
-                i_name="flow"
-                i_value="null"
-              }else if (i_value == "reality"){
+              }else if (i_value == "none"){
                 i_name="tls"
                 i_value="true"
-              }
+              }}
           }
           r[i_name]=i_value
         }
