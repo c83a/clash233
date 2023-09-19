@@ -305,7 +305,8 @@ jobs:
     - name: convert vless link to yaml
       continue-on-error: true 
       run: |
-        for i in *.base64;do
+        #!/bin/bash
+        for i in $(ls *.base64);do
         base64 -d $i | awk -f c.awk > $i.yaml
         done
         ls -l
