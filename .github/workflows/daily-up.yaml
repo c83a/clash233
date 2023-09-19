@@ -275,20 +275,24 @@ jobs:
         echo virtual env activate
         date
         if [ 1 ];then
+        cat >>pool_etc2<<-\EEE
+        https://github.com/Leon406/SubCrawler/raw/main/sub/share/vless
+        EEE
         cat >>pool_etc<<-EEE
         https://nodefree.org/dy/$(date '+%Y/%m/%Y%m%d' -d "-1 days").yaml
         https://nodefree.org/dy/$(date '+%Y/%m/%Y%m%d').yaml
         EEE
         fi
         down_from_list() {
+        if [ ! "$2" ];then suf="yaml";else suf="$2";fi
         for url in $(awk '!a[$0]++' $1);do
-        filename=tmp_1$RANDOM.yaml
+        filename=tmp_1$RANDOM.$suf
         echo GET $url TO $filename
         ( curl -L -k -s -o $filename $url  && echo $filename job done || echo $url failed)&
         p="$! $p"
         done
         }
-        [ $(date +%H | sed 's/^0//') -gt 3 ] && down_from_list pool_etc || touch tmp_0.yaml
+        [ $(date +%H | sed 's/^0//') -gt 3 ] && down_from_list pool_etc2 base64 && down_from_list pool_etc || touch tmp_0.yaml
         # [ -f tmp_0.yaml ] && down_from_list pool_etc || touch tmp_0.yaml
         for i in $p;do
         wait $i
@@ -298,6 +302,13 @@ jobs:
         timeout 15m bash ./prepare.sh > prepare.log || exit 1
         touch p_t
         cat prepare.log
+    - name: convert vless link to yaml
+      continue-on-error: true 
+      run: |
+        for i in *.base64;do
+        base64 -d $i | awk -f c.awk > $i.yaml
+        done
+        ls -l
     - name: Download filter.tgz
       uses: actions/download-artifact@v3
       continue-on-error: true
