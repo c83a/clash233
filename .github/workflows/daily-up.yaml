@@ -66,6 +66,8 @@ jobs:
         etcs["host"]
         etcs["path"]
         etcs["grpc-service-name"]
+        etcs["public-key"]
+        etcs["short-id"]
         url_encoded["path"]
         url_encoded["grpc-service-name"]
         split(trans,atrs,ORS)
@@ -135,11 +137,21 @@ jobs:
         if (t == "ws"){
           if ("path" in r)m= "path: " r["path"] ", "
           if ("host" in r)m=m "headers: { Host: " r["host"] "}, "
-          if (m) y=" ws-opts: { " m "}"
+          if (m) y=" ws-opts: { " m "}, "
         }else if (t == "grpc"){
           gsn="grpc-service-name"
           if (gsn in r)m= gsn  ": " r[gsn]
-          if (m) y=" grpc-opts: { " m  "}"
+          if (m) y=" grpc-opts: { " m  "}, "
+        }
+        pbk="public-key"
+        sid="short-id"
+        if (pbk in r){
+          m=pbk ": " r[pbk]
+          if (sid in r)
+            m=m " ," sid ": " r[sid]
+          y=y "reality-opts: { " m "}"
+        
+        
         }
         if (y)print y
         
