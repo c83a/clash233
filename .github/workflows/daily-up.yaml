@@ -508,7 +508,7 @@ jobs:
           }
         }
         FFF
-        gawk -F , 'BEGIN{print "proxies:"}{if (match($NF,/"name":"[^_"]*_([^_]*)_[^_"]*"/,ip)&&!b[ip[1]]++) {if( 11 == index($NF,"_") && ! match(ip[1],/:/) ){c=gensub(/server: [^,]*/,"server: "ip[1],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
+        gawk -F , 'BEGIN{print "proxies:"}{if (match($NF,/"name":"([^_"]*)_([^_]*)_[^_"]*"/,a) && a[1] != "CLOUDFLARE" && !b[a[2]]++) {if( 11 == index($NF,"_") && ! match(a[2],/:/) ){c=gensub(/server: [^,]*/,"server: "a[2],"g") ;print c}else{print}}}' speed_short.yaml > speed_ip.yaml
         if [ 1 ];then
         # echo -e 'speed_ip.yaml\nconfig.yml'| gawk -f mixn.awk
         cat config.yml speed_*.yaml speed.yaml
