@@ -148,8 +148,8 @@ jobs:
         if (pbk in r){
           m=pbk ": " r[pbk]
           if (sid in r)
-            m=m " ," sid ": " r[sid]
-          y=y "reality-opts: { " m "}"
+            m=m ", " sid ": " r[sid]
+          y=y "reality-opts: { " m " }"
         
         
         }
