@@ -75,13 +75,14 @@ jobs:
           split(atrs[i],trs," ")
           if (! length(trs)) continue
           TR[trs[1] trs[2]]=trs[3]}
-        ORS=" "
+        ORS=""
+        pbk="public-key"
+        sid="short-id"
+        gsn="grpc-service-name"
         printf( "proxies:\n")
         }
         {
-        #exit
-        #link=d64($0)
-        link=$0
+          link=$0
           n=split(link,a,"?")
           if ( n != 2 ) next
           base_part=a[1]
@@ -99,16 +100,13 @@ jobs:
           split(opt_part,a,"#")
           split(a[1],b,"&")
           for (i in b){
-            #print "DEBUG" OFS i OFS b[i]
             n=split(b[i],a,"=")
-            #print a[1] "???"  a[2]
             if (n != 2)continue
             key=r["type"] a[1]
             if ( ! (key in TR) )continue
-            #print "!!!"
             i_name=TR[key]
             if (i_name in url_encoded)
-              i_value="'" durl(a[2]) "'"     #i_value=durl(a[2])
+              i_value="'" durl(a[2]) "'"
             else  
               i_value=a[2]
         
@@ -119,12 +117,12 @@ jobs:
                 i_name="tls"
                 i_value="true"
               }
-          }
+            }
           r[i_name]=i_value
-        }
+          }
         
         if ("client-fingerprint" in r) r["client-fingerprint"]="chrome"
-        print "\n - { name: zz_" NR ", "
+        print "  - { name: zz_" NR ", "
         if (! ("network" in r) )r["network"]="tcp"
         t=r["network"]
         for (i in r)if (i && ! (i in etcs)) print (i ": " r[i] ",")
@@ -134,25 +132,18 @@ jobs:
           if ("host" in r)m=m "headers: { Host: " r["host"] "}, "
           if (m) y=" ws-opts: { " m "}, "
         }else if (t == "grpc"){
-          gsn="grpc-service-name"
           if (gsn in r)m= gsn  ": " r[gsn]
           if (m) y=" grpc-opts: { " m  "}, "
         }
-        pbk="public-key"
-        sid="short-id"
         if (pbk in r){
           m=pbk ": " r[pbk]
           if (sid in r)
             m=m ", " sid ": " r[sid]
           y=y "reality-opts: { " m " }"
-        
-        
         }
-        if (y)print y
-        
-        print " }"
-        
-        print "\n"
+        if (y)
+          print y
+        print " }\n"
         }
         EOF
         
