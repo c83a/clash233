@@ -125,7 +125,7 @@ jobs:
         print "  - { name: zz_" NR ", "
         if (! ("network" in r) )r["network"]="tcp"
         t=r["network"]
-        for (i in r)if (i && ! (i in etcs)) print (i ": " r[i] ",")
+        for (i in r)if (i && ! (i in etcs)) print (i ": " r[i] ", ")
         m=y=""
         if (t == "ws"){
           if ("path" in r)m= "path: " r["path"] ", "
