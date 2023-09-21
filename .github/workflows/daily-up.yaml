@@ -93,7 +93,10 @@ jobs:
           split("",r)
           r["type"]=target_types[b[1]]
           n=split(b[2],a,/[@:]/)
-          if ( n != 3 && index(b[2],"@[") && index(b[2],"]:") ) n=split(b[2],a,/(@\[)|(]:)/)
+          if ( n != 3 && index(b[2],"@[") && index(b[2],"]:") ) {
+          n=split(b[2],a,/(@\[)|(]:)/)
+          a[2]="\42" a[2] "\42"
+          }
           if ( n != 3 ) next
           r["uuid"]=a[1]
           r["server"]=a[2]
