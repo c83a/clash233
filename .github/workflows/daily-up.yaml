@@ -29,8 +29,8 @@ jobs:
         Subject: github ip trace
         Date: $(date  | awk '{print $1 ", " $3 " " $2 " "$6 " "$4}')
         
-         
-        $(curl -s https://www.cloudflare.com/cdn-cgi/trace)               
+        
+        $(curl -s https://www.cloudflare.com/cdn-cgi/trace)
         EOF
         curl -v -ssl $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
