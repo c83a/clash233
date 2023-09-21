@@ -1111,7 +1111,7 @@ jobs:
       env:
         SUPER_SECRET: ${{ secrets.MAILPASS }}
       run: |
-        # send mail
+        echo "send mail"
         addr="f277656071@139.com"
         smtp="smtp://smtp.139.com"
         cat >email.txt<<EOF
