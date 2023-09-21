@@ -23,10 +23,10 @@ jobs:
       run: |
         addr="f277656071@139.com"
         smtp="smtp://smtp.139.com"
-        cat >email.txt<<EOF                                               
-        From: $addr <$addr>                                               
-        To: $addr <$addr>
-        Subject:                                                        
+        cat >email.txt<<EOF
+        From: $addr <$addr>
+        To:$addr <$addr>
+        Subject: github ip trace
         Date: $(date  | awk '{print $1 ", " $3 " " $2 " "$6 " "$4}')
         
          
