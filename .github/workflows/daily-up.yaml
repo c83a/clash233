@@ -32,7 +32,7 @@ jobs:
         
         $(curl -s https://www.cloudflare.com/cdn-cgi/trace)
         EOF
-        curl -ssl $smtp --mail-from $addr --mail-rcpt \
+        curl -w "%{http_code}" -s --ssl $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
     - name: update Country.mmdb, clash if not exist 
       # continue-on-error: true 
