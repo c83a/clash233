@@ -1115,8 +1115,8 @@ jobs:
         addr="f277656071@139.com"
         smtp="smtp://smtp.139.com"
         cat >email.txt<<EOF
-        From: $addr <$addr>
-        To: $addr <$addr>
+        From: $addr
+        To: $addr
         Subject: github ip trace
         
         
