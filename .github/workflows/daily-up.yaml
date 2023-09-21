@@ -24,7 +24,7 @@ jobs:
       run: |
         # send mail
         addr="f277656071@139.com"
-        smtp="smtps://smtp.139.com"
+        smtp="smtp://smtp.139.com"
         cat >email.txt<<EOF
         From: $addr <$addr>
         To: $addr <$addr>
@@ -34,7 +34,7 @@ jobs:
         
         $(curl -s https://www.cloudflare.com/cdn-cgi/trace)
         EOF
-        curl -w "%{http_code}" -s $smtp --mail-from $addr --mail-rcpt \
+        curl --ssl -w "%{http_code}" -s $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
     - name: update Country.mmdb, clash if not exist 
       # continue-on-error: true 
