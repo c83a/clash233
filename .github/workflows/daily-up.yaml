@@ -262,8 +262,7 @@ jobs:
         set +e
         date
         show_ip(){
-        echo 'quering ip'
-        (curl -m 15 --doh-url https://dns.google/dns-query -s http://api64.ipify.org && echo ' ip q done'|| echo 'ip q timeout') &
+          curl -s https://www.cloudflare.com/cdn-cgi/trace &
         }
         show_ip
         if [ ! -e ipvenv ]; then
