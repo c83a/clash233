@@ -1027,6 +1027,7 @@ jobs:
             url: *url-cdn
             path: *path-config
             filter: '[0-9]ss$'
+            exclude-filter: "^CN_"
             dialer-proxy: D1
             health-check: *check
           ps:
