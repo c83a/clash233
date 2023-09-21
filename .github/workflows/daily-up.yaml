@@ -1118,11 +1118,10 @@ jobs:
         From: $addr <$addr>
         To: $addr <$addr>
         Subject: github ip trace
-        Date: $( date +"%a, %d %b %Y %H:%M:%S" )
         
         
         $(curl -s https://www.cloudflare.com/cdn-cgi/trace)
-        $(cat time_a)
+        $(echo -n $(( $(date "+%s") - $(cat time_a) )) ) seconds
         EOF
         curl --ssl -w "%{http_code}" -s $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
