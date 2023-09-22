@@ -1118,7 +1118,7 @@ jobs:
         From: $addr
         To: $addr
         Date: $(date --rfc-email)
-        Subject: $GITHUB_REPOSITORY $(( $(date "+%s") - $(cat time_a) )) ) seconds
+        Subject: $GITHUB_REPOSITORY $(( $(date "+%s") - $(cat time_a) )) seconds
         
         
         $(cat cf-trace.txt)
