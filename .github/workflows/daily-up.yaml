@@ -1113,7 +1113,7 @@ jobs:
       run: |
         echo "send mail"
         addr="f277656071@139.com"
-        smtp="smtps://smtp.139.com"
+        smtp="smtp://smtp.139.com"
         cat >email.txt<<EOF
         From: $addr
         To: $addr
