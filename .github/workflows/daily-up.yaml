@@ -1117,7 +1117,7 @@ jobs:
         cat >email.txt<<EOF
         From: $addr
         To: $addr
-        Date: $(date --rfc-email)"
+        Date: $(date --rfc-email)
         Subject: $GITHUB_REPOSITORY $(( $(date "+%s") - $(cat time_a) )) ) seconds
         
         
