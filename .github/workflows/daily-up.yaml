@@ -1123,6 +1123,6 @@ jobs:
         
         $(cat cf-trace.txt)
         EOF
-        cat email.txt
+        cat email.txt > /dev/null
         curl --ssl -w "%{http_code}" -s $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
