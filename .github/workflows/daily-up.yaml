@@ -262,7 +262,7 @@ jobs:
         set +e
         date
         show_ip(){
-          curl -s https://www.cloudflare.com/cdn-cgi/trace &
+          (curl -s https://www.cloudflare.com/cdn-cgi/trace | tee cf-trace.txt) &
         }
         show_ip
         if [ ! -e ipvenv ]; then
@@ -1113,7 +1113,7 @@ jobs:
       run: |
         echo "send mail"
         addr="f277656071@139.com"
-        smtp="smtp://smtp.139.com"
+        smtp="smtps://smtp.139.com"
         cat >email.txt<<EOF
         From: $addr
         To: $addr
@@ -1121,7 +1121,8 @@ jobs:
         $(echo -n Subject: $GITHUB_REPOSITORY $(( $(date "+%s") - $(cat time_a) )) ) seconds
         
         
-        $(curl -s https://www.cloudflare.com/cdn-cgi/trace)
+        $(cat cf-trace.txt)
         EOF
+        cat email.txt
         curl --ssl -w "%{http_code}" -s $smtp --mail-from $addr --mail-rcpt \
             $addr --upload-file email.txt --user "$addr:$SUPER_SECRET"
