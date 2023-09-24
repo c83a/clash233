@@ -306,7 +306,7 @@ jobs:
       run: |
         #!/bin/bash
         for i in $(ls *.base64);do
-        base64 -d $i | dos2unix | awk -f c.awk > $i.yaml
+        base64 -d $i | sed 's/[[:cntrl:]]//g'  | awk -f c.awk > $i.yaml
         done
         ls -l
     - name: Download filter.tgz
