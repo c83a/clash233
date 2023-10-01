@@ -1111,6 +1111,7 @@ jobs:
       env:
         SUPER_SECRET: ${{ secrets.MAILPASS }}
       run: |
+        [ ! -f tmp_0.yaml ] && exit || :
         echo "send mail"
         addr="f277656071@139.com"
         smtp="smtp://smtp.139.com"
@@ -1118,7 +1119,7 @@ jobs:
         From: $addr
         To: $addr
         Date: $(date --rfc-email)
-        Subject: $GITHUB_REPOSITORY $(( $(date "+%s") - $(cat time_a) )) seconds
+        Subject: $GITHUB_REPOSITORY $(( ($(date "+%s") - $(cat time_a)) / 60 )) min
         
         
         $(cat cf-trace.txt)
