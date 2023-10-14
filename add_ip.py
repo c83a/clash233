@@ -39,7 +39,7 @@ async def a_read():
         r = await loop.run_in_executor(pool, next, gen, end)
         if r is end: break
         yield r
-async def get_code_ip(ip_domain):
+async def get_code_ip(ip_domain, nslookup46):
         if re.match(ip_pattern,ip_domain):
           ip=ip_domain
         elif ip_domain in dns_cache:
@@ -48,7 +48,6 @@ async def get_code_ip(ip_domain):
           domain=ip_domain
           ip=None
           try:
-            nslookup46=nslookup46_var.get()
             ip=(await asyncio.wait_for(nslookup46(domain,80),timeout=10.0))[0][4][0]
           except:
             pass
@@ -63,6 +62,7 @@ async def get_code_ip(ip_domain):
           code_cache[ip]=code
         return (code, ip)
 async def print_item(agen,alock):
+  nslookup46=nslookup46_var.get()
   end=EOFError()
   while True:
     async with alock:
@@ -72,7 +72,7 @@ async def print_item(agen,alock):
     else:
       await asyncio.sleep(0)
       for server in re.finditer('server: ([^,]*)',line):
-        code, ip = await get_code_ip(server.group(1))
+        code, ip = await get_code_ip(server.group(1), nslookup46)
         print("#".join(map(str,(line.rstrip(), code, ip))))
         break
 async def main():
