@@ -1,4 +1,4 @@
-# Mon Oct 23 08:16:39 UTC 2023
+# Mon Oct 23 16:17:05 UTC 2023
 ipv6: true
 mixed-port: 7890
 allow-lan: true
@@ -24,9 +24,20 @@ proxy-providers:
       interval: &seconds 3600
       url: &baidu https://www.baidu.com/
 proxy-groups:
-  - {name: "@ Mon Oct 23 08:16:39 UTC 2023", type: select, proxies: [REJECT]}
+  - {name: "@ Mon Oct 23 16:17:05 UTC 2023", type: select, proxies: [REJECT]}
   - {name: A0, type: select, proxies: [A1,E0,DIRECT]}
   - {name: B0, type: select, proxies: [A1,E0,DIRECT]}
   - {name: E0, type: select, use: [pr], proxies: [REJECT]}
   - {name: A1, type: load-balance, use: [pr], url: *baidu, interval: *seconds, strategy: round-robin}
 proxies:
+  - {alterId: 0, cipher: auto, network: ws, port: 80, server: flkf2.shabijichang.com, skip-cert-verify: true, tls: false, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, ws-opts: {path: /, headers: {host: flkf2.shabijichang.com}},"name":"CLOUDFLARE_104.21.75.246_10232023ac59-560vmess"}
+  - {cipher: aes-256-gcm, password: kDWvXYZoTBcGkC4, port: 8882, server: 38.121.43.71, type: ss,"name":"US_38.121.43.71_10232023ac59-611ss"}
+  - {cipher: chacha20-ietf-poly1305, password: 5cp9Z3iWnJZ2, port: 443, server: www.outline.network.ak1889.fr8678825324247b8176d59f83c30bd94d23d2e3ac5cd4a743bkwqeikvdyufr.cyou, type: ss,"name":"US_205.134.180.151_10232023ac59-596ss"}
+  - {alterId: 0, cipher: auto, network: ws, port: 2052, server: lt1.992688.xyz, skip-cert-verify: false, tls: false, type: vmess, uuid: b63efdd5-bdb8-4eb4-f918-9846cd7321e6, ws-opts: {path: /, headers: {Host: vcus1.vpn66.eu.org}},"name":"CLOUDFLARE_172.67.189.154_10232023ac59-633vmess"}
+  - {password: telegram-id-privatevpns, port: 22222, server: 52.215.175.112, skip-cert-verify: false, sni: trj.rollingnext.co.uk, type: trojan,"name":"IE_52.215.175.112_10232023ac59-671trojan"}
+  - {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 51.159.111.208, type: ss,"name":"FR_51.159.111.208_10232023ac59-720ss"}
+  - {cipher: aes-256-cfb, password: f8f7aCzcPKbsF8p3, port: 989, server: 195.154.185.174, type: ss,"name":"FR_195.154.185.174_10232023ac59-740ss"}
+  - {cipher: aes-256-cfb, password: asdKkaskJKfnsa, port: 443, server: 51.159.222.38, type: ss,"name":"FR_51.159.222.38_10232023ac59-745ss"}
+  - {alterId: 0, cipher: auto, network: ws, port: 443, server: cloudflare.binghe.design, skip-cert-verify: false, tls: true, type: vmess, uuid: 4548b8de-c6f5-41f2-8cb6-723c8db8ed03, ws-opts: {path: /, headers: {Host: us.binghe.design}},"name":"CLOUDFLARE_104.16.67.38_10232023ac59-762vmess"}
+  - {cipher: chacha20-ietf-poly1305, password: T1pb7XxxrolvPSb0u2xSOA, port: 8080, server: beacomf.xyz, type: ss,"name":"DE_139.144.71.63_10232023ac59-756ss"}
+  - {password: telegram-id-privatevpns, port: 22222, server: 13.41.33.172, skip-cert-verify: false, sni: trj.rollingnext.co.uk, type: trojan,"name":"GB_13.41.33.172_10232023ac59-770trojan"}
