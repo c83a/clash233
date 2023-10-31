@@ -1,4 +1,4 @@
-# Tue Oct 31 00:54:51 UTC 2023
+# Tue Oct 31 08:16:21 UTC 2023
 ipv6: true
 mixed-port: 7890
 allow-lan: true
@@ -24,9 +24,13 @@ proxy-providers:
       interval: &seconds 3600
       url: &baidu https://www.baidu.com/
 proxy-groups:
-  - {name: "@ Tue Oct 31 00:54:51 UTC 2023", type: select, proxies: [REJECT]}
+  - {name: "@ Tue Oct 31 08:16:21 UTC 2023", type: select, proxies: [REJECT]}
   - {name: A0, type: select, proxies: [A1,E0,DIRECT]}
   - {name: B0, type: select, proxies: [A1,E0,DIRECT]}
   - {name: E0, type: select, use: [pr], proxies: [REJECT]}
   - {name: A1, type: load-balance, use: [pr], url: *baidu, interval: *seconds, strategy: round-robin}
 proxies:
+  - {alterId: 64, cipher: auto, network: ws, port: 30000, server: 154.85.1.245, skip-cert-verify: true, tls: true, type: vmess, uuid: 1d474f0b-e78d-4af9-bc4a-a467467bc7a7, ws-opts: {path: /path/1698498185718},"name":"NL_154.85.1.245_103120233dc9-310vmess"}
+  - {alterId: 0, cipher: auto, network: ws, port: 80, server: 124.220.57.75, skip-cert-verify: true, tls: false, type: vmess, uuid: 1b3dd95b-f6dc-4f20-97aa-3b365358419c, ws-opts: {path: /},"name":"CN_124.220.57.75_103120233dc9-330vmess"}
+  - {cipher: aes-256-cfb, password: asdKkaskJKfnsa, port: 443, server: 51.158.204.20, type: ss,"name":"FR_51.158.204.20_103120233dc9-560ss"}
+  - {cipher: aes-256-cfb, password: asdKkaskJKfnsa, port: 443, server: 51.158.195.96, type: ss,"name":"FR_51.158.195.96_103120233dc9-574ss"}
