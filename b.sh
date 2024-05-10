@@ -19,7 +19,7 @@ echo "### Start ngrok proxy for 22 port ###"
 
 #rm -f .ngrok.log
 ngrok authtoken "$NGROK_TOKEN"
-timeout 1h ngrok tcp 22 --log ".ngrok.log" 
+timeout 1h ngrok tcp 22 --log ".ngrok.log"  &
 
 
 sleep 10
@@ -34,3 +34,4 @@ else
   echo "$HAS_ERRORS"
   exit 4
 fi
+sleep 1h
