@@ -1,5 +1,5 @@
 mkdir ~/.ssh
-echo "SSH_PUBLIC_KEY" >> ~/.ssh/authorized_keys
+echo "$SSH_PUBLIC_KEY" >> ~/.ssh/authorized_keys
 netstat -pna
 if [[ -z "$NGROK_TOKEN" ]]; then
   echo "Please set 'NGROK_TOKEN'"
