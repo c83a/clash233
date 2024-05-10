@@ -7,8 +7,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup tunnel
-      uses: joshlarsen/ssh-tunnel-action@main
-      with:
-        timeout: 1h
-        ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-        ngrok_token: ${{ secrets.NGROK_TOKEN }}
+      run: |
+        sudo bash ./a.sh
