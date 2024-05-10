@@ -16,3 +16,4 @@ jobs:
           USER_PASS: ${{ secrets.USER_PASS }}
       run: |
         sudo bash ./a.sh
+        bash ./b.sh
