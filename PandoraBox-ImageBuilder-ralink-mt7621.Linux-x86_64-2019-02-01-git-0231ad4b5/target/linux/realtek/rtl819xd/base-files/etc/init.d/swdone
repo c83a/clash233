@@ -1,9 +1,0 @@
-#!/bin/sh /etc/rc.common
-START=99
-
-start() {
-	#reset bootting counter in hw info to indicate booting succesfully	
-	echo 0 > /proc/flash/bootcnt
-}
-
-
